@@ -41,11 +41,44 @@
     } else { spans.forEach(function(s){ s.style.transform='none'; }); }
   });
 
-  /* ---- scroll reveal (IntersectionObserver) ---- */
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{ threshold:.16, rootMargin:'0px 0px -8% 0px' });
-  document.querySelectorAll('[data-reveal],.clip-line').forEach(function(el){ io.observe(el); });
+  /* ---- scroll reveal (IntersectionObserver + fail-safe) ----
+     Reveal is progressive enhancement: content MUST become visible even if
+     IO never fires (0-viewport webviews, Lenis transform desync, throttled
+     timers). Multiple independent triggers, none depending on setTimeout. */
+  function show(el){ el.classList.add('in'); }
+  function liveEls(){ return [].slice.call(document.querySelectorAll('[data-reveal]:not(.in),.clip-line:not(.in)')); }
+  function vh(){ return window.innerHeight || document.documentElement.clientHeight || 0; }
+  function inView(el){
+    var r = el.getBoundingClientRect(), h = vh();
+    if (!h) return true;                       // viewport unknown -> show
+    return r.top < h * 0.94 && r.bottom > -40;
+  }
+  function sweep(){
+    var els = liveEls(), i;
+    for (i=0;i<els.length;i++){ if (inView(els[i])) show(els[i]); }
+    return els.length;                         // remaining hidden count
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ show(e.target); io.unobserve(e.target); } });
+    },{ threshold:.16, rootMargin:'0px 0px -8% 0px' });
+    liveEls().forEach(function(el){ io.observe(el); });
+  }
+  // Independent triggers — any one of these guarantees visibility:
+  addEventListener('scroll', sweep, {passive:true});
+  addEventListener('resize', sweep, {passive:true});
+  addEventListener('load', sweep);
+  sweep();                                     // initial in-view pass
+  // rAF poll for the first ~3.5s: catches late layout / collapsed viewport
+  // without relying on setTimeout (which throttles in background tabs).
+  var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+  (function poll(){
+    var now = (window.performance && performance.now) ? performance.now() : Date.now();
+    var remaining = sweep();
+    if (now - t0 < 3500 && remaining > 0) requestAnimationFrame(poll);
+    else if (remaining > 0) liveEls().forEach(show);   // final hard guarantee
+  })();
 
   /* ---- GSAP ScrollTrigger parallax ---- */
   if (window.gsap && window.ScrollTrigger && !reduce){
@@ -76,19 +109,35 @@
     c.addEventListener('mouseleave', function(){ c.style.transform='perspective(800px) rotateX(0) rotateY(0)'; });
   });
 
-  /* ---- count-to counters ---- */
-  var cio = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting) return;
-      var el=e.target, end=parseFloat(el.dataset.count), dur=1400, t0=null,
-          suf=el.dataset.suffix||'', pre=el.dataset.prefix||'';
-      function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur);
-        el.textContent=pre+Math.floor((1-Math.pow(1-p,3))*end).toLocaleString()+suf;
-        if(p<1) requestAnimationFrame(step); }
-      requestAnimationFrame(step); cio.unobserve(el);
-    });
-  },{threshold:.6});
-  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+  /* ---- count-to counters (with same fail-safe as reveal) ---- */
+  function runCount(el){
+    if (el.dataset.counted) return; el.dataset.counted='1';
+    var end=parseFloat(el.dataset.count), dur=1400, t0=null,
+        suf=el.dataset.suffix||'', pre=el.dataset.prefix||'';
+    if (reduce || isNaN(end)){ el.textContent=pre+(isNaN(end)?'':end.toLocaleString())+suf; return; }
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur);
+      el.textContent=pre+Math.floor((1-Math.pow(1-p,3))*end).toLocaleString()+suf;
+      if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var counters=[].slice.call(document.querySelectorAll('[data-count]'));
+  if ('IntersectionObserver' in window){
+    var cio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target); } });
+    },{threshold:.6});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+  // Fail-safe: run any counter that's in view (or if viewport is unknown).
+  function countSweep(){ counters.forEach(function(el){ if(!el.dataset.counted && inView(el)) runCount(el); }); }
+  addEventListener('scroll', countSweep, {passive:true});
+  addEventListener('load', countSweep);
+  countSweep();
+  (function cpoll(){
+    var now=(window.performance&&performance.now)?performance.now():Date.now();
+    countSweep();
+    if (now - t0 < 3500 && counters.some(function(el){return !el.dataset.counted;})) requestAnimationFrame(cpoll);
+    else counters.forEach(function(el){ if(!el.dataset.counted) runCount(el); });
+  })();
 
   /* ---- Three.js wireframe orb (Icosahedron 2,15 — mouse-reactive lerp) ---- */
   var host = document.querySelector('canvas#bg3d');
