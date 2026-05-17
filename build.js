@@ -252,7 +252,7 @@ const REELS = [
 /* ---------- HTML template ---------- */
 function page(opts){
   const { title, vars, disp, body, threeD, vanta, light, brutal, editorial,
-          c, refTag, badge, backHref } = opts;
+          c, refTag, badge, backHref, prevHref, nextHref, pos, total } = opts;
   const cssVars = Object.entries(vars).map(([k,v])=>`${k}:${v}`).join(';');
   const fonts = fontHref([disp, body]);
   const cdn = `
@@ -285,8 +285,13 @@ function page(opts){
   .btn:hover{background:var(--fg);color:#000;transition:none}` : '' }
   ${ editorial ? `.hero h1{font-style:italic}.proj{aspect-ratio:4/3;background:linear-gradient(135deg,var(--surface),var(--bg));border:1px solid var(--card-bd);display:flex;align-items:flex-end;padding:1.4rem;font-family:var(--font-display);font-size:1.1rem}` : '' }
   ${ light ? `.nav.scrolled{box-shadow:0 1px 0 var(--card-bd)} body{background:var(--bg)}` : '' }
-  .backlink{position:fixed;left:1rem;bottom:1rem;z-index:60;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-    padding:.6rem 1rem;border:1px solid var(--card-bd);background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px)}
+  .sitenav{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:60;display:flex;align-items:center;gap:.2rem;
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .5rem;border:1px solid var(--card-bd);
+    border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);max-width:92vw}
+  .sitenav a{padding:.4rem .85rem;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
+  .sitenav a:hover{background:var(--accent);color:#000}
+  .sitenav .pos{padding:.4rem .7rem;opacity:.55;font-variant-numeric:tabular-nums}
+  .sitenav .disabled{opacity:.3;pointer-events:none}
   .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
   .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
   .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
@@ -296,7 +301,12 @@ ${cdn}
 </head>
 <body${ vanta ? ` data-vanta="${vanta}"`:'' }>
 ${grain}
-<a class="backlink" href="${backHref}">&larr; Gallery</a>
+<nav class="sitenav" aria-label="Reference site switcher">
+  <a${ prevHref ? ` href="${prevHref}"`:' class="disabled"' }>&larr; Prev</a>
+  <a href="${backHref}">Gallery</a>
+  <span class="pos">${pos} / ${total}</span>
+  <a${ nextHref ? ` href="${nextHref}"`:' class="disabled"' }>Next &rarr;</a>
+</nav>
 <span class="reftag">${refTag}</span>
 
 <nav class="nav">
@@ -394,47 +404,59 @@ ${grain}
 let manifest = { styles:[], reels:[] };
 function styleObj(id){ return STYLES.find(s=>s.id===id); }
 
+fs.mkdirSync(path.join(ROOT,'reels'),{recursive:true});
+fs.mkdirSync(path.join(ROOT,'reels-realestate'),{recursive:true});
+
+/* Build one ordered chain across ALL 64 builds so every page links to the
+   next/prev — styles → styles-RE → reels → reels-RE. Each job carries its
+   relative path + the page() options; prev/next are wired after the list
+   is assembled. */
+const jobs = [];
+
 STYLES.forEach(s=>{
   const common = { vars:s.vars, disp:s.disp, body:s.body, threeD:!!s.threeD,
     vanta:s.vanta||'', light:!!s.light, brutal:!!s.brutal, editorial:!!s.editorial };
-  // generic
-  fs.writeFileSync(path.join(ROOT,'styles',s.id+'.html'),
-    page({ ...common, title:`${s.g.brand} — ${s.name}`, c:s.g,
+  jobs.push({ rel:`styles/${s.id}.html`,
+    opts:{ ...common, title:`${s.g.brand} — ${s.name}`, c:s.g,
       refTag:`Style · ${s.name}`, badge:`Reference · ${s.refs}`,
-      backHref:'../index.html' }));
-  // real-estate
-  fs.writeFileSync(path.join(ROOT,'styles-realestate',s.id+'.html'),
-    page({ ...common, title:`${s.re.brand} — ${s.name} (Real Estate)`, c:s.re,
+      backHref:'../index.html' } });
+  jobs.push({ rel:`styles-realestate/${s.id}.html`,
+    opts:{ ...common, title:`${s.re.brand} — ${s.name} (Real Estate)`, c:s.re,
       refTag:`Style · ${s.name} · RE`, badge:`Real-estate variant · ${s.refs}`,
-      backHref:'../index.html' }));
+      backHref:'../index.html' } });
   manifest.styles.push({ id:s.id, name:s.name, refs:s.refs, tag:s.tag,
     accent:s.vars['--accent'], g:s.g.brand, re:s.re.brand });
 });
 
-fs.mkdirSync(path.join(ROOT,'reels'),{recursive:true});
-fs.mkdirSync(path.join(ROOT,'reels-realestate'),{recursive:true});
 REELS.forEach(r=>{
   const s = styleObj(r.style);
   const common = { vars:s.vars, disp:s.disp, body:s.body, threeD:!!s.threeD,
     vanta:s.vanta||'', light:!!s.light, brutal:!!s.brutal, editorial:!!s.editorial };
   const slug = String(r.n).padStart(2,'0')+'-'+r.site.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
-  // generic — branded as the actual reel site, using the mapped style system
   const gc = { ...s.g, brand:r.site.toUpperCase(), kicker:s.g.kicker };
-  fs.writeFileSync(path.join(ROOT,'reels',slug+'.html'),
-    page({ ...common, title:`Reel ${r.n} — ${r.site}`, c:gc,
+  jobs.push({ rel:`reels/${slug}.html`,
+    opts:{ ...common, title:`Reel ${r.n} — ${r.site}`, c:gc,
       refTag:`Reel ${r.n} · ${r.site}`,
-      badge:`Reel ${r.n} · ${s.name} · ${r.tech}`, backHref:'../index.html' }));
-  // real-estate variant of the reel
-  const rc = { ...s.re };
-  fs.writeFileSync(path.join(ROOT,'reels-realestate',slug+'.html'),
-    page({ ...common, title:`Reel ${r.n} — ${r.site} (Real Estate)`, c:rc,
+      badge:`Reel ${r.n} · ${s.name} · ${r.tech}`, backHref:'../index.html' } });
+  jobs.push({ rel:`reels-realestate/${slug}.html`,
+    opts:{ ...common, title:`Reel ${r.n} — ${r.site} (Real Estate)`, c:{ ...s.re },
       refTag:`Reel ${r.n} · ${r.site} · RE`,
-      badge:`Reel ${r.n} RE variant · ${s.name}`, backHref:'../index.html' }));
+      badge:`Reel ${r.n} RE variant · ${s.name}`, backHref:'../index.html' } });
   manifest.reels.push({ n:r.n, site:r.site, slug, style:s.id, styleName:s.name,
     tech:r.tech, accent:s.vars['--accent'] });
 });
 
+// relative path from job A's dir to job B (all dirs are one level under ROOT)
+function relTo(from, to){ return '../' + to; }
+const total = jobs.length;
+jobs.forEach((job, i)=>{
+  const prev = jobs[i-1], next = jobs[i+1];
+  fs.writeFileSync(path.join(ROOT, job.rel),
+    page({ ...job.opts,
+      prevHref: prev ? relTo(job.rel, prev.rel) : '',
+      nextHref: next ? relTo(job.rel, next.rel) : '',
+      pos: i+1, total }));
+});
+
 fs.writeFileSync(path.join(ROOT,'manifest.json'), JSON.stringify(manifest,null,2));
-console.log('Generated',
-  STYLES.length*2,'style pages +',
-  REELS.length*2,'reel pages. manifest.json written.');
+console.log('Generated', total, 'pages, all cross-linked (prev/next/gallery). manifest.json written.');
