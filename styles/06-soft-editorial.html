@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maison de Synergy — Soft Editorial / Feminine</title>
+<meta name="description" content="Atelier de Mode — Maison de Synergy. Reference build (Style · Soft Editorial / Feminine).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../shared/lib.css">
+<style>
+  :root{--bg:#FAF0EB;--surface:#F3E2D8;--fg:#2C1810;--accent:#C8A08A;--card:rgba(255,255,255,.55);--card-bd:rgba(44,24,16,.10);--font-display:'Cormorant Garamond';--font-body:'Inter'}
+  
+  
+  .nav.scrolled{box-shadow:0 1px 0 var(--card-bd)} body{background:var(--bg)}
+  .backlink{position:fixed;left:1rem;bottom:1rem;z-index:60;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+    padding:.6rem 1rem;border:1px solid var(--card-bd);background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px)}
+  .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
+  .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
+  .scrolldown{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:2rem;z-index:3;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+<div aria-hidden="true" style="position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')"></div>
+<a class="backlink" href="../index.html">&larr; Gallery</a>
+<span class="reftag">Style · Soft Editorial / Feminine</span>
+
+<nav class="nav">
+  <div class="brand">Maison de Synergy</div>
+  <div class="links">
+    <a href="#work">Work</a><a href="#about">About</a><a href="#stats">Results</a><a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="btn btn-ghost magnetic" style="padding:.7rem 1.4rem">Explore the atelier</a>
+</nav>
+
+<header class="hero">
+  <div class="veil" data-parallax="60" style="background:
+         radial-gradient(70% 90% at 80% 10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),
+         linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>
+  <div class="wrap">
+    <span class="ribbon">Reference · Maison · Trendship · Bisous · hansarnesen</span>
+    <div class="eyebrow" data-reveal>Atelier de Mode</div>
+    <h1>Softness, with intention.</h1>
+    <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">A slow-fashion atelier of considered pieces — made in small batches, made to be kept.</p>
+    <div class="hero-cta" data-reveal data-reveal-d="3">
+      <a href="#contact" class="btn btn-primary magnetic">Explore the atelier</a>
+      <a href="#work" class="btn btn-ghost magnetic">View work</a>
+    </div>
+  </div>
+  <div class="scrolldown">Scroll down &darr;</div>
+</header>
+
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-reveal>What we do</div>
+      <h2 class="clip-line">The Collection, Made to Order &amp; The Journal.</h2>
+    </div>
+    <div class="grid g3">
+      <article class="card tilt" data-reveal data-reveal-d="1">
+        <div class="eyebrow">01</div>
+        <h3 style="margin:1rem 0 .7rem">The Collection</h3>
+        <p class="muted">Seasonless essentials in natural fibre.</p>
+      </article>
+      <article class="card tilt" data-reveal data-reveal-d="2">
+        <div class="eyebrow">02</div>
+        <h3 style="margin:1rem 0 .7rem">Made to Order</h3>
+        <p class="muted">Cut and finished to your measure.</p>
+      </article>
+      <article class="card tilt" data-reveal data-reveal-d="3">
+        <div class="eyebrow">03</div>
+        <h3 style="margin:1rem 0 .7rem">The Journal</h3>
+        <p class="muted">Notes on craft, slowness and care.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="marquee"><div class="track">
+  <span>Maison de Synergy</span><span>•</span><span>Atelier de Mode</span><span>•</span><span>Maison de Synergy</span><span>•</span><span>Atelier de Mode</span><span>•</span>
+  <span>Maison de Synergy</span><span>•</span><span>Atelier de Mode</span><span>•</span><span>Maison de Synergy</span><span>•</span><span>Atelier de Mode</span><span>•</span>
+</div></div>
+
+<section class="sec" id="about">
+  <div class="wrap grid g2" style="align-items:center">
+    <div data-reveal>
+      <div class="eyebrow">The studio</div>
+      <h2 style="margin:.8rem 0 1.2rem">A reference build, faithful to the source reel.</h2>
+      <p class="lead">A slow-fashion atelier of considered pieces — made in small batches, made to be kept. This page recreates the <strong>Style · Soft Editorial / Feminine</strong> aesthetic from the research library — palette, type pairing, section rhythm and the signature motion.</p>
+    </div>
+    <div class="tilt card" data-reveal data-reveal-d="2" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center">
+      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);text-align:center;line-height:1.1">Maison de Synergy<br><span class="muted" style="font-size:.9rem;letter-spacing:.2em">Atelier de Mode</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="stats">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat" data-reveal><div class="num" data-count="12" data-prefix="" data-suffix="">0</div><div class="lbl">Pieces / season</div></div>
+      <div class="stat" data-reveal><div class="num" data-count="100" data-prefix="" data-suffix="">0</div><div class="lbl">% natural fibre</div></div>
+      <div class="stat" data-reveal><div class="num" data-count="1" data-prefix="" data-suffix="">0</div><div class="lbl">Atelier</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow" data-reveal>Get in touch</div>
+    <h2 class="clip-line" style="margin:1rem auto 2rem;max-width:18ch">Explore the atelier.</h2>
+    <a href="#" class="btn btn-primary magnetic" data-reveal data-reveal-d="2">Explore the atelier</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap row">
+    <div><div class="brand" style="font-family:var(--font-display);font-size:1.2rem">Maison de Synergy</div>
+      <p class="muted" style="margin-top:.6rem;font-size:.85rem">Atelier de Mode</p></div>
+    <div class="muted" style="font-size:.8rem;max-width:30ch">Reference build · Style · Soft Editorial / Feminine · part of the SathiDeals / reno AI website library.</div>
+  </div>
+</footer>
+
+<script src="../shared/lib.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reference Sites — AI Website Library</title>
+<meta name="description" content="64 reference builds: 12 style archetypes + 20 reel-specific sites, generic and real-estate themed, faithful to the research library.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Playfair+Display:wght@500;600&display=swap">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#07080C;color:#EDEFF5;font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.2rem,4vw,3rem)}
+  header{padding:clamp(4rem,12vh,8rem) 0 3rem;border-bottom:1px solid rgba(255,255,255,.08);
+    background:radial-gradient(60% 80% at 80% 0,rgba(123,97,255,.16),transparent 60%)}
+  .eyebrow{font-size:.74rem;letter-spacing:.32em;text-transform:uppercase;color:#7B61FF}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.6rem);margin:.8rem 0 1rem;line-height:1.05}
+  .sub{max-width:62ch;opacity:.72;font-size:clamp(1rem,1.4vw,1.15rem)}
+  .meta{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:2.4rem;font-size:.82rem;opacity:.7}
+  .meta b{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;display:block}
+  section{padding:clamp(3.5rem,9vh,6rem) 0}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:.5rem}
+  .lead{opacity:.66;margin-bottom:2.6rem;max-width:60ch}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025);
+    transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s}
+  .card:hover{transform:translateY(-6px);border-color:var(--ac)}
+  .sw{height:6px}
+  .cbody{padding:1.6rem}
+  .card .num{font-size:.7rem;letter-spacing:.2em;color:var(--ac);opacity:.9}
+  .card h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin:.5rem 0}
+  .card .refs{font-size:.78rem;opacity:.55;margin-bottom:.7rem}
+  .card .tag{font-size:.84rem;opacity:.72;min-height:5.5em}
+  .card .links{display:flex;flex-direction:column;gap:.5rem;margin-top:1.2rem}
+  .card .links a{font-size:.82rem;padding:.6rem .9rem;border:1px solid rgba(255,255,255,.12);border-radius:8px;
+    text-align:center;transition:background .3s,border-color .3s}
+  .card .links a:hover{background:var(--ac);color:#000;border-color:var(--ac)}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:.9rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
+  th{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;opacity:.55;font-weight:600}
+  .rn{white-space:nowrap;font-variant-numeric:tabular-nums}
+  .rn span{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.6rem;vertical-align:middle}
+  .rs{font-weight:600}
+  .rt{opacity:.66;max-width:30ch}
+  .rst{opacity:.66}
+  .ra{white-space:nowrap}
+  .ra a{color:#9D86FF}
+  .note{margin-top:2.4rem;padding:1.4rem 1.6rem;border:1px solid rgba(255,255,255,.09);border-radius:12px;
+    background:rgba(123,97,255,.06);font-size:.86rem;opacity:.85;max-width:74ch}
+  footer{padding:4rem 0;border-top:1px solid rgba(255,255,255,.08);opacity:.5;font-size:.82rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">AI Website Library · Reference Builds</div>
+    <h1>Every site from the research library, built to compare.</h1>
+    <p class="sub">Self-contained recreations of all 12 design-style archetypes and all 20 reference reels — each in a generic version (true to the original brand) and a real-estate / reno-business variant. Open a build, then play the matching reel video to compare.</p>
+    <div class="meta">
+      <div><b>12</b> style archetypes</div>
+      <div><b>20</b> reference reels</div>
+      <div><b>64</b> total builds</div>
+      <div><b>0</b> frameworks · pure HTML/CSS/JS</div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The 12 Style Archetypes</h2>
+    <p class="lead">Each archetype recreates the palette, type pairing, section rhythm and signature motion described in <code>02-REEL-FINDINGS.md</code>.</p>
+    <div class="grid">
+    <article class="card" style="--ac:#C9A96E">
+      <div class="sw" style="background:#C9A96E"></div>
+      <div class="cbody">
+        <div class="num">STYLE 01</div>
+        <h3>Luxury Dark / Sand Atmosphere</h3>
+        <p class="refs">Cartier · Obsidian Dew · OF Sakazuki</p>
+        <p class="tag">Near-black bg, warm sand radial light, floating product, serif small-caps, gold only, vast negative space.</p>
+        <div class="links">
+          <a href="styles/01-luxury-dark.html">Generic — MAISON NOIR</a>
+          <a href="styles-realestate/01-luxury-dark.html">Real estate — NOIR ESTATES</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#E6B873">
+      <div class="sw" style="background:#E6B873"></div>
+      <div class="cbody">
+        <div class="num">STYLE 02</div>
+        <h3>Cinematic Video Hero</h3>
+        <p class="refs">Terminal Logistics · Villa Maravilha · Alpine · Hashgraph</p>
+        <p class="tag">Full-bleed autoplay video, gradient veil (never pure black), text enters y:60, SCROLL DOWN cue, counters, video parallax.</p>
+        <div class="links">
+          <a href="styles/02-cinematic-video.html">Generic — TERMINAL</a>
+          <a href="styles-realestate/02-cinematic-video.html">Real estate — MERIDIAN</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#FF2020">
+      <div class="sw" style="background:#FF2020"></div>
+      <div class="cbody">
+        <div class="num">STYLE 03</div>
+        <h3>Dark Brutalist / Anti-Design</h3>
+        <p class="refs">Guilty Mind · SHAPESHIFT · KVS · Sazabi · BANILA</p>
+        <p class="tag">Pure #000, ONE accent, massive clamp(60px,14vw,200px) type, 0px corners, 1px borders, instant invert hover, scramble on load, grain overlay.</p>
+        <div class="links">
+          <a href="styles/03-dark-brutalist.html">Generic — GUILTY/MIND</a>
+          <a href="styles-realestate/03-dark-brutalist.html">Real estate — BLACK/DOOR</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#5BE0FF">
+      <div class="sw" style="background:#5BE0FF"></div>
+      <div class="cbody">
+        <div class="num">STYLE 04</div>
+        <h3>3D Spline / WebGL</h3>
+        <p class="refs">Spline Ice Cube · E.C.H.O. · JoyJam · Cartier 3D</p>
+        <p class="tag">WebGL object fills/right-50%, mousemove lerp rotation, warm/cool PointLight pair, ACES glow, glass material.</p>
+        <div class="links">
+          <a href="styles/04-3d-spline-webgl.html">Generic — ECHO LABS</a>
+          <a href="styles-realestate/04-3d-spline-webgl.html">Real estate — DIMENSION RE</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#FF8C00">
+      <div class="sw" style="background:#FF8C00"></div>
+      <div class="cbody">
+        <div class="num">STYLE 05</div>
+        <h3>Vaporwave / Psychedelic</h3>
+        <p class="refs">Sidewave</p>
+        <p class="tag">bg #1A0033→#FF006E, concentric ripple rings scale→3 fade, glowing center oval, silhouette mix-blend screen, bold condensed italic.</p>
+        <div class="links">
+          <a href="styles/05-vaporwave.html">Generic — SIDEWAVE</a>
+          <a href="styles-realestate/05-vaporwave.html">Real estate — PULSE PROPERTIES</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#C8A08A">
+      <div class="sw" style="background:#C8A08A"></div>
+      <div class="cbody">
+        <div class="num">STYLE 06</div>
+        <h3>Soft Editorial / Feminine</h3>
+        <p class="refs">Maison · Trendship · Bisous · hansarnesen</p>
+        <p class="tag">Cream/blush/dusty-rose, Cormorant italic, padding ≥120px, soft grain, asymmetric grids, images scale 1.05, soft-dot cursor lag.</p>
+        <div class="links">
+          <a href="styles/06-soft-editorial.html">Generic — Maison de Synergy</a>
+          <a href="styles-realestate/06-soft-editorial.html">Real estate — Maison Living</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#7B61FF">
+      <div class="sw" style="background:#7B61FF"></div>
+      <div class="cbody">
+        <div class="num">STYLE 07</div>
+        <h3>SaaS Modern / Glassmorphism</h3>
+        <p class="refs">JoyJam · GSAP Engine · Hashgraph · Financial Inst.</p>
+        <p class="tag">Conic/shader mesh bg, glass cards blur(20px), device mockups perspective rotateX/Y, logo marquee, middle pricing card lifted, gradient text.</p>
+        <div class="links">
+          <a href="styles/07-saas-glass.html">Generic — JoyJam</a>
+          <a href="styles-realestate/07-saas-glass.html">Real estate — ListingOS</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#B7A88F">
+      <div class="sw" style="background:#B7A88F"></div>
+      <div class="cbody">
+        <div class="num">STYLE 08</div>
+        <h3>Architecture / Editorial Photography</h3>
+        <p class="refs">Fall Line House (19K likes) · Fifth & Dune · Alpine · Humaan</p>
+        <p class="tag">Full-viewport object-fit cover desaturated, Editorial italic+upright 80px, cursor-following image preview (most viral), GSAP horizontal panels, clip-path reveal, minimal nav.</p>
+        <div class="links">
+          <a href="styles/08-architecture-editorial.html">Generic — FALL LINE</a>
+          <a href="styles-realestate/08-architecture-editorial.html">Real estate — FALL LINE ESTATES</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#C9A96E">
+      <div class="sw" style="background:#C9A96E"></div>
+      <div class="cbody">
+        <div class="num">STYLE 09</div>
+        <h3>Luxury Aviation / Private Services</h3>
+        <p class="refs">Jesko Jets · Sakazuki</p>
+        <p class="tag">Split dark/light, live clock setInterval, destination ticker rotating words, pill CTA 999px, letter-spacing .3em labels, no decorative images.</p>
+        <div class="links">
+          <a href="styles/09-aviation-luxury.html">Generic — JESKO JETS</a>
+          <a href="styles-realestate/09-aviation-luxury.html">Real estate — JESKO ESTATES</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#B48226">
+      <div class="sw" style="background:#B48226"></div>
+      <div class="cbody">
+        <div class="num">STYLE 10</div>
+        <h3>Luxury Food / Beauty DTC</h3>
+        <p class="refs">Casper's Caviar · Obsidian Dew</p>
+        <p class="tag">Extreme close-up product hero, dark bg glow drop-shadow, ingredient mosaic mixed heights, sticky GET 15% OFF bar w/ dismiss.</p>
+        <div class="links">
+          <a href="styles/10-food-beauty-dtc.html">Generic — CASPER'S</a>
+          <a href="styles-realestate/10-food-beauty-dtc.html">Real estate — OBSIDIAN HOMES</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#B8600A">
+      <div class="sw" style="background:#B8600A"></div>
+      <div class="cbody">
+        <div class="num">STYLE 11</div>
+        <h3>Japanese Luxury / Community</h3>
+        <p class="refs">OF Sakazuki</p>
+        <p class="tag">Warm amber/fire + dark overlay, Vanta-style smoke parallax, spare ideographic spacing, parenthetical socials, arrow CTA, exclusive copy.</p>
+        <div class="links">
+          <a href="styles/11-japanese-web3.html">Generic — 盃 SAKAZUKI</a>
+          <a href="styles-realestate/11-japanese-web3.html">Real estate — 盃 KINDRED</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" style="--ac:#FF3B3B">
+      <div class="sw" style="background:#FF3B3B"></div>
+      <div class="cbody">
+        <div class="num">STYLE 12</div>
+        <h3>Experimental / Creative Developer</h3>
+        <p class="refs">E.C.H.O. · Robert Borghesi · IDOM</p>
+        <p class="tag">Full-screen WebGL canvas, HTML absolute z-2, mouse-reactive geometry, single accent on black, near-zero UI — work + contact only.</p>
+        <div class="links">
+          <a href="styles/12-experimental-dev.html">Generic — R.B.</a>
+          <a href="styles-realestate/12-experimental-dev.html">Real estate — PLOT.</a>
+        </div>
+      </div>
+    </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The 20 Reels — 1:1 Reference Builds</h2>
+    <p class="lead">Each reel mapped to its closest archetype system. Open the build alongside the reel video to verify it matches.</p>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>#</th><th>Reference Site</th><th>Key Technique</th><th>Style System</th><th>Open Build</th></tr></thead>
+        <tbody>
+      <tr>
+        <td class="rn"><span style="background:#C9A96E"></span>01</td>
+        <td class="rs">Cartier Watch</td>
+        <td class="rt">3D floating product, desert/fog atmosphere</td>
+        <td class="rst">Luxury Dark / Sand Atmosphere</td>
+        <td class="ra"><a href="reels/01-cartier-watch.html">Generic</a> · <a href="reels-realestate/01-cartier-watch.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#E6B873"></span>02</td>
+        <td class="rs">Terminal Logistics</td>
+        <td class="rt">Video hero, truck driving, golden hour</td>
+        <td class="rst">Cinematic Video Hero</td>
+        <td class="ra"><a href="reels/02-terminal-logistics.html">Generic</a> · <a href="reels-realestate/02-terminal-logistics.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#FF2020"></span>03</td>
+        <td class="rs">Guilty Mind</td>
+        <td class="rt">Cracked glass texture, all-caps grunge</td>
+        <td class="rst">Dark Brutalist / Anti-Design</td>
+        <td class="ra"><a href="reels/03-guilty-mind.html">Generic</a> · <a href="reels-realestate/03-guilty-mind.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#FF3B3B"></span>04</td>
+        <td class="rs">GSAP Animation Engine</td>
+        <td class="rt">Neon circular ring, glitch text, code panel</td>
+        <td class="rst">Experimental / Creative Developer</td>
+        <td class="ra"><a href="reels/04-gsap-animation-engine.html">Generic</a> · <a href="reels-realestate/04-gsap-animation-engine.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#FF8C00"></span>05</td>
+        <td class="rs">Sidewave Music</td>
+        <td class="rt">Purple/orange ripple rings, silhouette</td>
+        <td class="rst">Vaporwave / Psychedelic</td>
+        <td class="ra"><a href="reels/05-sidewave-music.html">Generic</a> · <a href="reels-realestate/05-sidewave-music.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#B8600A"></span>06</td>
+        <td class="rs">OF Sakazuki</td>
+        <td class="rt">Amber fire parallax, exclusive community</td>
+        <td class="rst">Japanese Luxury / Community</td>
+        <td class="ra"><a href="reels/06-of-sakazuki.html">Generic</a> · <a href="reels-realestate/06-of-sakazuki.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#B48226"></span>07</td>
+        <td class="rs">Obsidian Dew</td>
+        <td class="rt">Volcanic product, ingredient mosaic grid</td>
+        <td class="rst">Luxury Food / Beauty DTC</td>
+        <td class="ra"><a href="reels/07-obsidian-dew.html">Generic</a> · <a href="reels-realestate/07-obsidian-dew.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#E6B873"></span>08</td>
+        <td class="rs">Hashgraph Ventures</td>
+        <td class="rt">Ocean video, floating glowing orb</td>
+        <td class="rst">Cinematic Video Hero</td>
+        <td class="ra"><a href="reels/08-hashgraph-ventures.html">Generic</a> · <a href="reels-realestate/08-hashgraph-ventures.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#5BE0FF"></span>09</td>
+        <td class="rs">Spline Ice Cube</td>
+        <td class="rt">Interactive 3D object, arctic fog</td>
+        <td class="rst">3D Spline / WebGL</td>
+        <td class="ra"><a href="reels/09-spline-ice-cube.html">Generic</a> · <a href="reels-realestate/09-spline-ice-cube.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#B7A88F"></span>10</td>
+        <td class="rs">Fall Line House</td>
+        <td class="rt">Misty cliffside, editorial, 19K likes viral</td>
+        <td class="rst">Architecture / Editorial Photography</td>
+        <td class="ra"><a href="reels/10-fall-line-house.html">Generic</a> · <a href="reels-realestate/10-fall-line-house.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#FF2020"></span>11</td>
+        <td class="rs">Relats / Periflex</td>
+        <td class="rt">Close-up product photo, specs overlay</td>
+        <td class="rst">Dark Brutalist / Anti-Design</td>
+        <td class="ra"><a href="reels/11-relats-periflex.html">Generic</a> · <a href="reels-realestate/11-relats-periflex.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#C8A08A"></span>12</td>
+        <td class="rs">Maison de Synergy</td>
+        <td class="rt">Blush pink, serif, blooming flower 3D</td>
+        <td class="rst">Soft Editorial / Feminine</td>
+        <td class="ra"><a href="reels/12-maison-de-synergy.html">Generic</a> · <a href="reels-realestate/12-maison-de-synergy.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#FF3B3B"></span>13</td>
+        <td class="rs">Design Agency</td>
+        <td class="rt">Highlight-on-scroll typography list</td>
+        <td class="rst">Experimental / Creative Developer</td>
+        <td class="ra"><a href="reels/13-design-agency.html">Generic</a> · <a href="reels-realestate/13-design-agency.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#C8A08A"></span>14</td>
+        <td class="rs">Cartier Watches & Wonders</td>
+        <td class="rt">Gallery room 3D perspective, all white</td>
+        <td class="rst">Soft Editorial / Feminine</td>
+        <td class="ra"><a href="reels/14-cartier-watches-wonders.html">Generic</a> · <a href="reels-realestate/14-cartier-watches-wonders.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#FF3B3B"></span>15</td>
+        <td class="rs">E.C.H.O. / Active Theory</td>
+        <td class="rt">3D eye portal, crimson neon, water reflect</td>
+        <td class="rst">Experimental / Creative Developer</td>
+        <td class="ra"><a href="reels/15-e-c-h-o-active-theory.html">Generic</a> · <a href="reels-realestate/15-e-c-h-o-active-theory.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#B48226"></span>16</td>
+        <td class="rs">Casper's Caviar</td>
+        <td class="rt">Dark texture product hero, popup CTA</td>
+        <td class="rst">Luxury Food / Beauty DTC</td>
+        <td class="ra"><a href="reels/16-casper-s-caviar.html">Generic</a> · <a href="reels-realestate/16-casper-s-caviar.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#E6B873"></span>17</td>
+        <td class="rs">Villa Maravilha</td>
+        <td class="rt">Garden door to ocean, jungle parallax</td>
+        <td class="rst">Cinematic Video Hero</td>
+        <td class="ra"><a href="reels/17-villa-maravilha.html">Generic</a> · <a href="reels-realestate/17-villa-maravilha.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#C9A96E"></span>18</td>
+        <td class="rs">Jesko Jets</td>
+        <td class="rt">Split layout, destination ticker, live clock</td>
+        <td class="rst">Luxury Aviation / Private Services</td>
+        <td class="ra"><a href="reels/18-jesko-jets.html">Generic</a> · <a href="reels-realestate/18-jesko-jets.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#B7A88F"></span>19</td>
+        <td class="rs">Alpine Chalets</td>
+        <td class="rt">Snow panoramic, overlapping editorial type</td>
+        <td class="rst">Architecture / Editorial Photography</td>
+        <td class="ra"><a href="reels/19-alpine-chalets.html">Generic</a> · <a href="reels-realestate/19-alpine-chalets.html">Real estate</a></td>
+      </tr>
+      <tr>
+        <td class="rn"><span style="background:#7B61FF"></span>20</td>
+        <td class="rs">JoyJam</td>
+        <td class="rt">Flipping card panels, 3D phone mockups</td>
+        <td class="rst">SaaS Modern / Glassmorphism</td>
+        <td class="ra"><a href="reels/20-joyjam.html">Generic</a> · <a href="reels-realestate/20-joyjam.html">Real estate</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>How to compare:</strong> reel video links live in <code>00-REEL-LINKS.md</code>. Open the matching build here, watch the reel, and check: hero treatment, palette, type pairing, scroll/motion signature, and section pacing. Builds are intentionally faithful to the <em>system</em> (not pixel-copies of proprietary footage).</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Reference site library · part of the SathiDeals / reno AI website builder framework · regenerate with <code>node build.js &amp;&amp; node build-index.js</code></div>
+</footer>
+</body>
+</html>
