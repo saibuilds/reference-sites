@@ -30,6 +30,69 @@ function fontHref(list){
 }
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
+/* ---------- OWNED VISUAL GENERATOR ----------------------------------------
+   No external hotlinks (Coverr/Unsplash 404 + hotlink-block = broken boxes,
+   the worst "unfinished/AI" tell). Each archetype gets a deterministic,
+   self-contained SVG tuned to its palette + mood. If a real raster exists at
+   assets/<id>-hero.{jpg,png,webp} — dropped by a credentialed Higgsfield /
+   nano-banana run — it is preferred automatically, no code change needed.
+   GEN_PROMPT is the exact brief such a run should use ("learning what it
+   needs"): a future credentialed session calls the generate-image MCP with
+   GEN_PROMPT[id] and writes assets/<id>-hero.jpg.                           */
+const MOTIF = { '01-luxury-dark':'bloom','02-cinematic-video':'horizon','03-dark-brutalist':'slab',
+  '04-3d-spline-webgl':'mesh','05-vaporwave':'sun','06-soft-editorial':'soft','07-saas-glass':'mesh',
+  '08-architecture-editorial':'tonal','09-aviation-luxury':'horizon','10-food-beauty-dtc':'organic',
+  '11-japanese-web3':'organic','12-experimental-dev':'slab' };
+const GEN_PROMPT = {
+  '01-luxury-dark':'Cinematic macro of a haute-horlogerie movement, single warm gold key light on near-black, extreme restraint, museum lighting, no text',
+  '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
+  '03-dark-brutalist':'High-contrast brutalist photographic abstraction, hard black-and-white diagonal light, raw concrete, single red accent, no text',
+  '04-3d-spline-webgl':'Glossy iridescent 3D abstract render, cyan glass and chrome, soft studio gradient, real-time engine look, no text',
+  '05-vaporwave':'Retro synthwave horizon, large gradient sun behind scanline bands, magenta-to-orange, perspective grid, no text',
+  '06-soft-editorial':'Soft editorial fashion still life, warm sand and cream tones, diffuse window light, slow-fashion calm, no text',
+  '07-saas-glass':'Abstract frosted-glass product UI floating on a violet mesh gradient, soft depth blur, premium SaaS, no text',
+  '08-architecture-editorial':'Moody architectural photograph, concrete and timber against landscape, overcast tonal light, large negative space, no text',
+  '09-aviation-luxury':'Private jet on tarmac at golden hour, low horizon, long vapor trail, warm gold-on-charcoal, no text',
+  '10-food-beauty-dtc':'Luxury single-origin product macro on dark slate, dewy texture, warm amber rim light, editorial DTC, no text',
+  '11-japanese-web3':'Minimal Japanese ink-wash on warm dark paper, single ember-orange gesture, ma negative space, no text',
+  '12-experimental-dev':'Generative shader abstraction, raw red-on-black geometry, terminal aesthetic, experimental dev lab, no text' };
+function artSVG(id,p){
+  const m = MOTIF[id]||'mesh', { bg,surface,accent,fg } = p, W=1600,H=1000;
+  const defs = `<defs>
+<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${bg}"/><stop offset="1" stop-color="${surface}"/></linearGradient>
+<radialGradient id="a" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="${accent}" stop-opacity=".55"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></radialGradient>
+<filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="60"/></filter>
+<filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .035 0"/></filter></defs>`;
+  let layer='';
+  if(m==='bloom') layer=`<circle cx="1010" cy="430" r="380" fill="url(#a)" filter="url(#s)"/>
+${[260,330,400,470].map(r=>`<circle cx="1010" cy="430" r="${r}" fill="none" stroke="${accent}" stroke-opacity=".14"/>`).join('')}`;
+  else if(m==='slab') layer=`<g transform="rotate(-18 800 500)">
+<rect x="120" y="120" width="1360" height="150" fill="${fg}" opacity=".06"/>
+<rect x="-80" y="430" width="1760" height="120" fill="${accent}" opacity=".85"/>
+<rect x="260" y="690" width="1080" height="90" fill="${fg}" opacity=".08"/></g>`;
+  else if(m==='sun') layer=`<circle cx="800" cy="560" r="300" fill="${accent}"/>
+${[0,1,2,3,4,5].map(i=>`<rect x="500" y="${430+i*46}" width="600" height="22" fill="${bg}"/>`).join('')}
+<g stroke="${accent}" stroke-opacity=".5">${[-5,-3,-1,1,3,5].map(i=>`<line x1="800" y1="640" x2="${800+i*420}" y2="1000"/>`).join('')}${[700,800,920].map(y=>`<line x1="0" y1="${y}" x2="1600" y2="${y}"/>`).join('')}</g>`;
+  else if(m==='tonal') layer=`${[0,1,2,3,4].map(i=>`<rect x="0" y="${i*200}" width="1600" height="200" fill="${i%2?accent:fg}" opacity="${0.04+i*0.012}"/>`).join('')}
+<rect x="0" y="0" width="1600" height="1000" fill="url(#a)" opacity=".3"/>`;
+  else if(m==='horizon') layer=`<rect x="0" y="660" width="1600" height="340" fill="${fg}" opacity=".05"/>
+<ellipse cx="1120" cy="660" rx="420" ry="240" fill="url(#a)" filter="url(#s)"/>
+<line x1="0" y1="660" x2="1600" y2="660" stroke="${accent}" stroke-opacity=".35"/>
+<path d="M180 880 Q 760 560 1480 240" stroke="${fg}" stroke-opacity=".18" stroke-width="3" fill="none"/>`;
+  else if(m==='organic') layer=`<path d="M520 180 C 880 80 1280 240 1300 520 C 1320 800 980 920 700 860 C 420 800 280 560 360 380 C 410 270 430 215 520 180 Z" fill="url(#a)" filter="url(#s)"/>
+<path d="M560 260 C 820 200 1140 320 1150 540 C 1160 760 900 840 690 790" fill="none" stroke="${accent}" stroke-opacity=".25" stroke-width="2"/>`;
+  else if(m==='soft') layer=`<ellipse cx="800" cy="430" rx="560" ry="420" fill="url(#a)" filter="url(#s)"/>`;
+  else layer=`<g fill="none" stroke="${accent}" stroke-opacity=".16">${Array.from({length:9},(_,r)=>Array.from({length:14},(_,c)=>`<circle cx="${80+c*112}" cy="${90+r*100}" r="2.4" fill="${accent}" fill-opacity=".4" stroke="none"/>`).join('')).join('')}</g>
+<ellipse cx="430" cy="360" rx="320" ry="320" fill="url(#a)" filter="url(#s)"/><ellipse cx="1180" cy="660" rx="300" ry="300" fill="url(#a)" filter="url(#s)" opacity=".7"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img">${defs}<rect width="${W}" height="${H}" fill="url(#b)"/>${layer}<rect width="${W}" height="${H}" filter="url(#g)" opacity=".5"/></svg>`;
+}
+function resolveAsset(s){
+  for(const ext of ['jpg','png','webp']){
+    if(fs.existsSync(path.join(ROOT,'assets',`${s.id}-hero.${ext}`))) return `../assets/${s.id}-hero.${ext}`;
+  }
+  return `../assets/${s.id}.svg`;
+}
+
 /* ---------- 12 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
    (ordered section keys), and content for generic (g) + real-estate (re).
@@ -58,8 +121,6 @@ const STYLES = [
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
     vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#E6B873','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
-    heroVideo:'https://cdn.coverr.co/videos/coverr-aerial-view-of-a-cargo-ship-1080p.mp4',
-    heroImg:'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=1920&auto=format&fit=crop',
     layout:['heroVideo','statsBand','glassServices','processSteps','quoteCards','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
       ['Engineer','Lanes, modes and contingencies, costed to the hour.'],
@@ -172,12 +233,6 @@ const STYLES = [
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
     vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#9B9086','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
-    heroImg:'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1920&auto=format&fit=crop',
-    projImgs:[
-      'https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1100&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1100&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1100&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&w=1100&auto=format&fit=crop'],
     layout:['heroPhoto','projectIndex','caseStudies','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
       ['Water Cabin','West Coast, NZ','2022'],['Stone Court','Engadin, CH','2021']] },
@@ -195,7 +250,6 @@ const STYLES = [
   { id:'09-aviation-luxury', name:'Aviation Luxury', refs:'Jesko Jets · Sakazuki',
     vars:{'--bg':'#0C0C0C','--surface':'#161514','--fg':'#F5F2ED','--accent':'#C9A96E','--card':'rgba(245,242,237,.04)','--card-bd':'rgba(201,169,110,.20)','--btn-radius':'999px'},
     disp:'Space Grotesk', body:'Inter', threeD:false, clock:true,
-    heroImg:'https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1920&auto=format&fit=crop',
     layout:['heroSplit','routesGrid','fleetStrip','membership','applyForm','footerBare'],
     extra:{ tiers:[['Charter','On-demand','Any city pair, wheels-up in 4h'],
       ['Jet Card','Fixed hours','Locked rate, zero surprises'],
@@ -331,7 +385,7 @@ function heroProduct(x){ // luxury / food / japanese — glowing centred product
 function heroVideo(x){
   const {c,s} = x;
   return `<header class="hero hero--video">
-  <video class="media" autoplay muted loop playsinline preload="metadata"${s.heroImg?` poster="${s.heroImg}"`:''} aria-hidden="true" referrerpolicy="no-referrer"><source src="${s.heroVideo}" type="video/mp4"></video>
+  <img class="media" src="${resolveAsset(s)}" alt="" aria-hidden="true" loading="eager" decoding="async">
   <div class="scrim"></div>
   ${wrapOpen}
     <div class="eyebrow" data-reveal>${esc(c.kicker)}</div>
@@ -397,7 +451,7 @@ function heroSoft(x){
 function heroSplit(x){ // aviation — split + clock + ticker
   const {c,s} = x;
   return `<header class="hero hero--split">
-  <div class="split-media"${s.heroImg?` style="background-image:linear-gradient(90deg,var(--bg),transparent 60%),url('${s.heroImg}')"`:''} aria-hidden="true"></div>
+  <div class="split-media" style="background-image:linear-gradient(90deg,var(--bg),transparent 60%),url('${resolveAsset(s)}')" aria-hidden="true"></div>
   ${wrapOpen}
     <div class="eyebrow" data-reveal>${esc(c.kicker)}</div>
     <h1>${esc(c.h1)}</h1>
@@ -413,7 +467,7 @@ function heroSplit(x){ // aviation — split + clock + ticker
 function heroPhoto(x){ // architecture — full-bleed photo + italic overlay
   const {c,s} = x;
   return `<header class="hero hero--photo">
-  <img class="media" src="${s.heroImg}" alt="" aria-hidden="true" loading="eager" decoding="async" referrerpolicy="no-referrer">
+  <img class="media" src="${resolveAsset(s)}" alt="" aria-hidden="true" loading="eager" decoding="async">
   <div class="scrim scrim--soft"></div>
   ${wrapOpen}
     <div class="eyebrow" data-reveal>${esc(c.kicker)}</div>
@@ -505,9 +559,9 @@ function journalCards(x){ const {ex}=x; const j=ex.journal||[]; return `<section
 function newsletter(x){ return `<section class="sec" id="letter"><div class="wrap narrow" style="text-align:center">
   <h2 class="clip-line" style="margin:0 auto 1rem;max-width:20ch">A letter, for those who pay attention.</h2>
   <form class="email-row" onsubmit="return false"><input type="email" placeholder="your email" aria-label="Email" required><button class="btn btn-primary" type="submit">Subscribe</button></form></div></section>`; }
-function projectIndex(x){ const {ex,s}=x; const p=ex.projects||[]; const imgs=s.projImgs||[]; return `<section class="sec" id="work"><div class="wrap">${sectionHead('Index','Selected works.')}
-  <ul class="proj-list">${p.map((r,i)=>`<li class="proj-row" data-reveal data-reveal-d="${(i%4)+1}" data-img="${imgs[i%imgs.length]}"><span class="proj-i">${String(i+1).padStart(2,'0')}</span><span class="proj-t">${esc(r[0])}</span><span class="proj-loc muted">${esc(r[1])}</span><span class="proj-y muted">${esc(r[2])}</span></li>`).join('')}</ul></div></section>`; }
-function caseStudies(x){ const {s,c}=x; const imgs=s.projImgs||[]; const items=c.svc; return `<section class="sec sec--flush" id="cases">${items.map((t,i)=>`<article class="case${imgs.length?'':' case--solid'}" data-reveal${imgs.length?` style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('${imgs[i%imgs.length]}')"`:''}><div class="wrap"><div class="eyebrow">Project ${String(i+1).padStart(2,'0')}</div><h2>${esc(t)}</h2><p class="lead">${esc(c.svcd[i]||c.sub)}</p></div></article>`).join('')}</section>`; }
+function projectIndex(x){ const {ex,s}=x; const p=ex.projects||[]; const img=resolveAsset(s); return `<section class="sec" id="work"><div class="wrap">${sectionHead('Index','Selected works.')}
+  <ul class="proj-list">${p.map((r,i)=>`<li class="proj-row" data-reveal data-reveal-d="${(i%4)+1}" data-img="${img}"><span class="proj-i">${String(i+1).padStart(2,'0')}</span><span class="proj-t">${esc(r[0])}</span><span class="proj-loc muted">${esc(r[1])}</span><span class="proj-y muted">${esc(r[2])}</span></li>`).join('')}</ul></div></section>`; }
+function caseStudies(x){ const {s,c}=x; const img=resolveAsset(s); const items=c.svc; return `<section class="sec sec--flush" id="cases">${items.map((t,i)=>`<article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('${img}')"><div class="wrap"><div class="eyebrow">Project ${String(i+1).padStart(2,'0')}</div><h2>${esc(t)}</h2><p class="lead">${esc(c.svcd[i]||c.sub)}</p></div></article>`).join('')}</section>`; }
 function capabilitySlides(x){ const {ex}=x; const cap=ex.caps||[]; return `<section class="sec sec--flush" id="capabilities"><div class="wrap">${sectionHead('Capabilities','What I actually do.')}</div>
   <div class="hscroll"><div class="hscroll-track">${cap.map((m,i)=>`<article class="hpanel" data-reveal data-reveal-d="${(i%4)+1}"><div class="hpanel-n">${String(i+1).padStart(2,'0')}</div><h3>${esc(m[0])}</h3><p class="muted">${esc(m[1])}</p></article>`).join('')}</div></div></section>`; }
 function aboutTwoPara(x){ const {c}=x; return `<section class="sec" id="about"><div class="wrap narrow">${sectionHead('Studio','Two paragraphs, no more.')}
@@ -523,7 +577,7 @@ function contactBlack(x){ const {c}=x; return `<footer class="foot foot--black" 
   <div class="muted foot-meta">${esc(c.brand)} — ${esc(c.kicker)}</div></div></footer>`; }
 function routesGrid(x){ const {c}=x; return `<section class="sec" id="services"><div class="wrap">${sectionHead('The service',`${c.svc[0]} · ${c.svc[1]} · ${c.svc[2]}`)}
   <div class="routes">${c.svc.map((s,i)=>`<div class="route" data-reveal data-reveal-d="${i+1}"><h3>${esc(s)}</h3><p class="muted">${esc(c.svcd[i])}</p></div>`).join('')}</div></div></section>`; }
-function fleetStrip(x){ const {s}=x; const bg=s.heroImg?`style="background-image:url('${s.heroImg}')"`:''; return `<section class="sec--flush fleet" aria-hidden="true"><div class="fleet-img" ${bg}></div></section>`; }
+function fleetStrip(x){ const {s}=x; return `<section class="sec--flush fleet" aria-hidden="true"><div class="fleet-img" style="background-image:url('${resolveAsset(s)}')"></div></section>`; }
 function membership(x){ const {ex,c}=x; const t=ex.tiers||[]; return `<section class="sec" id="membership"><div class="wrap">${sectionHead('Membership','By standard, not by volume.')}
   <div class="grid g3">${t.map((p,i)=>`<article class="tier${i===1?' tier--hot':''}" data-reveal data-reveal-d="${i+1}"><div class="tier-name">${esc(p[0])}</div><div class="tier-tag muted">${esc(p[1])}</div><p class="muted">${esc(p[2])}</p></article>`).join('')}</div>
   <div style="text-align:center;margin-top:3rem">${A('#apply',c.cta+' &rarr;','btn btn-primary magnetic')}</div></div></section>`; }
@@ -620,6 +674,13 @@ let manifest = { styles:[], reels:[] };
 const styleObj = id => STYLES.find(s=>s.id===id);
 fs.mkdirSync(path.join(ROOT,'reels'),{recursive:true});
 fs.mkdirSync(path.join(ROOT,'reels-realestate'),{recursive:true});
+fs.mkdirSync(path.join(ROOT,'assets'),{recursive:true});
+STYLES.forEach(s=>{
+  const svg = path.join(ROOT,'assets',`${s.id}.svg`);
+  if(!fs.existsSync(path.join(ROOT,'assets',`${s.id}-hero.jpg`)))
+    fs.writeFileSync(svg, artSVG(s.id,{ bg:s.vars['--bg'], surface:s.vars['--surface'],
+      accent:s.vars['--accent'], fg:s.vars['--fg'] }));
+});
 const jobs = [];
 
 STYLES.forEach(s=>{
