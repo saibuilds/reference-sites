@@ -5,6 +5,12 @@ expansion — **no key is stored in a tracked file**. Fill credentials in
 `.mcp.env` (gitignored) for local use, **and** add them to your Claude Code
 on the web environment variables (a local file is not auto-loaded there).
 
+> ⚠️ The web environment's **network allowlist blocks every generation
+> backend** (Higgsfield/fal/Replicate/nanana → `403 Host not in
+> allowlist`), so live generation cannot run here regardless of
+> credentials. See **[NETWORK.md](NETWORK.md)** for the verified block
+> list and the two ways to produce real imagery.
+
 ## Status of each service
 
 | Server | What it gives | Key you gave? | State |
