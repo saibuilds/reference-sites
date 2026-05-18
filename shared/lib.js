@@ -175,4 +175,88 @@
     var k=v.dataset.vanta, fn=VANTA[k.toUpperCase()];
     if (fn) fn({ el:v, color:parseInt((getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#C9A96E').replace('#','0x')), backgroundColor:parseInt((getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#080808').replace('#','0x')) });
   }
+
+  /* ============================================================
+     CLAUDE-BROWSER FIX PASS — cursor, preloader, clock/ticker,
+     project image preview. Timer-light, viewport-independent.
+     ============================================================ */
+
+  /* ---- custom cursor (dot + lerp ring) ---- */
+  var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if (fine && !reduce){
+    var cur=document.getElementById('cur'), cur2=document.getElementById('cur2');
+    if (cur && cur2){
+      var rx=0, ry=0, tx=0, ty=0;
+      addEventListener('mousemove', function(e){
+        rx=e.clientX; ry=e.clientY;
+        cur.style.left=rx+'px'; cur.style.top=ry+'px';
+      }, {passive:true});
+      (function ring(){ tx+=(rx-tx)*.16; ty+=(ry-ty)*.16;
+        cur2.style.left=tx+'px'; cur2.style.top=ty+'px';
+        requestAnimationFrame(ring); })();
+      var hot='a,button,.btn,.magnetic,.tilt,[role=button]';
+      document.querySelectorAll(hot).forEach(function(el){
+        el.addEventListener('mouseenter', function(){ cur.classList.add('hot'); });
+        el.addEventListener('mouseleave', function(){ cur.classList.remove('hot'); });
+      });
+    }
+  }
+
+  /* ---- page preloader (rAF-driven, never traps the page) ---- */
+  var ld=document.getElementById('loader');
+  if (ld){
+    if (reduce){ ld.parentNode && ld.parentNode.removeChild(ld); }
+    else {
+      requestAnimationFrame(function(){ ld.classList.add('go'); });
+      var lt0=(window.performance&&performance.now)?performance.now():Date.now();
+      (function lp(){
+        var n=(window.performance&&performance.now)?performance.now():Date.now();
+        if (n-lt0>=1250){
+          ld.classList.add('done');
+          if (window.gsap){ gsap.to(ld,{yPercent:-100,duration:1.1,ease:'expo.inOut',
+            onComplete:function(){ ld.parentNode&&ld.parentNode.removeChild(ld); }}); }
+          else setTimeout(function(){ ld.parentNode&&ld.parentNode.removeChild(ld); },1100);
+        } else requestAnimationFrame(lp);
+      })();
+    }
+  }
+
+  /* ---- aviation live clock + destination ticker ---- */
+  var clk=document.getElementById('clock');
+  if (clk){
+    var tick=function(){ try{
+      clk.textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false});
+    }catch(e){} };
+    tick(); setInterval(tick,1000);
+  }
+  var tk=document.getElementById('ticker');
+  if (tk){
+    var dests=(tk.dataset.dests||'Tokyo,Dubai,Geneva,London,New York,Seoul,Zurich,Singapore').split(',');
+    var di=0; tk.textContent=dests[0];
+    setInterval(function(){ tk.style.opacity=0;
+      setTimeout(function(){ di=(di+1)%dests.length; tk.textContent=dests[di]; tk.style.opacity=1; },300);
+    },2600);
+  }
+
+  /* ---- cursor-following project image preview (architecture) ---- */
+  var pv=document.getElementById('preview-img');
+  if (pv && fine && !reduce){
+    var rows=document.querySelectorAll('[data-img]');
+    if (rows.length){
+      var px=innerWidth/2, py=innerHeight/2, prx=px, pry=py, pvOn=false;
+      rows.forEach(function(row){
+        row.addEventListener('mouseenter', function(){
+          var im=new Image(); im.src=row.dataset.img;
+          pv.src=row.dataset.img; pv.classList.add('show'); pvOn=true;
+        });
+        row.addEventListener('mouseleave', function(){ pv.classList.remove('show'); pvOn=false; });
+      });
+      addEventListener('mousemove', function(e){ px=e.clientX+150; py=e.clientY; }, {passive:true});
+      (function follow(){
+        prx+=(px-prx)*.18; pry+=(py-pry)*.18;
+        if (pvOn){ pv.style.left=prx+'px'; pv.style.top=pry+'px'; }
+        requestAnimationFrame(follow);
+      })();
+    }
+  }
 })();

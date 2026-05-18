@@ -52,6 +52,8 @@ const STYLES = [
     refs:'Terminal Logistics · Villa Maravilha · Alpine · Hashgraph',
     vars:{'--bg':'#05050F','--surface':'#0C0C18','--fg':'#F4F6FB','--accent':'#E6B873','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
+    heroVideo:'https://cdn.coverr.co/videos/coverr-aerial-view-of-a-cargo-ship-1080p.mp4',
+    heroImg:'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=1920&auto=format&fit=crop',
     tag:'Full-bleed autoplay video, gradient veil (never pure black), text enters y:60, SCROLL DOWN cue, counters, video parallax.',
     g:{ brand:'TERMINAL', kicker:'Global Logistics', h1:'The world moves on schedule.',
         sub:'Freight, forwarding and fulfilment across 140 countries — engineered to never miss a window.',
@@ -148,6 +150,11 @@ const STYLES = [
     refs:'Fall Line House (19K likes) · Fifth & Dune · Alpine · Humaan',
     vars:{'--bg':'#0B0B0B','--surface':'#141414','--fg':'#F2F0EC','--accent':'#B7A88F','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
+    heroImg:'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1920&auto=format&fit=crop',
+    projImgs:[
+      'https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=900&auto=format&fit=crop'],
     tag:'Full-viewport object-fit cover desaturated, Editorial italic+upright 80px, cursor-following image preview (most viral), GSAP horizontal panels, clip-path reveal, minimal nav.',
     g:{ brand:'FALL LINE', kicker:'Architecture Studio', h1:'Houses that listen to the land.',
         sub:'A practice working at the edge — cliffside, forest and water. Selected works, 2014–2026.',
@@ -252,6 +259,7 @@ const REELS = [
 /* ---------- HTML template ---------- */
 function page(opts){
   const { title, vars, disp, body, threeD, vanta, light, brutal, editorial,
+          ripple, clock, heroImg, heroVideo, video, projImgs, waPhone,
           c, refTag, badge, backHref, prevHref, nextHref, pos, total } = opts;
   const cssVars = Object.entries(vars).map(([k,v])=>`${k}:${v}`).join(';');
   const fonts = fontHref([disp, body]);
@@ -260,12 +268,47 @@ function page(opts){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>${ threeD ? `
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>`:'' }`;
-  const heroBg = threeD
-    ? `<canvas id="bg3d"></canvas><div class="veil" style="background:radial-gradient(60% 60% at 70% 35%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)"></div>`
+
+  /* hero visual — every hero gets a real visual element (issue 1, 2, 8, 9):
+     - ripple style  -> concentric vaporwave rings + glow orb
+     - threeD style   -> Three.js bg3d canvas (orb) + veil
+     - heroImg given  -> full-bleed desaturated image + scrim
+     - otherwise      -> CSS gradient veil + floating accent orb     */
+  const heroBg = ripple
+    ? `<div class="ripple-wrap" aria-hidden="true">
+         <div class="glow"></div>
+         <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+         <div class="ring r4"></div><div class="ring r5"></div>
+       </div>
+       <div class="veil" style="background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--bg) 55%,transparent) 70%,var(--bg) 100%)"></div>`
+    : threeD
+    ? `<canvas id="bg3d"></canvas><div class="orb" aria-hidden="true"></div><div class="veil" style="background:radial-gradient(60% 60% at 70% 35%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)"></div>`
+    : (video && heroVideo)
+    ? `<video class="media" autoplay muted loop playsinline preload="metadata"${ heroImg ? ` poster="${heroImg}"`:'' } aria-hidden="true" referrerpolicy="no-referrer">
+         <source src="${heroVideo}" type="video/mp4">
+       </video>
+       <div class="scrim"></div>`
+    : heroImg
+    ? `<img class="media" src="${heroImg}" alt="" aria-hidden="true" loading="eager" decoding="async" referrerpolicy="no-referrer">
+       <div class="scrim"></div>`
     : `<div class="veil" data-parallax="60" style="background:
          radial-gradient(70% 90% at 80% 10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),
-         linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>`;
-  const grain = `<div aria-hidden="true" style="position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')"></div>`;
+         linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>
+       <div class="orb" aria-hidden="true"></div>`;
+
+  const bodyCls = [ brutal&&'brutal', light&&'light' ].filter(Boolean).join(' ');
+  const waNum = (waPhone||'14165551234').replace(/[^0-9]/g,'');
+  const fab = `<a class="wa-fab" href="https://wa.me/${waNum}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>`;
+  const cursor = `<div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>`;
+  const loader = `<div id="loader"><div class="lLogo">${c.brand}</div><div class="lTrack"><div class="lBar"></div></div></div>`;
+  const previewImg = `<img id="preview-img" alt="" aria-hidden="true">`;
+  /* aviation style -> live local clock + rotating destination ticker (issue 12) */
+  const heroClock = clock
+    ? `<div class="av-meta" aria-hidden="true">
+         <div id="clock" class="av-clock">--:--</div>
+         <div class="av-ticker-wrap">Next departure &middot; <span id="ticker" class="av-ticker" data-dests="Tokyo,Dubai,Reykjavik,Singapore,Cape Town,Lisbon,Vancouver">Tokyo</span></div>
+       </div>`
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -299,8 +342,11 @@ function page(opts){
 </style>
 ${cdn}
 </head>
-<body${ vanta ? ` data-vanta="${vanta}"`:'' }>
-${grain}
+<body${ bodyCls ? ` class="${bodyCls}"`:'' }${ vanta ? ` data-vanta="${vanta}"`:'' }>
+${loader}
+${cursor}
+${fab}
+${previewImg}
 <nav class="sitenav" aria-label="Reference site switcher">
   <a${ prevHref ? ` href="${prevHref}"`:' class="disabled"' }>&larr; Prev</a>
   <a href="${backHref}">Gallery</a>
@@ -328,6 +374,7 @@ ${grain}
       <a href="#contact" class="btn btn-primary magnetic">${c.cta}</a>
       <a href="#work" class="btn btn-ghost magnetic">View work</a>
     </div>
+    ${heroClock}
   </div>
   <div class="scrolldown">Scroll down &darr;</div>
 </header>
@@ -347,6 +394,22 @@ ${grain}
     </div>
   </div>
 </section>
+${ projImgs ? `
+<section class="sec" id="selected">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-reveal>Selected works</div>
+      <h2 class="clip-line">Hover a project &mdash; the work follows.</h2>
+    </div>
+    <ul class="proj-list">
+      ${c.svc.map((s,i)=>`<li class="proj-row" data-reveal data-reveal-d="${i+1}" data-img="${projImgs[i%projImgs.length]}">
+        <span class="proj-i">0${i+1}</span>
+        <span class="proj-t">${s}</span>
+        <span class="proj-y muted">20${20+i}</span>
+      </li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>` : '' }
 
 <div class="marquee"><div class="track">
   <span>${c.brand}</span><span>•</span><span>${c.kicker}</span><span>•</span><span>${c.brand}</span><span>•</span><span>${c.kicker}</span><span>•</span>
@@ -415,7 +478,9 @@ const jobs = [];
 
 STYLES.forEach(s=>{
   const common = { vars:s.vars, disp:s.disp, body:s.body, threeD:!!s.threeD,
-    vanta:s.vanta||'', light:!!s.light, brutal:!!s.brutal, editorial:!!s.editorial };
+    vanta:s.vanta||'', light:!!s.light, brutal:!!s.brutal, editorial:!!s.editorial,
+    ripple:!!s.ripple, clock:!!s.clock, heroImg:s.heroImg||'', heroVideo:s.heroVideo||'',
+    video:!!s.video, projImgs:s.projImgs||null, waPhone:'14165551234' };
   jobs.push({ rel:`styles/${s.id}.html`,
     opts:{ ...common, title:`${s.g.brand} — ${s.name}`, c:s.g,
       refTag:`Style · ${s.name}`, badge:`Reference · ${s.refs}`,
@@ -431,7 +496,9 @@ STYLES.forEach(s=>{
 REELS.forEach(r=>{
   const s = styleObj(r.style);
   const common = { vars:s.vars, disp:s.disp, body:s.body, threeD:!!s.threeD,
-    vanta:s.vanta||'', light:!!s.light, brutal:!!s.brutal, editorial:!!s.editorial };
+    vanta:s.vanta||'', light:!!s.light, brutal:!!s.brutal, editorial:!!s.editorial,
+    ripple:!!s.ripple, clock:!!s.clock, heroImg:s.heroImg||'', heroVideo:s.heroVideo||'',
+    video:!!s.video, projImgs:s.projImgs||null, waPhone:'14165551234' };
   const slug = String(r.n).padStart(2,'0')+'-'+r.site.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
   const gc = { ...s.g, brand:r.site.toUpperCase(), kicker:s.g.kicker };
   jobs.push({ rel:`reels/${slug}.html`,

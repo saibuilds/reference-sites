@@ -31,8 +31,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
-<body>
-<div aria-hidden="true" style="position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')"></div>
+<body class="light">
+<div id="loader"><div class="lLogo">Maison Living</div><div class="lTrack"><div class="lBar"></div></div></div>
+<div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
+<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
+<img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Reference site switcher">
   <a href="../reels/14-cartier-watches-wonders.html">&larr; Prev</a>
   <a href="../index.html">Gallery</a>
@@ -53,6 +56,7 @@
   <div class="veil" data-parallax="60" style="background:
          radial-gradient(70% 90% at 80% 10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),
          linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>
+       <div class="orb" aria-hidden="true"></div>
   <div class="wrap">
     <span class="ribbon">Reel 14 RE variant · Soft Editorial / Feminine</span>
     <div class="eyebrow" data-reveal>Boutique Real Estate</div>
@@ -62,6 +66,7 @@
       <a href="#contact" class="btn btn-primary magnetic">Begin your search</a>
       <a href="#work" class="btn btn-ghost magnetic">View work</a>
     </div>
+    
   </div>
   <div class="scrolldown">Scroll down &darr;</div>
 </header>
@@ -91,6 +96,7 @@
     </div>
   </div>
 </section>
+
 
 <div class="marquee"><div class="track">
   <span>Maison Living</span><span>•</span><span>Boutique Real Estate</span><span>•</span><span>Maison Living</span><span>•</span><span>Boutique Real Estate</span><span>•</span>

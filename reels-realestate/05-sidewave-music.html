@@ -32,7 +32,10 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
-<div aria-hidden="true" style="position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')"></div>
+<div id="loader"><div class="lLogo">PULSE PROPERTIES</div><div class="lTrack"><div class="lBar"></div></div></div>
+<div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
+<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
+<img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Reference site switcher">
   <a href="../reels/05-sidewave-music.html">&larr; Prev</a>
   <a href="../index.html">Gallery</a>
@@ -50,9 +53,12 @@
 </nav>
 
 <header class="hero">
-  <div class="veil" data-parallax="60" style="background:
-         radial-gradient(70% 90% at 80% 10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),
-         linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>
+  <div class="ripple-wrap" aria-hidden="true">
+         <div class="glow"></div>
+         <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+         <div class="ring r4"></div><div class="ring r5"></div>
+       </div>
+       <div class="veil" style="background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--bg) 55%,transparent) 70%,var(--bg) 100%)"></div>
   <div class="wrap">
     <span class="ribbon">Reel 5 RE variant · Vaporwave / Psychedelic</span>
     <div class="eyebrow" data-reveal>Lifestyle Real Estate</div>
@@ -62,6 +68,7 @@
       <a href="#contact" class="btn btn-primary magnetic">Find your space</a>
       <a href="#work" class="btn btn-ghost magnetic">View work</a>
     </div>
+    
   </div>
   <div class="scrolldown">Scroll down &darr;</div>
 </header>
@@ -91,6 +98,7 @@
     </div>
   </div>
 </section>
+
 
 <div class="marquee"><div class="track">
   <span>PULSE PROPERTIES</span><span>•</span><span>Lifestyle Real Estate</span><span>•</span><span>PULSE PROPERTIES</span><span>•</span><span>Lifestyle Real Estate</span><span>•</span>
