@@ -103,6 +103,14 @@
       "accent": "#6F8F5F",
       "g": "COCO VEDA",
       "re": "COCO VEDA RETREATS"
+    },
+    {
+      "id": "14-cosmic-platform",
+      "name": "Cosmic Engine",
+      "refs": "Starry Labs",
+      "accent": "#9E8CFF",
+      "g": "STARRY LABS",
+      "re": "STARRY LABS"
     }
   ],
   "reels": [

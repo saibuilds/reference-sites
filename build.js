@@ -42,7 +42,8 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 const MOTIF = { '01-luxury-dark':'bloom','02-cinematic-video':'horizon','03-dark-brutalist':'slab',
   '04-3d-spline-webgl':'mesh','05-vaporwave':'sun','06-soft-editorial':'soft','07-saas-glass':'mesh',
   '08-architecture-editorial':'tonal','09-aviation-luxury':'horizon','10-food-beauty-dtc':'organic',
-  '11-japanese-web3':'organic','12-experimental-dev':'slab','13-wellness-botanical':'organic' };
+  '11-japanese-web3':'organic','12-experimental-dev':'slab','13-wellness-botanical':'organic',
+  '14-cosmic-platform':'cosmos' };
 const GEN_PROMPT = {
   '01-luxury-dark':'Cinematic macro of a haute-horlogerie movement, single warm gold key light on near-black, extreme restraint, museum lighting, no text',
   '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
@@ -56,7 +57,8 @@ const GEN_PROMPT = {
   '10-food-beauty-dtc':'Luxury single-origin product macro on dark slate, dewy texture, warm amber rim light, editorial DTC, no text',
   '11-japanese-web3':'Minimal Japanese ink-wash on warm dark paper, single ember-orange gesture, ma negative space, no text',
   '12-experimental-dev':'Generative shader abstraction, raw red-on-black geometry, terminal aesthetic, experimental dev lab, no text',
-  '13-wellness-botanical':'Soft natural still life of a halved coconut and green botanicals on warm cream linen, diffuse daylight, Ayurvedic wellness, editorial DTC, no text' };
+  '13-wellness-botanical':'Soft natural still life of a halved coconut and green botanicals on warm cream linen, diffuse daylight, Ayurvedic wellness, editorial DTC, no text',
+  '14-cosmic-platform':'Deep-space astrophotograph, faint star field with a luminous violet nebula bloom and thin orbital rings around one bright point, NASA-grade celestial calm, no text' };
 function artSVG(id,p){
   const m = MOTIF[id]||'mesh', { bg,surface,accent,fg } = p, W=1600,H=1000;
   const defs = `<defs>
@@ -83,6 +85,12 @@ ${[0,1,2,3,4,5].map(i=>`<rect x="500" y="${430+i*46}" width="600" height="22" fi
   else if(m==='organic') layer=`<path d="M520 180 C 880 80 1280 240 1300 520 C 1320 800 980 920 700 860 C 420 800 280 560 360 380 C 410 270 430 215 520 180 Z" fill="url(#a)" filter="url(#s)"/>
 <path d="M560 260 C 820 200 1140 320 1150 540 C 1160 760 900 840 690 790" fill="none" stroke="${accent}" stroke-opacity=".25" stroke-width="2"/>`;
   else if(m==='soft') layer=`<ellipse cx="800" cy="430" rx="560" ry="420" fill="url(#a)" filter="url(#s)"/>`;
+  else if(m==='cosmos'){ const HS=(i,k)=>{const v=Math.sin(i*12.9898+k*78.233)*43758.5453;return v-Math.floor(v);};
+    const stars=Array.from({length:120},(_,i)=>`<circle cx="${(HS(i,1)*1600)|0}" cy="${(HS(i,2)*1000)|0}" r="${(0.3+HS(i,3)*1.7).toFixed(2)}" opacity="${(0.12+HS(i,4)*0.55).toFixed(2)}"/>`).join('');
+    layer=`<g fill="${fg}">${stars}</g>
+<ellipse cx="1040" cy="470" rx="540" ry="540" fill="url(#a)" filter="url(#s)"/>
+<g fill="none" stroke="${accent}" stroke-opacity=".22" transform="rotate(-17 1040 470)">${[170,255,345,455].map(r=>`<ellipse cx="1040" cy="470" rx="${r}" ry="${Math.round(r*0.6)}"/>`).join('')}</g>
+<circle cx="1040" cy="470" r="40" fill="${accent}" opacity=".4" filter="url(#s)"/><circle cx="1040" cy="470" r="6" fill="${fg}"/>`; }
   else layer=`<g fill="none" stroke="${accent}" stroke-opacity=".16">${Array.from({length:9},(_,r)=>Array.from({length:14},(_,c)=>`<circle cx="${80+c*112}" cy="${90+r*100}" r="2.4" fill="${accent}" fill-opacity=".4" stroke="none"/>`).join('')).join('')}</g>
 <ellipse cx="430" cy="360" rx="320" ry="320" fill="url(#a)" filter="url(#s)"/><ellipse cx="1180" cy="660" rx="300" ry="300" fill="url(#a)" filter="url(#s)" opacity=".7"/>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img">${defs}<rect width="${W}" height="${H}" fill="url(#b)"/>${layer}<rect width="${W}" height="${H}" filter="url(#g)" opacity=".5"/></svg>`;
@@ -94,7 +102,7 @@ function resolveAsset(s){
   return `../assets/${s.id}.svg`;
 }
 
-/* ---------- 13 STYLE ARCHETYPES ----------
+/* ---------- 14 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
    (ordered section keys), and content for generic (g) + real-estate (re).
    `extra` holds archetype-level texture copy reused by both variants. */
@@ -358,6 +366,42 @@ const STYLES = [
         cta:'Request the portfolio', svc:['Grove Residences','Retreat Estates','Wellness Tenancy'],
         svcd:['Homes sited within working coconut groves.','Turnkey retreat properties with land and provenance.','Long-stay wellness leases, fully serviced.'],
         stats:[['12','Residences'],['2015','Established'],['100','% natural setting']] } },
+
+  { id:'14-cosmic-platform', name:'Cosmic Engine', refs:'Starry Labs',
+    vars:{'--bg':'#070611','--surface':'#11102A','--fg':'#EDEBFA','--accent':'#9E8CFF','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(158,140,255,.20)'},
+    disp:'Cormorant Garamond', body:'Inter', threeD:false,
+    layout:['heroProduct','manifesto','featureRows','processSteps','pricing','faq','contactBlack'],
+    extra:{
+      manifesto:[
+        'Time is not a clock. It is the distance between conscious events — measurable, addressable, computable.',
+        'We take the same ephemeris space agencies trust and turn thirty thousand lines of it into patterns you can query.',
+        'The kernel stays ours. The API is yours to build on.'],
+      steps:[
+        ['Resolve','A moment and a place become precise celestial coordinates.'],
+        ['Compute','NASA-grade ephemeris resolves every planet, asteroid and lunar node.'],
+        ['Pattern','The engine maps positions to the pattern set you requested.'],
+        ['Return','One clean JSON answer — fast enough to build a product on.']],
+      tiers:[
+        ['Explorer','Free','Invite-only beta access to the core endpoints, rate-limited.'],
+        ['Builder','Usage','Metered per computation. Full ephemeris, full pattern set.'],
+        ['Observatory','Talk','Dedicated throughput, on-prem kernel, direct support.']],
+      faq:[
+        ['Is this an app I download?','No. dm-ck-core is a computation engine you build on, not a consumer app.'],
+        ['How accurate is the astronomy?','The same math space agencies use — every planet, asteroid and lunar node.'],
+        ['Can I see the kernel?','The kernel stays proprietary while the API and pricing stabilize.'],
+        ['How is it priced?','Usage-based, metered per computation. The beta is invite-only.']] },
+    g:{ brand:'STARRY LABS', kicker:'Time is the distance between conscious events',
+        h1:'NASA-grade astronomy, as a computation engine.',
+        sub:'Thirty thousand lines turning planetary positions into psychological patterns you can query — an AWS for astronomical and esoteric pattern matching. A kernel you build on, not an app. Private beta.',
+        cta:'Request beta access', svc:['Astronomical Core','Pattern Computation','Developer API'],
+        svcd:['NASA-grade ephemeris tracking every planet, asteroid and lunar node.','Positions resolved into the psychological patterns your product needs.','One stable, usage-priced API — the kernel stays ours, the build is yours.'],
+        stats:[['30K','Lines in the kernel'],['9','Bodies + nodes tracked'],['1','API to build on']] },
+    re:{ brand:'STARRY LABS', kicker:'Locational timing intelligence',
+        h1:'Where and when, computed.',
+        sub:'Relocation-grade locational and timing intelligence for property decisions — the same NASA-grade ephemeris, scored for place and moment, delivered as an API.',
+        cta:'Request beta access', svc:['Locational Engine','Timing Windows','Developer API'],
+        svcd:['Astrocartography-grade scoring for any coordinate on Earth.','The moments a place is most and least favourable, computed.','One stable, usage-priced API to build location products on.'],
+        stats:[['30K','Lines in the kernel'],['195','Countries scored'],['1','API to build on']] } },
 ];
 
 /* ---------- 20 REELS -> archetype + a tasteful per-reel brand ----------
