@@ -18,15 +18,15 @@
       "command": "npx",
       "args": ["-y", "@nanana-ai/mcp-server-nano-banana@0.1.2"],
       "env": {
-        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+        "NANANA_API_TOKEN": "${NANANA_API_TOKEN}"
       }
     },
     "higgsfield": {
       "command": "npx",
       "args": ["-y", "higgsfield-mcp@0.2.0"],
       "env": {
-        "HIGGSFIELD_API_KEY": "${HIGGSFIELD_API_KEY}",
-        "HIGGSFIELD_API_SECRET": "${HIGGSFIELD_API_SECRET}"
+        "HF_API_KEY": "${HIGGSFIELD_API_KEY}",
+        "HF_SECRET": "${HIGGSFIELD_API_SECRET}"
       }
     },
     "stitch": {
