@@ -28,8 +28,23 @@
     onScroll(); addEventListener('scroll', onScroll, {passive:true});
   }
 
+  /* ---- brutalist scramble headline ---- */
+  document.querySelectorAll('h1[data-scramble]').forEach(function(h){
+    if (h.dataset.split) return; h.dataset.split='1';
+    var real = h.textContent, chars='!<>-_\\/[]{}=+*^?#01', frame=0;
+    if (reduce){ h.textContent=real; return; }
+    (function run(){
+      h.textContent = real.split('').map(function(ch,i){
+        if (ch===' ') return ' ';
+        return i < frame/2 ? real[i] : chars[Math.floor(Math.random()*chars.length)];
+      }).join('');
+      if (frame/2 < real.length){ frame++; requestAnimationFrame(run); }
+      else h.textContent = real;
+    })();
+  });
+
   /* ---- hero headline word reveal ---- */
-  document.querySelectorAll('.hero h1').forEach(function(h){
+  document.querySelectorAll('.hero h1:not([data-scramble])').forEach(function(h){
     if (h.dataset.split) return; h.dataset.split='1';
     var html = h.innerHTML.split(/(\s+)/).map(function(w){
       return /\s+/.test(w)? w : '<span class="word"><span>'+w+'</span></span>';

@@ -1,145 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JoyJam — SaaS Modern / Glassmorphism</title>
-<meta name="description" content="Creator Platform — JoyJam. Reference build (Style · SaaS Modern / Glassmorphism).">
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JoyJam — Creator Platform</title>
+<meta name="description" content="Creator Platform. The all-in-one toolkit for creators — pages, payments and analytics, no code required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>
-  :root{--bg:#05050F;--surface:#0A0A18;--fg:#EEF1FF;--accent:#7B61FF;--card:rgba(255,255,255,.05);--card-bd:rgba(255,255,255,.10);--font-display:'Syne';--font-body:'Inter'}
-  
-  
-  
-  .sitenav{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:60;display:flex;align-items:center;gap:.2rem;
-    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .5rem;border:1px solid var(--card-bd);
-    border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);max-width:92vw}
-  .sitenav a{padding:.4rem .85rem;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
-  .sitenav a:hover{background:var(--accent);color:#000}
-  .sitenav .pos{padding:.4rem .7rem;opacity:.55;font-variant-numeric:tabular-nums}
-  .sitenav .disabled{opacity:.3;pointer-events:none}
-  .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
-  .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
-  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
-  .scrolldown{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:2rem;z-index:3;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
-</style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>:root{--bg:#070710;--surface:#0E0E1C;--fg:#EEF1FF;--accent:#7B61FF;--card:rgba(255,255,255,.05);--card-bd:rgba(255,255,255,.12);--font-display:'Syne';--font-body:'Inter'}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 <div id="loader"><div class="lLogo">JoyJam</div><div class="lTrack"><div class="lBar"></div></div></div>
 <div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
-<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
 <img id="preview-img" alt="" aria-hidden="true">
-<nav class="sitenav" aria-label="Reference site switcher">
-  <a href="../styles-realestate/06-soft-editorial.html">&larr; Prev</a>
-  <a href="../index.html">Gallery</a>
-  <span class="pos">13 / 64</span>
-  <a href="../styles-realestate/07-saas-glass.html">Next &rarr;</a>
-</nav>
-<span class="reftag">Style · SaaS Modern / Glassmorphism</span>
-
-<nav class="nav">
-  <div class="brand">JoyJam</div>
-  <div class="links">
-    <a href="#work">Work</a><a href="#about">About</a><a href="#stats">Results</a><a href="#contact">Contact</a>
-  </div>
-  <a href="#contact" class="btn btn-ghost magnetic" style="padding:.7rem 1.4rem">Start free</a>
-</nav>
-
-<header class="hero">
-  <canvas id="bg3d"></canvas><div class="orb" aria-hidden="true"></div><div class="veil" style="background:radial-gradient(60% 60% at 70% 35%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)"></div>
+<nav class="sitenav" aria-label="Library switcher">
+  <a href="../styles-realestate/06-soft-editorial.html" aria-label="Previous">&larr;</a>
+  <a href="../index.html">Index</a><span class="pos">13 / 64</span>
+  <a href="../styles-realestate/07-saas-glass.html" aria-label="Next">&rarr;</a></nav>
+<nav class="nav"><div class="brand">JoyJam</div>
+  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <a href="#contact" class="btn btn-ghost magnetic nav-cta">Start free</a></nav>
+<header class="hero hero--saas">
+  <div class="mesh" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="ribbon">Reference · JoyJam · GSAP Engine · Hashgraph · Financial Inst.</span>
     <div class="eyebrow" data-reveal>Creator Platform</div>
     <h1>Ship your idea this weekend.</h1>
-    <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">The all-in-one toolkit for creators — pages, payments and analytics, no code required.</p>
+    <p class="lead" data-reveal data-reveal-d="2">The all-in-one toolkit for creators — pages, payments and analytics, no code required.</p>
     <div class="hero-cta" data-reveal data-reveal-d="3">
-      <a href="#contact" class="btn btn-primary magnetic">Start free</a>
-      <a href="#work" class="btn btn-ghost magnetic">View work</a>
+      <a href="#pricing" class="btn btn-primary magnetic">Start free</a> <a href="#how" class="btn btn-ghost magnetic">See how</a>
     </div>
-    
+    <div class="device" data-reveal data-reveal-d="4" aria-hidden="true"><div class="device-screen"></div></div>
   </div>
-  <div class="scrolldown">Scroll down &darr;</div>
 </header>
-
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow" data-reveal>What we do</div>
-      <h2 class="clip-line">Pages, Payments &amp; Insights.</h2>
-    </div>
-    <div class="grid g3">
-      <article class="card tilt" data-reveal data-reveal-d="1">
-        <div class="eyebrow">01</div>
-        <h3 style="margin:1rem 0 .7rem">Pages</h3>
-        <p class="muted">Beautiful pages live in minutes.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="2">
-        <div class="eyebrow">02</div>
-        <h3 style="margin:1rem 0 .7rem">Payments</h3>
-        <p class="muted">Take money globally, day one.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="3">
-        <div class="eyebrow">03</div>
-        <h3 style="margin:1rem 0 .7rem">Insights</h3>
-        <p class="muted">Know exactly what converts.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<div class="marquee"><div class="track">
-  <span>JoyJam</span><span>•</span><span>Creator Platform</span><span>•</span><span>JoyJam</span><span>•</span><span>Creator Platform</span><span>•</span>
-  <span>JoyJam</span><span>•</span><span>Creator Platform</span><span>•</span><span>JoyJam</span><span>•</span><span>Creator Platform</span><span>•</span>
-</div></div>
-
-<section class="sec" id="about">
-  <div class="wrap grid g2" style="align-items:center">
-    <div data-reveal>
-      <div class="eyebrow">The studio</div>
-      <h2 style="margin:.8rem 0 1.2rem">A reference build, faithful to the source reel.</h2>
-      <p class="lead">The all-in-one toolkit for creators — pages, payments and analytics, no code required. This page recreates the <strong>Style · SaaS Modern / Glassmorphism</strong> aesthetic from the research library — palette, type pairing, section rhythm and the signature motion.</p>
-    </div>
-    <div class="tilt card" data-reveal data-reveal-d="2" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center">
-      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);text-align:center;line-height:1.1">JoyJam<br><span class="muted" style="font-size:.9rem;letter-spacing:.2em">Creator Platform</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="stats">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat" data-reveal><div class="num" data-count="120" data-prefix="" data-suffix="k">0k</div><div class="lbl">Creators</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="48" data-prefix="$" data-suffix="M">$0M</div><div class="lbl">Paid out</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="4.9" data-prefix="" data-suffix="">0</div><div class="lbl">★ rating</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="contact">
-  <div class="wrap" style="text-align:center">
-    <div class="eyebrow" data-reveal>Get in touch</div>
-    <h2 class="clip-line" style="margin:1rem auto 2rem;max-width:18ch">Start free.</h2>
-    <a href="#" class="btn btn-primary magnetic" data-reveal data-reveal-d="2">Start free</a>
-  </div>
-</section>
-
-<footer class="foot">
-  <div class="wrap row">
-    <div><div class="brand" style="font-family:var(--font-display);font-size:1.2rem">JoyJam</div>
-      <p class="muted" style="margin-top:.6rem;font-size:.85rem">Creator Platform</p></div>
-    <div class="muted" style="font-size:.8rem;max-width:30ch">Reference build · Style · SaaS Modern / Glassmorphism · part of the SathiDeals / reno AI website library.</div>
-  </div>
-</footer>
+<main>
+<section class="sec stack-sec" id="how"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The product</div><h2 class="clip-line">Everything, in one place.</h2></div>
+  <div class="stack"><article class="stack-c" data-reveal style="--i:0"><div class="eyebrow">01</div><h3>Pages</h3><p class="muted">Beautiful pages live in minutes.</p></article><article class="stack-c" data-reveal style="--i:1"><div class="eyebrow">02</div><h3>Payments</h3><p class="muted">Take money globally, day one.</p></article><article class="stack-c" data-reveal style="--i:2"><div class="eyebrow">03</div><h3>Insights</h3><p class="muted">Know exactly what converts.</p></article></div></div></section>
+<section class="sec" id="who"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Built for</div><h2 class="clip-line">For pages, payments &amp; insights.</h2></div>
+  <div class="grid g3"><article class="persona" data-reveal data-reveal-d="1"><h3>Pages</h3><p class="muted">Beautiful pages live in minutes.</p></article><article class="persona" data-reveal data-reveal-d="2"><h3>Payments</h3><p class="muted">Take money globally, day one.</p></article><article class="persona" data-reveal data-reveal-d="3"><h3>Insights</h3><p class="muted">Know exactly what converts.</p></article></div></div></section>
+<div class="logo-mq" aria-hidden="true"><div class="logo-mq-track"><span>JoyJam</span><span class="dot">·</span><span>Creator Platform</span><span class="dot">·</span><span>Pages</span><span class="dot">·</span><span>Payments</span><span class="dot">·</span><span>Insights</span><span class="dot">·</span><span>JoyJam</span><span class="dot">·</span><span>Creator Platform</span><span class="dot">·</span><span>Pages</span><span class="dot">·</span><span>Payments</span><span class="dot">·</span><span>Insights</span><span class="dot">·</span><span>JoyJam</span><span class="dot">·</span><span>Creator Platform</span><span class="dot">·</span><span>Pages</span><span class="dot">·</span><span>Payments</span><span class="dot">·</span><span>Insights</span><span class="dot">·</span></div></div>
+<section class="sec" id="pricing"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Pricing</div><h2 class="clip-line">Simple, by design.</h2></div>
+  <div class="grid g3 price-grid"><article class="price" data-reveal data-reveal-d="1"><div class="price-name">Free</div><div class="price-amt">$0</div><p class="muted">Up to 3 projects, core analytics</p><a href="#" class="btn btn-ghost magnetic">Start free</a></article><article class="price price--hot" data-reveal data-reveal-d="2"><div class="price-name">Pro</div><div class="price-amt">$24</div><p class="muted">Unlimited, payments, automations</p><a href="#" class="btn btn-primary magnetic">Start free</a></article><article class="price" data-reveal data-reveal-d="3"><div class="price-name">Team</div><div class="price-amt">$79</div><p class="muted">Roles, SSO, priority support</p><a href="#" class="btn btn-ghost magnetic">Start free</a></article></div></div></section>
+<section class="sec" id="faq"><div class="wrap narrow"><div class="sec-head"><div class="eyebrow" data-reveal>Questions</div><h2 class="clip-line">The short answers.</h2></div>
+  <div class="faq"><details class="faq-i" data-reveal data-reveal-d="1" open><summary>Is there a free tier?</summary><p class="muted">Yes — generous, no card, no expiry.</p></details><details class="faq-i" data-reveal data-reveal-d="2"><summary>Can I export my data?</summary><p class="muted">One click, open formats, anytime.</p></details><details class="faq-i" data-reveal data-reveal-d="3"><summary>Do you take a cut of payments?</summary><p class="muted">No platform fee on your revenue.</p></details></div></div></section>
+<section class="sec cta-grad" id="contact"><div class="wrap" style="text-align:center">
+  <div class="eyebrow" data-reveal>Get started</div>
+  <h2 class="clip-line grad-text" style="margin:.6rem auto 2rem;max-width:18ch">Ship your idea this weekend.</h2>
+  <a href="#" class="btn btn-primary magnetic">Start free</a></div></section>
+<footer class="foot"><div class="wrap row">
+  <div><div class="brand-mark">JoyJam</div><p class="muted foot-meta">Creator Platform</p></div>
+  <div class="foot-nav"><a href="#">Pages</a><a href="#">Payments</a><a href="#">Insights</a></div></div></footer>
+</main>
 
 <script src="../shared/lib.js"></script>
-</body>
-</html>
+</body></html>

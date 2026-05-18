@@ -1,145 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CASPER'S — Luxury Food / Beauty DTC</title>
-<meta name="description" content="Single-Origin Caviar — CASPER'S. Reference build (Style · Luxury Food / Beauty DTC).">
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASPER'S — Single-Origin Caviar</title>
+<meta name="description" content="Single-Origin Caviar. Sustainably farmed Oscietra, cured to a 200-year recipe and shipped on ice within 24 hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>
-  :root{--bg:#080808;--surface:#161210;--fg:#F3EBDD;--accent:#B48226;--card:rgba(255,255,255,.04);--card-bd:rgba(180,130,40,.22);--font-display:'Playfair Display';--font-body:'Inter'}
-  
-  
-  
-  .sitenav{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:60;display:flex;align-items:center;gap:.2rem;
-    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .5rem;border:1px solid var(--card-bd);
-    border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);max-width:92vw}
-  .sitenav a{padding:.4rem .85rem;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
-  .sitenav a:hover{background:var(--accent);color:#000}
-  .sitenav .pos{padding:.4rem .7rem;opacity:.55;font-variant-numeric:tabular-nums}
-  .sitenav .disabled{opacity:.3;pointer-events:none}
-  .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
-  .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
-  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
-  .scrolldown{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:2rem;z-index:3;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
-</style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>:root{--bg:#080808;--surface:#161210;--fg:#F3EBDD;--accent:#B48226;--card:rgba(255,255,255,.04);--card-bd:rgba(180,130,40,.24);--font-display:'Playfair Display';--font-body:'Inter'}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 <div id="loader"><div class="lLogo">CASPER'S</div><div class="lTrack"><div class="lBar"></div></div></div>
 <div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
-<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
 <img id="preview-img" alt="" aria-hidden="true">
-<nav class="sitenav" aria-label="Reference site switcher">
-  <a href="../styles-realestate/09-aviation-luxury.html">&larr; Prev</a>
-  <a href="../index.html">Gallery</a>
-  <span class="pos">19 / 64</span>
-  <a href="../styles-realestate/10-food-beauty-dtc.html">Next &rarr;</a>
-</nav>
-<span class="reftag">Style · Luxury Food / Beauty DTC</span>
-
-<nav class="nav">
-  <div class="brand">CASPER'S</div>
-  <div class="links">
-    <a href="#work">Work</a><a href="#about">About</a><a href="#stats">Results</a><a href="#contact">Contact</a>
-  </div>
-  <a href="#contact" class="btn btn-ghost magnetic" style="padding:.7rem 1.4rem">Shop the tin</a>
-</nav>
-
-<header class="hero">
-  <canvas id="bg3d"></canvas><div class="orb" aria-hidden="true"></div><div class="veil" style="background:radial-gradient(60% 60% at 70% 35%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)"></div>
+<nav class="sitenav" aria-label="Library switcher">
+  <a href="../styles-realestate/09-aviation-luxury.html" aria-label="Previous">&larr;</a>
+  <a href="../index.html">Index</a><span class="pos">19 / 64</span>
+  <a href="../styles-realestate/10-food-beauty-dtc.html" aria-label="Next">&rarr;</a></nav>
+<nav class="nav"><div class="brand">CASPER'S</div>
+  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <a href="#contact" class="btn btn-ghost magnetic nav-cta">Shop the tin</a></nav>
+<header class="hero hero--product">
+  <canvas id="bg3d" aria-hidden="true"></canvas><div class="orb" aria-hidden="true"></div>
+  <div class="veil" style="background:radial-gradient(58% 58% at 64% 38%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%)"></div>
   <div class="wrap">
-    <span class="ribbon">Reference · Casper's Caviar · Obsidian Dew</span>
     <div class="eyebrow" data-reveal>Single-Origin Caviar</div>
     <h1>The ocean, at its rarest.</h1>
-    <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">Sustainably farmed Oscietra, cured to a 200-year recipe and shipped on ice within 24 hours.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3">
-      <a href="#contact" class="btn btn-primary magnetic">Shop the tin</a>
-      <a href="#work" class="btn btn-ghost magnetic">View work</a>
-    </div>
-    
+    <p class="lead" data-reveal data-reveal-d="2">Sustainably farmed Oscietra, cured to a 200-year recipe and shipped on ice within 24 hours.</p>
+    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#story" class="link-cta">Shop the tin &rarr;</a></div>
   </div>
-  <div class="scrolldown">Scroll down &darr;</div>
+  <span class="scrollcue" aria-hidden="true">Scroll</span>
 </header>
-
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow" data-reveal>What we do</div>
-      <h2 class="clip-line">The Caviar, Pairings &amp; Gifting.</h2>
-    </div>
-    <div class="grid g3">
-      <article class="card tilt" data-reveal data-reveal-d="1">
-        <div class="eyebrow">01</div>
-        <h3 style="margin:1rem 0 .7rem">The Caviar</h3>
-        <p class="muted">Oscietra, Beluga and Kaluga grades.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="2">
-        <div class="eyebrow">02</div>
-        <h3 style="margin:1rem 0 .7rem">Pairings</h3>
-        <p class="muted">Blinis, crème fraîche and service kit.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="3">
-        <div class="eyebrow">03</div>
-        <h3 style="margin:1rem 0 .7rem">Gifting</h3>
-        <p class="muted">Hand-packed presentation boxes.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<div class="marquee"><div class="track">
-  <span>CASPER'S</span><span>•</span><span>Single-Origin Caviar</span><span>•</span><span>CASPER'S</span><span>•</span><span>Single-Origin Caviar</span><span>•</span>
-  <span>CASPER'S</span><span>•</span><span>Single-Origin Caviar</span><span>•</span><span>CASPER'S</span><span>•</span><span>Single-Origin Caviar</span><span>•</span>
-</div></div>
-
-<section class="sec" id="about">
-  <div class="wrap grid g2" style="align-items:center">
-    <div data-reveal>
-      <div class="eyebrow">The studio</div>
-      <h2 style="margin:.8rem 0 1.2rem">A reference build, faithful to the source reel.</h2>
-      <p class="lead">Sustainably farmed Oscietra, cured to a 200-year recipe and shipped on ice within 24 hours. This page recreates the <strong>Style · Luxury Food / Beauty DTC</strong> aesthetic from the research library — palette, type pairing, section rhythm and the signature motion.</p>
-    </div>
-    <div class="tilt card" data-reveal data-reveal-d="2" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center">
-      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);text-align:center;line-height:1.1">CASPER'S<br><span class="muted" style="font-size:.9rem;letter-spacing:.2em">Single-Origin Caviar</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="stats">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat" data-reveal><div class="num" data-count="24" data-prefix="" data-suffix="h">0h</div><div class="lbl">To your door</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="1" data-prefix="" data-suffix="">0</div><div class="lbl">Single origin</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="200" data-prefix="" data-suffix="">0</div><div class="lbl">Year recipe</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="contact">
-  <div class="wrap" style="text-align:center">
-    <div class="eyebrow" data-reveal>Get in touch</div>
-    <h2 class="clip-line" style="margin:1rem auto 2rem;max-width:18ch">Shop the tin.</h2>
-    <a href="#" class="btn btn-primary magnetic" data-reveal data-reveal-d="2">Shop the tin</a>
-  </div>
-</section>
-
-<footer class="foot">
-  <div class="wrap row">
-    <div><div class="brand" style="font-family:var(--font-display);font-size:1.2rem">CASPER'S</div>
-      <p class="muted" style="margin-top:.6rem;font-size:.85rem">Single-Origin Caviar</p></div>
-    <div class="muted" style="font-size:.8rem;max-width:30ch">Reference build · Style · Luxury Food / Beauty DTC · part of the SathiDeals / reno AI website library.</div>
-  </div>
-</footer>
+<main>
+<section class="sec" id="story"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>What it is</div><h2 class="clip-line">Few things. The right things.</h2></div>
+  <div class="mosaic"><figure class="mtile m1" data-reveal data-reveal-d="1"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>Single Origin</strong><span class="muted">One estuary. One season. One grade.</span></figcaption></figure><figure class="mtile m2" data-reveal data-reveal-d="2"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>Cured Slow</strong><span class="muted">A 200-year salt cure, never rushed.</span></figcaption></figure><figure class="mtile m3" data-reveal data-reveal-d="3"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>On Ice in 24h</strong><span class="muted">Hand-packed, shipped cold, traceable.</span></figcaption></figure><figure class="mtile m4" data-reveal data-reveal-d="4"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>Nothing Added</strong><span class="muted">No borax, no pasteurisation, no shortcuts.</span></figcaption></figure></div></div></section>
+<section class="sec" id="ritual"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The ritual</div><h2 class="clip-line">How it is served.</h2></div>
+  <ol class="ritual"><li data-reveal data-reveal-d="1"><span class="ritual-n">01</span><div><h3>Chill</h3><p class="muted">Tin and spoon, ten minutes, mother-of-pearl only.</p></div></li><li data-reveal data-reveal-d="2"><span class="ritual-n">02</span><div><h3>Open</h3><p class="muted">Lift the lid. Do not stir.</p></div></li><li data-reveal data-reveal-d="3"><span class="ritual-n">03</span><div><h3>Taste</h3><p class="muted">A pea-sized pearl on the back of the hand.</p></div></li><li data-reveal data-reveal-d="4"><span class="ritual-n">04</span><div><h3>Serve</h3><p class="muted">Blini, crème fraîche, nothing louder.</p></div></li></ol></div></section>
+<div class="tmq" aria-hidden="true"><div class="tmq-track"><span>Oscietra, Beluga and Kaluga grades.</span><span class="dot">✦</span><span>Blinis, crème fraîche and service kit.</span><span class="dot">✦</span><span>Hand-packed presentation boxes.</span><span class="dot">✦</span><span>Oscietra, Beluga and Kaluga grades.</span><span class="dot">✦</span><span>Blinis, crème fraîche and service kit.</span><span class="dot">✦</span><span>Hand-packed presentation boxes.</span><span class="dot">✦</span></div></div>
+<section class="sec" id="shop"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The shelf</div><h2 class="clip-line">Hand-packed, shipped cold.</h2></div>
+  <div class="grid g3"><article class="shelf" data-reveal data-reveal-d="1"><div class="shelf-vis" aria-hidden="true"></div><h3>Oscietra</h3><div class="shelf-meta"><span class="muted">30g</span><span class="shelf-price">$118</span></div><a href="#" class="btn btn-ghost magnetic">Add to bag</a></article><article class="shelf" data-reveal data-reveal-d="2"><div class="shelf-vis" aria-hidden="true"></div><h3>Beluga</h3><div class="shelf-meta"><span class="muted">30g</span><span class="shelf-price">$240</span></div><a href="#" class="btn btn-ghost magnetic">Add to bag</a></article><article class="shelf" data-reveal data-reveal-d="3"><div class="shelf-vis" aria-hidden="true"></div><h3>Kaluga</h3><div class="shelf-meta"><span class="muted">30g</span><span class="shelf-price">$96</span></div><a href="#" class="btn btn-ghost magnetic">Add to bag</a></article></div></div></section>
+<section class="sec email-cap" id="join"><div class="wrap" style="text-align:center">
+  <h2 class="clip-line" style="margin:0 auto 1.6rem;max-width:14ch">Shop the tin.</h2>
+  <form class="email-row" onsubmit="return false"><input type="email" placeholder="you@email.com" aria-label="Email" required><button class="btn btn-primary" type="submit">Join</button></form></div></section>
+<footer class="foot foot--bare"><div class="wrap" style="text-align:center">
+  <div class="brand-mark">CASPER'S</div>
+  <a class="big-mail" href="mailto:hello@caspers.com">hello@caspers.com</a>
+  <div class="paren-links"><a href="#">Instagram</a></div></div></footer>
+</main>
 
 <script src="../shared/lib.js"></script>
-</body>
-</html>
+</body></html>

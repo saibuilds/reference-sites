@@ -1,147 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Reel 12 — Maison de Synergy (Real Estate)</title>
-<meta name="description" content="Boutique Real Estate — Maison Living. Reference build (Reel 12 · Maison de Synergy · RE).">
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maison Living — Boutique Real Estate</title>
+<meta name="description" content="Boutique Real Estate. A boutique advisory for design-led homes — matched slowly, considered carefully.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>
-  :root{--bg:#FAF0EB;--surface:#F3E2D8;--fg:#2C1810;--accent:#C8A08A;--card:rgba(255,255,255,.55);--card-bd:rgba(44,24,16,.10);--font-display:'Cormorant Garamond';--font-body:'Inter'}
-  
-  
-  .nav.scrolled{box-shadow:0 1px 0 var(--card-bd)} body{background:var(--bg)}
-  .sitenav{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:60;display:flex;align-items:center;gap:.2rem;
-    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .5rem;border:1px solid var(--card-bd);
-    border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);max-width:92vw}
-  .sitenav a{padding:.4rem .85rem;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
-  .sitenav a:hover{background:var(--accent);color:#000}
-  .sitenav .pos{padding:.4rem .7rem;opacity:.55;font-variant-numeric:tabular-nums}
-  .sitenav .disabled{opacity:.3;pointer-events:none}
-  .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
-  .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
-  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
-  .scrolldown{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:2rem;z-index:3;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
-</style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>:root{--bg:#FAF0EB;--surface:#F3E2D8;--fg:#2C1810;--accent:#B07D63;--card:rgba(255,255,255,.6);--card-bd:rgba(44,24,16,.12);--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body class="light">
 <div id="loader"><div class="lLogo">Maison Living</div><div class="lTrack"><div class="lBar"></div></div></div>
 <div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
-<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
 <img id="preview-img" alt="" aria-hidden="true">
-<nav class="sitenav" aria-label="Reference site switcher">
-  <a href="../reels/12-maison-de-synergy.html">&larr; Prev</a>
-  <a href="../index.html">Gallery</a>
-  <span class="pos">48 / 64</span>
-  <a href="../reels/13-design-agency.html">Next &rarr;</a>
-</nav>
-<span class="reftag">Reel 12 · Maison de Synergy · RE</span>
-
-<nav class="nav">
-  <div class="brand">Maison Living</div>
-  <div class="links">
-    <a href="#work">Work</a><a href="#about">About</a><a href="#stats">Results</a><a href="#contact">Contact</a>
-  </div>
-  <a href="#contact" class="btn btn-ghost magnetic" style="padding:.7rem 1.4rem">Begin your search</a>
-</nav>
-
-<header class="hero">
-  <div class="veil" data-parallax="60" style="background:
-         radial-gradient(70% 90% at 80% 10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),
-         linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>
-       <div class="orb" aria-hidden="true"></div>
+<nav class="sitenav" aria-label="Library switcher">
+  <a href="../reels/12-maison-de-synergy.html" aria-label="Previous">&larr;</a>
+  <a href="../index.html">Index</a><span class="pos">48 / 64</span>
+  <a href="../reels/13-design-agency.html" aria-label="Next">&rarr;</a></nav>
+<nav class="nav"><div class="brand">Maison Living</div>
+  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <a href="#contact" class="btn btn-ghost magnetic nav-cta">Begin your search</a></nav>
+<header class="hero hero--soft">
+  <div class="soft-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="ribbon">Reel 12 RE variant · Soft Editorial / Feminine</span>
     <div class="eyebrow" data-reveal>Boutique Real Estate</div>
     <h1>A home, with intention.</h1>
-    <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">A boutique advisory for design-led homes — matched slowly, considered carefully, made to be loved.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3">
-      <a href="#contact" class="btn btn-primary magnetic">Begin your search</a>
-      <a href="#work" class="btn btn-ghost magnetic">View work</a>
-    </div>
-    
+    <p class="lead" data-reveal data-reveal-d="2">A boutique advisory for design-led homes — matched slowly, considered carefully.</p>
+    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#collection" class="link-cta">Begin your search &rarr;</a></div>
   </div>
-  <div class="scrolldown">Scroll down &darr;</div>
 </header>
-
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow" data-reveal>What we do</div>
-      <h2 class="clip-line">Curated Homes, Concierge Search &amp; The Journal.</h2>
-    </div>
-    <div class="grid g3">
-      <article class="card tilt" data-reveal data-reveal-d="1">
-        <div class="eyebrow">01</div>
-        <h3 style="margin:1rem 0 .7rem">Curated Homes</h3>
-        <p class="muted">Design-forward residences, hand-selected.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="2">
-        <div class="eyebrow">02</div>
-        <h3 style="margin:1rem 0 .7rem">Concierge Search</h3>
-        <p class="muted">A calm, guided buying experience.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="3">
-        <div class="eyebrow">03</div>
-        <h3 style="margin:1rem 0 .7rem">The Journal</h3>
-        <p class="muted">Notes on neighbourhoods and living well.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<div class="marquee"><div class="track">
-  <span>Maison Living</span><span>•</span><span>Boutique Real Estate</span><span>•</span><span>Maison Living</span><span>•</span><span>Boutique Real Estate</span><span>•</span>
-  <span>Maison Living</span><span>•</span><span>Boutique Real Estate</span><span>•</span><span>Maison Living</span><span>•</span><span>Boutique Real Estate</span><span>•</span>
-</div></div>
-
-<section class="sec" id="about">
-  <div class="wrap grid g2" style="align-items:center">
-    <div data-reveal>
-      <div class="eyebrow">The studio</div>
-      <h2 style="margin:.8rem 0 1.2rem">A reference build, faithful to the source reel.</h2>
-      <p class="lead">A boutique advisory for design-led homes — matched slowly, considered carefully, made to be loved. This page recreates the <strong>Reel 12 · Maison de Synergy · RE</strong> aesthetic from the research library — palette, type pairing, section rhythm and the signature motion.</p>
-    </div>
-    <div class="tilt card" data-reveal data-reveal-d="2" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center">
-      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);text-align:center;line-height:1.1">Maison Living<br><span class="muted" style="font-size:.9rem;letter-spacing:.2em">Boutique Real Estate</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="stats">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat" data-reveal><div class="num" data-count="40" data-prefix="" data-suffix="">0</div><div class="lbl">Homes / year</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="1" data-prefix="" data-suffix="">0</div><div class="lbl">Advisor</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="97" data-prefix="" data-suffix="">0</div><div class="lbl">% referral</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="contact">
-  <div class="wrap" style="text-align:center">
-    <div class="eyebrow" data-reveal>Get in touch</div>
-    <h2 class="clip-line" style="margin:1rem auto 2rem;max-width:18ch">Begin your search.</h2>
-    <a href="#" class="btn btn-primary magnetic" data-reveal data-reveal-d="2">Begin your search</a>
-  </div>
-</section>
-
-<footer class="foot">
-  <div class="wrap row">
-    <div><div class="brand" style="font-family:var(--font-display);font-size:1.2rem">Maison Living</div>
-      <p class="muted" style="margin-top:.6rem;font-size:.85rem">Boutique Real Estate</p></div>
-    <div class="muted" style="font-size:.8rem;max-width:30ch">Reference build · Reel 12 · Maison de Synergy · RE · part of the SathiDeals / reno AI website library.</div>
-  </div>
-</footer>
+<main>
+<section class="sec" id="collection"><div class="wrap narrow" style="text-align:center">
+  <p class="ed-statement" data-reveal>A boutique advisory for design-led homes — matched slowly, considered carefully.</p></div></section>
+<section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The collection</div><h2 class="clip-line">Considered, not seasonal.</h2></div>
+  <div class="asym"><figure class="asym-i asym-1" data-reveal data-reveal-d="1"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>01</span> Curated Homes</figcaption></figure><figure class="asym-i asym-2" data-reveal data-reveal-d="2"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>02</span> Concierge Search</figcaption></figure><figure class="asym-i asym-3" data-reveal data-reveal-d="3"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>03</span> The Journal</figcaption></figure></div></div></section>
+<section class="sec" id="about"><div class="wrap narrow">
+  <p class="ed-statement" data-reveal>Design-forward residences, hand-selected.</p>
+  <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">A boutique advisory for design-led homes — matched slowly, considered carefully.</p></div></section>
+<section class="sec" id="journal"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The journal</div><h2 class="clip-line">Notes, slowly.</h2></div>
+  <div class="grid g3"><article class="jcard" data-reveal data-reveal-d="1"><div class="jcard-vis" aria-hidden="true"></div><h3>On Slowness</h3><p class="muted">Why a season should take a season.</p></article><article class="jcard" data-reveal data-reveal-d="2"><div class="jcard-vis" aria-hidden="true"></div><h3>The Cutting Room</h3><p class="muted">Notes from the atelier floor.</p></article><article class="jcard" data-reveal data-reveal-d="3"><div class="jcard-vis" aria-hidden="true"></div><h3>Kept, Not Consumed</h3><p class="muted">A wardrobe measured in years.</p></article></div></div></section>
+<section class="sec" id="letter"><div class="wrap narrow" style="text-align:center">
+  <h2 class="clip-line" style="margin:0 auto 1rem;max-width:20ch">A letter, for those who pay attention.</h2>
+  <form class="email-row" onsubmit="return false"><input type="email" placeholder="your email" aria-label="Email" required><button class="btn btn-primary" type="submit">Subscribe</button></form></div></section>
+<footer class="foot foot--bare"><div class="wrap" style="text-align:center">
+  <div class="brand-mark">Maison Living</div>
+  <a class="big-mail" href="mailto:hello@maisonliving.com">hello@maisonliving.com</a>
+  <div class="paren-links"><a href="#">Instagram</a></div></div></footer>
+</main>
 
 <script src="../shared/lib.js"></script>
-</body>
-</html>
+</body></html>

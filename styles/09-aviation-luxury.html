@@ -1,150 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JESKO JETS — Luxury Aviation / Private Services</title>
-<meta name="description" content="Private Aviation — JESKO JETS. Reference build (Style · Luxury Aviation / Private Services).">
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JESKO JETS — Private Aviation</title>
+<meta name="description" content="Private Aviation. A global private fleet with a single standard of service. Wheels-up in as little as four hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>
-  :root{--bg:#0C0C0C;--surface:#161616;--fg:#F5F2ED;--accent:#C9A96E;--card:rgba(245,242,237,.04);--card-bd:rgba(201,169,110,.20);--btn-radius:999px;--font-display:'Space Grotesk';--font-body:'Inter'}
-  
-  
-  
-  .sitenav{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:60;display:flex;align-items:center;gap:.2rem;
-    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .5rem;border:1px solid var(--card-bd);
-    border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);max-width:92vw}
-  .sitenav a{padding:.4rem .85rem;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
-  .sitenav a:hover{background:var(--accent);color:#000}
-  .sitenav .pos{padding:.4rem .7rem;opacity:.55;font-variant-numeric:tabular-nums}
-  .sitenav .disabled{opacity:.3;pointer-events:none}
-  .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
-  .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
-  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
-  .scrolldown{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:2rem;z-index:3;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
-</style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>:root{--bg:#0C0C0C;--surface:#161514;--fg:#F5F2ED;--accent:#C9A96E;--card:rgba(245,242,237,.04);--card-bd:rgba(201,169,110,.20);--btn-radius:999px;--font-display:'Space Grotesk';--font-body:'Inter'}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
 <div id="loader"><div class="lLogo">JESKO JETS</div><div class="lTrack"><div class="lBar"></div></div></div>
 <div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
-<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
 <img id="preview-img" alt="" aria-hidden="true">
-<nav class="sitenav" aria-label="Reference site switcher">
-  <a href="../styles-realestate/08-architecture-editorial.html">&larr; Prev</a>
-  <a href="../index.html">Gallery</a>
-  <span class="pos">17 / 64</span>
-  <a href="../styles-realestate/09-aviation-luxury.html">Next &rarr;</a>
-</nav>
-<span class="reftag">Style · Luxury Aviation / Private Services</span>
-
-<nav class="nav">
-  <div class="brand">JESKO JETS</div>
-  <div class="links">
-    <a href="#work">Work</a><a href="#about">About</a><a href="#stats">Results</a><a href="#contact">Contact</a>
-  </div>
-  <a href="#contact" class="btn btn-ghost magnetic" style="padding:.7rem 1.4rem">Request a flight</a>
-</nav>
-
-<header class="hero">
-  <div class="veil" data-parallax="60" style="background:
-         radial-gradient(70% 90% at 80% 10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),
-         linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent) 0%,var(--bg) 90%)"></div>
-       <div class="orb" aria-hidden="true"></div>
+<nav class="sitenav" aria-label="Library switcher">
+  <a href="../styles-realestate/08-architecture-editorial.html" aria-label="Previous">&larr;</a>
+  <a href="../index.html">Index</a><span class="pos">17 / 64</span>
+  <a href="../styles-realestate/09-aviation-luxury.html" aria-label="Next">&rarr;</a></nav>
+<nav class="nav"><div class="brand">JESKO JETS</div>
+  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <a href="#contact" class="btn btn-ghost magnetic nav-cta">Request a flight</a></nav>
+<header class="hero hero--split">
+  <div class="split-media" style="background-image:linear-gradient(90deg,var(--bg),transparent 60%),url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1920&auto=format&fit=crop')" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="ribbon">Reference · Jesko Jets · Sakazuki</span>
     <div class="eyebrow" data-reveal>Private Aviation</div>
     <h1>Anywhere. On your hour.</h1>
-    <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">A global private fleet with a single standard of service. Wheels-up in as little as four hours.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3">
-      <a href="#contact" class="btn btn-primary magnetic">Request a flight</a>
-      <a href="#work" class="btn btn-ghost magnetic">View work</a>
+    <p class="lead" data-reveal data-reveal-d="2">A global private fleet with a single standard of service. Wheels-up in as little as four hours.</p>
+    <div class="av-meta" data-reveal data-reveal-d="3">
+      <div id="clock" class="av-clock">--:--</div>
+      <div class="av-ticker-wrap">Next departure &middot; <span id="ticker" class="av-ticker" data-dests="Tokyo,Dubai,Geneva,London,New York,Seoul,Zurich">Tokyo</span></div>
     </div>
-    <div class="av-meta" aria-hidden="true">
-         <div id="clock" class="av-clock">--:--</div>
-         <div class="av-ticker-wrap">Next departure &middot; <span id="ticker" class="av-ticker" data-dests="Tokyo,Dubai,Reykjavik,Singapore,Cape Town,Lisbon,Vancouver">Tokyo</span></div>
-       </div>
+    <div class="hero-cta" data-reveal data-reveal-d="4"><a href="#apply" class="btn btn-primary magnetic">Request a flight &rarr;</a></div>
   </div>
-  <div class="scrolldown">Scroll down &darr;</div>
 </header>
-
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow" data-reveal>What we do</div>
-      <h2 class="clip-line">Charter, Jet Card &amp; Management.</h2>
-    </div>
-    <div class="grid g3">
-      <article class="card tilt" data-reveal data-reveal-d="1">
-        <div class="eyebrow">01</div>
-        <h3 style="margin:1rem 0 .7rem">Charter</h3>
-        <p class="muted">On-demand charter, any city pair.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="2">
-        <div class="eyebrow">02</div>
-        <h3 style="margin:1rem 0 .7rem">Jet Card</h3>
-        <p class="muted">Fixed-rate hours, zero surprises.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="3">
-        <div class="eyebrow">03</div>
-        <h3 style="margin:1rem 0 .7rem">Management</h3>
-        <p class="muted">Full ownership management.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<div class="marquee"><div class="track">
-  <span>JESKO JETS</span><span>•</span><span>Private Aviation</span><span>•</span><span>JESKO JETS</span><span>•</span><span>Private Aviation</span><span>•</span>
-  <span>JESKO JETS</span><span>•</span><span>Private Aviation</span><span>•</span><span>JESKO JETS</span><span>•</span><span>Private Aviation</span><span>•</span>
-</div></div>
-
-<section class="sec" id="about">
-  <div class="wrap grid g2" style="align-items:center">
-    <div data-reveal>
-      <div class="eyebrow">The studio</div>
-      <h2 style="margin:.8rem 0 1.2rem">A reference build, faithful to the source reel.</h2>
-      <p class="lead">A global private fleet with a single standard of service. Wheels-up in as little as four hours. This page recreates the <strong>Style · Luxury Aviation / Private Services</strong> aesthetic from the research library — palette, type pairing, section rhythm and the signature motion.</p>
-    </div>
-    <div class="tilt card" data-reveal data-reveal-d="2" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center">
-      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);text-align:center;line-height:1.1">JESKO JETS<br><span class="muted" style="font-size:.9rem;letter-spacing:.2em">Private Aviation</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="stats">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat" data-reveal><div class="num" data-count="190" data-prefix="" data-suffix="">0</div><div class="lbl">Aircraft</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="4" data-prefix="" data-suffix="h">0h</div><div class="lbl">To wheels-up</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="24" data-prefix="" data-suffix="/7">0/7</div><div class="lbl">Crew</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="contact">
-  <div class="wrap" style="text-align:center">
-    <div class="eyebrow" data-reveal>Get in touch</div>
-    <h2 class="clip-line" style="margin:1rem auto 2rem;max-width:18ch">Request a flight.</h2>
-    <a href="#" class="btn btn-primary magnetic" data-reveal data-reveal-d="2">Request a flight</a>
-  </div>
-</section>
-
-<footer class="foot">
-  <div class="wrap row">
-    <div><div class="brand" style="font-family:var(--font-display);font-size:1.2rem">JESKO JETS</div>
-      <p class="muted" style="margin-top:.6rem;font-size:.85rem">Private Aviation</p></div>
-    <div class="muted" style="font-size:.8rem;max-width:30ch">Reference build · Style · Luxury Aviation / Private Services · part of the SathiDeals / reno AI website library.</div>
-  </div>
-</footer>
+<main>
+<section class="sec" id="services"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The service</div><h2 class="clip-line">Charter · Jet Card · Management</h2></div>
+  <div class="routes"><div class="route" data-reveal data-reveal-d="1"><h3>Charter</h3><p class="muted">On-demand charter, any city pair.</p></div><div class="route" data-reveal data-reveal-d="2"><h3>Jet Card</h3><p class="muted">Fixed-rate hours, zero surprises.</p></div><div class="route" data-reveal data-reveal-d="3"><h3>Management</h3><p class="muted">Full ownership management.</p></div></div></div></section>
+<section class="sec--flush fleet" aria-hidden="true"><div class="fleet-img" style="background-image:url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1920&auto=format&fit=crop')"></div></section>
+<section class="sec" id="membership"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Membership</div><h2 class="clip-line">By standard, not by volume.</h2></div>
+  <div class="grid g3"><article class="tier" data-reveal data-reveal-d="1"><div class="tier-name">Charter</div><div class="tier-tag muted">On-demand</div><p class="muted">Any city pair, wheels-up in 4h</p></article><article class="tier tier--hot" data-reveal data-reveal-d="2"><div class="tier-name">Jet Card</div><div class="tier-tag muted">Fixed hours</div><p class="muted">Locked rate, zero surprises</p></article><article class="tier" data-reveal data-reveal-d="3"><div class="tier-name">Management</div><div class="tier-tag muted">Full ownership</div><p class="muted">Crew, maintenance, charter revenue</p></article></div>
+  <div style="text-align:center;margin-top:3rem"><a href="#apply" class="btn btn-primary magnetic">Request a flight &rarr;</a></div></div></section>
+<section class="sec" id="apply"><div class="wrap narrow" style="text-align:center">
+  <h2 class="clip-line" style="margin:0 auto 2rem;max-width:16ch">Begin your application.</h2>
+  <form class="apply" onsubmit="return false"><input placeholder="Full name" aria-label="Name" required><input type="email" placeholder="Email" aria-label="Email" required><button class="btn btn-primary" type="submit">Request a flight</button></form></div></section>
+<footer class="foot foot--bare"><div class="wrap" style="text-align:center">
+  <div class="brand-mark">JESKO JETS</div>
+  <a class="big-mail" href="mailto:hello@jeskojets.com">hello@jeskojets.com</a>
+  <div class="paren-links"><a href="#">Instagram</a></div></div></footer>
+</main>
 
 <script src="../shared/lib.js"></script>
-</body>
-</html>
+</body></html>
