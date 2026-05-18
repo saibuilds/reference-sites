@@ -1,0 +1,11 @@
+{
+  // Static-asset deploy for Cloudflare Workers Builds.
+  // This repo is a framework-less static site (index.html at root); the
+  // Workers project was set to "Workers Builds" with no config, which
+  // failed instantly. A bare assets binding serves the files as-is.
+  "name": "reference-sites",
+  "compatibility_date": "2026-05-01",
+  "assets": {
+    "directory": "."
+  }
+}

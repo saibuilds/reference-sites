@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARRY LABS — Locational timing intelligence</title>
+<meta name="description" content="Locational timing intelligence. Relocation-grade locational and timing intelligence for property decisions — the same NASA-grade ephemeris, scored for place and moment, delivered as an API.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../shared/lib.css">
+<style>:root{--bg:#070611;--surface:#11102A;--fg:#EDEBFA;--accent:#9E8CFF;--card:rgba(255,255,255,.045);--card-bd:rgba(158,140,255,.20);--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+<div id="loader"><div class="lLogo">STARRY LABS</div><div class="lTrack"><div class="lBar"></div></div></div>
+<div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
+<img id="preview-img" alt="" aria-hidden="true">
+<nav class="sitenav" aria-label="Library switcher">
+  <a href="../styles/14-cosmic-platform.html" aria-label="Previous">&larr;</a>
+  <a href="../index.html">Index</a><span class="pos">28 / 68</span>
+  <a href="../reels/01-cartier-watch.html" aria-label="Next">&rarr;</a></nav>
+<nav class="nav"><div class="brand">STARRY LABS</div>
+  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <a href="#contact" class="btn btn-ghost magnetic nav-cta">Request beta access</a></nav>
+<header class="hero hero--product">
+  <div class="orb" aria-hidden="true"></div>
+  <div class="veil" style="background:radial-gradient(58% 58% at 64% 38%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%)"></div>
+  <div class="wrap">
+    <div class="eyebrow" data-reveal>Locational timing intelligence</div>
+    <h1>Where and when, computed.</h1>
+    <p class="lead" data-reveal data-reveal-d="2">Relocation-grade locational and timing intelligence for property decisions — the same NASA-grade ephemeris, scored for place and moment, delivered as an API.</p>
+    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#story" class="link-cta">Request beta access &rarr;</a></div>
+  </div>
+  <span class="scrollcue" aria-hidden="true">Scroll</span>
+</header>
+<main>
+<section class="sec manifesto" id="about"><div class="wrap narrow">
+  <p class="manifesto-p" data-reveal data-reveal-d="1">Time is not a clock. It is the distance between conscious events — measurable, addressable, computable.</p><p class="manifesto-p" data-reveal data-reveal-d="2">We take the same ephemeris space agencies trust and turn thirty thousand lines of it into patterns you can query.</p><p class="manifesto-p" data-reveal data-reveal-d="3">The kernel stays ours. The API is yours to build on.</p>
+</div></section>
+<section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>What you build</div><h2 class="clip-line">From idea to live.</h2></div>
+  <div class="frow" data-reveal><div class="frow-txt"><div class="eyebrow">01</div><h3>Locational Engine</h3><p class="muted">Astrocartography-grade scoring for any coordinate on Earth.</p></div><div class="frow-vis" aria-hidden="true"></div></div><div class="frow frow--rev" data-reveal><div class="frow-txt"><div class="eyebrow">02</div><h3>Timing Windows</h3><p class="muted">The moments a place is most and least favourable, computed.</p></div><div class="frow-vis" aria-hidden="true"></div></div><div class="frow" data-reveal><div class="frow-txt"><div class="eyebrow">03</div><h3>Developer API</h3><p class="muted">One stable, usage-priced API to build location products on.</p></div><div class="frow-vis" aria-hidden="true"></div></div></div></section>
+<section class="sec" id="process"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>How it works</div><h2 class="clip-line">One window. No surprises.</h2></div>
+  <ol class="steps"><li class="step" data-reveal data-reveal-d="1"><span class="step-n">1</span><h3>Resolve</h3><p class="muted">A moment and a place become precise celestial coordinates.</p></li><li class="step" data-reveal data-reveal-d="2"><span class="step-n">2</span><h3>Compute</h3><p class="muted">NASA-grade ephemeris resolves every planet, asteroid and lunar node.</p></li><li class="step" data-reveal data-reveal-d="3"><span class="step-n">3</span><h3>Pattern</h3><p class="muted">The engine maps positions to the pattern set you requested.</p></li><li class="step" data-reveal data-reveal-d="4"><span class="step-n">4</span><h3>Return</h3><p class="muted">One clean JSON answer — fast enough to build a product on.</p></li></ol></div></section>
+<section class="sec" id="pricing"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Pricing</div><h2 class="clip-line">Simple, by design.</h2></div>
+  <div class="grid g3 price-grid"><article class="price" data-reveal data-reveal-d="1"><div class="price-name">Explorer</div><div class="price-amt">Free</div><p class="muted">Invite-only beta access to the core endpoints, rate-limited.</p><a href="#" class="btn btn-ghost magnetic">Request beta access</a></article><article class="price price--hot" data-reveal data-reveal-d="2"><div class="price-name">Builder</div><div class="price-amt">Usage</div><p class="muted">Metered per computation. Full ephemeris, full pattern set.</p><a href="#" class="btn btn-primary magnetic">Request beta access</a></article><article class="price" data-reveal data-reveal-d="3"><div class="price-name">Observatory</div><div class="price-amt">Talk</div><p class="muted">Dedicated throughput, on-prem kernel, direct support.</p><a href="#" class="btn btn-ghost magnetic">Request beta access</a></article></div></div></section>
+<section class="sec" id="faq"><div class="wrap narrow"><div class="sec-head"><div class="eyebrow" data-reveal>Questions</div><h2 class="clip-line">The short answers.</h2></div>
+  <div class="faq"><details class="faq-i" data-reveal data-reveal-d="1" open><summary>Is this an app I download?</summary><p class="muted">No. dm-ck-core is a computation engine you build on, not a consumer app.</p></details><details class="faq-i" data-reveal data-reveal-d="2"><summary>How accurate is the astronomy?</summary><p class="muted">The same math space agencies use — every planet, asteroid and lunar node.</p></details><details class="faq-i" data-reveal data-reveal-d="3"><summary>Can I see the kernel?</summary><p class="muted">The kernel stays proprietary while the API and pricing stabilize.</p></details><details class="faq-i" data-reveal data-reveal-d="1"><summary>How is it priced?</summary><p class="muted">Usage-based, metered per computation. The beta is invite-only.</p></details></div></div></section>
+<footer class="foot foot--black" id="contact"><div class="wrap narrow">
+  <h2 class="clip-line">Request beta access.</h2>
+  <form class="email-row" onsubmit="return false"><input type="email" placeholder="you@studio.dev" aria-label="Email" required><button class="btn btn-primary" type="submit">Send</button></form>
+  <div class="muted foot-meta">STARRY LABS — Locational timing intelligence</div></div></footer>
+</main>
+
+<script src="../shared/lib.js"></script>
+</body></html>

@@ -1,145 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>盃 SAKAZUKI — Japanese Luxury / Community</title>
-<meta name="description" content="( Members Only ) — 盃 SAKAZUKI. Reference build (Style · Japanese Luxury / Community).">
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>盃 SAKAZUKI — ( Members Only )</title>
+<meta name="description" content="( Members Only ). A private circle for collectors of craft and fire. Membership is by allowlist, by introduction only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Grotesk:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>
-  :root{--bg:#0C0808;--surface:#1A1010;--fg:#F0E6D3;--accent:#B8600A;--card:rgba(255,255,255,.04);--card-bd:rgba(184,96,10,.26);--font-display:'Cormorant Garamond';--font-body:'Space Grotesk'}
-  
-  
-  
-  .sitenav{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:60;display:flex;align-items:center;gap:.2rem;
-    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .5rem;border:1px solid var(--card-bd);
-    border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);max-width:92vw}
-  .sitenav a{padding:.4rem .85rem;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
-  .sitenav a:hover{background:var(--accent);color:#000}
-  .sitenav .pos{padding:.4rem .7rem;opacity:.55;font-variant-numeric:tabular-nums}
-  .sitenav .disabled{opacity:.3;pointer-events:none}
-  .reftag{position:fixed;right:1rem;bottom:1rem;z-index:60;font-size:.66rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
-  .ribbon{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--card-bd);padding:.35rem .8rem;border-radius:2rem;margin-bottom:1.4rem}
-  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
-  .scrolldown{position:absolute;right:clamp(1.25rem,4vw,3rem);bottom:2rem;z-index:3;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
-</style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>:root{--bg:#0C0807;--surface:#1A100E;--fg:#F0E6D3;--accent:#C2670C;--card:rgba(255,255,255,.04);--card-bd:rgba(194,103,12,.28);--font-display:'Cormorant Garamond';--font-body:'Space Grotesk'}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body data-vanta="fog">
 <div id="loader"><div class="lLogo">盃 SAKAZUKI</div><div class="lTrack"><div class="lBar"></div></div></div>
 <div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
-<a class="wa-fab" href="https://wa.me/14165551234" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#128172;</a>
 <img id="preview-img" alt="" aria-hidden="true">
-<nav class="sitenav" aria-label="Reference site switcher">
-  <a href="../styles-realestate/10-food-beauty-dtc.html">&larr; Prev</a>
-  <a href="../index.html">Gallery</a>
-  <span class="pos">21 / 64</span>
-  <a href="../styles-realestate/11-japanese-web3.html">Next &rarr;</a>
-</nav>
-<span class="reftag">Style · Japanese Luxury / Community</span>
-
-<nav class="nav">
-  <div class="brand">盃 SAKAZUKI</div>
-  <div class="links">
-    <a href="#work">Work</a><a href="#about">About</a><a href="#stats">Results</a><a href="#contact">Contact</a>
-  </div>
-  <a href="#contact" class="btn btn-ghost magnetic" style="padding:.7rem 1.4rem">APPLY ALLOWLIST >>></a>
-</nav>
-
-<header class="hero">
-  <canvas id="bg3d"></canvas><div class="orb" aria-hidden="true"></div><div class="veil" style="background:radial-gradient(60% 60% at 70% 35%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)"></div>
+<nav class="sitenav" aria-label="Library switcher">
+  <a href="../styles-realestate/10-food-beauty-dtc.html" aria-label="Previous">&larr;</a>
+  <a href="../index.html">Index</a><span class="pos">21 / 68</span>
+  <a href="../styles-realestate/11-japanese-web3.html" aria-label="Next">&rarr;</a></nav>
+<nav class="nav"><div class="brand">盃 SAKAZUKI</div>
+  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <a href="#contact" class="btn btn-ghost magnetic nav-cta">APPLY ALLOWLIST</a></nav>
+<header class="hero hero--product">
+  <canvas id="bg3d" aria-hidden="true"></canvas><div class="orb" aria-hidden="true"></div>
+  <div class="veil" style="background:radial-gradient(58% 58% at 64% 38%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%)"></div>
   <div class="wrap">
-    <span class="ribbon">Reference · OF Sakazuki</span>
     <div class="eyebrow" data-reveal>( Members Only )</div>
     <h1>Connection beyond access.</h1>
-    <p class="lead" data-reveal data-reveal-d="2" style="margin-top:1.6rem">A private circle for collectors of craft and fire. Membership is by allowlist, by introduction only.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3">
-      <a href="#contact" class="btn btn-primary magnetic">APPLY ALLOWLIST >>></a>
-      <a href="#work" class="btn btn-ghost magnetic">View work</a>
-    </div>
-    
+    <p class="lead" data-reveal data-reveal-d="2">A private circle for collectors of craft and fire. Membership is by allowlist, by introduction only.</p>
+    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#story" class="link-cta">APPLY ALLOWLIST &rarr;</a></div>
   </div>
-  <div class="scrolldown">Scroll down &darr;</div>
+  <span class="scrollcue" aria-hidden="true">Scroll</span>
 </header>
-
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow" data-reveal>What we do</div>
-      <h2 class="clip-line">The Circle, The Vault &amp; The Rituals.</h2>
-    </div>
-    <div class="grid g3">
-      <article class="card tilt" data-reveal data-reveal-d="1">
-        <div class="eyebrow">01</div>
-        <h3 style="margin:1rem 0 .7rem">The Circle</h3>
-        <p class="muted">A community measured in trust.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="2">
-        <div class="eyebrow">02</div>
-        <h3 style="margin:1rem 0 .7rem">The Vault</h3>
-        <p class="muted">Curated craft, released slowly.</p>
-      </article>
-      <article class="card tilt" data-reveal data-reveal-d="3">
-        <div class="eyebrow">03</div>
-        <h3 style="margin:1rem 0 .7rem">The Rituals</h3>
-        <p class="muted">Gatherings, seasonal and rare.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<div class="marquee"><div class="track">
-  <span>盃 SAKAZUKI</span><span>•</span><span>( Members Only )</span><span>•</span><span>盃 SAKAZUKI</span><span>•</span><span>( Members Only )</span><span>•</span>
-  <span>盃 SAKAZUKI</span><span>•</span><span>( Members Only )</span><span>•</span><span>盃 SAKAZUKI</span><span>•</span><span>( Members Only )</span><span>•</span>
-</div></div>
-
-<section class="sec" id="about">
-  <div class="wrap grid g2" style="align-items:center">
-    <div data-reveal>
-      <div class="eyebrow">The studio</div>
-      <h2 style="margin:.8rem 0 1.2rem">A reference build, faithful to the source reel.</h2>
-      <p class="lead">A private circle for collectors of craft and fire. Membership is by allowlist, by introduction only. This page recreates the <strong>Style · Japanese Luxury / Community</strong> aesthetic from the research library — palette, type pairing, section rhythm and the signature motion.</p>
-    </div>
-    <div class="tilt card" data-reveal data-reveal-d="2" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center">
-      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);text-align:center;line-height:1.1">盃 SAKAZUKI<br><span class="muted" style="font-size:.9rem;letter-spacing:.2em">( Members Only )</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="stats">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat" data-reveal><div class="num" data-count="888" data-prefix="" data-suffix="">0</div><div class="lbl">Members</div></div>
-      <div class="stat" data-reveal><div class="num" data-count="1" data-prefix="" data-suffix="">0</div><div class="lbl">Allowlist</div></div>
-      <div class="stat" data-reveal><div class="num">∞</div><div class="lbl">Patience</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="contact">
-  <div class="wrap" style="text-align:center">
-    <div class="eyebrow" data-reveal>Get in touch</div>
-    <h2 class="clip-line" style="margin:1rem auto 2rem;max-width:18ch">APPLY ALLOWLIST >>>.</h2>
-    <a href="#" class="btn btn-primary magnetic" data-reveal data-reveal-d="2">APPLY ALLOWLIST >>></a>
-  </div>
-</section>
-
-<footer class="foot">
-  <div class="wrap row">
-    <div><div class="brand" style="font-family:var(--font-display);font-size:1.2rem">盃 SAKAZUKI</div>
-      <p class="muted" style="margin-top:.6rem;font-size:.85rem">( Members Only )</p></div>
-    <div class="muted" style="font-size:.8rem;max-width:30ch">Reference build · Style · Japanese Luxury / Community · part of the SathiDeals / reno AI website library.</div>
-  </div>
-</footer>
+<main>
+<section class="sec" id="circle"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Within</div><h2 class="clip-line">Three rooms.</h2></div>
+  <div class="grid g3"><article class="vault" data-reveal data-reveal-d="1"><h3 class="vault-t">盃 · The Circle</h3><p class="muted">A community measured in trust, not headcount.</p></article><article class="vault" data-reveal data-reveal-d="2"><h3 class="vault-t">蔵 · The Vault</h3><p class="muted">Curated craft, released slowly, to members first.</p></article><article class="vault" data-reveal data-reveal-d="3"><h3 class="vault-t">儀 · The Rituals</h3><p class="muted">Gatherings, seasonal and rare, by introduction.</p></article></div></div></section>
+<section class="sec" id="membership"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Membership</div><h2 class="clip-line">By standard, not by volume.</h2></div>
+  <div class="grid g3"><article class="tier" data-reveal data-reveal-d="1"><div class="tier-name">Allowlist</div><div class="tier-tag muted">By introduction</div><p class="muted">Sponsored by one member</p></article><article class="tier tier--hot" data-reveal data-reveal-d="2"><div class="tier-name">Member</div><div class="tier-tag muted">Active</div><p class="muted">Full vault + rituals access</p></article><article class="tier" data-reveal data-reveal-d="3"><div class="tier-name">Keeper</div><div class="tier-tag muted">Lifetime</div><p class="muted">Stewardship of one ritual</p></article></div>
+  <div style="text-align:center;margin-top:3rem"><a href="#apply" class="btn btn-primary magnetic">APPLY ALLOWLIST &rarr;</a></div></div></section>
+<section class="sec" id="proof"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>In their words</div><h2 class="clip-line">Trusted where it matters.</h2></div>
+  <div class="grid g3"><figure class="qcard" data-reveal data-reveal-d="1"><blockquote>A community measured in trust.</blockquote><figcaption class="muted">— 盃 SAKAZUKI</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="2"><blockquote>Curated craft, released slowly.</blockquote><figcaption class="muted">— ( Members Only )</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="3"><blockquote>Gatherings, seasonal and rare.</blockquote><figcaption class="muted">— 盃 SAKAZUKI</figcaption></figure></div></div></section>
+<footer class="foot foot--paren"><div class="wrap" style="text-align:center">
+  <div class="brand-mark">盃 SAKAZUKI</div>
+  <div class="paren-links"><a href="#">(X)</a> <a href="#">(IG)</a> <a href="#">(OS)</a></div>
+  <div class="muted foot-meta">( Members Only )</div></div></footer>
+</main>
 
 <script src="../shared/lib.js"></script>
-</body>
-</html>
+</body></html>

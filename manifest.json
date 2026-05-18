@@ -2,111 +2,115 @@
   "styles": [
     {
       "id": "01-luxury-dark",
-      "name": "Luxury Dark / Sand Atmosphere",
+      "name": "Luxury Dark",
       "refs": "Cartier · Obsidian Dew · OF Sakazuki",
-      "tag": "Near-black bg, warm sand radial light, floating product, serif small-caps, gold only, vast negative space.",
       "accent": "#C9A96E",
       "g": "MAISON NOIR",
       "re": "NOIR ESTATES"
     },
     {
       "id": "02-cinematic-video",
-      "name": "Cinematic Video Hero",
-      "refs": "Terminal Logistics · Villa Maravilha · Alpine · Hashgraph",
-      "tag": "Full-bleed autoplay video, gradient veil (never pure black), text enters y:60, SCROLL DOWN cue, counters, video parallax.",
+      "name": "Cinematic Video",
+      "refs": "Terminal Logistics · Villa · Alpine · Hashgraph",
       "accent": "#E6B873",
       "g": "TERMINAL",
       "re": "MERIDIAN"
     },
     {
       "id": "03-dark-brutalist",
-      "name": "Dark Brutalist / Anti-Design",
-      "refs": "Guilty Mind · SHAPESHIFT · KVS · Sazabi · BANILA",
-      "tag": "Pure #000, ONE accent, massive clamp(60px,14vw,200px) type, 0px corners, 1px borders, instant invert hover, scramble on load, grain overlay.",
-      "accent": "#FF2020",
+      "name": "Dark Brutalist",
+      "refs": "Guilty Mind · SHAPESHIFT · Sazabi",
+      "accent": "#FF2D16",
       "g": "GUILTY/MIND",
       "re": "BLACK/DOOR"
     },
     {
       "id": "04-3d-spline-webgl",
-      "name": "3D Spline / WebGL",
-      "refs": "Spline Ice Cube · E.C.H.O. · JoyJam · Cartier 3D",
-      "tag": "WebGL object fills/right-50%, mousemove lerp rotation, warm/cool PointLight pair, ACES glow, glass material.",
+      "name": "3D / WebGL",
+      "refs": "Spline Ice Cube · E.C.H.O. · JoyJam",
       "accent": "#5BE0FF",
       "g": "ECHO LABS",
-      "re": "DIMENSION RE"
+      "re": "DIMENSION"
     },
     {
       "id": "05-vaporwave",
-      "name": "Vaporwave / Psychedelic",
+      "name": "Vaporwave",
       "refs": "Sidewave",
-      "tag": "bg #1A0033→#FF006E, concentric ripple rings scale→3 fade, glowing center oval, silhouette mix-blend screen, bold condensed italic.",
       "accent": "#FF8C00",
       "g": "SIDEWAVE",
-      "re": "PULSE PROPERTIES"
+      "re": "PULSE"
     },
     {
       "id": "06-soft-editorial",
-      "name": "Soft Editorial / Feminine",
-      "refs": "Maison · Trendship · Bisous · hansarnesen",
-      "tag": "Cream/blush/dusty-rose, Cormorant italic, padding ≥120px, soft grain, asymmetric grids, images scale 1.05, soft-dot cursor lag.",
-      "accent": "#C8A08A",
+      "name": "Soft Editorial",
+      "refs": "Maison de Synergy · Trendship · Bisous",
+      "accent": "#B07D63",
       "g": "Maison de Synergy",
       "re": "Maison Living"
     },
     {
       "id": "07-saas-glass",
-      "name": "SaaS Modern / Glassmorphism",
-      "refs": "JoyJam · GSAP Engine · Hashgraph · Financial Inst.",
-      "tag": "Conic/shader mesh bg, glass cards blur(20px), device mockups perspective rotateX/Y, logo marquee, middle pricing card lifted, gradient text.",
+      "name": "SaaS Glass",
+      "refs": "JoyJam · GSAP Engine · Hashgraph",
       "accent": "#7B61FF",
       "g": "JoyJam",
       "re": "ListingOS"
     },
     {
       "id": "08-architecture-editorial",
-      "name": "Architecture / Editorial Photography",
-      "refs": "Fall Line House (19K likes) · Fifth & Dune · Alpine · Humaan",
-      "tag": "Full-viewport object-fit cover desaturated, Editorial italic+upright 80px, cursor-following image preview (most viral), GSAP horizontal panels, clip-path reveal, minimal nav.",
-      "accent": "#B7A88F",
+      "name": "Architecture Editorial",
+      "refs": "Fall Line House · Fifth & Dune · Alpine",
+      "accent": "#9B9086",
       "g": "FALL LINE",
       "re": "FALL LINE ESTATES"
     },
     {
       "id": "09-aviation-luxury",
-      "name": "Luxury Aviation / Private Services",
+      "name": "Aviation Luxury",
       "refs": "Jesko Jets · Sakazuki",
-      "tag": "Split dark/light, live clock setInterval, destination ticker rotating words, pill CTA 999px, letter-spacing .3em labels, no decorative images.",
       "accent": "#C9A96E",
       "g": "JESKO JETS",
       "re": "JESKO ESTATES"
     },
     {
       "id": "10-food-beauty-dtc",
-      "name": "Luxury Food / Beauty DTC",
+      "name": "Food / Beauty DTC",
       "refs": "Casper's Caviar · Obsidian Dew",
-      "tag": "Extreme close-up product hero, dark bg glow drop-shadow, ingredient mosaic mixed heights, sticky GET 15% OFF bar w/ dismiss.",
       "accent": "#B48226",
       "g": "CASPER'S",
-      "re": "OBSIDIAN HOMES"
+      "re": "OBSIDIAN"
     },
     {
       "id": "11-japanese-web3",
-      "name": "Japanese Luxury / Community",
+      "name": "Japanese / Community",
       "refs": "OF Sakazuki",
-      "tag": "Warm amber/fire + dark overlay, Vanta-style smoke parallax, spare ideographic spacing, parenthetical socials, arrow CTA, exclusive copy.",
-      "accent": "#B8600A",
+      "accent": "#C2670C",
       "g": "盃 SAKAZUKI",
       "re": "盃 KINDRED"
     },
     {
       "id": "12-experimental-dev",
-      "name": "Experimental / Creative Developer",
+      "name": "Experimental / Dev",
       "refs": "E.C.H.O. · Robert Borghesi · IDOM",
-      "tag": "Full-screen WebGL canvas, HTML absolute z-2, mouse-reactive geometry, single accent on black, near-zero UI — work + contact only.",
       "accent": "#FF3B3B",
       "g": "R.B.",
       "re": "PLOT."
+    },
+    {
+      "id": "13-wellness-botanical",
+      "name": "Wellness Botanical",
+      "refs": "Coco Veda",
+      "accent": "#6F8F5F",
+      "g": "COCO VEDA",
+      "re": "COCO VEDA RETREATS"
+    },
+    {
+      "id": "14-cosmic-platform",
+      "name": "Cosmic Engine",
+      "refs": "Starry Labs",
+      "accent": "#9E8CFF",
+      "g": "STARRY LABS",
+      "re": "STARRY LABS"
     }
   ],
   "reels": [
@@ -115,8 +119,7 @@
       "site": "Cartier Watch",
       "slug": "01-cartier-watch",
       "style": "01-luxury-dark",
-      "styleName": "Luxury Dark / Sand Atmosphere",
-      "tech": "3D floating product, desert/fog atmosphere",
+      "styleName": "Luxury Dark",
       "accent": "#C9A96E"
     },
     {
@@ -124,8 +127,7 @@
       "site": "Terminal Logistics",
       "slug": "02-terminal-logistics",
       "style": "02-cinematic-video",
-      "styleName": "Cinematic Video Hero",
-      "tech": "Video hero, truck driving, golden hour",
+      "styleName": "Cinematic Video",
       "accent": "#E6B873"
     },
     {
@@ -133,17 +135,15 @@
       "site": "Guilty Mind",
       "slug": "03-guilty-mind",
       "style": "03-dark-brutalist",
-      "styleName": "Dark Brutalist / Anti-Design",
-      "tech": "Cracked glass texture, all-caps grunge",
-      "accent": "#FF2020"
+      "styleName": "Dark Brutalist",
+      "accent": "#FF2D16"
     },
     {
       "n": 4,
       "site": "GSAP Animation Engine",
       "slug": "04-gsap-animation-engine",
       "style": "12-experimental-dev",
-      "styleName": "Experimental / Creative Developer",
-      "tech": "Neon circular ring, glitch text, code panel",
+      "styleName": "Experimental / Dev",
       "accent": "#FF3B3B"
     },
     {
@@ -151,8 +151,7 @@
       "site": "Sidewave Music",
       "slug": "05-sidewave-music",
       "style": "05-vaporwave",
-      "styleName": "Vaporwave / Psychedelic",
-      "tech": "Purple/orange ripple rings, silhouette",
+      "styleName": "Vaporwave",
       "accent": "#FF8C00"
     },
     {
@@ -160,17 +159,15 @@
       "site": "OF Sakazuki",
       "slug": "06-of-sakazuki",
       "style": "11-japanese-web3",
-      "styleName": "Japanese Luxury / Community",
-      "tech": "Amber fire parallax, exclusive community",
-      "accent": "#B8600A"
+      "styleName": "Japanese / Community",
+      "accent": "#C2670C"
     },
     {
       "n": 7,
       "site": "Obsidian Dew",
       "slug": "07-obsidian-dew",
       "style": "10-food-beauty-dtc",
-      "styleName": "Luxury Food / Beauty DTC",
-      "tech": "Volcanic product, ingredient mosaic grid",
+      "styleName": "Food / Beauty DTC",
       "accent": "#B48226"
     },
     {
@@ -178,8 +175,7 @@
       "site": "Hashgraph Ventures",
       "slug": "08-hashgraph-ventures",
       "style": "02-cinematic-video",
-      "styleName": "Cinematic Video Hero",
-      "tech": "Ocean video, floating glowing orb",
+      "styleName": "Cinematic Video",
       "accent": "#E6B873"
     },
     {
@@ -187,8 +183,7 @@
       "site": "Spline Ice Cube",
       "slug": "09-spline-ice-cube",
       "style": "04-3d-spline-webgl",
-      "styleName": "3D Spline / WebGL",
-      "tech": "Interactive 3D object, arctic fog",
+      "styleName": "3D / WebGL",
       "accent": "#5BE0FF"
     },
     {
@@ -196,35 +191,31 @@
       "site": "Fall Line House",
       "slug": "10-fall-line-house",
       "style": "08-architecture-editorial",
-      "styleName": "Architecture / Editorial Photography",
-      "tech": "Misty cliffside, editorial, 19K likes viral",
-      "accent": "#B7A88F"
+      "styleName": "Architecture Editorial",
+      "accent": "#9B9086"
     },
     {
       "n": 11,
       "site": "Relats / Periflex",
       "slug": "11-relats-periflex",
       "style": "03-dark-brutalist",
-      "styleName": "Dark Brutalist / Anti-Design",
-      "tech": "Close-up product photo, specs overlay",
-      "accent": "#FF2020"
+      "styleName": "Dark Brutalist",
+      "accent": "#FF2D16"
     },
     {
       "n": 12,
       "site": "Maison de Synergy",
       "slug": "12-maison-de-synergy",
       "style": "06-soft-editorial",
-      "styleName": "Soft Editorial / Feminine",
-      "tech": "Blush pink, serif, blooming flower 3D",
-      "accent": "#C8A08A"
+      "styleName": "Soft Editorial",
+      "accent": "#B07D63"
     },
     {
       "n": 13,
       "site": "Design Agency",
       "slug": "13-design-agency",
       "style": "12-experimental-dev",
-      "styleName": "Experimental / Creative Developer",
-      "tech": "Highlight-on-scroll typography list",
+      "styleName": "Experimental / Dev",
       "accent": "#FF3B3B"
     },
     {
@@ -232,17 +223,15 @@
       "site": "Cartier Watches & Wonders",
       "slug": "14-cartier-watches-wonders",
       "style": "06-soft-editorial",
-      "styleName": "Soft Editorial / Feminine",
-      "tech": "Gallery room 3D perspective, all white",
-      "accent": "#C8A08A"
+      "styleName": "Soft Editorial",
+      "accent": "#B07D63"
     },
     {
       "n": 15,
       "site": "E.C.H.O. / Active Theory",
       "slug": "15-e-c-h-o-active-theory",
       "style": "12-experimental-dev",
-      "styleName": "Experimental / Creative Developer",
-      "tech": "3D eye portal, crimson neon, water reflect",
+      "styleName": "Experimental / Dev",
       "accent": "#FF3B3B"
     },
     {
@@ -250,8 +239,7 @@
       "site": "Casper's Caviar",
       "slug": "16-casper-s-caviar",
       "style": "10-food-beauty-dtc",
-      "styleName": "Luxury Food / Beauty DTC",
-      "tech": "Dark texture product hero, popup CTA",
+      "styleName": "Food / Beauty DTC",
       "accent": "#B48226"
     },
     {
@@ -259,8 +247,7 @@
       "site": "Villa Maravilha",
       "slug": "17-villa-maravilha",
       "style": "02-cinematic-video",
-      "styleName": "Cinematic Video Hero",
-      "tech": "Garden door to ocean, jungle parallax",
+      "styleName": "Cinematic Video",
       "accent": "#E6B873"
     },
     {
@@ -268,8 +255,7 @@
       "site": "Jesko Jets",
       "slug": "18-jesko-jets",
       "style": "09-aviation-luxury",
-      "styleName": "Luxury Aviation / Private Services",
-      "tech": "Split layout, destination ticker, live clock",
+      "styleName": "Aviation Luxury",
       "accent": "#C9A96E"
     },
     {
@@ -277,17 +263,15 @@
       "site": "Alpine Chalets",
       "slug": "19-alpine-chalets",
       "style": "08-architecture-editorial",
-      "styleName": "Architecture / Editorial Photography",
-      "tech": "Snow panoramic, overlapping editorial type",
-      "accent": "#B7A88F"
+      "styleName": "Architecture Editorial",
+      "accent": "#9B9086"
     },
     {
       "n": 20,
       "site": "JoyJam",
       "slug": "20-joyjam",
       "style": "07-saas-glass",
-      "styleName": "SaaS Modern / Glassmorphism",
-      "tech": "Flipping card panels, 3D phone mockups",
+      "styleName": "SaaS Glass",
       "accent": "#7B61FF"
     }
   ]

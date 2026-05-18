@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "fal-ai": {
+      "type": "http",
+      "url": "https://mcp.fal.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${FAL_KEY}"
+      }
+    },
+    "replicate": {
+      "command": "npx",
+      "args": ["-y", "replicate-mcp@0.9.0", "--tools=dynamic"],
+      "env": {
+        "REPLICATE_API_TOKEN": "${REPLICATE_API_TOKEN}"
+      }
+    },
+    "nano-banana": {
+      "command": "npx",
+      "args": ["-y", "@nanana-ai/mcp-server-nano-banana@0.1.2"],
+      "env": {
+        "NANANA_API_TOKEN": "${NANANA_API_TOKEN}"
+      }
+    },
+    "higgsfield": {
+      "command": "npx",
+      "args": ["-y", "higgsfield-mcp@0.2.0"],
+      "env": {
+        "HF_API_KEY": "${HIGGSFIELD_API_KEY}",
+        "HF_SECRET": "${HIGGSFIELD_API_SECRET}"
+      }
+    },
+    "stitch": {
+      "command": "npx",
+      "args": ["-y", "@_davideast/stitch-mcp@0.7.1"],
+      "env": {
+        "STITCH_API_KEY": "${STITCH_API_KEY}"
+      }
+    }
+  }
+}
