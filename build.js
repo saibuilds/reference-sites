@@ -42,7 +42,7 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 const MOTIF = { '01-luxury-dark':'bloom','02-cinematic-video':'horizon','03-dark-brutalist':'slab',
   '04-3d-spline-webgl':'mesh','05-vaporwave':'sun','06-soft-editorial':'soft','07-saas-glass':'mesh',
   '08-architecture-editorial':'tonal','09-aviation-luxury':'horizon','10-food-beauty-dtc':'organic',
-  '11-japanese-web3':'organic','12-experimental-dev':'slab' };
+  '11-japanese-web3':'organic','12-experimental-dev':'slab','13-wellness-botanical':'organic' };
 const GEN_PROMPT = {
   '01-luxury-dark':'Cinematic macro of a haute-horlogerie movement, single warm gold key light on near-black, extreme restraint, museum lighting, no text',
   '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
@@ -55,7 +55,8 @@ const GEN_PROMPT = {
   '09-aviation-luxury':'Private jet on tarmac at golden hour, low horizon, long vapor trail, warm gold-on-charcoal, no text',
   '10-food-beauty-dtc':'Luxury single-origin product macro on dark slate, dewy texture, warm amber rim light, editorial DTC, no text',
   '11-japanese-web3':'Minimal Japanese ink-wash on warm dark paper, single ember-orange gesture, ma negative space, no text',
-  '12-experimental-dev':'Generative shader abstraction, raw red-on-black geometry, terminal aesthetic, experimental dev lab, no text' };
+  '12-experimental-dev':'Generative shader abstraction, raw red-on-black geometry, terminal aesthetic, experimental dev lab, no text',
+  '13-wellness-botanical':'Soft natural still life of a halved coconut and green botanicals on warm cream linen, diffuse daylight, Ayurvedic wellness, editorial DTC, no text' };
 function artSVG(id,p){
   const m = MOTIF[id]||'mesh', { bg,surface,accent,fg } = p, W=1600,H=1000;
   const defs = `<defs>
@@ -93,7 +94,7 @@ function resolveAsset(s){
   return `../assets/${s.id}.svg`;
 }
 
-/* ---------- 12 STYLE ARCHETYPES ----------
+/* ---------- 13 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
    (ordered section keys), and content for generic (g) + real-estate (re).
    `extra` holds archetype-level texture copy reused by both variants. */
@@ -328,6 +329,35 @@ const STYLES = [
         cta:'Get in touch', svc:['Selected Work','Experiments','Availability'],
         svcd:['Interactive listing + map builds.','Open data + 3D neighbourhood toys.','Available for select projects.'],
         stats:[['41','Builds'],['7','Awards'],['1','Human']] } },
+
+  { id:'13-wellness-botanical', name:'Wellness Botanical', refs:'Coco Veda',
+    vars:{'--bg':'#F6F1E7','--surface':'#EAE0CE','--fg':'#2C2A22','--accent':'#6F8F5F','--card':'rgba(255,255,255,.62)','--card-bd':'rgba(44,42,34,.14)'},
+    disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
+    layout:['heroSoft','editorialStatement','asymGrid','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
+    extra:{ quote:'Healing begins when body, mind and spirit return to balance.',
+      journal:[['The Coconut, Whole','Why we cold-process, and never refine.'],
+        ['From Tree to Hand','A day with our craftswomen in Manila.'],
+        ['Ayurveda, Daily','Small rituals, repeated, that actually hold.']],
+      mosaic:[['Cold-Processed VCO','Our signature virgin coconut oil, pressed without heat.'],
+        ['Single Origin','One archipelago, smallholder groves, full traceability.'],
+        ['Handcrafted in Manila','Blended in small batches by expert craftswomen.'],
+        ['Farmer Cooperatives','No middlemen — value returns to rural Philippine farmers.']],
+      ritual:[['Warm','Soften a little oil between the palms.'],
+        ['Anoint','Work through hair and skin, with intention.'],
+        ['Breathe','Two slow minutes. Let it absorb.'],
+        ['Keep','The same small care, repeated daily.']] },
+    g:{ brand:'COCO VEDA', kicker:'Live Healthy · Live Well · Live Natural',
+        h1:'Nature, handcrafted into wellness.',
+        sub:'Over 100 cold-processed virgin coconut and plant-based products — Ayurveda-inspired, sustainably sourced from Philippine farmer cooperatives, handcrafted in Manila since 2015.',
+        cta:'Explore the range', svc:['Coconut Oil & Wellness','Hair, Skin & Body','Sustainable Sourcing'],
+        svcd:['Signature cold-processed virgin coconut oil at the heart of every blend.','Massage, hair, facial, body, lip, baby and pet care — over a hundred products.','Direct farmer cooperatives, fair value, a lighter footprint.'],
+        stats:[['100+','Handcrafted products'],['2015','Crafting since'],['1','Single origin']] },
+    re:{ brand:'COCO VEDA RETREATS', kicker:'Live Well · By the Coconut Grove',
+        h1:'A home, in balance with nature.',
+        sub:'A small collection of wellness residences set within working coconut groves — designed around Ayurvedic calm and slow, natural living.',
+        cta:'Request the portfolio', svc:['Grove Residences','Retreat Estates','Wellness Tenancy'],
+        svcd:['Homes sited within working coconut groves.','Turnkey retreat properties with land and provenance.','Long-stay wellness leases, fully serviced.'],
+        stats:[['12','Residences'],['2015','Established'],['100','% natural setting']] } },
 ];
 
 /* ---------- 20 REELS -> archetype + a tasteful per-reel brand ----------
