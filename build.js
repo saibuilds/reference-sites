@@ -63,38 +63,48 @@ const GEN_PROMPT = {
 function artSVG(id,p){
   const m = MOTIF[id]||'mesh', { bg,surface,accent,fg } = p, W=1600,H=1000;
   const defs = `<defs>
-<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${bg}"/><stop offset="1" stop-color="${surface}"/></linearGradient>
+<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${bg}"/><stop offset=".55" stop-color="${surface}"/><stop offset="1" stop-color="${bg}"/></linearGradient>
 <radialGradient id="a" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="${accent}" stop-opacity=".55"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></radialGradient>
-<filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="60"/></filter>
-<filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .035 0"/></filter></defs>`;
+<linearGradient id="lk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${accent}" stop-opacity="0"/><stop offset=".5" stop-color="${accent}" stop-opacity=".10"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></linearGradient>
+<radialGradient id="v" cx="50%" cy="46%" r="75%"><stop offset="0" stop-color="${bg}" stop-opacity="0"/><stop offset=".66" stop-color="${bg}" stop-opacity="0"/><stop offset="1" stop-color="${bg}" stop-opacity=".62"/></radialGradient>
+<filter id="s" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="70"/></filter>
+<filter id="gg" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter>
+<filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .04 0"/></filter></defs>`;
+  const atmo = `<ellipse cx="320" cy="250" rx="520" ry="420" fill="url(#a)" filter="url(#s)" opacity=".5"/><ellipse cx="1300" cy="800" rx="560" ry="460" fill="url(#a)" filter="url(#s)" opacity=".36"/>`;
   let layer='';
-  if(m==='bloom') layer=`<circle cx="1010" cy="430" r="380" fill="url(#a)" filter="url(#s)"/>
-${[260,330,400,470].map(r=>`<circle cx="1010" cy="430" r="${r}" fill="none" stroke="${accent}" stroke-opacity=".14"/>`).join('')}`;
+  if(m==='bloom') layer=`<ellipse cx="1010" cy="430" rx="430" ry="430" fill="url(#a)" filter="url(#s)"/>
+${[230,300,370,440,520].map(r=>`<circle cx="1010" cy="430" r="${r}" fill="none" stroke="${accent}" stroke-opacity=".13"/>`).join('')}
+<circle cx="1010" cy="430" r="34" fill="${accent}" opacity=".5" filter="url(#gg)"/><circle cx="1010" cy="430" r="7" fill="${fg}"/>`;
   else if(m==='slab') layer=`<g transform="rotate(-18 800 500)">
 <rect x="120" y="120" width="1360" height="150" fill="${fg}" opacity=".06"/>
-<rect x="-80" y="430" width="1760" height="120" fill="${accent}" opacity=".85"/>
+<rect x="-80" y="426" width="1760" height="124" fill="${accent}" opacity=".16"/>
+<rect x="-80" y="430" width="1760" height="116" fill="${accent}" opacity=".85"/>
 <rect x="260" y="690" width="1080" height="90" fill="${fg}" opacity=".08"/></g>`;
-  else if(m==='sun') layer=`<circle cx="800" cy="560" r="300" fill="${accent}"/>
+  else if(m==='sun') layer=`<circle cx="800" cy="560" r="322" fill="url(#a)" filter="url(#gg)"/><circle cx="800" cy="560" r="300" fill="${accent}"/>
 ${[0,1,2,3,4,5].map(i=>`<rect x="500" y="${430+i*46}" width="600" height="22" fill="${bg}"/>`).join('')}
 <g stroke="${accent}" stroke-opacity=".5">${[-5,-3,-1,1,3,5].map(i=>`<line x1="800" y1="640" x2="${800+i*420}" y2="1000"/>`).join('')}${[700,800,920].map(y=>`<line x1="0" y1="${y}" x2="1600" y2="${y}"/>`).join('')}</g>`;
-  else if(m==='tonal') layer=`${[0,1,2,3,4].map(i=>`<rect x="0" y="${i*200}" width="1600" height="200" fill="${i%2?accent:fg}" opacity="${0.04+i*0.012}"/>`).join('')}
-<rect x="0" y="0" width="1600" height="1000" fill="url(#a)" opacity=".3"/>`;
-  else if(m==='horizon') layer=`<rect x="0" y="660" width="1600" height="340" fill="${fg}" opacity=".05"/>
-<ellipse cx="1120" cy="660" rx="420" ry="240" fill="url(#a)" filter="url(#s)"/>
+  else if(m==='tonal') layer=`${[0,1,2,3,4].map(i=>`<rect x="0" y="${i*200}" width="1600" height="200" fill="${i%2?accent:fg}" opacity="${0.045+i*0.014}"/>`).join('')}
+<rect x="1080" y="0" width="2" height="1000" fill="${fg}" opacity=".10"/>
+<ellipse cx="1180" cy="300" rx="640" ry="520" fill="url(#a)" filter="url(#s)" opacity=".5"/>`;
+  else if(m==='horizon') layer=`<rect x="0" y="660" width="1600" height="340" fill="${fg}" opacity=".06"/>
+<rect x="0" y="612" width="1600" height="60" fill="${accent}" opacity=".05" filter="url(#gg)"/>
+<ellipse cx="1120" cy="652" rx="460" ry="280" fill="url(#a)" filter="url(#s)"/>
 <line x1="0" y1="660" x2="1600" y2="660" stroke="${accent}" stroke-opacity=".35"/>
-<path d="M180 880 Q 760 560 1480 240" stroke="${fg}" stroke-opacity=".18" stroke-width="3" fill="none"/>`;
+<ellipse cx="1120" cy="690" rx="300" ry="34" fill="${accent}" opacity=".10" filter="url(#gg)"/>
+<path d="M180 880 Q 760 560 1480 240" stroke="${fg}" stroke-opacity=".16" stroke-width="3" fill="none"/>`;
   else if(m==='organic') layer=`<path d="M520 180 C 880 80 1280 240 1300 520 C 1320 800 980 920 700 860 C 420 800 280 560 360 380 C 410 270 430 215 520 180 Z" fill="url(#a)" filter="url(#s)"/>
+<path d="M600 300 C 820 230 1080 340 1100 540 C 1115 720 900 800 720 760" fill="${accent}" opacity=".06" filter="url(#gg)"/>
 <path d="M560 260 C 820 200 1140 320 1150 540 C 1160 760 900 840 690 790" fill="none" stroke="${accent}" stroke-opacity=".25" stroke-width="2"/>`;
-  else if(m==='soft') layer=`<ellipse cx="800" cy="430" rx="560" ry="420" fill="url(#a)" filter="url(#s)"/>`;
+  else if(m==='soft') layer=`<ellipse cx="820" cy="420" rx="600" ry="460" fill="url(#a)" filter="url(#s)"/><ellipse cx="560" cy="640" rx="360" ry="300" fill="${accent}" opacity=".05" filter="url(#s)"/>`;
   else if(m==='cosmos'){ const HS=(i,k)=>{const v=Math.sin(i*12.9898+k*78.233)*43758.5453;return v-Math.floor(v);};
-    const stars=Array.from({length:120},(_,i)=>`<circle cx="${(HS(i,1)*1600)|0}" cy="${(HS(i,2)*1000)|0}" r="${(0.3+HS(i,3)*1.7).toFixed(2)}" opacity="${(0.12+HS(i,4)*0.55).toFixed(2)}"/>`).join('');
+    const stars=Array.from({length:140},(_,i)=>`<circle cx="${(HS(i,1)*1600)|0}" cy="${(HS(i,2)*1000)|0}" r="${(0.3+HS(i,3)*1.8).toFixed(2)}" opacity="${(0.12+HS(i,4)*0.6).toFixed(2)}"/>`).join('');
     layer=`<g fill="${fg}">${stars}</g>
-<ellipse cx="1040" cy="470" rx="540" ry="540" fill="url(#a)" filter="url(#s)"/>
+<ellipse cx="1040" cy="470" rx="560" ry="560" fill="url(#a)" filter="url(#s)"/>
 <g fill="none" stroke="${accent}" stroke-opacity=".22" transform="rotate(-17 1040 470)">${[170,255,345,455].map(r=>`<ellipse cx="1040" cy="470" rx="${r}" ry="${Math.round(r*0.6)}"/>`).join('')}</g>
-<circle cx="1040" cy="470" r="40" fill="${accent}" opacity=".4" filter="url(#s)"/><circle cx="1040" cy="470" r="6" fill="${fg}"/>`; }
-  else layer=`<g fill="none" stroke="${accent}" stroke-opacity=".16">${Array.from({length:9},(_,r)=>Array.from({length:14},(_,c)=>`<circle cx="${80+c*112}" cy="${90+r*100}" r="2.4" fill="${accent}" fill-opacity=".4" stroke="none"/>`).join('')).join('')}</g>
-<ellipse cx="430" cy="360" rx="320" ry="320" fill="url(#a)" filter="url(#s)"/><ellipse cx="1180" cy="660" rx="300" ry="300" fill="url(#a)" filter="url(#s)" opacity=".7"/>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img">${defs}<rect width="${W}" height="${H}" fill="url(#b)"/>${layer}<rect width="${W}" height="${H}" filter="url(#g)" opacity=".5"/></svg>`;
+<circle cx="1040" cy="470" r="40" fill="${accent}" opacity=".4" filter="url(#gg)"/><circle cx="1040" cy="470" r="6" fill="${fg}"/>`; }
+  else layer=`<g fill="none">${Array.from({length:9},(_,r)=>Array.from({length:14},(_,c)=>`<circle cx="${80+c*112}" cy="${90+r*100}" r="2.4" fill="${accent}" fill-opacity=".32"/>`).join('')).join('')}</g>
+<ellipse cx="430" cy="360" rx="360" ry="360" fill="url(#a)" filter="url(#s)"/><ellipse cx="1180" cy="660" rx="340" ry="340" fill="url(#a)" filter="url(#s)" opacity=".7"/><ellipse cx="880" cy="520" rx="260" ry="260" fill="${accent}" opacity=".05" filter="url(#s)"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img">${defs}<rect width="${W}" height="${H}" fill="url(#b)"/>${atmo}${layer}<rect width="${W}" height="${H}" fill="url(#lk)"/><rect width="${W}" height="${H}" fill="url(#v)"/><rect width="${W}" height="${H}" filter="url(#g)" opacity=".5"/></svg>`;
 }
 function resolveAsset(s){
   for(const ext of ['jpg','png','webp']){
