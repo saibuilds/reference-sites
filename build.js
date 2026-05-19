@@ -43,7 +43,7 @@ const MOTIF = { '01-luxury-dark':'bloom','02-cinematic-video':'horizon','03-dark
   '04-3d-spline-webgl':'mesh','05-vaporwave':'sun','06-soft-editorial':'soft','07-saas-glass':'mesh',
   '08-architecture-editorial':'tonal','09-aviation-luxury':'horizon','10-food-beauty-dtc':'organic',
   '11-japanese-web3':'organic','12-experimental-dev':'slab','13-wellness-botanical':'organic',
-  '14-cosmic-platform':'cosmos' };
+  '14-cosmic-platform':'cosmos','15-resort-residences':'tonal' };
 const GEN_PROMPT = {
   '01-luxury-dark':'Cinematic macro of a haute-horlogerie movement, single warm gold key light on near-black, extreme restraint, museum lighting, no text',
   '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
@@ -58,7 +58,8 @@ const GEN_PROMPT = {
   '11-japanese-web3':'Minimal Japanese ink-wash on warm dark paper, single ember-orange gesture, ma negative space, no text',
   '12-experimental-dev':'Generative shader abstraction, raw red-on-black geometry, terminal aesthetic, experimental dev lab, no text',
   '13-wellness-botanical':'Soft natural still life of a halved coconut and green botanicals on warm cream linen, diffuse daylight, Ayurvedic wellness, editorial DTC, no text',
-  '14-cosmic-platform':'Deep-space astrophotograph, faint star field with a luminous violet nebula bloom and thin orbital rings around one bright point, NASA-grade celestial calm, no text' };
+  '14-cosmic-platform':'Deep-space astrophotograph, faint star field with a luminous violet nebula bloom and thin orbital rings around one bright point, NASA-grade celestial calm, no text',
+  '15-resort-residences':'Cinematic dusk photograph of a low stone-and-timber luxury resort villa half-hidden in coastal trees above a private bay, warm lantern glow, calm sea, no people, no text' };
 function artSVG(id,p){
   const m = MOTIF[id]||'mesh', { bg,surface,accent,fg } = p, W=1600,H=1000;
   const defs = `<defs>
@@ -102,7 +103,7 @@ function resolveAsset(s){
   return `../assets/${s.id}.svg`;
 }
 
-/* ---------- 14 STYLE ARCHETYPES ----------
+/* ---------- 15 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
    (ordered section keys), and content for generic (g) + real-estate (re).
    `extra` holds archetype-level texture copy reused by both variants. */
@@ -402,6 +403,42 @@ const STYLES = [
         cta:'Request beta access', svc:['Locational Engine','Timing Windows','Developer API'],
         svcd:['Astrocartography-grade scoring for any coordinate on Earth.','The moments a place is most and least favourable, computed.','One stable, usage-priced API to build location products on.'],
         stats:[['30K','Lines in the kernel'],['195','Countries scored'],['1','API to build on']] } },
+
+  { id:'15-resort-residences', name:'Resort & Residences', refs:'Aman · Six Senses',
+    vars:{'--bg':'#15130F','--surface':'#221E17','--fg':'#F2EBDD','--accent':'#C9A86A','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(201,168,106,.22)'},
+    disp:'Cormorant Garamond', body:'Inter', threeD:false,
+    layout:['heroPhoto','editorialStatement','asymGrid','ritualSteps','ingredientMosaic','membership','journalCards','contactBlack'],
+    extra:{
+      ritual:[
+        ['Arrive','A boat, not a lobby. The day slows on the water.'],
+        ['Wander','Sand paths, no cars, the architecture half-hidden in the trees.'],
+        ['Be fed','One table, produce from the land, nothing on a schedule.'],
+        ['Disappear','A villa, the sea, and no real reason to leave it.']],
+      mosaic:[
+        ['The setting','A private bay reached only by water — no road, no neighbours.'],
+        ['The architecture','Low local stone and timber the landscape quietly swallows.'],
+        ['The privacy','Twenty-four villas across forty hectares. You will not see the others.'],
+        ['The service','One host per villa, anticipating rather than asking.']],
+      tiers:[
+        ['Garden Villa','from $1,400 / night','One bedroom, plunge pool, walled garden.'],
+        ['Bay Pavilion','from $2,600 / night','Two bedrooms, infinity edge, direct sand.'],
+        ['The Reserve','On request','The whole headland, fully staffed, exclusive use.']],
+      journal:[
+        ['Building with the land','Why we moved the resort, and not the trees.'],
+        ['The one-table kitchen','A menu decided by the morning catch.'],
+        ['Keeping a bay quiet','The case for fewer rooms, forever.']] },
+    g:{ brand:'AMARA', kicker:'A coastline kept quiet',
+        h1:'A resort that disappears into the land.',
+        sub:'A barefoot-luxury resort of twenty-four villas on a private bay — designed around the landscape and the silence, with service that anticipates rather than asks.',
+        cta:'Reserve your stay', svc:['Villas & Pavilions','The Spa & Table','The Setting'],
+        svcd:['Twenty-four villas and pavilions, each with its own water and walled quiet.','A single table from the land and sea, and a spa built into the rock.','Forty private hectares on a bay reached only by boat.'],
+        stats:[['24','Private villas'],['1','Untouched bay'],['40','Hectares, kept wild']] },
+    re:{ brand:'AMARA RESIDENCES', kicker:'Own a piece of the quiet',
+        h1:'A home, inside the resort.',
+        sub:'A limited collection of freehold branded residences within the resort — full hotel service, a managed rental programme, and a bay that stays this quiet on purpose.',
+        cta:'Register interest', svc:['The Residences','Ownership & Service','The Investment'],
+        svcd:['Eighteen architect-designed homes woven into the resort grounds.','Freehold title, full resort service, optional managed rental.','A scarce, branded, income-producing asset on protected land.'],
+        stats:[['18','Branded residences'],['Freehold','Title held'],['365','Days of service']] } },
 ];
 
 /* ---------- 20 REELS -> archetype + a tasteful per-reel brand ----------

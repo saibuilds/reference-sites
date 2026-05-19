@@ -111,6 +111,14 @@
       "accent": "#9E8CFF",
       "g": "STARRY LABS",
       "re": "STARRY LABS"
+    },
+    {
+      "id": "15-resort-residences",
+      "name": "Resort & Residences",
+      "refs": "Aman · Six Senses",
+      "accent": "#C9A86A",
+      "g": "AMARA",
+      "re": "AMARA RESIDENCES"
     }
   ],
   "reels": [
