@@ -405,9 +405,9 @@ const STYLES = [
         stats:[['30K','Lines in the kernel'],['195','Countries scored'],['1','API to build on']] } },
 
   { id:'15-resort-residences', name:'Resort & Residences', refs:'Aman · Six Senses',
-    vars:{'--bg':'#15130F','--surface':'#221E17','--fg':'#F2EBDD','--accent':'#C9A86A','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(201,168,106,.22)'},
-    disp:'Cormorant Garamond', body:'Inter', threeD:false,
-    layout:['heroPhoto','editorialStatement','asymGrid','ritualSteps','ingredientMosaic','membership','journalCards','contactBlack'],
+    vars:{'--bg':'#F5F0E6','--surface':'#E9DFC9','--fg':'#2B2620','--accent':'#9C7B4A','--card':'rgba(255,255,255,.60)','--card-bd':'rgba(43,38,32,.14)'},
+    disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
+    layout:['heroSoft','editorialStatement','asymGrid','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
     extra:{
       ritual:[
         ['Arrive','A boat, not a lobby. The day slows on the water.'],
