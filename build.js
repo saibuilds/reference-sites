@@ -123,7 +123,7 @@ const STYLES = [
   { id:'01-luxury-dark', name:'Luxury Dark', refs:'Cartier · Obsidian Dew · OF Sakazuki',
     vars:{'--bg':'#0A0A0A','--surface':'#161412','--fg':'#F5F0E8','--accent':'#C9A96E','--card':'rgba(255,255,255,.035)','--card-bd':'rgba(201,169,110,.18)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:true,
-    layout:['heroProduct','storyQuote','galleryHorizontalScroll','productGrid','scrollReel','materialScroll','footerBare'],
+    layout:['heroProduct','storyQuote','scrollDepth','galleryHorizontalScroll','productGrid','carouselClassic','scrollReel','materialScroll','footerBare'],
     extra:{ quote:'A single complication. A lifetime of restraint.',
       materials:[['Sapphire','Grown over months, faceted by hand to a single axis of light.'],
         ['Rose Gold','Cast in-house from a 5N alloy, warmed by a trace of copper.'],
@@ -162,7 +162,7 @@ const STYLES = [
   { id:'03-dark-brutalist', name:'Dark Brutalist', refs:'Guilty Mind · SHAPESHIFT · Sazabi',
     vars:{'--bg':'#000000','--surface':'#000000','--fg':'#FFFFFF','--accent':'#FF2D16','--card':'transparent','--card-bd':'#FFFFFF','--btn-radius':'0','--card-radius':'0'},
     disp:'Anton', body:'IBM Plex Mono', threeD:false, brutal:true,
-    layout:['heroType','manifesto','relatsKinetic','galleryHorizontalScroll','rawProof','numberedGet','emailInvert','footerBare'],
+    layout:['heroType','manifesto','relatsKinetic','galleryHorizontalScroll','rawProof','scrollDepth','numberedGet','emailInvert','footerBare'],
     extra:{ manifesto:['We do not do templates. We do not do safe. We do not do "on brand" when the brand is boring.',
       'Every system we ship is built to be remembered, then argued about, then copied.',
       'If it blends in, we failed. It will not blend in.'] },
@@ -216,7 +216,7 @@ const STYLES = [
   { id:'06-soft-editorial', name:'Soft Editorial', refs:'Maison de Synergy · Trendship · Bisous',
     vars:{'--bg':'#FAF0EB','--surface':'#F3E2D8','--fg':'#2C1810','--accent':'#B07D63','--card':'rgba(255,255,255,.6)','--card-bd':'rgba(44,24,16,.12)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
-    layout:['heroSoft','editorialStatement','galleryHorizontalScroll','asymGrid','philosophy','scrollReel','journalCards','newsletter','footerBare'],
+    layout:['heroSoft','editorialStatement','galleryHorizontalScroll','asymGrid','carouselClassic','philosophy','scrollDepth','scrollReel','journalCards','newsletter','footerBare'],
     extra:{ journal:[['On Slowness','Why a season should take a season.'],
       ['The Cutting Room','Notes from the atelier floor.'],
       ['Kept, Not Consumed','A wardrobe measured in years.']] },
@@ -255,7 +255,7 @@ const STYLES = [
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
     vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#9B9086','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
-    layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','aboutTwoPara','contactEmail'],
+    layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','scrollDepth','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
       ['Water Cabin','West Coast, NZ','2022'],['Stone Court','Engadin, CH','2021']] },
     g:{ brand:'FALL LINE', kicker:'Architecture Studio', h1:'Houses that listen to the land.',
@@ -290,7 +290,7 @@ const STYLES = [
   { id:'10-food-beauty-dtc', name:'Food / Beauty DTC', refs:"Casper's Caviar · Obsidian Dew",
     vars:{'--bg':'#080808','--surface':'#161210','--fg':'#F3EBDD','--accent':'#B48226','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(180,130,40,.24)'},
     disp:'Playfair Display', body:'Inter', threeD:true, sticky:true,
-    layout:['heroProduct','ingredientMosaic','scrollDepth','ritualSteps','testimonialMarquee','productShelf','emailInvert','footerBare'],
+    layout:['heroProduct','ingredientMosaic','scrollDepth','ritualSteps','testimonialMarquee','productShelf','carouselClassic','emailInvert','footerBare'],
     extra:{ mosaic:[['Single Origin','One estuary. One season. One grade.'],
       ['Cured Slow','A 200-year salt cure, never rushed.'],
       ['On Ice in 24h','Hand-packed, shipped cold, traceable.'],
@@ -335,7 +335,7 @@ const STYLES = [
   { id:'12-experimental-dev', name:'Experimental / Dev', refs:'E.C.H.O. · Robert Borghesi · IDOM',
     vars:{'--bg':'#000000','--surface':'#070707','--fg':'#EDEDED','--accent':'#FF3B3B','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,59,59,.26)','--btn-radius':'0'},
     disp:'Space Grotesk', body:'IBM Plex Mono', threeD:true, minimal:true,
-    layout:['heroCanvas','relatsKinetic','caseStudies','galleryHorizontalScroll','capabilitySlides','aboutTwoPara','contactBlack'],
+    layout:['heroCanvas','relatsKinetic','caseStudies','galleryHorizontalScroll','capabilitySlides','scrollDepth','aboutTwoPara','contactBlack'],
     extra:{ caps:[['WebGL / Shaders','Custom GLSL, post-processing, 60fps budgets.'],
       ['Motion Systems','GSAP timelines, scroll choreography, transitions.'],
       ['Creative Tooling','Generative systems, editors, internal toys.'],
@@ -354,7 +354,7 @@ const STYLES = [
   { id:'13-wellness-botanical', name:'Wellness Botanical', refs:'Coco Veda',
     vars:{'--bg':'#050302','--surface':'#0E0805','--fg':'#f4e6cf','--accent':'#e9b26b','--amber':'#de7c0d','--cream':'#f4e6cf','--gold':'#e9b26b','--card':'rgba(244,230,207,.05)','--card-bd':'rgba(244,230,207,.14)'},
     disp:'Fraunces', body:'Inter', threeD:false, light:false,
-    layout:['heroCinematicFilm','editorialStatement','statsBand','asymGrid','productShelf','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
+    layout:['heroCinematicFilm','editorialStatement','statsBand','asymGrid','scrollDepth','productShelf','ritualSteps','ingredientMosaic','carouselClassic','journalCards','newsletter','footerBare'],
     extra:{ quote:'Picked at the perfect moment. Pressed cold. Bottled whole.',
       chapters:[
         {num:'',  label:'I — A FILM IN SIX CHAPTERS',     h1a:'A film about',           h1b:'oil.',                  italic:'b', side:'right',  marquee:true,  meta:'Six frames. One coconut. Cold-pressed at first light.'},
@@ -431,7 +431,7 @@ const STYLES = [
   { id:'15-resort-residences', name:'Resort & Residences', refs:'Aman · Six Senses',
     vars:{'--bg':'#F5F0E6','--surface':'#E9DFC9','--fg':'#2B2620','--accent':'#9C7B4A','--card':'rgba(255,255,255,.60)','--card-bd':'rgba(43,38,32,.14)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
-    layout:['heroBuildSequence','editorialStatement','galleryHorizontalScroll','asymGrid','scrollReel','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
+    layout:['heroBuildSequence','editorialStatement','galleryHorizontalScroll','asymGrid','scrollDepth','scrollReel','ritualSteps','carouselClassic','ingredientMosaic','journalCards','newsletter','footerBare'],
     extra:{
       ritual:[
         ['Arrive','A boat, not a lobby. The day slows on the water.'],
@@ -463,6 +463,39 @@ const STYLES = [
         cta:'Register interest', svc:['The Residences','Ownership & Service','The Investment'],
         svcd:['Eighteen architect-designed homes woven into the resort grounds.','Freehold title, full resort service, optional managed rental.','A scarce, branded, income-producing asset on protected land.'],
         stats:[['18','Branded residences'],['Freehold','Title held'],['365','Days of service']] } },
+
+  { id:'16-terminal-industrial', name:'Terminal Industrial', refs:'terminal-industries.com · Stripe · Linear',
+    vars:{'--bg':'#050505','--surface':'#0B0B0D','--fg':'#EDEDED','--accent':'#FF5C00','--accent-2':'#1AFF8C','--card':'rgba(255,255,255,.025)','--card-bd':'rgba(255,255,255,.10)','--btn-radius':'2px','--card-radius':'2px'},
+    disp:'Space Grotesk', body:'IBM Plex Mono', threeD:false, industrial:true,
+    layout:['heroVideoGSAP','statsBand','routesGrid','scrollDepth','featureRows','carouselClassic','galleryHorizontalScroll','processSteps','logoMarquee','contactBlack'],
+    extra:{ steps:[
+        ['Scan','Real-time computer vision identifies every truck, trailer and yard asset.'],
+        ['Route','AI dispatch assigns the shortest, safest, most fuel-efficient path.'],
+        ['Move','Autonomous yard tractors execute moves continuously, 24/7.'],
+        ['Audit','Every motion logged, every minute saved, every dollar measured.']],
+      carousel:[
+        ['01 / Terminal OS','Operating system for the modern logistics yard. One pane of glass.','Live deployment'],
+        ['02 / Autonomous Yard','Driverless yard tractors that move trailers between docks and slots.','SAE Level 4'],
+        ['03 / Computer Vision','Edge-deployed cameras tracking every asset, person and motion.','99.7% accuracy'],
+        ['04 / API Layer','Plug into your TMS, WMS, ERP. REST + webhooks, opinionated defaults.','OpenAPI 3.1']],
+      carouselTitle:'The yard, rebuilt.',
+      routes:[
+        ['LAX → ORD','Los Angeles · Chicago','27h · automated'],
+        ['ATL → DFW','Atlanta · Dallas','13h · automated'],
+        ['SEA → DEN','Seattle · Denver','22h · automated'],
+        ['MIA → JFK','Miami · New York','21h · automated'],
+        ['HOU → PHX','Houston · Phoenix','17h · automated'],
+        ['MSP → IND','Minneapolis · Indianapolis','11h · automated']] },
+    g:{ brand:'TERMINAL', kicker:'Industrial AI · NOC-25.04', h1:'The logistics yard, autonomous.',
+        sub:'We build the operating system, the autonomous trucks and the computer vision that runs the modern freight terminal — end to end, 24/7, measured to the minute.',
+        cta:'Request a deployment', svc:['Yard OS','Autonomous Fleet','Vision Platform'],
+        svcd:['One operating system for every motion in the terminal.','Driverless tractors that never stop, never tire, never miss a slot.','Edge vision tracking every asset, person and second.'],
+        stats:[['24/7','Yard uptime'],['SAE 4','Autonomy'],['12','Terminals live']] },
+    re:{ brand:'TERMINAL ASSETS', kicker:'Industrial Real Estate · NOC-25.04', h1:'The industrial yard, owned right.',
+        sub:'We acquire, retrofit and operate Class A industrial yards across North America — built around autonomy, computer vision and a single operating layer.',
+        cta:'Request the deck', svc:['Acquisitions','Retrofits','Operations'],
+        svcd:['Off-market industrial yards with rail or port access.','Sensor + autonomy retrofit in 90 days.','Operated end-to-end on Terminal OS.'],
+        stats:[['$420M','AUM'],['18','Yards held'],['90','Days to retrofit']] } },
 ];
 
 /* ---------- 20 REELS -> archetype + a tasteful per-reel brand ----------
@@ -1268,6 +1301,112 @@ function emailInvert(x){ const {c}=x; return `<section class="sec email-cap" id=
 function featureRows(x){ const {c}=x; return `<section class="sec" id="work"><div class="wrap">${sectionHead('What you build','From idea to live.')}
   ${c.svc.map((s,i)=>`<div class="frow${i%2?' frow--rev':''}" data-reveal><div class="frow-txt"><div class="eyebrow">0${i+1}</div><h3>${esc(s)}</h3><p class="muted">${esc(c.svcd[i])}</p></div><div class="frow-vis" aria-hidden="true"></div></div>`).join('')}</div></section>`; }
 function logoMarquee(x){ const {c}=x; const w=[c.brand,c.kicker,c.svc[0],c.svc[1],c.svc[2]]; const row=w.concat(w).concat(w).map(t=>`<span>${esc(t)}</span><span class="dot">·</span>`).join(''); return `<div class="logo-mq" aria-hidden="true"><div class="logo-mq-track">${row}</div></div>`; }
+function carouselClassic(x){
+  const {c,ex} = x;
+  // pull slides from ex.carousel if present, else build from svc/svcd, else from materials/mosaic/ritual
+  const src = (ex && ex.carousel) || (ex && ex.materials) || (ex && ex.mosaic) || (ex && ex.ritual) ||
+    (c.svc || []).map((s,i)=>[s, (c.svcd||[])[i]||'']);
+  const slides = src.slice(0, Math.max(3, Math.min(src.length, 8)));
+  const head = c.kicker || 'Featured';
+  const title = ex && ex.carouselTitle || 'Selected.';
+  return `<section class="cx-sec" id="carousel" aria-roledescription="carousel" aria-label="${esc(title)}">
+<div class="cx-wrap">
+  <div class="cx-head">
+    <div class="cx-eb">${esc(head)}</div>
+    <h2 class="cx-h2">${esc(title)}</h2>
+  </div>
+  <div class="cx-stage">
+    <button class="cx-nav cx-prev" type="button" aria-label="Previous slide">&larr;</button>
+    <div class="cx-track-wrap"><div class="cx-track">
+      ${slides.map((sl,i)=>{
+        const t = Array.isArray(sl)?sl[0]:(sl.title||'');
+        const p = Array.isArray(sl)?sl[1]:(sl.body||'');
+        const m = Array.isArray(sl)?(sl[2]||''):(sl.meta||'');
+        return `<article class="cx-slide" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i+1} of ${slides.length}">
+          <div class="cx-num">${String(i+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}</div>
+          <h3 class="cx-st">${esc(t)}</h3>
+          <p class="cx-sp">${esc(p)}</p>
+          ${m?`<div class="cx-sm">${esc(m)}</div>`:''}
+        </article>`;
+      }).join('')}
+    </div></div>
+    <button class="cx-nav cx-next" type="button" aria-label="Next slide">&rarr;</button>
+  </div>
+  <div class="cx-dots" role="tablist">
+    ${slides.map((_,i)=>`<button class="cx-dot${i===0?' cx-dot--on':''}" type="button" role="tab" aria-label="Go to slide ${i+1}" data-i="${i}"></button>`).join('')}
+  </div>
+  <div class="cx-progress" aria-hidden="true"><div class="cx-progress-bar"></div></div>
+</div>
+<style>
+.cx-sec{position:relative;padding:clamp(3rem,6vw,6rem) 0;background:var(--bg);color:var(--fg);overflow:hidden}
+.cx-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.4rem,4vw,3rem)}
+.cx-head{margin-bottom:2.4rem}
+.cx-eb{font-family:var(--font-body),sans-serif;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;opacity:.9}
+.cx-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2rem,4vw,3.4rem);line-height:1;margin:0;letter-spacing:-.02em}
+.cx-stage{position:relative;display:flex;align-items:stretch;gap:1rem}
+.cx-track-wrap{flex:1;overflow:hidden;border-radius:8px;background:var(--surface,rgba(255,255,255,.02));border:1px solid var(--card-bd,rgba(255,255,255,.08))}
+.cx-track{display:flex;transition:transform .8s cubic-bezier(.65,0,.35,1);will-change:transform}
+.cx-slide{flex:0 0 100%;padding:clamp(2rem,5vw,4rem) clamp(1.6rem,4vw,3.2rem);min-height:340px;display:flex;flex-direction:column;gap:1rem;justify-content:center}
+.cx-num{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--accent) 80%, var(--fg));opacity:.85;margin-bottom:.6rem}
+.cx-st{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.1;margin:0;letter-spacing:-.01em}
+.cx-sp{margin:0;max-width:60ch;font-size:1rem;line-height:1.6;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.cx-sm{margin-top:auto;padding-top:1.4rem;font-family:var(--font-body),monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:color-mix(in srgb,var(--accent) 70%, var(--fg));opacity:.8}
+.cx-nav{flex:0 0 auto;align-self:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--card-bd,rgba(255,255,255,.18));background:transparent;color:var(--fg);font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .25s ease,transform .25s ease}
+.cx-nav:hover{background:color-mix(in srgb,var(--accent) 14%, transparent);transform:scale(1.05)}
+.cx-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cx-dots{display:flex;justify-content:center;gap:.6rem;margin-top:1.6rem}
+.cx-dot{width:8px;height:8px;border-radius:999px;border:none;background:color-mix(in srgb,var(--fg) 30%, transparent);cursor:pointer;padding:0;transition:width .35s ease,background .35s ease}
+.cx-dot--on{width:32px;background:var(--accent)}
+.cx-dot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cx-progress{margin-top:1.4rem;height:2px;background:color-mix(in srgb,var(--fg) 12%, transparent);border-radius:2px;overflow:hidden}
+.cx-progress-bar{height:100%;width:0;background:var(--accent);transition:width .15s linear}
+@media (max-width:640px){.cx-nav{display:none}.cx-slide{padding:1.6rem 1.2rem;min-height:280px}}
+@media (prefers-reduced-motion: reduce){.cx-track{transition:none}.cx-progress-bar{transition:none}}
+</style>
+<script>
+(function(){
+  var sec=document.currentScript.closest('.cx-sec'); if(!sec)return;
+  var track=sec.querySelector('.cx-track');
+  var slides=sec.querySelectorAll('.cx-slide');
+  var dots=sec.querySelectorAll('.cx-dot');
+  var prev=sec.querySelector('.cx-prev');
+  var next=sec.querySelector('.cx-next');
+  var bar=sec.querySelector('.cx-progress-bar');
+  var n=slides.length, i=0, timer=null, t0=0, dur=5000, paused=false;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(k){
+    i=((k%n)+n)%n;
+    track.style.transform='translateX('+(-i*100)+'%)';
+    dots.forEach(function(d,j){d.classList.toggle('cx-dot--on',j===i)});
+    t0=Date.now();
+  }
+  function tick(){
+    if(reduce||paused){requestAnimationFrame(tick);return}
+    var p=Math.min(1,(Date.now()-t0)/dur);
+    bar.style.width=(p*100)+'%';
+    if(p>=1){go(i+1)}
+    requestAnimationFrame(tick);
+  }
+  prev&&prev.addEventListener('click',function(){go(i-1)});
+  next&&next.addEventListener('click',function(){go(i+1)});
+  dots.forEach(function(d,j){d.addEventListener('click',function(){go(j)})});
+  sec.addEventListener('mouseenter',function(){paused=true});
+  sec.addEventListener('mouseleave',function(){paused=false;t0=Date.now()});
+  sec.addEventListener('focusin',function(){paused=true});
+  sec.addEventListener('focusout',function(){paused=false;t0=Date.now()});
+  // touch swipe
+  var sx=0,sy=0,sw=0;
+  track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;sw=0;paused=true},{passive:true});
+  track.addEventListener('touchmove',function(e){sw=e.touches[0].clientX-sx},{passive:true});
+  track.addEventListener('touchend',function(){if(Math.abs(sw)>40)go(i+(sw<0?1:-1));paused=false;t0=Date.now()});
+  // keyboard
+  sec.tabIndex=0;
+  sec.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')go(i-1);else if(e.key==='ArrowRight')go(i+1)});
+  go(0); t0=Date.now(); requestAnimationFrame(tick);
+})();
+</script>
+</section>`;
+}
 function relatsKinetic(x){
   const {c} = x;
   const phrase = (c.h1||'Form follows energy.').toUpperCase();
@@ -1419,7 +1558,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,

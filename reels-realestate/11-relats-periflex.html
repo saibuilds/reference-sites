@@ -17,7 +17,7 @@
 <img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Library switcher">
   <a href="../reels/11-relats-periflex.html" aria-label="Previous">&larr;</a>
-  <a href="../index.html">Index</a><span class="pos">52 / 70</span>
+  <a href="../index.html">Index</a><span class="pos">54 / 72</span>
   <a href="../reels/12-maison-de-synergy.html" aria-label="Next">&rarr;</a></nav>
 <nav class="nav"><div class="brand">BLACK/DOOR</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
@@ -127,6 +127,51 @@
 </section>
 <section class="sec" id="proof"><div class="wrap narrow">
   <p class="raw-q" data-reveal data-reveal-d="1">"Listing campaigns that do not blend in." <span class="raw-by">— CLIENT 001</span></p><p class="raw-q" data-reveal data-reveal-d="2">"Aggressive, data-led buyer representation." <span class="raw-by">— CLIENT 002</span></p><p class="raw-q" data-reveal data-reveal-d="3">"Staging engineered to be remembered." <span class="raw-by">— CLIENT 003</span></p><p class="raw-q" data-reveal data-reveal-d="1">"no fluff. just sold." <span class="raw-by">— CLIENT 004</span></p></div></section>
+<section class="sd-sec" aria-label="Depth">
+  <div class="sd-stage">
+    <svg class="sd-layer sd-l3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FF2D16" stop-opacity=".22"/><stop offset="1" stop-color="#FF2D16" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1600" height="900" fill="url(#sdSky)"/>
+      <circle cx="1200" cy="240" r="100" fill="#FF2D16" fill-opacity=".5" filter="blur(40)"/>
+    </svg>
+    <svg class="sd-layer sd-l2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="#FF2D16" fill-opacity=".22"/>
+    </svg>
+    <svg class="sd-layer sd-l1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="#FF2D16" fill-opacity=".48"/>
+    </svg>
+    <div class="sd-frame">
+      <div class="sd-eyebrow">Property Studio — EST 2019</div>
+      <h2 class="sd-h2">WE SELL HOMES ON PURPOSE</h2>
+      <p class="sd-sub">no fluff. just sold.</p>
+    </div>
+  </div>
+  <style>
+  .sd-sec{position:relative;height:220vh;background:linear-gradient(180deg,var(--bg,#0a0a0a),var(--surface,#11102a));color:var(--fg,#f5f1e8)}
+  .sd-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .sd-layer{position:absolute;inset:0;width:100%;height:100%;will-change:transform;filter:drop-shadow(0 12px 32px rgba(0,0,0,.45))}
+  .sd-l3{transform:translateY(0);z-index:1}
+  .sd-l2{transform:translateY(0);z-index:2}
+  .sd-l1{transform:translateY(0);z-index:3}
+  .sd-frame{position:relative;z-index:4;text-align:center;padding:0 1.6rem;max-width:min(80vw,720px)}
+  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#FF2D16;margin-bottom:1.2rem}
+  .sd-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;letter-spacing:-.02em;margin:0 0 1.2rem;text-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .sd-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.75);margin:0 auto;max-width:48ch}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.sd-sec');if(!sec)return;
+    var l1=sec.querySelector('.sd-l1'),l2=sec.querySelector('.sd-l2'),l3=sec.querySelector('.sd-l3'),f=sec.querySelector('.sd-frame');
+    function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+    function on(){var r=sec.getBoundingClientRect(),t=Math.max(0,-r.top),m=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,t/m),e=ease(p);
+      if(l1)l1.style.transform='translate3d(0,'+(-e*120)+'px,0) scale('+(1+e*.08)+')';
+      if(l2)l2.style.transform='translate3d(0,'+(-e*70)+'px,0) scale('+(1+e*.04)+')';
+      if(l3)l3.style.transform='translate3d(0,'+(-e*30)+'px,0)';
+      if(f)f.style.transform='translate3d(0,'+(-e*40)+'px,0)';if(f)f.style.opacity=String(1-Math.max(0,(p-.7)/.3));
+    }addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
 <section class="sec" id="work"><div class="wrap narrow">
   <h2 class="clip-line" style="margin-bottom:2.4rem">WHAT YOU GET</h2>
   <ol class="big-list"><li data-reveal data-reveal-d="1"><span>01</span>SELL — Listing campaigns that do not blend in.</li><li data-reveal data-reveal-d="2"><span>02</span>BUY — Aggressive, data-led buyer representation.</li><li data-reveal data-reveal-d="3"><span>03</span>STAGE — Staging engineered to be remembered.</li></ol></div></section>

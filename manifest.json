@@ -119,6 +119,14 @@
       "accent": "#9C7B4A",
       "g": "AMARA",
       "re": "AMARA RESIDENCES"
+    },
+    {
+      "id": "16-terminal-industrial",
+      "name": "Terminal Industrial",
+      "refs": "terminal-industries.com · Stripe · Linear",
+      "accent": "#FF5C00",
+      "g": "TERMINAL",
+      "re": "TERMINAL ASSETS"
     }
   ],
   "reels": [
