@@ -25,6 +25,7 @@ const FONTS = {
   'IBM Plex Mono':'IBM+Plex+Mono:wght@400;600',
   'Fraunces':'Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700',
   'JetBrains Mono':'JetBrains+Mono:wght@300;400',
+  'Instrument Serif':'Instrument+Serif:ital@0;1',
 };
 function fontHref(list){
   const s = [...new Set(list)].map(f=>'family='+FONTS[f]).join('&');
@@ -141,7 +142,7 @@ const STYLES = [
         stats:[['$4.2M','Avg. residence'],['1','Advisor each'],['28','Days to close']] } },
 
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
-    vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#E6B873','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
+    vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#FF7A1A','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
     layout:['heroVideoGSAP','statsBand','scrollDepth','glassServices','processSteps','carouselClassic','quoteCards','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
@@ -197,7 +198,7 @@ const STYLES = [
         stats:[['60','fps tours'],['320','Homes scanned'],['3.1x','More inquiries']] } },
 
   { id:'05-vaporwave', name:'Vaporwave', refs:'Sidewave',
-    vars:{'--bg':'#1A0033','--surface':'#2A0A4A','--fg':'#FDF0FF','--accent':'#FF8C00','--card':'rgba(255,255,255,.06)','--card-bd':'rgba(255,0,110,.32)'},
+    vars:{'--bg':'#1A0033','--surface':'#2A0A4A','--fg':'#FDF0FF','--accent':'#FF2BD6','--accent-2':'#00F0FF','--card':'rgba(255,255,255,.06)','--card-bd':'rgba(255,43,214,.36)'},
     disp:'Archivo Black', body:'Space Grotesk', threeD:false, ripple:true,
     layout:['heroVanta','waveBand','p5Sketch','releaseGrid','quoteCards','emailInvert','footerBare'],
     extra:{ releases:[['001 · Nightdrive','EP · 6 tracks'],['002 · Afterglow','Single'],
@@ -214,7 +215,7 @@ const STYLES = [
         stats:[['210','Spaces'],['38','Days avg.'],['6','Districts']] } },
 
   { id:'06-soft-editorial', name:'Soft Editorial', refs:'Maison de Synergy · Trendship · Bisous',
-    vars:{'--bg':'#FAF0EB','--surface':'#F3E2D8','--fg':'#2C1810','--accent':'#B07D63','--card':'rgba(255,255,255,.6)','--card-bd':'rgba(44,24,16,.12)'},
+    vars:{'--bg':'#F5EFE6','--surface':'#EBE2D2','--fg':'#2C1810','--accent':'#8C6A56','--card':'rgba(255,255,255,.6)','--card-bd':'rgba(44,24,16,.12)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
     layout:['heroSoft','editorialStatement','galleryHorizontalScroll','asymGrid','carouselClassic','philosophy','scrollDepth','scrollReel','journalCards','newsletter','footerBare'],
     extra:{ journal:[['On Slowness','Why a season should take a season.'],
@@ -271,7 +272,7 @@ const STYLES = [
 
   { id:'09-aviation-luxury', name:'Aviation Luxury', refs:'Jesko Jets · Sakazuki',
     vars:{'--bg':'#0C0C0C','--surface':'#161514','--fg':'#F5F2ED','--accent':'#C9A96E','--card':'rgba(245,242,237,.04)','--card-bd':'rgba(201,169,110,.20)','--btn-radius':'999px'},
-    disp:'Space Grotesk', body:'Inter', threeD:false, clock:true,
+    disp:'Cormorant Garamond', body:'Inter', threeD:false, clock:true,
     layout:['heroSplit','routesGrid','scrollReel','fleetStrip','membership','applyForm','footerBare'],
     extra:{ tiers:[['Charter','On-demand','Any city pair, wheels-up in 4h'],
       ['Jet Card','Fixed hours','Locked rate, zero surprises'],
@@ -393,8 +394,8 @@ const STYLES = [
         stats:[['12','Residences'],['2015','Established'],['100','% natural setting']] } },
 
   { id:'14-cosmic-platform', name:'Cosmic Engine', refs:'Starry Labs',
-    vars:{'--bg':'#070611','--surface':'#11102A','--fg':'#EDEBFA','--accent':'#9E8CFF','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(158,140,255,.20)'},
-    disp:'Cormorant Garamond', body:'Inter', threeD:false,
+    vars:{'--bg':'#0A0820','--surface':'#11102A','--fg':'#EDEBFA','--accent':'#C7B8FF','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(199,184,255,.22)'},
+    disp:'Instrument Serif', body:'Inter', threeD:false,
     layout:['heroThreeGlobe','manifesto','p5Sketch','featureRows','processSteps','pricing','faq','contactBlack'],
     extra:{
       manifesto:[

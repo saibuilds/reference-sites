@@ -12,7 +12,7 @@
       "id": "02-cinematic-video",
       "name": "Cinematic Video",
       "refs": "Terminal Logistics · Villa · Alpine · Hashgraph",
-      "accent": "#E6B873",
+      "accent": "#FF7A1A",
       "g": "TERMINAL",
       "re": "MERIDIAN"
     },
@@ -36,7 +36,7 @@
       "id": "05-vaporwave",
       "name": "Vaporwave",
       "refs": "Sidewave",
-      "accent": "#FF8C00",
+      "accent": "#FF2BD6",
       "g": "SIDEWAVE",
       "re": "PULSE"
     },
@@ -44,7 +44,7 @@
       "id": "06-soft-editorial",
       "name": "Soft Editorial",
       "refs": "Maison de Synergy · Trendship · Bisous",
-      "accent": "#B07D63",
+      "accent": "#8C6A56",
       "g": "Maison de Synergy",
       "re": "Maison Living"
     },
@@ -108,7 +108,7 @@
       "id": "14-cosmic-platform",
       "name": "Cosmic Engine",
       "refs": "Starry Labs",
-      "accent": "#9E8CFF",
+      "accent": "#C7B8FF",
       "g": "STARRY LABS",
       "re": "STARRY LABS"
     },
@@ -144,7 +144,7 @@
       "slug": "02-terminal-logistics",
       "style": "02-cinematic-video",
       "styleName": "Cinematic Video",
-      "accent": "#E6B873"
+      "accent": "#FF7A1A"
     },
     {
       "n": 3,
@@ -168,7 +168,7 @@
       "slug": "05-sidewave-music",
       "style": "05-vaporwave",
       "styleName": "Vaporwave",
-      "accent": "#FF8C00"
+      "accent": "#FF2BD6"
     },
     {
       "n": 6,
@@ -192,7 +192,7 @@
       "slug": "08-hashgraph-ventures",
       "style": "02-cinematic-video",
       "styleName": "Cinematic Video",
-      "accent": "#E6B873"
+      "accent": "#FF7A1A"
     },
     {
       "n": 9,
@@ -224,7 +224,7 @@
       "slug": "12-maison-de-synergy",
       "style": "06-soft-editorial",
       "styleName": "Soft Editorial",
-      "accent": "#B07D63"
+      "accent": "#8C6A56"
     },
     {
       "n": 13,
@@ -240,7 +240,7 @@
       "slug": "14-cartier-watches-wonders",
       "style": "06-soft-editorial",
       "styleName": "Soft Editorial",
-      "accent": "#B07D63"
+      "accent": "#8C6A56"
     },
     {
       "n": 15,
@@ -264,7 +264,7 @@
       "slug": "17-villa-maravilha",
       "style": "02-cinematic-video",
       "styleName": "Cinematic Video",
-      "accent": "#E6B873"
+      "accent": "#FF7A1A"
     },
     {
       "n": 18,
