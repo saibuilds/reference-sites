@@ -274,4 +274,26 @@
       })();
     }
   }
+
+  /* ---- osmo/barba-style page transition ---- */
+  if (!reduce){
+    var fade=document.createElement('div');
+    fade.style.cssText='position:fixed;inset:0;background:#000;z-index:9999;pointer-events:none;opacity:1;transition:opacity .55s cubic-bezier(.65,0,.35,1)';
+    document.documentElement.appendChild(fade);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ fade.style.opacity='0'; setTimeout(function(){ fade.remove(); }, 700); }); });
+    document.addEventListener('click', function(e){
+      var a=e.target.closest('a[href]');
+      if(!a) return;
+      var href=a.getAttribute('href');
+      if(!href||href[0]==='#'||/^(mailto:|tel:|javascript:)/i.test(href)) return;
+      if(a.target==='_blank'||a.hasAttribute('download')) return;
+      try{ var u=new URL(a.href, location.href); if(u.origin!==location.origin) return; }catch(_){ return; }
+      e.preventDefault();
+      var f=document.createElement('div');
+      f.style.cssText='position:fixed;inset:0;background:#000;z-index:9999;pointer-events:none;opacity:0;transition:opacity .5s cubic-bezier(.65,0,.35,1)';
+      document.documentElement.appendChild(f);
+      requestAnimationFrame(function(){ f.style.opacity='1'; });
+      setTimeout(function(){ location.href=a.href; }, 520);
+    });
+  }
 })();

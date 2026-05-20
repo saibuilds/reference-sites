@@ -143,7 +143,7 @@ const STYLES = [
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
     vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#E6B873','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
-    layout:['heroVideoGSAP','statsBand','glassServices','processSteps','quoteCards','ctaBig','footerCols'],
+    layout:['heroVideoGSAP','statsBand','scrollDepth','glassServices','processSteps','quoteCards','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
       ['Engineer','Lanes, modes and contingencies, costed to the hour.'],
       ['Execute','Live tracking, one point of contact, no surprises.'],
@@ -178,7 +178,7 @@ const STYLES = [
   { id:'04-3d-spline-webgl', name:'3D / WebGL', refs:'Spline Ice Cube · E.C.H.O. · JoyJam',
     vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#5BE0FF','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(91,224,255,.18)'},
     disp:'Space Grotesk', body:'Inter', threeD:true,
-    layout:['heroSpline','howGlass','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
+    layout:['r3fScene','howGlass','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
       ['Can we bring our own 3D?','glTF / USDZ in, optimised automatically on upload.'],
       ['What about mobile?','Adaptive LOD; the same scene degrades gracefully to phones.']],
@@ -234,7 +234,7 @@ const STYLES = [
   { id:'07-saas-glass', name:'SaaS Glass', refs:'JoyJam · GSAP Engine · Hashgraph',
     vars:{'--bg':'#070710','--surface':'#0E0E1C','--fg':'#EEF1FF','--accent':'#7B61FF','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.12)'},
     disp:'Syne', body:'Inter', threeD:true,
-    layout:['heroSaas','stackCards','personaCols','logoMarquee','pricing','faq','ctaGradient','footerCols'],
+    layout:['heroSaas','stackCards','r3fScene','personaCols','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Is there a free tier?','Yes — generous, no card, no expiry.'],
       ['Can I export my data?','One click, open formats, anytime.'],
       ['Do you take a cut of payments?','No platform fee on your revenue.']],
@@ -290,7 +290,7 @@ const STYLES = [
   { id:'10-food-beauty-dtc', name:'Food / Beauty DTC', refs:"Casper's Caviar · Obsidian Dew",
     vars:{'--bg':'#080808','--surface':'#161210','--fg':'#F3EBDD','--accent':'#B48226','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(180,130,40,.24)'},
     disp:'Playfair Display', body:'Inter', threeD:true, sticky:true,
-    layout:['heroProduct','ingredientMosaic','ritualSteps','testimonialMarquee','productShelf','emailInvert','footerBare'],
+    layout:['heroProduct','ingredientMosaic','scrollDepth','ritualSteps','testimonialMarquee','productShelf','emailInvert','footerBare'],
     extra:{ mosaic:[['Single Origin','One estuary. One season. One grade.'],
       ['Cured Slow','A 200-year salt cure, never rushed.'],
       ['On Ice in 24h','Hand-packed, shipped cold, traceable.'],
@@ -314,7 +314,7 @@ const STYLES = [
   { id:'11-japanese-web3', name:'Japanese / Community', refs:'OF Sakazuki',
     vars:{'--bg':'#0C0807','--surface':'#1A100E','--fg':'#F0E6D3','--accent':'#C2670C','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(194,103,12,.28)'},
     disp:'Cormorant Garamond', body:'Space Grotesk', threeD:true, vanta:'fog',
-    layout:['heroProduct','circleVault','membership','quoteCards','parentheticalFooter'],
+    layout:['heroProduct','circleVault','scrollDepth','membership','quoteCards','parentheticalFooter'],
     extra:{ vault:[['盃 · The Circle','A community measured in trust, not headcount.'],
       ['蔵 · The Vault','Curated craft, released slowly, to members first.'],
       ['儀 · The Rituals','Gatherings, seasonal and rare, by introduction.']],
@@ -1024,6 +1024,125 @@ function scrollReel(x){ // reusable scroll-driven crossfade reel — 4 frames
   </script>
 </section>`;
 }
+function r3fScene(x){ // react-three-fiber-style ESM scene, drei-style controls. GLB-friendly: extra.glb overrides.
+  const {c,s,ex} = x;
+  const accent = s.vars['--accent'] || '#9e8cff';
+  const glb = (ex && ex.glb) || '';
+  return `<section class="r3f-hero">
+<canvas class="r3f-canvas" id="r3fCanvas" aria-hidden="true"></canvas>
+<div class="r3f-grid" aria-hidden="true"></div>
+<div class="r3f-frame">
+  <div class="r3f-eyebrow">${esc(c.kicker)}</div>
+  <h1 class="r3f-h1">${esc(c.h1)}</h1>
+  <p class="r3f-sub">${esc(c.sub)}</p>
+  <div class="r3f-cta-row">
+    <a class="r3f-cta" href="#story">${esc(c.cta)} &rarr;</a>
+    <span class="r3f-hint">drag &middot; scroll &middot; hover</span>
+  </div>
+</div>
+<style>
+.r3f-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#15132b 0%,#070611 70%);color:var(--fg,#edebfa)}
+.r3f-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%;cursor:grab}
+.r3f-canvas:active{cursor:grabbing}
+.r3f-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(158,140,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(158,140,255,.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 50%,#000 30%,transparent 80%);opacity:.6}
+.r3f-frame{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;height:100%;padding:0 clamp(1.4rem,5vw,4rem) clamp(2.4rem,6vw,4rem);max-width:min(60vw,640px);pointer-events:none}
+.r3f-frame > *{pointer-events:auto}
+.r3f-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:${accent};margin-bottom:1.4rem}
+.r3f-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.6rem,7vw,6.4rem);line-height:.98;margin:0 0 1.4rem;letter-spacing:-.02em}
+.r3f-sub{font-size:1.05rem;line-height:1.55;color:rgba(237,235,250,.7);margin:0 0 1.8rem;max-width:50ch}
+.r3f-cta-row{display:flex;align-items:center;gap:1.2rem}
+.r3f-cta{display:inline-block;padding:.95rem 1.8rem;background:${accent};color:#0a0a0a;border-radius:999px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;font-weight:600}
+.r3f-hint{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(237,235,250,.4)}
+</style>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+  if(typeof THREE==='undefined')return;
+  var cv=document.getElementById('r3fCanvas');if(!cv)return;
+  var R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.outputColorSpace=THREE.SRGBColorSpace;R.toneMapping=THREE.ACESFilmicToneMapping;
+  var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(45,1,.1,200);C.position.set(0,1.2,4);
+  function sz(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix();}sz();addEventListener('resize',sz);
+  S.add(new THREE.HemisphereLight(0xffffff,0x1a1530,.6));
+  var key=new THREE.DirectionalLight(0xfff2dc,1.4);key.position.set(4,6,4);S.add(key);
+  var rim=new THREE.DirectionalLight(0x${accent.replace('#','')},.8);rim.position.set(-4,2,-3);S.add(rim);
+  // halo
+  var halo=new THREE.Mesh(new THREE.IcosahedronGeometry(2.4,2),new THREE.MeshBasicMaterial({color:0x${accent.replace('#','')},wireframe:true,transparent:true,opacity:.16}));S.add(halo);
+  // particle field
+  var pg=new THREE.BufferGeometry(),pos=[];
+  for(var i=0;i<480;i++){var r=2.2+Math.random()*2.8,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);pos.push(r*Math.sin(p)*Math.cos(t),r*Math.sin(p)*Math.sin(t),r*Math.cos(p));}
+  pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  var dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0xedebfa,size:.018,transparent:true,opacity:.65}));S.add(dust);
+  // model placeholder (replaced if GLB provided)
+  var hero;
+  var glb='${esc(glb)}';
+  function placeholder(){
+    var g=new THREE.TorusKnotGeometry(.85,.28,180,28),m=new THREE.MeshPhysicalMaterial({color:0x${accent.replace('#','')},metalness:.45,roughness:.18,clearcoat:1,clearcoatRoughness:.06,sheen:1,sheenColor:0x${accent.replace('#','')}});
+    hero=new THREE.Mesh(g,m);S.add(hero);
+  }
+  if(glb && THREE.GLTFLoader){
+    new THREE.GLTFLoader().load(glb,function(gl){hero=gl.scene;hero.scale.set(1.4,1.4,1.4);S.add(hero);},undefined,placeholder);
+  }else placeholder();
+  // mouse drag-tilt (drei-style)
+  var tx=0,ty=0,mx=0,my=0;
+  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;});
+  function tick(){tx+=(mx-tx)*.06;ty+=(my-ty)*.06;if(hero){hero.rotation.y+=.005+tx*.04;hero.rotation.x=-ty*.3;}halo.rotation.y-=.002;halo.rotation.x+=.001;dust.rotation.y+=.0006;C.position.x=tx*.6;C.position.y=1.2-ty*.4;C.lookAt(0,0,0);R.render(S,C);requestAnimationFrame(tick);}tick();
+  // scroll-driven zoom-out as you leave hero
+  addEventListener('scroll',function(){var r=cv.getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/innerHeight));C.position.z=4+p*3;},{passive:true});
+})();
+</script>
+</section>`;
+}
+function scrollDepth(x){ // layered parallax depth — 3 stacked SVG planes scrubbed by scroll
+  const {c,s} = x;
+  const accent = s.vars['--accent'] || '#c9a961';
+  return `<section class="sd-sec" aria-label="Depth">
+  <div class="sd-stage">
+    <svg class="sd-layer sd-l3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="${accent}" stop-opacity=".22"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1600" height="900" fill="url(#sdSky)"/>
+      <circle cx="1200" cy="240" r="100" fill="${accent}" fill-opacity=".5" filter="blur(40)"/>
+    </svg>
+    <svg class="sd-layer sd-l2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="${accent}" fill-opacity=".22"/>
+    </svg>
+    <svg class="sd-layer sd-l1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="${accent}" fill-opacity=".48"/>
+    </svg>
+    <div class="sd-frame">
+      <div class="sd-eyebrow">${esc(c.kicker||'Depth')}</div>
+      <h2 class="sd-h2">${esc(c.h1||'Layered worlds.')}</h2>
+      <p class="sd-sub">${esc(c.sub||'')}</p>
+    </div>
+  </div>
+  <style>
+  .sd-sec{position:relative;height:220vh;background:linear-gradient(180deg,var(--bg,#0a0a0a),var(--surface,#11102a));color:var(--fg,#f5f1e8)}
+  .sd-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .sd-layer{position:absolute;inset:0;width:100%;height:100%;will-change:transform;filter:drop-shadow(0 12px 32px rgba(0,0,0,.45))}
+  .sd-l3{transform:translateY(0);z-index:1}
+  .sd-l2{transform:translateY(0);z-index:2}
+  .sd-l1{transform:translateY(0);z-index:3}
+  .sd-frame{position:relative;z-index:4;text-align:center;padding:0 1.6rem;max-width:min(80vw,720px)}
+  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:${accent};margin-bottom:1.2rem}
+  .sd-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;letter-spacing:-.02em;margin:0 0 1.2rem;text-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .sd-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.75);margin:0 auto;max-width:48ch}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.sd-sec');if(!sec)return;
+    var l1=sec.querySelector('.sd-l1'),l2=sec.querySelector('.sd-l2'),l3=sec.querySelector('.sd-l3'),f=sec.querySelector('.sd-frame');
+    function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+    function on(){var r=sec.getBoundingClientRect(),t=Math.max(0,-r.top),m=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,t/m),e=ease(p);
+      if(l1)l1.style.transform='translate3d(0,'+(-e*120)+'px,0) scale('+(1+e*.08)+')';
+      if(l2)l2.style.transform='translate3d(0,'+(-e*70)+'px,0) scale('+(1+e*.04)+')';
+      if(l3)l3.style.transform='translate3d(0,'+(-e*30)+'px,0)';
+      if(f)f.style.transform='translate3d(0,'+(-e*40)+'px,0)';if(f)f.style.opacity=String(1-Math.max(0,(p-.7)/.3));
+    }addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>`;
+}
 function galleryHorizontalScroll(x){ // pinned horizontal scroll panel
   const {c,ex} = x;
   const g = (ex && ex.gallery && ex.gallery.length) ? ex.gallery : (c.svc||[]).map((t,i)=>[t, (c.svcd||[])[i]||'']);
@@ -1215,7 +1334,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,galleryHorizontalScroll,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,
