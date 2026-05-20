@@ -350,30 +350,31 @@ const STYLES = [
         stats:[['41','Builds'],['7','Awards'],['1','Human']] } },
 
   { id:'13-wellness-botanical', name:'Wellness Botanical', refs:'Coco Veda',
-    vars:{'--bg':'#F6F1E7','--surface':'#EAE0CE','--fg':'#2C2A22','--accent':'#6F8F5F','--card':'rgba(255,255,255,.62)','--card-bd':'rgba(44,42,34,.14)'},
-    disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
+    vars:{'--bg':'#050302','--surface':'#0E0805','--fg':'#F4E6CF','--accent':'#F5B009','--card':'rgba(244,230,207,.05)','--card-bd':'rgba(244,230,207,.14)'},
+    disp:'Cormorant Garamond', body:'Inter', threeD:false, light:false,
     layout:['heroSoft','editorialStatement','statsBand','asymGrid','productShelf','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
-    extra:{ quote:'Healing begins when body, mind and spirit return to balance.',
-      shelf:[['Virgin Coconut Oil','Cold-pressed · multi-use · 250ml','from $18'],
-        ['Ayurvedic Hair Oil','Strength & shine · botanical infusion','from $22'],
-        ['Coconut Body Balm','Daily nourishment · 150g','from $16']],
-      journal:[['The Coconut, Whole','Why we cold-process, and never refine.'],
-        ['From Tree to Hand','A day with our craftswomen in Manila.'],
-        ['Ayurveda, Daily','Small rituals, repeated, that actually hold.']],
-      mosaic:[['Cold-Processed VCO','Our signature virgin coconut oil, pressed without heat.'],
-        ['Single Origin','One archipelago, smallholder groves, full traceability.'],
-        ['Handcrafted in Manila','Blended in small batches by expert craftswomen.'],
-        ['Farmer Cooperatives','No middlemen — value returns to rural Philippine farmers.']],
-      ritual:[['Warm','Soften a little oil between the palms.'],
-        ['Anoint','Work through hair and skin, with intention.'],
-        ['Breathe','Two slow minutes. Let it absorb.'],
-        ['Keep','The same small care, repeated daily.']] },
-    g:{ brand:'COCO VEDA', kicker:'Live Healthy · Live Well · Live Natural',
-        h1:'Nature, handcrafted into wellness.',
-        sub:'Over 100 cold-processed virgin coconut and plant-based products — Ayurveda-inspired, sustainably sourced from Philippine farmer cooperatives, handcrafted in Manila since 2015.',
-        cta:'Explore the range', svc:['Coconut Oil & Wellness','Hair, Skin & Body','Sustainable Sourcing'],
+    extra:{ quote:'Picked at the perfect moment. Pressed cold. Bottled whole.',
+      shelf:[['Virgin Coconut Oil','Cold-pressed · multi-use · 250ml','₹1,490'],
+        ['Ayurvedic Hair Oil','Strength & shine · botanical infusion','₹990'],
+        ['Coconut Body Balm','Daily nourishment · 150g','₹790']],
+      journal:[['I. The Grove','Where the coconuts grow — slow, sun-fed, unhurried.'],
+        ['II. The Reveal','Halved by hand. White, clean, full of milk.'],
+        ['III. The Press','Stone wheel, no heat. The oil comes on its own.']],
+      mosaic:[['I. The Grove','Smallholder groves along the Philippine coast.'],
+        ['II. The Reveal','Each coconut split fresh on the day of pressing.'],
+        ['III. The Press','Cold-pressed in small batches, never refined.'],
+        ['IV. The Bottle','Amber glass, hand-labeled, traceable to the grove.']],
+      ritual:[['I. Warm','Soften a little oil between the palms.'],
+        ['II. Anoint','Work through hair and skin, with intention.'],
+        ['III. Breathe','Two slow minutes. Let it absorb.'],
+        ['IV. Keep','The same small care, repeated daily.']] },
+    g:{ brand:'COCO VEDA', kicker:'A FILM BY COCO VEDA · MMXXVI',
+        h1:'Picked at the perfect moment.',
+        h1Html:'Picked at the <em style="font-style:italic;color:var(--accent)">perfect</em> moment.',
+        sub:'A single coconut, halved by hand, cold-pressed the same morning. One bottle. One grove. The whole story.',
+        cta:'BUY · ₹1,490', svc:['Coconut Oil & Wellness','Hair, Skin & Body','Sustainable Sourcing'],
         svcd:['Signature cold-processed virgin coconut oil at the heart of every blend.','Massage, hair, facial, body, lip, baby and pet care — over a hundred products.','Direct farmer cooperatives, fair value, a lighter footprint.'],
-        stats:[['100+','Handcrafted products'],['2015','Crafting since'],['1','Single origin']] },
+        stats:[['VI','Chapters'],['I','Single origin'],['100','% cold-pressed']] },
     re:{ brand:'COCO VEDA RETREATS', kicker:'Live Well · By the Coconut Grove',
         h1:'A home, in balance with nature.',
         sub:'A small collection of wellness residences set within working coconut groves — designed around Ayurvedic calm and slow, natural living.',
@@ -562,11 +563,12 @@ function heroRipple(x){
 }
 function heroSoft(x){
   const {c} = x;
+  const h1 = c.h1Html || esc(c.h1);
   return `<header class="hero hero--soft">
   <div class="soft-glow" aria-hidden="true"></div>
   ${wrapOpen}
     <div class="eyebrow" data-reveal>${esc(c.kicker)}</div>
-    <h1>${esc(c.h1)}</h1>
+    <h1>${h1}</h1>
     <p class="lead" data-reveal data-reveal-d="2">${esc(c.sub)}</p>
     <div class="hero-cta" data-reveal data-reveal-d="3">${A('#collection',c.cta+' &rarr;','link-cta')}</div>
   </div>
