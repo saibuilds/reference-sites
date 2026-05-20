@@ -23,6 +23,8 @@ const FONTS = {
   'Archivo Black':'Archivo+Black',
   'DM Sans':'DM+Sans:wght@400;500;700',
   'IBM Plex Mono':'IBM+Plex+Mono:wght@400;600',
+  'Fraunces':'Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700',
+  'JetBrains Mono':'JetBrains+Mono:wght@300;400',
 };
 function fontHref(list){
   const s = [...new Set(list)].map(f=>'family='+FONTS[f]).join('&');
@@ -350,10 +352,18 @@ const STYLES = [
         stats:[['41','Builds'],['7','Awards'],['1','Human']] } },
 
   { id:'13-wellness-botanical', name:'Wellness Botanical', refs:'Coco Veda',
-    vars:{'--bg':'#050302','--surface':'#0E0805','--fg':'#F4E6CF','--accent':'#F5B009','--card':'rgba(244,230,207,.05)','--card-bd':'rgba(244,230,207,.14)'},
-    disp:'Cormorant Garamond', body:'Inter', threeD:false, light:false,
-    layout:['heroSoft','editorialStatement','statsBand','asymGrid','productShelf','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
+    vars:{'--bg':'#050302','--surface':'#0E0805','--fg':'#f4e6cf','--accent':'#e9b26b','--amber':'#de7c0d','--cream':'#f4e6cf','--gold':'#e9b26b','--card':'rgba(244,230,207,.05)','--card-bd':'rgba(244,230,207,.14)'},
+    disp:'Fraunces', body:'Inter', threeD:false, light:false,
+    layout:['heroCinematicFilm','editorialStatement','statsBand','asymGrid','productShelf','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
     extra:{ quote:'Picked at the perfect moment. Pressed cold. Bottled whole.',
+      chapters:[
+        {num:'',  label:'I — A FILM IN SIX CHAPTERS',     h1a:'A film about',           h1b:'oil.',                  italic:'b', side:'right',  marquee:true,  meta:'Six frames. One coconut. Cold-pressed at first light.'},
+        {num:'01',label:'II — THE GROVE',                 h1a:'Picked at the',          h1b:'perfect moment.',       italic:'b', side:'left',   marquee:false, meta:'10°31′N · 76°10′E · HARVEST 04:30'},
+        {num:'02',label:'III — THE REVEAL',               h1a:'Split open.',            h1b:'Nothing added.',        italic:'b', side:'right',  marquee:false, meta:'Halved by hand. White, clean, full of milk.'},
+        {num:'03',label:'IV — THE PRESS',                 h1a:'One press.',             h1b:'No heat. No haste.',    italic:'',  side:'left',   marquee:true,  meta:'Stone wheel · cold method · small batch'},
+        {num:'04',label:'V — THE BOTTLE',                 h1a:'Liquid gold,',           h1b:'sealed in glass.',      italic:'a', side:'right',  marquee:false, meta:'Amber glass · hand-labeled · grove-traceable'},
+        {num:'',  label:'VI — AVAILABLE NOW',             h1a:'Pure.',                  h1b:'Pressed once. Yours.',  italic:'b', side:'center', marquee:true,  meta:'₹ 1,490 · FREE SHIPPING ABOVE ₹ 2,000'}
+      ],
       shelf:[['Virgin Coconut Oil','Cold-pressed · multi-use · 250ml','₹1,490'],
         ['Ayurvedic Hair Oil','Strength & shine · botanical infusion','₹990'],
         ['Coconut Body Balm','Daily nourishment · 150g','₹790']],
@@ -574,6 +584,130 @@ function heroSoft(x){
   </div>
 </header>`;
 }
+function heroCinematicFilm(x){ // coco-veda 6-chapter scroll film
+  const {c,s,ex} = x;
+  const chapters = (ex && ex.chapters) || [];
+  const splitH1 = (a,b,italic) => {
+    const ai = italic==='a';
+    const bi = italic==='b';
+    const aHtml = ai ? `<em class="cv-it">${esc(a)}</em>` : esc(a);
+    const bHtml = bi ? `<em class="cv-it">${esc(b)}</em>` : esc(b);
+    return `${aHtml} <br>${bHtml}`;
+  };
+  const marqueeStrip = `<div class="cv-marquee" aria-hidden="true"><div class="cv-marquee-track">`+
+    Array(4).fill(0).map(()=>`<span>COCO Vēda</span><span>·</span><span>A Film in Six Chapters</span><span>·</span><span>Cold-Pressed Once</span><span>·</span><span>Bottled Whole</span><span>·</span>`).join('')+
+    `</div></div>`;
+  const overlays = chapters.map((ch,i)=>{
+    const pos = ch.side==='left' ? 'cv-pos-left' : ch.side==='right' ? 'cv-pos-right' : 'cv-pos-center';
+    const num = ch.num ? `<div class="cv-num ${i%2?'cv-num-l':'cv-num-r'}">${esc(ch.num)}</div>` : '';
+    const mq  = ch.marquee ? marqueeStrip : '';
+    return `<section class="cv-chapter" data-cv-idx="${i}" aria-label="${esc(ch.label)}">
+  ${mq}
+  ${num}
+  <div class="cv-frame ${pos}">
+    <div class="cv-label">${esc(ch.label)}</div>
+    <h1 class="cv-h1">${splitH1(ch.h1a, ch.h1b, ch.italic)}</h1>
+    <div class="cv-meta">${esc(ch.meta||'')}</div>
+  </div>
+</section>`;
+  }).join('\n');
+  const rail = `<aside class="cv-rail" aria-hidden="true">`+
+    ['I','II','III','IV','V','VI'].map((r,i)=>`<span class="cv-rn" data-cv-rn="${i}">${r}</span>`).join('<i class="cv-hair"></i>')+
+    `</aside>`;
+  const credit = `<aside class="cv-credit" aria-hidden="true">A Film By Coco Vēda · MMXXVI</aside>`;
+  const progress = `<div class="cv-progress" aria-hidden="true">
+    <span class="cv-pn">01 / 06</span>
+    <i class="cv-bar"><i class="cv-fill"></i></i>
+    <span class="cv-pp">00%</span>
+  </div>`;
+  const hint = `<div class="cv-hint" aria-hidden="true">Scroll to begin<i class="cv-hairv"></i></div>`;
+  const canvas = `<canvas class="cv-stage" id="cvStage" aria-hidden="true"></canvas>`;
+  const spacer = `<div class="cv-spacer" style="height:700vh" aria-hidden="true"></div>`;
+  return `<div class="cv-film">
+${canvas}
+${overlays}
+${rail}
+${credit}
+${progress}
+${hint}
+${spacer}
+<style>
+.cv-film{position:relative;background:var(--bg,#050302);color:var(--cream,#f4e6cf);min-height:100vh}
+.cv-stage{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 35%,rgba(233,178,107,.08),transparent 60%),#050302}
+.cv-chapter{position:fixed;inset:0;z-index:20;opacity:0;pointer-events:none;will-change:opacity;display:flex;align-items:center;justify-content:center}
+.cv-chapter[data-cv-idx="0"]{opacity:1}
+.cv-frame{position:relative;padding:clamp(2rem,4vw,3.2rem);max-width:min(90vw,1100px)}
+.cv-pos-left .cv-frame{margin-right:auto;margin-left:0;text-align:left}
+.cv-pos-right .cv-frame{margin-left:auto;margin-right:0;text-align:right}
+.cv-pos-center{justify-content:center}
+.cv-pos-center .cv-frame{text-align:center}
+.cv-pos-left{justify-content:flex-start}
+.cv-pos-right{justify-content:flex-end}
+.cv-label{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(244,230,207,.55);margin-bottom:1.6rem}
+.cv-h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.4rem,7.6vw,8.4rem);line-height:.96;letter-spacing:-.02em;margin:0;color:#f4e6cf;font-variation-settings:"opsz" 144,"SOFT" 50,"WONK" 0}
+.cv-h1 .cv-it{font-style:italic;color:#e9b26b;font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1}
+.cv-meta{margin-top:1.8rem;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,230,207,.55);background:rgba(5,3,2,.42);backdrop-filter:blur(14px) saturate(120%);border:1px solid hsla(37,63%,88%,.06);border-radius:2px;padding:.7rem 1rem;display:inline-block}
+.cv-num{position:absolute;top:5%;font-family:'Fraunces',serif;font-weight:300;font-size:28vw;line-height:1;color:rgba(244,230,207,.06);pointer-events:none;z-index:1;font-feature-settings:"lnum","tnum";font-variation-settings:"opsz" 144,"SOFT" 0}
+.cv-num-l{left:3%}
+.cv-num-r{right:3%}
+.cv-marquee{position:absolute;top:6rem;left:0;right:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);z-index:2}
+.cv-marquee-track{display:inline-flex;gap:1.2rem;align-items:center;white-space:nowrap;animation:cv-marquee 50s linear infinite;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,230,207,.4)}
+@keyframes cv-marquee{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-25%,0,0)}}
+.cv-rail{position:fixed;left:1.4rem;top:50%;transform:translateY(-50%);z-index:30;display:none;flex-direction:column;align-items:center;gap:.6rem;font-family:'Fraunces',serif;font-size:.8rem;letter-spacing:.15em}
+@media(min-width:900px){.cv-rail{display:flex}}
+.cv-rn{color:rgba(244,230,207,.3);transition:color .35s ease}
+.cv-rn.is-active{color:#e9b26b}
+.cv-hair{display:block;width:1px;height:24px;background:rgba(244,230,207,.18)}
+.cv-credit{position:fixed;right:1rem;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;z-index:30;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(244,230,207,.4);display:none}
+@media(min-width:900px){.cv-credit{display:block}}
+.cv-progress{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:1rem;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,230,207,.55)}
+.cv-bar{display:block;width:min(36vw,300px);height:1px;background:rgba(244,230,207,.15);position:relative}
+.cv-fill{display:block;height:100%;width:0;background:#e9b26b;transition:width .12s linear}
+.cv-hint{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,230,207,.5);opacity:.7;transition:opacity .4s ease}
+.cv-hint.is-hide{opacity:0}
+.cv-hairv{display:block;width:1px;height:40px;background:#e9b26b;transform-origin:center;animation:cv-shimmer 2.6s ease-in-out infinite}
+@keyframes cv-shimmer{0%,100%{opacity:.4;transform:scaleY(.4)}50%{opacity:1;transform:scaleY(1)}}
+</style>
+<script>
+(function(){
+  var stage=document.getElementById('cvStage');
+  if(stage){var ctx=stage.getContext('2d'),W=0,H=0,parts=[],T=0;
+    function size(){W=stage.width=innerWidth;H=stage.height=innerHeight;parts=[];for(var i=0;i<48;i++)parts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,s:Math.random()*.25+.05});}
+    function tick(){T++;ctx.clearRect(0,0,W,H);for(var i=0;i<parts.length;i++){var p=parts[i];p.y-=p.s;if(p.y<-4)p.y=H+4;ctx.fillStyle='rgba(233,178,107,'+(.18*Math.sin((T+i*40)*.01)+.22)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fill();}requestAnimationFrame(tick);}
+    size();tick();addEventListener('resize',size);}
+  var chapters=document.querySelectorAll('.cv-chapter'),
+      rails=document.querySelectorAll('[data-cv-rn]'),
+      fill=document.querySelector('.cv-fill'),
+      pn=document.querySelector('.cv-pn'),
+      pp=document.querySelector('.cv-pp'),
+      hint=document.querySelector('.cv-hint'),
+      hero=document.querySelector('.cv-film');
+  if(!chapters.length||!hero)return;
+  function onScroll(){
+    var rect=hero.getBoundingClientRect();
+    var top=Math.max(0,-rect.top);
+    var max=Math.max(1,hero.offsetHeight-innerHeight);
+    var p=Math.min(1,top/max);
+    var seg=1/chapters.length;
+    var active=Math.min(chapters.length-1,Math.floor(p/seg));
+    for(var i=0;i<chapters.length;i++){
+      var local=(p-i*seg)/seg;
+      var o=0;
+      if(i===active){o=local<.15?local/.15:(local>.85?1-(local-.85)/.15:1);}
+      else if(i===active-1&&local<0){o=0;}
+      chapters[i].style.opacity=Math.max(0,Math.min(1,o));
+    }
+    for(var j=0;j<rails.length;j++)rails[j].classList.toggle('is-active',j===active);
+    if(fill)fill.style.width=(p*100).toFixed(1)+'%';
+    if(pn)pn.textContent=('0'+(active+1)).slice(-2)+' / 0'+chapters.length;
+    if(pp)pp.textContent=Math.round(p*100)+'%';
+    if(hint)hint.classList.toggle('is-hide',p>.02);
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</div>`;
+}
 function heroSplit(x){ // aviation — split + clock + ticker
   const {c,s} = x;
   return `<header class="hero hero--split">
@@ -731,7 +865,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,

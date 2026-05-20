@@ -1,0 +1,596 @@
+{
+  "source_brief": "C:\\Users\\Admin\\Downloads\\web automation claude broser to learn rom etc.txt",
+  "source_brief_size": "116507 lines, 3.4 MB",
+  "line_range_covered": "1-2700 (unique reel + style content); confirmed duplicate/non-reel content at offsets 15000, 40000, 80000",
+  "caveats": [
+    "Brief does NOT contain individual Instagram URLs per reel; only the source handle @yasoppuprompts is referenced. instagram_url fields are null.",
+    "Brief is structured by design style buckets (Style 1-12) and production modules (A-P), NOT by per-reel sections with their own HTML templates. html_template_lines points at the matching style block, not a reel-specific block.",
+    "key_snippet_lines reference the style prompt/animation spec block in the brief that most closely matches the reel.",
+    "Library versions reflect the brief's pinned stack (GSAP 3.12.2, Lenis 1.0.42, Three.js r134, Spline viewer 1.0.0, Vanta latest, Lottie 5.12.2, Tailwind v4.3, React 18.2, Vite 5, Framer Motion 10.16.4)."
+  ],
+  "archetype_legend": {
+    "01-luxury-dark": "Luxury dark cinematic",
+    "02-cinematic-video": "Cinematic video hero SaaS",
+    "03-dark-brutalist": "Dark brutalist grunge",
+    "04-3d-spline-webgl": "Interactive Spline / WebGL hero",
+    "05-vaporwave": "Vaporwave / retro neon",
+    "06-soft-editorial": "Soft feminine editorial",
+    "07-saas-glass": "SaaS glassmorphism",
+    "08-architecture-editorial": "Architecture editorial",
+    "09-aviation-luxury": "Aviation / private jet luxury",
+    "10-food-beauty-dtc": "Food / beauty DTC dark",
+    "11-japanese-web3": "Japanese luxury / Web3 amber",
+    "12-experimental-dev": "Experimental dev / tech dark",
+    "13-wellness-botanical": "Wellness botanical",
+    "14-cosmic-platform": "Cosmic / crypto platform",
+    "15-resort-residences": "Resort / residences"
+  },
+  "reels": [
+    {
+      "reel_id": "01-luxury-dark",
+      "instagram_url": null,
+      "source_site": "Cartier-style luxury watch microsite",
+      "style_name": "Luxury Dark — 3D floating product, desert/fog",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "gsap/SplitText", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" },
+        { "name": "three", "version": "r134" },
+        { "name": "@splinetool/viewer", "version": "1.0.0" }
+      ],
+      "hero_technique": "Spline 3D watch floating in desert fog with slow camera dolly, GSAP SplitText char reveal on serif headline, Lenis smooth scroll synced to ScrollTrigger pin",
+      "key_snippet_lines": "37-107",
+      "html_template_lines": "37-107",
+      "palette": {
+        "background": "#0a0a0a",
+        "surface": "#1a1a1a",
+        "accent_gold": "#c9a961",
+        "ivory": "#f5f1e8",
+        "muted": "#7a7268"
+      },
+      "fonts": {
+        "display": "Cormorant Garamond / Playfair Display",
+        "body": "Inter"
+      },
+      "spline_scene_pattern": "https://prod.spline.design/{sceneId}/scene.splinecode",
+      "notes": "Hero uses 100vh splash with <spline-viewer> below a fixed gradient vignette; gold accent only on CTA + price.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "02-cinematic-video",
+      "instagram_url": null,
+      "source_site": "Terminal Logistics — cinematic SaaS",
+      "style_name": "Cinematic SaaS — video hero, truck, golden hour",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Full-bleed muted autoplay <video> with overlay gradient, GSAP timeline fades headline + ticker stats; ScrollTrigger pin releases on 100vh scroll",
+      "key_snippet_lines": "108-175",
+      "html_template_lines": "108-175",
+      "palette": {
+        "background": "#0d0f12",
+        "surface": "#16191e",
+        "accent_amber": "#e8a948",
+        "text": "#f2f2f2",
+        "muted": "#8a8f97"
+      },
+      "fonts": {
+        "display": "Neue Haas Grotesk Display / Inter Tight",
+        "body": "Inter"
+      },
+      "notes": "Video hero with stats ticker bar; secondary section uses three-column logistics KPI grid.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "03-dark-brutalist",
+      "instagram_url": null,
+      "source_site": "Guilty Mind — dark brutalist editorial",
+      "style_name": "Dark Brutalist — cracked glass, all-caps grunge",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "gsap/SplitText", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Massive all-caps display type with clip-path shatter reveal, grainy noise overlay (SVG turbulence), magnetic cursor on links",
+      "key_snippet_lines": "176-235",
+      "html_template_lines": "176-235",
+      "palette": {
+        "background": "#000000",
+        "surface": "#0f0f0f",
+        "accent_blood": "#a8190e",
+        "bone": "#d9d3c7",
+        "muted": "#5a5a5a"
+      },
+      "fonts": {
+        "display": "PP Neue Machina / Druk Wide",
+        "body": "JetBrains Mono"
+      },
+      "notes": "Uses SVG feTurbulence + feDisplacementMap for cracked glass on hover; CSS mix-blend-mode: difference for cursor.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "12-experimental-dev",
+      "instagram_url": null,
+      "source_site": "GSAP Animation Engine showcase",
+      "style_name": "Dev / Tech Dark — neon circular ring, glitch text",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/MotionPathPlugin", "version": "3.12.2" },
+        { "name": "gsap/DrawSVGPlugin", "version": "3.12.2" },
+        { "name": "gsap/SplitText", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "SVG circular ring drawn with DrawSVG, glitch text via SplitText + random char swap on tick, glowing radial neon gradient background",
+      "key_snippet_lines": "319-385",
+      "html_template_lines": "319-385",
+      "palette": {
+        "background": "#05060a",
+        "surface": "#0d0f17",
+        "accent_lime": "#9cf24a",
+        "accent_cyan": "#3df0ff",
+        "text": "#e7eaf2"
+      },
+      "fonts": {
+        "display": "JetBrains Mono / Space Grotesk",
+        "body": "Inter"
+      },
+      "notes": "Background: conic-gradient ring + @property --angle animation. Use mix-blend-mode: screen on glitch layer.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "05-vaporwave",
+      "instagram_url": null,
+      "source_site": "Sidewave Music — vaporwave audio brand",
+      "style_name": "Vaporwave — purple-orange ripple rings",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "three", "version": "r134" },
+        { "name": "vanta", "version": "latest (WAVES)" }
+      ],
+      "hero_technique": "Vanta WAVES background + concentric ripple SVGs scaling on a GSAP infinite timeline; chromatic-aberration headline shadow",
+      "key_snippet_lines": "386-450",
+      "html_template_lines": "386-450",
+      "palette": {
+        "background": "#1a0b2e",
+        "surface": "#2b1247",
+        "accent_purple": "#8a3df0",
+        "accent_orange": "#ff7a3d",
+        "accent_pink": "#ff4da6"
+      },
+      "fonts": {
+        "display": "Monument Extended / VCR OSD Mono",
+        "body": "Space Grotesk"
+      },
+      "notes": "Vanta requires global THREE r134; pin THREE before vanta import or use UMD build.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "11-japanese-web3",
+      "instagram_url": null,
+      "source_site": "OF Sakazuki — Japanese luxury / Web3",
+      "style_name": "Japanese Luxury / Web3 — amber fire parallax",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" },
+        { "name": "lottie-web", "version": "5.12.2" }
+      ],
+      "hero_technique": "Layered parallax (3-plane) of amber fire + ink-wash backgrounds with Lottie embers, vertical kanji ticker on side rail",
+      "key_snippet_lines": "451-510",
+      "html_template_lines": "451-510",
+      "palette": {
+        "background": "#0c0805",
+        "surface": "#1c1108",
+        "accent_amber": "#e07b1f",
+        "accent_crimson": "#9a1414",
+        "ivory": "#f0e6d2"
+      },
+      "fonts": {
+        "display": "Shippori Mincho / Noto Serif JP",
+        "body": "Inter"
+      },
+      "notes": "Vertical writing mode: writing-mode: vertical-rl on side rail.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "10-food-beauty-dtc",
+      "instagram_url": null,
+      "source_site": "Obsidian Dew — dark beauty DTC",
+      "style_name": "Dark Beauty DTC — volcanic product, ingredient grid",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "gsap/Flip", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Centered product PNG with radial volcanic glow, ingredient bento grid below revealed via Flip on scroll-in",
+      "key_snippet_lines": "511-575",
+      "html_template_lines": "511-575",
+      "palette": {
+        "background": "#08070a",
+        "surface": "#15131a",
+        "accent_emerald": "#2f7a5f",
+        "accent_gold": "#b8893a",
+        "text": "#ece6dc"
+      },
+      "fonts": {
+        "display": "Canela / Cormorant",
+        "body": "Inter"
+      },
+      "notes": "Product hover triggers Flip morph from card → fullscreen detail.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "14-cosmic-platform",
+      "instagram_url": null,
+      "source_site": "Hashgraph Ventures — VC/Crypto ocean",
+      "style_name": "VC/Crypto Ocean — ocean video, glowing orb",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "three", "version": "r134" },
+        { "name": "@splinetool/viewer", "version": "1.0.0" }
+      ],
+      "hero_technique": "Looping ocean video hero with centered Spline glowing orb (IcosahedronGeometry + MeshPhysicalMaterial transmission), ACESFilmic tone mapping",
+      "key_snippet_lines": "576-640",
+      "html_template_lines": "576-640",
+      "palette": {
+        "background": "#04111f",
+        "surface": "#0a1d33",
+        "accent_cyan": "#3df0ff",
+        "accent_indigo": "#5c4dff",
+        "text": "#e9f1ff"
+      },
+      "fonts": {
+        "display": "Editorial New / Cormorant",
+        "body": "Inter"
+      },
+      "spline_scene_pattern": "https://prod.spline.design/{sceneId}/scene.splinecode",
+      "notes": "Orb uses transmission: 1, roughness: 0.05; renderer.toneMapping = THREE.ACESFilmicToneMapping.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "04-3d-spline-webgl",
+      "instagram_url": null,
+      "source_site": "Spline Ice Cube — interactive arctic",
+      "style_name": "3D Spline Hero — interactive arctic fog",
+      "libraries": [
+        { "name": "@splinetool/viewer", "version": "1.0.0" },
+        { "name": "@splinetool/react-spline", "version": "2.2.6" },
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Full-viewport <spline-viewer> with mouse-tracking ice cube, scroll-linked camera FOV via Spline events bridge to GSAP",
+      "key_snippet_lines": "236-318",
+      "html_template_lines": "236-318",
+      "palette": {
+        "background": "#e8f1f5",
+        "surface": "#ffffff",
+        "accent_ice": "#7ec8d9",
+        "accent_deep": "#143447",
+        "muted": "#a8b8c2"
+      },
+      "fonts": {
+        "display": "Söhne / Inter Display",
+        "body": "Inter"
+      },
+      "spline_scene_pattern": "https://prod.spline.design/{sceneId}/scene.splinecode",
+      "notes": "Light theme variant; Spline scene exports must include named events for scroll bridge.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "08-architecture-editorial",
+      "instagram_url": null,
+      "source_site": "Fall Line House (19K-like viral reel)",
+      "style_name": "Architecture Editorial — misty cliffside",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "gsap/SplitText", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Cinematic image hero with slow ken-burns scale, oversized serif title with line-by-line mask reveal, sticky side caption",
+      "key_snippet_lines": "641-705",
+      "html_template_lines": "641-705",
+      "palette": {
+        "background": "#f4f1ec",
+        "surface": "#ffffff",
+        "ink": "#1a1a1a",
+        "accent_stone": "#8a8275",
+        "muted": "#bfb8ac"
+      },
+      "fonts": {
+        "display": "Canela Deck / Editorial New",
+        "body": "Inter"
+      },
+      "notes": "Highest engagement reel in the brief; copy lead = 'Where the mountain ends, the house begins.'",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "16-industrial-b2b",
+      "instagram_url": null,
+      "source_site": "Relats / Periflex — industrial B2B",
+      "style_name": "Industrial B2B — close-up product, specs overlay",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Macro product video loop with HUD-style spec annotations animating on scroll via stagger",
+      "key_snippet_lines": "706-770",
+      "html_template_lines": "706-770",
+      "palette": {
+        "background": "#0f1114",
+        "surface": "#1a1d22",
+        "accent_safety": "#ff6b1a",
+        "steel": "#9aa3ad",
+        "text": "#e8ebf0"
+      },
+      "fonts": {
+        "display": "Söhne Mono / IBM Plex Sans",
+        "body": "IBM Plex Sans"
+      },
+      "notes": "HUD lines built with SVG paths animated via DrawSVG; one-color safety-orange accent only.",
+      "new_archetype": true
+    },
+    {
+      "reel_id": "06-soft-editorial",
+      "instagram_url": null,
+      "source_site": "Maison de Synergy — soft feminine",
+      "style_name": "Soft Feminine — blush pink, serif, blooming flower",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" },
+        { "name": "lottie-web", "version": "5.12.2" }
+      ],
+      "hero_technique": "Lottie blooming flower centered behind oversized italic serif headline, parallax petals on scroll",
+      "key_snippet_lines": "771-830",
+      "html_template_lines": "771-830",
+      "palette": {
+        "background": "#fbeee6",
+        "surface": "#ffffff",
+        "accent_blush": "#e8a8a0",
+        "accent_rose": "#c97a7a",
+        "ink": "#3a2a2a"
+      },
+      "fonts": {
+        "display": "Tangerine / Italiana / Cormorant Italic",
+        "body": "Inter"
+      },
+      "notes": "Italic display only; body remains sans for legibility.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "17-services-scroll-list",
+      "instagram_url": null,
+      "source_site": "Generic design agency services site",
+      "style_name": "Services Scroll List — highlight-on-scroll",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Vertical list of services; ScrollTrigger snaps each row to viewport center, active row scales + colorizes while others dim to muted",
+      "key_snippet_lines": "831-890",
+      "html_template_lines": "831-890",
+      "palette": {
+        "background": "#0a0a0a",
+        "surface": "#141414",
+        "accent_lime": "#d4ff3a",
+        "text": "#f0f0f0",
+        "muted": "#4a4a4a"
+      },
+      "fonts": {
+        "display": "PP Neue Montreal / Söhne",
+        "body": "Inter"
+      },
+      "notes": "snap: 1/(rows-1); scrub: true; markers off in prod.",
+      "new_archetype": true
+    },
+    {
+      "reel_id": "18-luxury-cream-gallery",
+      "instagram_url": null,
+      "source_site": "Cartier Watches & Wonders",
+      "style_name": "Ultra-Luxury Cream — gallery room 3D, all white",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@splinetool/viewer", "version": "1.0.0" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "All-cream 3D gallery room (Spline) with camera dolly between plinths on scroll; serif italic display fades per plinth",
+      "key_snippet_lines": "891-950",
+      "html_template_lines": "891-950",
+      "palette": {
+        "background": "#f5f1e8",
+        "surface": "#ffffff",
+        "accent_gold": "#c9a961",
+        "ink": "#1a1a1a",
+        "muted": "#b8b0a0"
+      },
+      "fonts": {
+        "display": "Cormorant Garamond Italic",
+        "body": "Inter"
+      },
+      "spline_scene_pattern": "https://prod.spline.design/{sceneId}/scene.splinecode",
+      "notes": "Cream/ivory inversion of 01-luxury-dark; same library stack.",
+      "new_archetype": true
+    },
+    {
+      "reel_id": "15-cyberpunk-webgl",
+      "instagram_url": null,
+      "source_site": "E.C.H.O. / Active Theory — cyberpunk WebGL",
+      "style_name": "Cyberpunk WebGL — 3D eye portal, crimson neon",
+      "libraries": [
+        { "name": "three", "version": "r134" },
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Custom Three.js scene with TorusKnotGeometry portal + post-processing bloom, crimson neon rim light, mouse-driven camera parallax",
+      "key_snippet_lines": "951-1015",
+      "html_template_lines": "951-1015",
+      "palette": {
+        "background": "#06030a",
+        "surface": "#10071a",
+        "accent_crimson": "#ff2a3d",
+        "accent_violet": "#7a3dff",
+        "text": "#f0e6f5"
+      },
+      "fonts": {
+        "display": "Monument Grotesk / PP Neue Machina",
+        "body": "JetBrains Mono"
+      },
+      "notes": "Requires EffectComposer + UnrealBloomPass from three/examples/jsm/postprocessing.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "10-food-beauty-dtc-caviar",
+      "instagram_url": null,
+      "source_site": "Casper's Caviar — luxury food DTC",
+      "style_name": "Luxury Food DTC — dark texture, popup CTA",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Macro product on textured matte-black plate, sticky bottom-right popup CTA card slides in after 60% scroll",
+      "key_snippet_lines": "1016-1075",
+      "html_template_lines": "1016-1075",
+      "palette": {
+        "background": "#0a0908",
+        "surface": "#161310",
+        "accent_gold": "#d4a84a",
+        "accent_pearl": "#e8e0d0",
+        "text": "#f0ebe0"
+      },
+      "fonts": {
+        "display": "Canela / Tiempos Headline",
+        "body": "Inter"
+      },
+      "notes": "Variant of 10-food-beauty-dtc with warmer gold accents and slide-in CTA pattern.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "15-resort-residences",
+      "instagram_url": null,
+      "source_site": "Villa Maravilha — tropical real estate",
+      "style_name": "Tropical Real Estate — garden door, jungle parallax",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "gsap/SplitText", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Layered jungle PNG parallax (4 planes) opening to reveal villa door; ambient leaves animate on infinite GSAP timeline",
+      "key_snippet_lines": "1076-1140",
+      "html_template_lines": "1076-1140",
+      "palette": {
+        "background": "#0e1a14",
+        "surface": "#16271e",
+        "accent_jade": "#3d8a5f",
+        "accent_terracotta": "#c97a4a",
+        "ivory": "#f0e8d4"
+      },
+      "fonts": {
+        "display": "Canela / Cormorant",
+        "body": "Inter"
+      },
+      "notes": "Layer order back→front: sky, deep jungle, mid foliage, foreground leaves + door.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "09-aviation-luxury",
+      "instagram_url": null,
+      "source_site": "Jesko Jets — private aviation",
+      "style_name": "Private Aviation — split layout, live clock, ticker",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Vertical split — left: looping tarmac video; right: dark panel with live UTC clock (requestAnimationFrame) + scrolling destination ticker",
+      "key_snippet_lines": "1141-1205",
+      "html_template_lines": "1141-1205",
+      "palette": {
+        "background": "#0a0d12",
+        "surface": "#141821",
+        "accent_gold": "#b89456",
+        "text": "#e8ecf2",
+        "muted": "#6b7280"
+      },
+      "fonts": {
+        "display": "Söhne / Neue Haas Unica",
+        "body": "Inter"
+      },
+      "notes": "Ticker uses CSS keyframes translate3d on a duplicated row for seamless loop.",
+      "new_archetype": false
+    },
+    {
+      "reel_id": "19-alpine-residences",
+      "instagram_url": null,
+      "source_site": "Alpine Chalets — ski/mountain real estate",
+      "style_name": "Ski/Mountain RE — snow panoramic, overlapping type",
+      "libraries": [
+        { "name": "gsap", "version": "3.12.2" },
+        { "name": "gsap/ScrollTrigger", "version": "3.12.2" },
+        { "name": "gsap/SplitText", "version": "3.12.2" },
+        { "name": "@studio-freight/lenis", "version": "1.0.42" }
+      ],
+      "hero_technique": "Wide alpine panorama with subtle falling-snow canvas overlay; oversized serif overlaps photo edge, second line slides from opposite direction on scroll",
+      "key_snippet_lines": "1206-1270",
+      "html_template_lines": "1206-1270",
+      "palette": {
+        "background": "#f5f7fa",
+        "surface": "#ffffff",
+        "ink": "#1a232e",
+        "accent_pine": "#2f5a47",
+        "accent_copper": "#b87333"
+      },
+      "fonts": {
+        "display": "Editorial New / Canela",
+        "body": "Inter"
+      },
+      "notes": "Variant of 15-resort-residences with cold palette + snow canvas; reuse parallax timeline.",
+      "new_archetype": true
+    },
+    {
+      "reel_id": "07-saas-glass",
+      "instagram_url": null,
+      "source_site": "JoyJam — creator SaaS",
+      "style_name": "Creator SaaS — flipping cards, 3D phone mockups",
+      "libraries": [
+        { "name": "react", "version": "18.2" },
+        { "name": "framer-motion", "version": "10.16.4" },
+        { "name": "tailwindcss", "version": "4.3" },
+        { "name": "@tailwindcss/vite", "version": "4.3" },
+        { "name": "vite", "version": "5" },
+        { "name": "@splinetool/react-spline", "version": "2.2.6" }
+      ],
+      "hero_technique": "Glassmorphism panel (backdrop-filter: blur(20px)) over animated gradient mesh; 3D phone mockups flip on Framer Motion variants triggered by useInView",
+      "key_snippet_lines": "1271-1340",
+      "html_template_lines": "1271-1340",
+      "palette": {
+        "background": "#0e0a1f",
+        "surface_glass": "rgba(255,255,255,0.06)",
+        "accent_violet": "#7c5cff",
+        "accent_pink": "#ff5ca8",
+        "accent_cyan": "#4dd7ff",
+        "text": "#f3f0ff"
+      },
+      "fonts": {
+        "display": "Inter Display / Söhne",
+        "body": "Inter"
+      },
+      "spline_scene_pattern": "https://prod.spline.design/{sceneId}/scene.splinecode",
+      "notes": "Glass requires border: 1px solid rgba(255,255,255,0.12) + saturate(180%) for the frosted effect.",
+      "new_archetype": false
+    }
+  ]
+}
