@@ -143,7 +143,7 @@ const STYLES = [
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
     vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#E6B873','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
-    layout:['heroVideoGSAP','statsBand','scrollDepth','glassServices','processSteps','quoteCards','ctaBig','footerCols'],
+    layout:['heroVideoGSAP','statsBand','scrollDepth','glassServices','processSteps','carouselClassic','quoteCards','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
       ['Engineer','Lanes, modes and contingencies, costed to the hour.'],
       ['Execute','Live tracking, one point of contact, no surprises.'],
@@ -178,7 +178,7 @@ const STYLES = [
   { id:'04-3d-spline-webgl', name:'3D / WebGL', refs:'Spline Ice Cube · E.C.H.O. · JoyJam',
     vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#5BE0FF','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(91,224,255,.18)'},
     disp:'Space Grotesk', body:'Inter', threeD:true,
-    layout:['r3fScene','howGlass','theatreScene','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
+    layout:['r3fScene','howGlass','theatreScene','babylonHero','rapierPhysicsHero','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
       ['Can we bring our own 3D?','glTF / USDZ in, optimised automatically on upload.'],
       ['What about mobile?','Adaptive LOD; the same scene degrades gracefully to phones.']],
@@ -199,7 +199,7 @@ const STYLES = [
   { id:'05-vaporwave', name:'Vaporwave', refs:'Sidewave',
     vars:{'--bg':'#1A0033','--surface':'#2A0A4A','--fg':'#FDF0FF','--accent':'#FF8C00','--card':'rgba(255,255,255,.06)','--card-bd':'rgba(255,0,110,.32)'},
     disp:'Archivo Black', body:'Space Grotesk', threeD:false, ripple:true,
-    layout:['heroVanta','waveBand','releaseGrid','quoteCards','emailInvert','footerBare'],
+    layout:['heroVanta','waveBand','p5Sketch','releaseGrid','quoteCards','emailInvert','footerBare'],
     extra:{ releases:[['001 · Nightdrive','EP · 6 tracks'],['002 · Afterglow','Single'],
       ['003 · Violet Hour','EP · 5 tracks'],['004 · Signal','Single']] },
     g:{ brand:'SIDEWAVE', kicker:'Sound Collective', h1:'Feel the frequency.',
@@ -255,7 +255,7 @@ const STYLES = [
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
     vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#9B9086','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
-    layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','scrollDepth','aboutTwoPara','contactEmail'],
+    layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','carouselClassic','scrollDepth','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
       ['Water Cabin','West Coast, NZ','2022'],['Stone Court','Engadin, CH','2021']] },
     g:{ brand:'FALL LINE', kicker:'Architecture Studio', h1:'Houses that listen to the land.',
@@ -335,7 +335,7 @@ const STYLES = [
   { id:'12-experimental-dev', name:'Experimental / Dev', refs:'E.C.H.O. · Robert Borghesi · IDOM',
     vars:{'--bg':'#000000','--surface':'#070707','--fg':'#EDEDED','--accent':'#FF3B3B','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,59,59,.26)','--btn-radius':'0'},
     disp:'Space Grotesk', body:'IBM Plex Mono', threeD:true, minimal:true,
-    layout:['heroCanvas','relatsKinetic','caseStudies','rapierPhysicsHero','galleryHorizontalScroll','capabilitySlides','scrollDepth','aboutTwoPara','contactBlack'],
+    layout:['heroCanvas','relatsKinetic','caseStudies','rapierPhysicsHero','theatreScene','galleryHorizontalScroll','capabilitySlides','scrollDepth','aboutTwoPara','contactBlack'],
     extra:{ caps:[['WebGL / Shaders','Custom GLSL, post-processing, 60fps budgets.'],
       ['Motion Systems','GSAP timelines, scroll choreography, transitions.'],
       ['Creative Tooling','Generative systems, editors, internal toys.'],
@@ -1844,6 +1844,12 @@ function page(o){
   const heroHTML = SECTIONS[heroKey](x);
   const restHTML = s.layout.slice(1).map(k=>SECTIONS[k]?SECTIONS[k](x):'').join('\n');
   const hasFooter = /footer|contactEmail|contactBlack|parentheticalFooter/i.test(s.layout[s.layout.length-1]);
+  let body = `${heroHTML}\n<main>\n${restHTML}\n</main>\n${hasFooter?'':footerBare(x)}`;
+  // ---- dedup pass: collapse duplicate Three.js loads + merge importmaps ----
+  body = dedupScripts(body);
+  // strip page-level r128 three load when body already brings a Three build
+  const bodyHasThree = /unpkg\.com\/three@/.test(body) || /\bthree\.module\.js\b/.test(body);
+  const cdnOut = bodyHasThree ? cdn.replace(/<script src="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/three\.js\/r128\/three\.min\.js"><\/script>\s*/g,'') : cdn;
   return `<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
@@ -1853,7 +1859,7 @@ function page(o){
 <link rel="stylesheet" href="${fonts}">
 <link rel="stylesheet" href="../shared/lib.css">
 <style>:root{${cssVars};--font-display:'${s.disp}';--font-body:'${s.body}'}</style>
-${cdn}
+${cdnOut}
 </head>
 <body${bodyCls?` class="${bodyCls}"`:''}${s.vanta?` data-vanta="${s.vanta}"`:''}>
 <div id="loader"><div class="lLogo">${esc(c.brand)}</div><div class="lTrack"><div class="lBar"></div></div></div>
@@ -1861,13 +1867,34 @@ ${cdn}
 <img id="preview-img" alt="" aria-hidden="true">
 ${switcher(prevHref,nextHref,backHref,pos,total)}
 ${navBar(c)}
-${heroHTML}
-<main>
-${restHTML}
-</main>
-${hasFooter?'':footerBare(x)}
+${body}
 <script src="../shared/lib.js"></script>
 </body></html>`;
+}
+
+/* ---- script dedup helper ----
+   1) collapse repeated <script src="..."> for identical URLs (keep first)
+   2) merge all <script type="importmap"> JSON blocks into the first one
+*/
+function dedupScripts(html){
+  // dedupe identical script src tags
+  const seen = new Set();
+  html = html.replace(/<script\s+src="([^"]+)"\s*><\/script>\s*/g, (m, src)=>{
+    if(seen.has(src)) return '';
+    seen.add(src); return m;
+  });
+  // merge importmaps
+  const maps = [];
+  html = html.replace(/<script\s+type="importmap"\s*>\s*(\{[\s\S]*?\})\s*<\/script>\s*/g, (m, json)=>{
+    try{ maps.push(JSON.parse(json)); }catch(e){ /* skip malformed */ }
+    return '';
+  });
+  if(maps.length){
+    const merged = { imports:{} };
+    maps.forEach(o=>{ if(o && o.imports) Object.assign(merged.imports, o.imports); });
+    html = `<script type="importmap">${JSON.stringify(merged)}</script>\n` + html;
+  }
+  return html;
 }
 
 /* ---------- emit ---------- */

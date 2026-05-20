@@ -47,6 +47,59 @@
 </section>
 <main>
 <section class="sec wave-sec" aria-hidden="true"><div class="wrap"><div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div></section>
+<section class="p5-sec" id="phero">
+<div class="p5-holder" id="p5-h"></div>
+<div class="p5-overlay">
+  <div class="p5-eb">Sound Collective</div>
+  <h1 class="p5-h">Feel the frequency.</h1>
+  <p class="p5-p">An audio-reactive label and live event series. Wave after wave after wave.</p>
+</div>
+<style>
+.p5-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.p5-holder{position:absolute;inset:0}
+.p5-holder canvas{display:block;width:100%!important;height:100%!important}
+.p5-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,5vw,5rem);pointer-events:none;max-width:1280px;margin:0 auto;z-index:1}
+.p5-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.p5-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.p5-p{margin:0;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+@media (prefers-reduced-motion: reduce){.p5-holder{display:none}.p5-sec{background:repeating-linear-gradient(45deg, color-mix(in srgb, var(--accent) 8%, transparent) 0 2px, transparent 2px 14px), var(--bg)}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var holder=document.getElementById('p5-h'); if(!holder)return;
+  var tries=0;
+  function start(){
+    if(!window.p5){ if(tries++<60) return setTimeout(start,50); return; }
+    if(!holder.clientWidth||!holder.clientHeight){ if(tries++<60) return setTimeout(start,50); }
+    var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+    new p5(function(p){
+    var pts=[], cnt=480, t=0;
+    p.setup=function(){
+      var w=holder.clientWidth, h=holder.clientHeight;
+      var cv=p.createCanvas(w,h); cv.parent(holder);
+      p.noStroke();
+      for(var i=0;i<cnt;i++)pts.push({x:p.random(w),y:p.random(h),s:p.random(.4,1.6)});
+    };
+    p.windowResized=function(){p.resizeCanvas(holder.clientWidth,holder.clientHeight)};
+    p.draw=function(){
+      p.background(0,0,0,18); t+=.003;
+      p.fill(p.color(accent)); p.noStroke();
+      for(var i=0;i<pts.length;i++){
+        var P=pts[i];
+        var n=p.noise(P.x*.0018,P.y*.0018,t)*p.TWO_PI*2;
+        P.x+=Math.cos(n)*P.s; P.y+=Math.sin(n)*P.s;
+        if(P.x<0||P.x>p.width||P.y<0||P.y>p.height){P.x=p.random(p.width);P.y=p.random(p.height)}
+        p.circle(P.x,P.y,P.s*1.6);
+      }
+    };
+    });
+  }
+  start();
+})();
+</script>
+</section>
 <section class="sec" id="listen"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Releases</div><h2 class="clip-line">Wave after wave.</h2></div><div class="grid g2"><article class="rel" data-reveal data-reveal-d="1"><div class="rel-vis" aria-hidden="true"></div><div><h3>001 · Nightdrive</h3><p class="muted">EP · 6 tracks</p></div></article><article class="rel" data-reveal data-reveal-d="2"><div class="rel-vis" aria-hidden="true"></div><div><h3>002 · Afterglow</h3><p class="muted">Single</p></div></article><article class="rel" data-reveal data-reveal-d="3"><div class="rel-vis" aria-hidden="true"></div><div><h3>003 · Violet Hour</h3><p class="muted">EP · 5 tracks</p></div></article><article class="rel" data-reveal data-reveal-d="4"><div class="rel-vis" aria-hidden="true"></div><div><h3>004 · Signal</h3><p class="muted">Single</p></div></article></div></div></section>
 <section class="sec" id="proof"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>In their words</div><h2 class="clip-line">Trusted where it matters.</h2></div>
   <div class="grid g3"><figure class="qcard" data-reveal data-reveal-d="1"><blockquote>Genre-fluid drops every full moon.</blockquote><figcaption class="muted">— SIDEWAVE</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="2"><blockquote>Immersive audiovisual live shows.</blockquote><figcaption class="muted">— Sound Collective</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="3"><blockquote>Music licensing for film &amp; games.</blockquote><figcaption class="muted">— SIDEWAVE</figcaption></figure></div></div></section>
