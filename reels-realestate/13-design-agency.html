@@ -100,6 +100,72 @@
 </script>
 </section>
 <section class="sec sec--flush" id="cases"><article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('../assets/12-experimental-dev-hero.jpg')"><div class="wrap"><div class="eyebrow">Project 01</div><h2>Selected Work</h2><p class="lead">Interactive listing + map builds.</p></div></article><article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('../assets/12-experimental-dev-hero.jpg')"><div class="wrap"><div class="eyebrow">Project 02</div><h2>Experiments</h2><p class="lead">Open data + 3D neighbourhood toys.</p></div></article><article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('../assets/12-experimental-dev-hero.jpg')"><div class="wrap"><div class="eyebrow">Project 03</div><h2>Availability</h2><p class="lead">Available for select projects.</p></div></article></section>
+<section class="rp-sec" id="rhero">
+<canvas class="rp-canvas" id="rp-c"></canvas>
+<div class="rp-overlay">
+  <div class="rp-eb">Property × Code</div>
+  <h1 class="rp-h">I build property the strange way.</h1>
+  <p class="rp-p">A one-person studio building experimental real-estate experiences — maps, 3D, data.</p>
+  <button class="rp-drop" type="button" id="rp-drop">Drop one</button>
+</div>
+<style>
+.rp-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.rp-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.rp-overlay{position:absolute;inset:auto 0 0 0;padding:clamp(2rem,5vw,5rem);z-index:1;max-width:1280px;margin:0 auto}
+.rp-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.rp-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.rp-p{margin:0 0 1.4rem;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.rp-drop{background:transparent;color:var(--fg);border:1px solid var(--accent);padding:.7rem 1.4rem;font-family:var(--font-body),monospace;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;border-radius:var(--btn-radius,2px);transition:background .25s ease}
+.rp-drop:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.rp-drop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.rp-canvas{display:none}.rp-sec{background:radial-gradient(50% 60% at 50% 60%, color-mix(in srgb, var(--accent) 14%, transparent), transparent), var(--bg)}.rp-drop{display:none}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.158.0/build/three.module.js","@dimforge/rapier3d-compat":"https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.12.0/rapier.es.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import RAPIER from '@dimforge/rapier3d-compat';
+(async function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  await RAPIER.init();
+  var c=document.getElementById('rp-c'); if(!c)return;
+  var ren=new THREE.WebGLRenderer({canvas:c,antialias:true});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  function size(){ren.setSize(c.clientWidth,c.clientHeight,false)}
+  size();
+  var sc=new THREE.Scene();
+  sc.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#050505');
+  var cam=new THREE.PerspectiveCamera(50,c.clientWidth/c.clientHeight,.1,100); cam.position.set(0,4,12); cam.lookAt(0,0,0);
+  sc.add(new THREE.AmbientLight(0xffffff,.55));
+  var d=new THREE.DirectionalLight(0xffffff,1.1); d.position.set(4,8,5); sc.add(d);
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  var w=new RAPIER.World({x:0,y:-9.81,z:0});
+  // floor
+  w.createCollider(RAPIER.ColliderDesc.cuboid(20,.2,20).setRestitution(.3),w.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0,-2,0)));
+  var floor=new THREE.Mesh(new THREE.BoxGeometry(40,.4,40),new THREE.MeshStandardMaterial({color:0x111111,roughness:.9}));
+  floor.position.y=-2; sc.add(floor);
+  var bodies=[];
+  function drop(){
+    var size=.5+Math.random()*.4;
+    var rb=w.createRigidBody(RAPIER.RigidBodyDesc.dynamic().setTranslation((Math.random()-.5)*4,6,(Math.random()-.5)*2));
+    w.createCollider(RAPIER.ColliderDesc.cuboid(size/2,size/2,size/2).setRestitution(.35),rb);
+    var m=new THREE.Mesh(new THREE.BoxGeometry(size,size,size),new THREE.MeshStandardMaterial({color:accent,metalness:.5,roughness:.3}));
+    sc.add(m); bodies.push({rb:rb,m:m});
+    if(bodies.length>40){var old=bodies.shift(); w.removeRigidBody(old.rb); sc.remove(old.m); old.m.geometry.dispose(); old.m.material.dispose();}
+  }
+  for(var i=0;i<8;i++)drop();
+  var btn=document.getElementById('rp-drop'); btn&&btn.addEventListener('click',drop);
+  function tick(){
+    w.step();
+    bodies.forEach(function(b){var t=b.rb.translation(),r=b.rb.rotation();b.m.position.set(t.x,t.y,t.z);b.m.quaternion.set(r.x,r.y,r.z,r.w);});
+    ren.render(sc,cam); requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',function(){size();cam.aspect=c.clientWidth/c.clientHeight;cam.updateProjectionMatrix();});
+  requestAnimationFrame(tick);
+})();
+</script>
+</section>
 <section class="hs-sec" id="gallery">
 <div class="hs-pin">
   <div class="hs-head"><div class="hs-eb">Property × Code</div><h2 class="hs-h2">Selected works.</h2></div>

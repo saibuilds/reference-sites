@@ -38,6 +38,44 @@
 <main>
 <section class="sec stack-sec" id="how"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The product</div><h2 class="clip-line">Everything, in one place.</h2></div>
   <div class="stack"><article class="stack-c" data-reveal style="--i:0"><div class="eyebrow">01</div><h3>Pages</h3><p class="muted">Beautiful pages live in minutes.</p></article><article class="stack-c" data-reveal style="--i:1"><div class="eyebrow">02</div><h3>Payments</h3><p class="muted">Take money globally, day one.</p></article><article class="stack-c" data-reveal style="--i:2"><div class="eyebrow">03</div><h3>Insights</h3><p class="muted">Know exactly what converts.</p></article></div></div></section>
+<section class="bh-sec" id="bhero">
+<canvas class="bh-canvas" id="bh-c"></canvas>
+<div class="bh-overlay">
+  <div class="bh-eb">Creator Platform</div>
+  <h1 class="bh-h">Ship your idea this weekend.</h1>
+  <p class="bh-p">The all-in-one toolkit for creators — pages, payments and analytics, no code required.</p>
+</div>
+<style>
+.bh-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.bh-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:none}
+.bh-overlay{position:absolute;inset:auto 0 0 0;padding:clamp(2rem,5vw,5rem);z-index:1;pointer-events:none;max-width:1280px;margin:0 auto}
+.bh-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.bh-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.bh-p{margin:0;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+@media (prefers-reduced-motion: reduce){.bh-canvas{display:none}.bh-sec{background:radial-gradient(60% 50% at 50% 40%, color-mix(in srgb, var(--accent) 18%, transparent), transparent), var(--bg)}}
+</style>
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var c=document.getElementById('bh-c'); if(!c||!window.BABYLON)return;
+  var eng=new BABYLON.Engine(c,true,{preserveDrawingBuffer:false,stencil:false,antialias:true});
+  var s=new BABYLON.Scene(eng); s.clearColor=new BABYLON.Color4(0,0,0,1);
+  var cam=new BABYLON.ArcRotateCamera('c',Math.PI/2,Math.PI/2.2,5,BABYLON.Vector3.Zero(),s);
+  cam.attachControl(c,true); cam.lowerRadiusLimit=4; cam.upperRadiusLimit=8; cam.wheelDeltaPercentage=0;
+  var hemi=new BABYLON.HemisphericLight('h',new BABYLON.Vector3(0,1,0),s); hemi.intensity=.4;
+  var dir=new BABYLON.DirectionalLight('d',new BABYLON.Vector3(-1,-2,-1),s); dir.intensity=.8;
+  var m=new BABYLON.PBRMaterial('m',s);
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  m.albedoColor=BABYLON.Color3.FromHexString(accent);
+  m.metallic=.7; m.roughness=.25; m.emissiveColor=BABYLON.Color3.FromHexString(accent).scale(.05);
+  var sph=BABYLON.MeshBuilder.CreateSphere('s',{diameter:2.2,segments:64},s); sph.material=m;
+  var t=0;
+  eng.runRenderLoop(function(){ t+=.005; sph.rotation.y=t; sph.position.y=Math.sin(t*2)*.08; s.render(); });
+  window.addEventListener('resize',function(){eng.resize()});
+})();
+</script>
+</section>
 <section class="r3f-hero">
 <canvas class="r3f-canvas" id="r3fCanvas" aria-hidden="true"></canvas>
 <div class="r3f-grid" aria-hidden="true"></div>

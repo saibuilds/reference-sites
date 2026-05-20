@@ -82,10 +82,36 @@ After every STYLES/SECTIONS edit:
 4. Conventional commit message
 5. Push to `claude/setup-mcp-api-keys-t4GTr` only
 
-## Pending experiments
+## 2026-05 — Four new renderers landed (Babylon / p5 / Theatre / Rapier)
 
-- A/B test r3fScene vs babylonHero vs p5Sketch on reels 01-cartier, 03-guilty-mind, 11-relats-periflex
-- Add theatreScene renderer (Theatre.js keyframe Three.js)
-- Add rapierPhysicsHero renderer (Rapier WASM physics + Three.js)
+All four are self-contained, CDN-loaded, prefers-reduced-motion compliant, fall back to a static gradient when motion is disabled:
+
+- **babylonHero** — Babylon.js 6 ArcRotateCamera + PBR sphere using CSS `--accent` for albedo. Loaded via `cdn.babylonjs.com/babylon.js`. Wired into archetype 07 SaaS Glass as mid-page showcase.
+- **p5Sketch** — p5.js 1.9 flow-field with perlin noise drift. 480 particles, fade-trail via `background(0,0,0,18)`. Loaded via `cdn.jsdelivr.net/npm/p5@1.9.0`. Wired into archetype 14 Cosmic Engine.
+- **theatreScene** — Three.js icosahedron driven by a 4-keyframe timeline I authored manually (lieu of Theatre.js Studio runtime — keeps payload thin). Uses Three.js importmap from unpkg. Smoothstep easing between KFs based on section scroll progress. Wired into archetype 04 3D-WebGL.
+- **rapierPhysicsHero** — Rapier 0.12 WASM physics + Three.js. Floor + dynamic cubes, "Drop one" button to spawn more (cap 40, GC oldest). Loaded via `cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.12.0/rapier.es.js`. Wired into archetype 12 Experimental Dev.
+
+All registered in SECTIONS. Output verified: bh-canvas / p5-holder / th-canvas / rp-canvas markers present in 4 styles pages (04, 07, 12, 14).
+
+## 2026-05 — Importmap pattern for module-script renderers
+
+`theatreScene` and `rapierPhysicsHero` are ES-module scripts. Each section emits its own `<script type="importmap">` BEFORE the `<script type="module">`. Multiple importmaps per page work in modern Chromium / Firefox / Safari, but each must come BEFORE the first module script that uses its mappings. Since renderers are appended in layout order, this works as long as the importmap-using renderer doesn't precede another module that needs the same import.
+
+## 2026-05 — Carouseling rendering safety
+
+Each carouselClassic IIFE binds via `document.currentScript.closest('.cx-sec')` — guarantees each instance binds to its own section. No global namespace pollution. Same pattern used in all new renderers (`document.getElementById('bh-c')` etc., where ID is unique per renderer-emit). Could collide if same renderer is wired twice in one page — currently not the case, but flagged for future awareness.
+
+## 2026-05 — Pending experiments
+
+- A/B test r3fScene vs babylonHero vs p5Sketch vs theatreScene vs rapierPhysicsHero on reels 01-cartier, 03-guilty-mind, 11-relats-periflex — visit each page in Chrome MCP, screenshot, score on (load weight, visual impact, scroll-feel, motion-reduce fallback quality)
 - Higgsfield → first/last WebP frames for BG suite 6-chapter film
-- Hunyuan 3D → GLB for archetype 08 cliff-house hero
+- Hunyuan 3D → GLB for archetype 08 cliff-house hero, archetype 15 resort villa
+- Open Instagram reels in Chrome MCP, screenshot side-by-side vs our outputs (each archetype vs the IG reel it references)
+- Nano Banana / Google Stitch — generate texture maps for Three.js MeshStandardMaterial.map, save to assets/textures/
+
+## 2026-05 — User correction log (CRITICAL)
+
+- "make sure not add parllax scroll as well" → INITIAL READ: remove parallax. CORRECTED IMMEDIATELY by next user message "no i sayd add parallax as well" → KEEP and ADD parallax. **Lesson**: when user message has typos that could swing meaning either direction ("add" vs "not add"), wait one more confirmation before destructive edits. Building MORE is reversible; deleting and re-adding wastes a cycle.
+- "use codex or other claude subagents to get done dont use local ai for now" → never delegate to ollama / local-general-worker on this repo until further notice.
+- "find ways and get this done make sure the sites are exactly the same as the ones shown in the insta reels" → primary success metric is visual parity with the IG reel each archetype was named after.
+- "Never merge to main. Push only to claude/setup-mcp-api-keys-t4GTr" → branch discipline is hard rule.

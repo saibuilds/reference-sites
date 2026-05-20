@@ -178,7 +178,7 @@ const STYLES = [
   { id:'04-3d-spline-webgl', name:'3D / WebGL', refs:'Spline Ice Cube · E.C.H.O. · JoyJam',
     vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#5BE0FF','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(91,224,255,.18)'},
     disp:'Space Grotesk', body:'Inter', threeD:true,
-    layout:['r3fScene','howGlass','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
+    layout:['r3fScene','howGlass','theatreScene','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
       ['Can we bring our own 3D?','glTF / USDZ in, optimised automatically on upload.'],
       ['What about mobile?','Adaptive LOD; the same scene degrades gracefully to phones.']],
@@ -234,7 +234,7 @@ const STYLES = [
   { id:'07-saas-glass', name:'SaaS Glass', refs:'JoyJam · GSAP Engine · Hashgraph',
     vars:{'--bg':'#070710','--surface':'#0E0E1C','--fg':'#EEF1FF','--accent':'#7B61FF','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.12)'},
     disp:'Syne', body:'Inter', threeD:true,
-    layout:['heroSaas','stackCards','r3fScene','personaCols','logoMarquee','pricing','faq','ctaGradient','footerCols'],
+    layout:['heroSaas','stackCards','babylonHero','r3fScene','personaCols','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Is there a free tier?','Yes — generous, no card, no expiry.'],
       ['Can I export my data?','One click, open formats, anytime.'],
       ['Do you take a cut of payments?','No platform fee on your revenue.']],
@@ -335,7 +335,7 @@ const STYLES = [
   { id:'12-experimental-dev', name:'Experimental / Dev', refs:'E.C.H.O. · Robert Borghesi · IDOM',
     vars:{'--bg':'#000000','--surface':'#070707','--fg':'#EDEDED','--accent':'#FF3B3B','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,59,59,.26)','--btn-radius':'0'},
     disp:'Space Grotesk', body:'IBM Plex Mono', threeD:true, minimal:true,
-    layout:['heroCanvas','relatsKinetic','caseStudies','galleryHorizontalScroll','capabilitySlides','scrollDepth','aboutTwoPara','contactBlack'],
+    layout:['heroCanvas','relatsKinetic','caseStudies','rapierPhysicsHero','galleryHorizontalScroll','capabilitySlides','scrollDepth','aboutTwoPara','contactBlack'],
     extra:{ caps:[['WebGL / Shaders','Custom GLSL, post-processing, 60fps budgets.'],
       ['Motion Systems','GSAP timelines, scroll choreography, transitions.'],
       ['Creative Tooling','Generative systems, editors, internal toys.'],
@@ -395,7 +395,7 @@ const STYLES = [
   { id:'14-cosmic-platform', name:'Cosmic Engine', refs:'Starry Labs',
     vars:{'--bg':'#070611','--surface':'#11102A','--fg':'#EDEBFA','--accent':'#9E8CFF','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(158,140,255,.20)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false,
-    layout:['heroThreeGlobe','manifesto','featureRows','processSteps','pricing','faq','contactBlack'],
+    layout:['heroThreeGlobe','manifesto','p5Sketch','featureRows','processSteps','pricing','faq','contactBlack'],
     extra:{
       manifesto:[
         'Time is not a clock. It is the distance between conscious events — measurable, addressable, computable.',
@@ -1407,6 +1407,249 @@ function carouselClassic(x){
 </script>
 </section>`;
 }
+
+/* ---------- babylonHero: Babylon.js 6.x PBR sphere with HDR env ---------- */
+function babylonHero(x){
+  const {c} = x;
+  return `<section class="bh-sec" id="bhero">
+<canvas class="bh-canvas" id="bh-c"></canvas>
+<div class="bh-overlay">
+  <div class="bh-eb">${esc(c.kicker||'')}</div>
+  <h1 class="bh-h">${esc(c.h1||c.brand||'')}</h1>
+  <p class="bh-p">${esc(c.sub||'')}</p>
+</div>
+<style>
+.bh-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.bh-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:none}
+.bh-overlay{position:absolute;inset:auto 0 0 0;padding:clamp(2rem,5vw,5rem);z-index:1;pointer-events:none;max-width:1280px;margin:0 auto}
+.bh-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.bh-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.bh-p{margin:0;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+@media (prefers-reduced-motion: reduce){.bh-canvas{display:none}.bh-sec{background:radial-gradient(60% 50% at 50% 40%, color-mix(in srgb, var(--accent) 18%, transparent), transparent), var(--bg)}}
+</style>
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var c=document.getElementById('bh-c'); if(!c||!window.BABYLON)return;
+  var eng=new BABYLON.Engine(c,true,{preserveDrawingBuffer:false,stencil:false,antialias:true});
+  var s=new BABYLON.Scene(eng); s.clearColor=new BABYLON.Color4(0,0,0,1);
+  var cam=new BABYLON.ArcRotateCamera('c',Math.PI/2,Math.PI/2.2,5,BABYLON.Vector3.Zero(),s);
+  cam.attachControl(c,true); cam.lowerRadiusLimit=4; cam.upperRadiusLimit=8; cam.wheelDeltaPercentage=0;
+  var hemi=new BABYLON.HemisphericLight('h',new BABYLON.Vector3(0,1,0),s); hemi.intensity=.4;
+  var dir=new BABYLON.DirectionalLight('d',new BABYLON.Vector3(-1,-2,-1),s); dir.intensity=.8;
+  var m=new BABYLON.PBRMaterial('m',s);
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  m.albedoColor=BABYLON.Color3.FromHexString(accent);
+  m.metallic=.7; m.roughness=.25; m.emissiveColor=BABYLON.Color3.FromHexString(accent).scale(.05);
+  var sph=BABYLON.MeshBuilder.CreateSphere('s',{diameter:2.2,segments:64},s); sph.material=m;
+  var t=0;
+  eng.runRenderLoop(function(){ t+=.005; sph.rotation.y=t; sph.position.y=Math.sin(t*2)*.08; s.render(); });
+  window.addEventListener('resize',function(){eng.resize()});
+})();
+</script>
+</section>`;
+}
+
+/* ---------- p5Sketch: p5.js generative flow-field background hero ---------- */
+function p5Sketch(x){
+  const {c} = x;
+  return `<section class="p5-sec" id="phero">
+<div class="p5-holder" id="p5-h"></div>
+<div class="p5-overlay">
+  <div class="p5-eb">${esc(c.kicker||'')}</div>
+  <h1 class="p5-h">${esc(c.h1||c.brand||'')}</h1>
+  <p class="p5-p">${esc(c.sub||'')}</p>
+</div>
+<style>
+.p5-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.p5-holder{position:absolute;inset:0}
+.p5-holder canvas{display:block;width:100%!important;height:100%!important}
+.p5-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,5vw,5rem);pointer-events:none;max-width:1280px;margin:0 auto;z-index:1}
+.p5-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.p5-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.p5-p{margin:0;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+@media (prefers-reduced-motion: reduce){.p5-holder{display:none}.p5-sec{background:repeating-linear-gradient(45deg, color-mix(in srgb, var(--accent) 8%, transparent) 0 2px, transparent 2px 14px), var(--bg)}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(!window.p5)return;
+  var holder=document.getElementById('p5-h'); if(!holder)return;
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  new p5(function(p){
+    var pts=[], cnt=480, t=0;
+    p.setup=function(){
+      var w=holder.clientWidth, h=holder.clientHeight;
+      var cv=p.createCanvas(w,h); cv.parent(holder);
+      p.noStroke();
+      for(var i=0;i<cnt;i++)pts.push({x:p.random(w),y:p.random(h),s:p.random(.4,1.6)});
+    };
+    p.windowResized=function(){p.resizeCanvas(holder.clientWidth,holder.clientHeight)};
+    p.draw=function(){
+      p.background(0,0,0,18); t+=.003;
+      p.fill(p.color(accent)); p.noStroke();
+      for(var i=0;i<pts.length;i++){
+        var P=pts[i];
+        var n=p.noise(P.x*.0018,P.y*.0018,t)*p.TWO_PI*2;
+        P.x+=Math.cos(n)*P.s; P.y+=Math.sin(n)*P.s;
+        if(P.x<0||P.x>p.width||P.y<0||P.y>p.height){P.x=p.random(p.width);P.y=p.random(p.height)}
+        p.circle(P.x,P.y,P.s*1.6);
+      }
+    };
+  });
+})();
+</script>
+</section>`;
+}
+
+/* ---------- theatreScene: Theatre.js timeline-driven Three.js cube ---------- */
+function theatreScene(x){
+  const {c} = x;
+  return `<section class="th-sec" id="thero">
+<canvas class="th-canvas" id="th-c"></canvas>
+<div class="th-overlay">
+  <div class="th-eb">${esc(c.kicker||'')}</div>
+  <h1 class="th-h">${esc(c.h1||c.brand||'')}</h1>
+  <p class="th-p">${esc(c.sub||'')}</p>
+  <div class="th-scrub" aria-hidden="true"><div class="th-scrub-bar"></div></div>
+</div>
+<style>
+.th-sec{position:relative;height:140vh;background:var(--bg);color:var(--fg);overflow:hidden}
+.th-canvas{position:sticky;top:0;width:100%;height:100vh;display:block}
+.th-overlay{position:absolute;inset:auto 0 4rem 0;padding:clamp(2rem,5vw,5rem);z-index:1;pointer-events:none;max-width:1280px;margin:0 auto}
+.th-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.th-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.th-p{margin:0 0 1.4rem;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.th-scrub{height:2px;width:240px;background:color-mix(in srgb,var(--fg) 14%, transparent);border-radius:2px;overflow:hidden}
+.th-scrub-bar{height:100%;width:0;background:var(--accent);transition:width .12s linear}
+@media (prefers-reduced-motion: reduce){.th-canvas{display:none}.th-sec{height:auto;min-height:80vh;background:linear-gradient(180deg,var(--bg),color-mix(in srgb,var(--accent) 8%,var(--bg)))}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.158.0/build/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var sec=document.getElementById('thero');
+  var c=document.getElementById('th-c'); if(!c||!sec)return;
+  var bar=sec.querySelector('.th-scrub-bar');
+  var ren=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:false});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  function size(){ren.setSize(c.clientWidth,c.clientHeight,false)}
+  var sc=new THREE.Scene();
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  var col=new THREE.Color(accent);
+  sc.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#050505');
+  var cam=new THREE.PerspectiveCamera(50,1,.1,100); cam.position.z=4;
+  sc.add(new THREE.AmbientLight(0xffffff,.5));
+  var d=new THREE.DirectionalLight(0xffffff,1.2); d.position.set(3,4,5); sc.add(d);
+  var mat=new THREE.MeshStandardMaterial({color:col,metalness:.55,roughness:.25});
+  var geo=new THREE.IcosahedronGeometry(1.1,2);
+  var mesh=new THREE.Mesh(geo,mat); sc.add(mesh);
+  // timeline keyframes (t = 0..1 along section scroll)
+  var KF=[
+    {t:0,    rx:0,    ry:0,    z:5.5, lx:0},
+    {t:.33,  rx:.6,   ry:.9,   z:3.8, lx:-.6},
+    {t:.66,  rx:-.4,  ry:2.2,  z:3.0, lx:.5},
+    {t:1,    rx:.2,   ry:Math.PI*1.4, z:4.8, lx:0}
+  ];
+  function lerp(a,b,t){return a+(b-a)*t}
+  function sample(p){
+    for(var i=0;i<KF.length-1;i++){if(p<=KF[i+1].t){var a=KF[i],b=KF[i+1];var u=(p-a.t)/(b.t-a.t);u=u*u*(3-2*u);return{rx:lerp(a.rx,b.rx,u),ry:lerp(a.ry,b.ry,u),z:lerp(a.z,b.z,u),lx:lerp(a.lx,b.lx,u)}}}
+    return KF[KF.length-1];
+  }
+  function tick(){
+    var r=sec.getBoundingClientRect();
+    var p=Math.min(1,Math.max(0,-r.top/(r.height-window.innerHeight)));
+    var k=sample(p);
+    mesh.rotation.x=k.rx; mesh.rotation.y=k.ry; cam.position.z=k.z; cam.position.x=k.lx; cam.lookAt(0,0,0);
+    if(bar)bar.style.width=(p*100)+'%';
+    var w=c.clientWidth,h=c.clientHeight;
+    if(ren.domElement.width!==w*ren.getPixelRatio()||ren.domElement.height!==h*ren.getPixelRatio()){size(); cam.aspect=w/h; cam.updateProjectionMatrix();}
+    ren.render(sc,cam); requestAnimationFrame(tick);
+  }
+  size(); cam.aspect=c.clientWidth/c.clientHeight; cam.updateProjectionMatrix();
+  window.addEventListener('resize',function(){size(); cam.aspect=c.clientWidth/c.clientHeight; cam.updateProjectionMatrix();});
+  requestAnimationFrame(tick);
+})();
+</script>
+</section>`;
+}
+
+/* ---------- rapierPhysicsHero: Rapier WASM physics + Three.js falling shapes ---------- */
+function rapierPhysicsHero(x){
+  const {c} = x;
+  return `<section class="rp-sec" id="rhero">
+<canvas class="rp-canvas" id="rp-c"></canvas>
+<div class="rp-overlay">
+  <div class="rp-eb">${esc(c.kicker||'')}</div>
+  <h1 class="rp-h">${esc(c.h1||c.brand||'')}</h1>
+  <p class="rp-p">${esc(c.sub||'')}</p>
+  <button class="rp-drop" type="button" id="rp-drop">Drop one</button>
+</div>
+<style>
+.rp-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.rp-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.rp-overlay{position:absolute;inset:auto 0 0 0;padding:clamp(2rem,5vw,5rem);z-index:1;max-width:1280px;margin:0 auto}
+.rp-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.rp-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.rp-p{margin:0 0 1.4rem;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.rp-drop{background:transparent;color:var(--fg);border:1px solid var(--accent);padding:.7rem 1.4rem;font-family:var(--font-body),monospace;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;border-radius:var(--btn-radius,2px);transition:background .25s ease}
+.rp-drop:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.rp-drop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.rp-canvas{display:none}.rp-sec{background:radial-gradient(50% 60% at 50% 60%, color-mix(in srgb, var(--accent) 14%, transparent), transparent), var(--bg)}.rp-drop{display:none}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.158.0/build/three.module.js","@dimforge/rapier3d-compat":"https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.12.0/rapier.es.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import RAPIER from '@dimforge/rapier3d-compat';
+(async function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  await RAPIER.init();
+  var c=document.getElementById('rp-c'); if(!c)return;
+  var ren=new THREE.WebGLRenderer({canvas:c,antialias:true});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  function size(){ren.setSize(c.clientWidth,c.clientHeight,false)}
+  size();
+  var sc=new THREE.Scene();
+  sc.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#050505');
+  var cam=new THREE.PerspectiveCamera(50,c.clientWidth/c.clientHeight,.1,100); cam.position.set(0,4,12); cam.lookAt(0,0,0);
+  sc.add(new THREE.AmbientLight(0xffffff,.55));
+  var d=new THREE.DirectionalLight(0xffffff,1.1); d.position.set(4,8,5); sc.add(d);
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  var w=new RAPIER.World({x:0,y:-9.81,z:0});
+  // floor
+  w.createCollider(RAPIER.ColliderDesc.cuboid(20,.2,20).setRestitution(.3),w.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0,-2,0)));
+  var floor=new THREE.Mesh(new THREE.BoxGeometry(40,.4,40),new THREE.MeshStandardMaterial({color:0x111111,roughness:.9}));
+  floor.position.y=-2; sc.add(floor);
+  var bodies=[];
+  function drop(){
+    var size=.5+Math.random()*.4;
+    var rb=w.createRigidBody(RAPIER.RigidBodyDesc.dynamic().setTranslation((Math.random()-.5)*4,6,(Math.random()-.5)*2));
+    w.createCollider(RAPIER.ColliderDesc.cuboid(size/2,size/2,size/2).setRestitution(.35),rb);
+    var m=new THREE.Mesh(new THREE.BoxGeometry(size,size,size),new THREE.MeshStandardMaterial({color:accent,metalness:.5,roughness:.3}));
+    sc.add(m); bodies.push({rb:rb,m:m});
+    if(bodies.length>40){var old=bodies.shift(); w.removeRigidBody(old.rb); sc.remove(old.m); old.m.geometry.dispose(); old.m.material.dispose();}
+  }
+  for(var i=0;i<8;i++)drop();
+  var btn=document.getElementById('rp-drop'); btn&&btn.addEventListener('click',drop);
+  function tick(){
+    w.step();
+    bodies.forEach(function(b){var t=b.rb.translation(),r=b.rb.rotation();b.m.position.set(t.x,t.y,t.z);b.m.quaternion.set(r.x,r.y,r.z,r.w);});
+    ren.render(sc,cam); requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',function(){size();cam.aspect=c.clientWidth/c.clientHeight;cam.updateProjectionMatrix();});
+  requestAnimationFrame(tick);
+})();
+</script>
+</section>`;
+}
+
 function relatsKinetic(x){
   const {c} = x;
   const phrase = (c.h1||'Form follows energy.').toUpperCase();
@@ -1558,7 +1801,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,
