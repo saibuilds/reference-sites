@@ -131,6 +131,31 @@ Pages probed and outcome:
 
 **Chrome MCP capability note**: there is no `mcp__Claude_in_Chrome__screenshot` tool. To inspect a built page visually we have: `navigate`, `javascript_tool` (DOM probe via evaluated expression), `read_console_messages`, `read_page`, `get_page_text`, `find` (natural-language element search). Pixel-level comparison requires `mcp__computer-use__screenshot` on the desktop (after `request_access` for Chrome).
 
+**CRITICAL gotcha — verification machine has prefers-reduced-motion:reduce ON**. Every motion-gated renderer (p5Sketch, theatreScene, Rapier physics, scrollDepth GSAP) correctly takes the static-fallback path. So `document.querySelectorAll('canvas')` will NOT count canvases that only mount inside a motion-IIFE. False-positive "missing canvas" reports on this machine. Two fixes:
+1. To validate motion on this machine: use Chrome DevTools `Rendering` panel → `Emulate CSS media feature prefers-reduced-motion → no-preference`. JS patch of `matchMedia` does NOT defeat the CSS-level `@media (prefers-reduced-motion: reduce)` rule because CSS evaluates against OS pref directly.
+2. To validate motion in code: code-review the IIFE guard + CSS fallback exist and look correct.
+
+Verified motion-gated correctness by code review for: p5Sketch (line 1477), theatreScene (line 1527 CSS), rapierPhysicsHero (line 1604), babylonHero (line 1430), r3fScene (existing). All correctly guard + fall back to static gradient.
+
+## 2026-05 — A/B perf scores (cold load, lab-served via `python -m http.server 8765`)
+
+| Page | Headline renderer | DCL ms | Loaded ms | Scripts | Notes |
+|---|---|---|---|---|---|
+| 01 luxury-dark | scrollDepth + carouselClassic | 159 | 193 | 5 | Lightest fully-loaded reel page |
+| 04 3D-WebGL | r3fScene + theatreScene | 367 | 411 | 8 | **Loads three.min.js + ESM Three twice** (lib.js + importmap) — wasteful |
+| 07 SaaS Glass | babylonHero + r3fScene | 346 | 512 | 9 | **Three + Babylon both loaded** — heaviest, intentional showcase |
+| 12 Experimental Dev | rapierPhysicsHero | 92 | 102 | 5 | Fastest 3D page — Rapier WASM lazy-loads |
+| 14 Cosmic Platform | p5Sketch | 99 | 135 | 5 | Fastest creative-coding page |
+
+**Winners by archetype (preliminary, perf-only)**:
+- 01-cartier feel → keep current (scrollDepth + carousel)
+- 03-guilty-mind / brutalist → r3fScene (already wired)
+- 04 / 07 / 11 → theatreScene wins on weight, babylonHero wins on PBR quality
+- 12 experimental → rapierPhysicsHero (uniquely interactive)
+- 14 cosmic / generative → p5Sketch (perfect-fit)
+
+**Tech-debt finding**: Three.js loaded twice on pages 04/07. Should consolidate to single import — either drop the global `three.min.js` from lib.js when archetype uses ESM Three, or drop the importmap when global is enough. Tracked as separate task.
+
 ## 2026-05 — Browser_batch is mandatory
 
 System reminded after single-call navigate: "Prefer browser_batch — significantly faster." Batched the 4-page renderer audit in one call (5 actions) instead of 8 separate calls. ~5x speedup. Use `browser_batch` whenever ≥2 chained browser actions are predictable.

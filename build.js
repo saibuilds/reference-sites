@@ -1475,10 +1475,13 @@ function p5Sketch(x){
 <script>
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  if(!window.p5)return;
   var holder=document.getElementById('p5-h'); if(!holder)return;
-  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
-  new p5(function(p){
+  var tries=0;
+  function start(){
+    if(!window.p5){ if(tries++<60) return setTimeout(start,50); return; }
+    if(!holder.clientWidth||!holder.clientHeight){ if(tries++<60) return setTimeout(start,50); }
+    var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+    new p5(function(p){
     var pts=[], cnt=480, t=0;
     p.setup=function(){
       var w=holder.clientWidth, h=holder.clientHeight;
@@ -1498,7 +1501,9 @@ function p5Sketch(x){
         p.circle(P.x,P.y,P.s*1.6);
       }
     };
-  });
+    });
+  }
+  start();
 })();
 </script>
 </section>`;
