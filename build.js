@@ -123,7 +123,7 @@ const STYLES = [
   { id:'01-luxury-dark', name:'Luxury Dark', refs:'Cartier · Obsidian Dew · OF Sakazuki',
     vars:{'--bg':'#0A0A0A','--surface':'#161412','--fg':'#F5F0E8','--accent':'#C9A96E','--card':'rgba(255,255,255,.035)','--card-bd':'rgba(201,169,110,.18)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:true,
-    layout:['heroProduct','storyQuote','productGrid','materialScroll','footerBare'],
+    layout:['heroProduct','storyQuote','productGrid','scrollReel','materialScroll','footerBare'],
     extra:{ quote:'A single complication. A lifetime of restraint.',
       materials:[['Sapphire','Grown over months, faceted by hand to a single axis of light.'],
         ['Rose Gold','Cast in-house from a 5N alloy, warmed by a trace of copper.'],
@@ -216,7 +216,7 @@ const STYLES = [
   { id:'06-soft-editorial', name:'Soft Editorial', refs:'Maison de Synergy · Trendship · Bisous',
     vars:{'--bg':'#FAF0EB','--surface':'#F3E2D8','--fg':'#2C1810','--accent':'#B07D63','--card':'rgba(255,255,255,.6)','--card-bd':'rgba(44,24,16,.12)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
-    layout:['heroSoft','editorialStatement','asymGrid','philosophy','journalCards','newsletter','footerBare'],
+    layout:['heroSoft','editorialStatement','asymGrid','philosophy','scrollReel','journalCards','newsletter','footerBare'],
     extra:{ journal:[['On Slowness','Why a season should take a season.'],
       ['The Cutting Room','Notes from the atelier floor.'],
       ['Kept, Not Consumed','A wardrobe measured in years.']] },
@@ -255,7 +255,7 @@ const STYLES = [
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
     vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#9B9086','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
-    layout:['heroPhoto','projectIndex','caseStudies','aboutTwoPara','contactEmail'],
+    layout:['heroBuildSequence','projectIndex','scrollReel','caseStudies','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
       ['Water Cabin','West Coast, NZ','2022'],['Stone Court','Engadin, CH','2021']] },
     g:{ brand:'FALL LINE', kicker:'Architecture Studio', h1:'Houses that listen to the land.',
@@ -272,7 +272,7 @@ const STYLES = [
   { id:'09-aviation-luxury', name:'Aviation Luxury', refs:'Jesko Jets · Sakazuki',
     vars:{'--bg':'#0C0C0C','--surface':'#161514','--fg':'#F5F2ED','--accent':'#C9A96E','--card':'rgba(245,242,237,.04)','--card-bd':'rgba(201,169,110,.20)','--btn-radius':'999px'},
     disp:'Space Grotesk', body:'Inter', threeD:false, clock:true,
-    layout:['heroSplit','routesGrid','fleetStrip','membership','applyForm','footerBare'],
+    layout:['heroSplit','routesGrid','scrollReel','fleetStrip','membership','applyForm','footerBare'],
     extra:{ tiers:[['Charter','On-demand','Any city pair, wheels-up in 4h'],
       ['Jet Card','Fixed hours','Locked rate, zero surprises'],
       ['Management','Full ownership','Crew, maintenance, charter revenue']] },
@@ -431,7 +431,7 @@ const STYLES = [
   { id:'15-resort-residences', name:'Resort & Residences', refs:'Aman · Six Senses',
     vars:{'--bg':'#F5F0E6','--surface':'#E9DFC9','--fg':'#2B2620','--accent':'#9C7B4A','--card':'rgba(255,255,255,.60)','--card-bd':'rgba(43,38,32,.14)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
-    layout:['heroSoft','editorialStatement','asymGrid','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
+    layout:['heroBuildSequence','editorialStatement','asymGrid','scrollReel','ritualSteps','ingredientMosaic','journalCards','newsletter','footerBare'],
     extra:{
       ritual:[
         ['Arrive','A boat, not a lobby. The day slows on the water.'],
@@ -836,6 +836,194 @@ function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
 </style>
 </section>`;
 }
+function heroBuildSequence(x){ // scroll-driven 3D build + animated brand monogram
+  const {c,s} = x;
+  // monogram = first letter of each brand word, max 2 — embedded as SVG line-draw plate, then re-anchored as a glass plaque inside the 3D scene
+  const brand = (c.brand||'STUDIO').replace(/[^A-Za-z ]/g,'').trim();
+  const initials = (brand.split(/\s+/).map(w=>w[0]).join('').slice(0,2) || brand.slice(0,2)).toUpperCase();
+  const accent = s.vars['--accent'] || '#c9a961';
+  return `<section class="bs-hero">
+<canvas class="bs-bg" id="bsBg" aria-hidden="true"></canvas>
+<canvas class="bs-3d" id="bs3d" aria-hidden="true"></canvas>
+<div class="bs-vignette" aria-hidden="true"></div>
+<div class="bs-monogram" aria-hidden="true">
+  <svg viewBox="0 0 240 240" width="120" height="120">
+    <defs><linearGradient id="bsG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${accent}" stop-opacity=".95"/>
+      <stop offset="1" stop-color="${accent}" stop-opacity=".55"/></linearGradient></defs>
+    <circle class="bs-p bs-p1" cx="120" cy="120" r="104" fill="none" stroke="url(#bsG)" stroke-width="1.2"/>
+    <circle class="bs-p bs-p2" cx="120" cy="120" r="78"  fill="none" stroke="${accent}" stroke-width=".8" stroke-opacity=".55"/>
+    <text class="bs-p bs-mn" x="120" y="142" text-anchor="middle" font-family="${s.disp||'serif'}" font-size="92" font-weight="300" fill="${accent}" letter-spacing="-2">${esc(initials)}</text>
+    <line class="bs-p bs-l1" x1="38"  y1="208" x2="202" y2="208" stroke="${accent}" stroke-opacity=".4" stroke-width=".8"/>
+  </svg>
+  <div class="bs-wordmark">${esc(brand)}</div>
+</div>
+<div class="bs-frame">
+  <div class="bs-eyebrow">${esc(c.kicker)}</div>
+  <h1 class="bs-h1">${esc(c.h1)}</h1>
+  <p class="bs-sub">${esc(c.sub)}</p>
+  <div class="bs-cta-row"><a class="bs-cta" href="#story">${esc(c.cta)} &rarr;</a><span class="bs-chap" id="bsChap">I &middot; Site</span></div>
+</div>
+<div class="bs-rail" aria-hidden="true">
+  <i class="bs-r bs-r1 is-on"></i><span>I</span>
+  <i class="bs-r bs-r2"></i><span>II</span>
+  <i class="bs-r bs-r3"></i><span>III</span>
+  <i class="bs-r bs-r4"></i><span>IV</span>
+</div>
+<div class="bs-spacer" aria-hidden="true"></div>
+<style>
+.bs-hero{position:relative;height:420vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8);overflow:visible}
+.bs-bg,.bs-3d{position:sticky;top:0;left:0;width:100vw;height:100vh;display:block}
+.bs-bg{position:fixed;inset:0;z-index:0}
+.bs-3d{position:fixed;inset:0;z-index:1}
+.bs-vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 60%,transparent 35%,rgba(0,0,0,.5) 75%,#000 100%),linear-gradient(180deg,rgba(0,0,0,.6),transparent 26%,transparent 70%,rgba(0,0,0,.55))}
+.bs-monogram{position:fixed;top:clamp(1.2rem,3vw,2.4rem);left:clamp(1.2rem,3vw,2.4rem);z-index:5;display:flex;align-items:center;gap:.9rem;opacity:0;animation:bsFadeMono 1.6s .35s ease forwards}
+.bs-monogram svg{display:block;flex-shrink:0}
+.bs-monogram .bs-p{stroke-dasharray:700;stroke-dashoffset:700;animation:bsDraw 2.4s ease forwards}
+.bs-monogram .bs-p1{animation-delay:.35s}
+.bs-monogram .bs-p2{animation-delay:.95s;stroke-dasharray:520;stroke-dashoffset:520}
+.bs-monogram .bs-l1{animation-delay:1.4s;stroke-dasharray:200;stroke-dashoffset:200}
+.bs-monogram .bs-mn{opacity:0;animation:bsType 1.4s 1.6s ease forwards;stroke-dasharray:0}
+.bs-wordmark{font-family:var(--font-display),serif;font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;color:${accent};opacity:0;transform:translateX(-8px);animation:bsSlide 1.1s 1.9s ease forwards}
+@keyframes bsDraw{to{stroke-dashoffset:0}}
+@keyframes bsType{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
+@keyframes bsSlide{to{opacity:1;transform:none}}
+@keyframes bsFadeMono{to{opacity:1}}
+.bs-frame{position:fixed;left:clamp(1.4rem,4vw,3rem);bottom:clamp(2rem,6vw,4rem);max-width:min(60vw,560px);z-index:4}
+.bs-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:${accent};margin-bottom:1.2rem;opacity:0;animation:bsUp .9s 2.2s ease forwards}
+.bs-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5.6rem);line-height:.98;margin:0 0 1.2rem;letter-spacing:-.02em;opacity:0;animation:bsUp 1.2s 2.4s ease forwards}
+.bs-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.7);margin:0 0 1.6rem;max-width:38ch;opacity:0;animation:bsUp 1.1s 2.7s ease forwards}
+.bs-cta-row{display:flex;align-items:center;gap:1.2rem;opacity:0;animation:bsUp 1.1s 3s ease forwards}
+.bs-cta{display:inline-block;padding:.85rem 1.6rem;border:1px solid ${accent};color:${accent};border-radius:999px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .25s ease}
+.bs-cta:hover{background:${accent};color:#000}
+.bs-chap{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,232,.5);transition:color .4s ease}
+@keyframes bsUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
+.bs-rail{position:fixed;right:clamp(1.2rem,3vw,2.4rem);top:50%;transform:translateY(-50%);z-index:4;display:none;flex-direction:column;gap:.7rem;align-items:flex-end;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.6rem;letter-spacing:.32em;color:rgba(245,241,232,.4)}
+@media(min-width:900px){.bs-rail{display:flex}}
+.bs-rail span{display:inline-block;width:1.6rem;text-align:right}
+.bs-r{display:inline-block;width:18px;height:1px;background:rgba(245,241,232,.25);margin-right:.5rem;vertical-align:middle;transition:all .3s ease}
+.bs-r.is-on{background:${accent};width:28px}
+</style>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script>
+(function(){
+  // ambient palette wash on cv-bg style canvas
+  var bg=document.getElementById('bsBg');if(bg){var b=bg.getContext('2d'),BW=0,BH=0,t=0;
+    function sz(){BW=bg.width=innerWidth;BH=bg.height=innerHeight;}sz();addEventListener('resize',sz);
+    (function tk(){t++;b.fillStyle='rgba(8,8,12,.18)';b.fillRect(0,0,BW,BH);
+      for(var i=0;i<4;i++){var x=BW*(.2+.18*i)+Math.sin(t*.003+i)*60,y=BH*(.5+.12*Math.cos(t*.004+i*1.7));
+        var g=b.createRadialGradient(x,y,0,x,y,260);g.addColorStop(0,'${accent}33');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,260,0,6.28);b.fill();}
+      requestAnimationFrame(tk);})();}
+  if(typeof THREE==='undefined')return;
+  var cv=document.getElementById('bs3d');if(!cv)return;
+  var R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+  var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,.1,200);
+  function sz(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix();}sz();addEventListener('resize',sz);
+  S.add(new THREE.HemisphereLight(0xfff2dc,0x141414,.55));
+  var key=new THREE.DirectionalLight(0xffe5c0,1.2);key.position.set(8,12,6);key.castShadow=true;S.add(key);
+  var ground=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:0x14110d,roughness:.92}));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;S.add(ground);
+  // build group — assembles in 4 chapters
+  var G=new THREE.Group();S.add(G);
+  // chapter II — foundation slab
+  var slab=new THREE.Mesh(new THREE.BoxGeometry(7,.4,5),new THREE.MeshStandardMaterial({color:0x2a241c,roughness:.75}));slab.position.y=.2;slab.castShadow=true;slab.receiveShadow=true;slab.scale.set(.001,.001,.001);G.add(slab);
+  // chapter III — 4 walls
+  var WALL=new THREE.MeshStandardMaterial({color:0xe8dcc0,roughness:.6});
+  var walls=[];
+  function mkWall(w,h,d,x,y,z){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),WALL);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;m.scale.y=.001;G.add(m);walls.push(m);return m;}
+  mkWall(7,2.6,.18,0,1.7,-2.4);
+  mkWall(7,2.6,.18,0,1.7,2.4);
+  mkWall(.18,2.6,4.8,-3.4,1.7,0);
+  mkWall(.18,2.6,4.8,3.4,1.7,0);
+  // chapter IV — roof + plaque (the brand monogram, dropped in last)
+  var roof=new THREE.Mesh(new THREE.BoxGeometry(7.6,.18,5.4),new THREE.MeshStandardMaterial({color:0x1a1714,roughness:.6,metalness:.2}));roof.position.y=3.1;roof.castShadow=true;roof.scale.set(.001,1,.001);G.add(roof);
+  // glass plaque holding the BRAND monogram inside the build
+  var plaqueGeom=new THREE.PlaneGeometry(2.6,1.4);
+  var pcv=document.createElement('canvas');pcv.width=512;pcv.height=256;
+  var pc=pcv.getContext('2d');pc.fillStyle='rgba(0,0,0,0)';pc.fillRect(0,0,512,256);
+  pc.strokeStyle='${accent}';pc.lineWidth=2;pc.beginPath();pc.arc(256,128,108,0,6.283);pc.stroke();
+  pc.font='600 132px ${s.disp||'serif'}';pc.fillStyle='${accent}';pc.textAlign='center';pc.textBaseline='middle';pc.fillText('${initials}',256,138);
+  pc.font='600 22px ${s.disp||'serif'}';pc.letterSpacing='8px';pc.fillStyle='rgba(245,241,232,.78)';pc.fillText('${brand}',256,236);
+  var ptex=new THREE.CanvasTexture(pcv);ptex.anisotropy=4;
+  var plaque=new THREE.Mesh(plaqueGeom,new THREE.MeshPhysicalMaterial({map:ptex,transparent:true,transmission:.55,roughness:.18,thickness:.4,clearcoat:1,opacity:0}));plaque.position.set(0,1.7,2.51);G.add(plaque);
+  var lamp=new THREE.PointLight(0xffd9a0,0,8,2);lamp.position.set(0,2.4,0);G.add(lamp);
+  // ground markers — site outline drawn first
+  var outline=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(7,5)),new THREE.LineBasicMaterial({color:0xc9a961,transparent:true,opacity:0}));outline.rotation.x=-Math.PI/2;outline.position.y=.02;S.add(outline);
+  // expose stage hook for scroll-driven chapters
+  var chap=document.getElementById('bsChap'),rails=document.querySelectorAll('.bs-r'),labels=['I · Site','II · Slab','III · Frame','IV · Brand'];
+  window.__bsStage=function(p){
+    // 4 chapters: 0-.25 site, .25-.5 slab, .5-.75 frame, .75-1 roof+plaque
+    var c1=Math.max(0,Math.min(1,p/.25));
+    var c2=Math.max(0,Math.min(1,(p-.25)/.25));
+    var c3=Math.max(0,Math.min(1,(p-.5)/.25));
+    var c4=Math.max(0,Math.min(1,(p-.75)/.25));
+    outline.material.opacity=c1*.9;
+    slab.scale.set(c2,c2,c2);
+    walls.forEach(function(w,i){var k=Math.max(0,Math.min(1,c3-i*.05));w.scale.y=k;w.position.y=1.7-(1-k)*1.5;});
+    roof.scale.set(c4,1,c4);
+    plaque.material.opacity=Math.pow(c4,1.6)*.95;
+    lamp.intensity=c4*1.6;
+    var idx=p<.25?0:p<.5?1:p<.75?2:3;
+    if(chap)chap.textContent=labels[idx];
+    rails.forEach(function(r,i){r.classList.toggle('is-on',i===idx);});
+    // camera arc
+    var ang=p*Math.PI*.9-.2,rad=11-p*2;
+    C.position.set(Math.sin(ang)*rad,3.5+p*1.4,Math.cos(ang)*rad);
+    C.lookAt(0,1.4,0);
+  };
+  window.__bsStage(0);
+  function loop(){R.render(S,C);requestAnimationFrame(loop);}loop();
+  function onScroll(){var sec=document.querySelector('.bs-hero');if(!sec)return;var r=sec.getBoundingClientRect();var top=Math.max(0,-r.top);var max=Math.max(1,sec.offsetHeight-innerHeight);window.__bsStage(Math.min(1,top/max));}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</section>`;
+}
+function scrollReel(x){ // reusable scroll-driven crossfade reel — 4 frames
+  const {c} = x;
+  const frames = (c.svc||[]).slice(0,4).map((t,i)=>({title:t,sub:(c.svcd||[])[i]||''}));
+  while(frames.length<4) frames.push({title:c.h1||'',sub:c.sub||''});
+  return `<section class="rl-sec" aria-label="Reel">
+  <div class="rl-stage">
+    <canvas class="rl-bg" id="rlBg" aria-hidden="true"></canvas>
+    ${frames.map((f,i)=>`<div class="rl-frame" data-rl-idx="${i}">
+      <div class="rl-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="rl-title">${esc(f.title)}</div>
+      <div class="rl-sub">${esc(f.sub)}</div>
+    </div>`).join('')}
+    <div class="rl-progress" aria-hidden="true"><i class="rl-fill"></i></div>
+  </div>
+  <div class="rl-spacer" aria-hidden="true"></div>
+  <style>
+  .rl-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+  .rl-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .rl-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+  .rl-frame{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.6rem;opacity:0;transform:scale(.98);transition:opacity .6s ease,transform .9s ease;z-index:2}
+  .rl-frame[data-rl-idx="0"]{opacity:1;transform:none}
+  .rl-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;color:var(--accent,#c9a961);margin-bottom:1.6rem}
+  .rl-title{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.6rem,7vw,6.8rem);line-height:.98;letter-spacing:-.02em;max-width:18ch;margin-bottom:1.4rem}
+  .rl-sub{font-size:1.05rem;line-height:1.55;color:rgba(245,241,232,.7);max-width:50ch}
+  .rl-progress{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:3;width:min(30vw,260px);height:1px;background:rgba(245,241,232,.18)}
+  .rl-fill{display:block;height:100%;width:0;background:var(--accent,#c9a961);transition:width .12s linear}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.rl-sec');if(!sec)return;
+    var frames=sec.querySelectorAll('.rl-frame'),fill=sec.querySelector('.rl-fill');
+    var bg=sec.querySelector('.rl-bg');
+    if(bg){var b=bg.getContext('2d'),BW=0,BH=0,t=0;
+      function sz(){BW=bg.width=bg.clientWidth;BH=bg.height=bg.clientHeight;}sz();addEventListener('resize',sz);
+      (function tk(){t++;b.clearRect(0,0,BW,BH);for(var i=0;i<5;i++){var x=BW*(.18+.16*i)+Math.sin(t*.004+i)*40,y=BH*(.5+.18*Math.cos(t*.003+i*1.2));var g=b.createRadialGradient(x,y,0,x,y,180);g.addColorStop(0,'rgba(201,169,110,.18)');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,180,0,6.28);b.fill();}requestAnimationFrame(tk);})();}
+    function on(){
+      var r=sec.getBoundingClientRect(),top=Math.max(0,-r.top),max=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,top/max);
+      var seg=1/frames.length,active=Math.min(frames.length-1,Math.floor(p/seg));
+      for(var i=0;i<frames.length;i++){var l=(p-i*seg)/seg,o=0,sc=.98;if(i===active){o=l<.18?l/.18:(l>.82?1-(l-.82)/.18:1);sc=.98+.02*o;}frames[i].style.opacity=Math.max(0,Math.min(1,o));frames[i].style.transform='scale('+sc+')';}
+      if(fill)fill.style.width=(p*100).toFixed(1)+'%';
+    }
+    addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>`;
+}
 function galleryHorizontalScroll(x){ // pinned horizontal scroll panel
   const {c,ex} = x;
   const g = (ex && ex.gallery && ex.gallery.length) ? ex.gallery : (c.svc||[]).map((t,i)=>[t, (c.svcd||[])[i]||'']);
@@ -1027,7 +1215,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,galleryHorizontalScroll,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,galleryHorizontalScroll,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,

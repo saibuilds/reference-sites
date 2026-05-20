@@ -43,6 +43,59 @@
   <div class="sec-head"><div class="eyebrow" data-reveal>The house</div><h2 class="clip-line">What we keep rare.</h2></div>
   <div class="grid g3"><article class="prod" data-reveal data-reveal-d="1"><span class="prod-i">01</span><h3>Curated Listings</h3><p class="muted">A handful of significant residences, never mass-listed.</p></article><article class="prod" data-reveal data-reveal-d="2"><span class="prod-i">02</span><h3>Bespoke Search</h3><p class="muted">Your brief, matched across months of market intelligence.</p></article><article class="prod" data-reveal data-reveal-d="3"><span class="prod-i">03</span><h3>Private Showing</h3><p class="muted">By appointment with a single dedicated advisor.</p></article></div>
 </div></section>
+<section class="rl-sec" aria-label="Reel">
+  <div class="rl-stage">
+    <canvas class="rl-bg" id="rlBg" aria-hidden="true"></canvas>
+    <div class="rl-frame" data-rl-idx="0">
+      <div class="rl-num">01</div>
+      <div class="rl-title">Curated Listings</div>
+      <div class="rl-sub">A handful of significant residences, never mass-listed.</div>
+    </div><div class="rl-frame" data-rl-idx="1">
+      <div class="rl-num">02</div>
+      <div class="rl-title">Bespoke Search</div>
+      <div class="rl-sub">Your brief, matched across months of market intelligence.</div>
+    </div><div class="rl-frame" data-rl-idx="2">
+      <div class="rl-num">03</div>
+      <div class="rl-title">Private Showing</div>
+      <div class="rl-sub">By appointment with a single dedicated advisor.</div>
+    </div><div class="rl-frame" data-rl-idx="3">
+      <div class="rl-num">04</div>
+      <div class="rl-title">Architecture, distilled to its purest form.</div>
+      <div class="rl-sub">A curated portfolio of architecturally significant homes. Discreet. Considered. Rare.</div>
+    </div>
+    <div class="rl-progress" aria-hidden="true"><i class="rl-fill"></i></div>
+  </div>
+  <div class="rl-spacer" aria-hidden="true"></div>
+  <style>
+  .rl-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+  .rl-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .rl-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+  .rl-frame{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.6rem;opacity:0;transform:scale(.98);transition:opacity .6s ease,transform .9s ease;z-index:2}
+  .rl-frame[data-rl-idx="0"]{opacity:1;transform:none}
+  .rl-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;color:var(--accent,#c9a961);margin-bottom:1.6rem}
+  .rl-title{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.6rem,7vw,6.8rem);line-height:.98;letter-spacing:-.02em;max-width:18ch;margin-bottom:1.4rem}
+  .rl-sub{font-size:1.05rem;line-height:1.55;color:rgba(245,241,232,.7);max-width:50ch}
+  .rl-progress{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:3;width:min(30vw,260px);height:1px;background:rgba(245,241,232,.18)}
+  .rl-fill{display:block;height:100%;width:0;background:var(--accent,#c9a961);transition:width .12s linear}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.rl-sec');if(!sec)return;
+    var frames=sec.querySelectorAll('.rl-frame'),fill=sec.querySelector('.rl-fill');
+    var bg=sec.querySelector('.rl-bg');
+    if(bg){var b=bg.getContext('2d'),BW=0,BH=0,t=0;
+      function sz(){BW=bg.width=bg.clientWidth;BH=bg.height=bg.clientHeight;}sz();addEventListener('resize',sz);
+      (function tk(){t++;b.clearRect(0,0,BW,BH);for(var i=0;i<5;i++){var x=BW*(.18+.16*i)+Math.sin(t*.004+i)*40,y=BH*(.5+.18*Math.cos(t*.003+i*1.2));var g=b.createRadialGradient(x,y,0,x,y,180);g.addColorStop(0,'rgba(201,169,110,.18)');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,180,0,6.28);b.fill();}requestAnimationFrame(tk);})();}
+    function on(){
+      var r=sec.getBoundingClientRect(),top=Math.max(0,-r.top),max=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,top/max);
+      var seg=1/frames.length,active=Math.min(frames.length-1,Math.floor(p/seg));
+      for(var i=0;i<frames.length;i++){var l=(p-i*seg)/seg,o=0,sc=.98;if(i===active){o=l<.18?l/.18:(l>.82?1-(l-.82)/.18:1);sc=.98+.02*o;}frames[i].style.opacity=Math.max(0,Math.min(1,o));frames[i].style.transform='scale('+sc+')';}
+      if(fill)fill.style.width=(p*100).toFixed(1)+'%';
+    }
+    addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
 <section class="sec sec--flush" id="material"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Material</div><h2 class="clip-line">Made of few things, chosen well.</h2></div></div>
   <div class="hscroll"><div class="hscroll-track"><article class="hpanel" data-reveal data-reveal-d="1"><div class="hpanel-n">01</div><h3>Sapphire</h3><p class="muted">Grown over months, faceted by hand to a single axis of light.</p></article><article class="hpanel" data-reveal data-reveal-d="2"><div class="hpanel-n">02</div><h3>Rose Gold</h3><p class="muted">Cast in-house from a 5N alloy, warmed by a trace of copper.</p></article><article class="hpanel" data-reveal data-reveal-d="3"><div class="hpanel-n">03</div><h3>Alligator</h3><p class="muted">Matte Louisiana skin, hand-burnished, stitched in silk.</p></article><article class="hpanel" data-reveal data-reveal-d="4"><div class="hpanel-n">04</div><h3>Movement</h3><p class="muted">618 components, assembled and adjusted by one watchmaker.</p></article></div></div>
 </section>
