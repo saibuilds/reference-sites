@@ -34,6 +34,36 @@
 <main>
 <section class="sec" id="collection"><div class="wrap narrow" style="text-align:center">
   <p class="ed-statement" data-reveal>A boutique advisory for design-led homes — matched slowly, considered carefully.</p></div></section>
+<section class="hs-sec" id="gallery">
+<div class="hs-pin">
+  <div class="hs-head"><div class="hs-eb">Boutique Real Estate</div><h2 class="hs-h2">Selected works.</h2></div>
+  <div class="hs-track">
+    <article class="hs-panel"><div class="hs-num">01</div><h3 class="hs-pt">Curated Homes</h3><p class="hs-pp">Design-forward residences, hand-selected.</p></article><article class="hs-panel"><div class="hs-num">02</div><h3 class="hs-pt">Concierge Search</h3><p class="hs-pp">A calm, guided buying experience.</p></article><article class="hs-panel"><div class="hs-num">03</div><h3 class="hs-pt">The Journal</h3><p class="hs-pp">Notes on neighbourhoods and living well.</p></article>
+  </div>
+</div>
+<style>
+.hs-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+.hs-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;padding:clamp(2rem,5vw,4rem) 0}
+.hs-head{padding:0 clamp(1.4rem,4vw,3rem);margin-bottom:2.4rem;flex-shrink:0}
+.hs-eb{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#c9a961);margin-bottom:.8rem}
+.hs-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2rem,4vw,3.6rem);line-height:1;margin:0;letter-spacing:-.02em}
+.hs-track{display:flex;gap:clamp(1rem,2vw,2rem);padding:0 clamp(1.4rem,4vw,3rem);flex:1;align-items:stretch;will-change:transform}
+.hs-panel{flex:0 0 min(70vw,520px);background:var(--card,rgba(245,241,232,.04));border:1px solid var(--card-bd,rgba(245,241,232,.12));border-radius:6px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.hs-num{font-family:var(--font-display),serif;font-size:3rem;font-weight:300;color:var(--accent,#c9a961);line-height:1}
+.hs-pt{font-family:var(--font-display),serif;font-size:1.6rem;font-weight:400;margin:0;line-height:1.1}
+.hs-pp{font-size:.95rem;color:rgba(245,241,232,.65);margin:0;line-height:1.5}
+</style>
+<script>
+(function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+  gsap.registerPlugin(ScrollTrigger);
+  var track=document.querySelector('.hs-track');if(!track)return;
+  var sec=document.querySelector('.hs-sec');
+  var dist=track.scrollWidth-innerWidth+48;
+  gsap.to(track,{x:-dist,ease:'none',scrollTrigger:{trigger:sec,start:'top top',end:'+='+dist,scrub:1}});
+})();
+</script>
+</section>
 <section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The collection</div><h2 class="clip-line">Considered, not seasonal.</h2></div>
   <div class="asym"><figure class="asym-i asym-1" data-reveal data-reveal-d="1"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>01</span> Curated Homes</figcaption></figure><figure class="asym-i asym-2" data-reveal data-reveal-d="2"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>02</span> Concierge Search</figcaption></figure><figure class="asym-i asym-3" data-reveal data-reveal-d="3"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>03</span> The Journal</figcaption></figure></div></div></section>
 <section class="sec" id="about"><div class="wrap narrow">
