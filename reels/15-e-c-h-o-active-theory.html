@@ -37,6 +37,68 @@
   <span class="scrollcue" aria-hidden="true">Scroll</span>
 </header>
 <main>
+<section class="rk-sec" id="kinetic">
+<div class="rk-stage">
+  <div class="rk-grid" aria-hidden="true"></div>
+  <div class="rk-eb">Immersive WebGL</div>
+  <h2 class="rk-h"><span class="rk-c" style="--i:0">I</span><span class="rk-c rk-c--sp" style="--i:1">&nbsp;</span><span class="rk-c" style="--i:2">B</span><span class="rk-c" style="--i:3">U</span><span class="rk-c" style="--i:4">I</span><span class="rk-c" style="--i:5">L</span><span class="rk-c" style="--i:6">D</span><span class="rk-c rk-c--sp" style="--i:7">&nbsp;</span><span class="rk-c" style="--i:8">T</span><span class="rk-c" style="--i:9">H</span><span class="rk-c" style="--i:10">E</span><span class="rk-c rk-c--sp" style="--i:11">&nbsp;</span><span class="rk-c" style="--i:12">S</span><span class="rk-c" style="--i:13">T</span><span class="rk-c" style="--i:14">R</span><span class="rk-c" style="--i:15">A</span><span class="rk-c" style="--i:16">N</span><span class="rk-c" style="--i:17">G</span><span class="rk-c" style="--i:18">E</span><span class="rk-c rk-c--sp" style="--i:19">&nbsp;</span><span class="rk-c" style="--i:20">O</span><span class="rk-c" style="--i:21">N</span><span class="rk-c" style="--i:22">E</span><span class="rk-c" style="--i:23">S</span><span class="rk-c" style="--i:24">.</span></h2>
+  <div class="rk-italic" aria-hidden="true">relats</div>
+  <p class="rk-p">Independent creative developer. WebGL, motion and the experiments other studios will not ship.</p>
+  <div class="rk-meta">
+    <span>01 — Disperse</span><span>02 — Settle</span><span>03 — Hold</span>
+  </div>
+</div>
+<style>
+.rk-sec{position:relative;height:360vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8);overflow:hidden}
+.rk-stage{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(2rem,5vw,5rem);text-align:center}
+.rk-grid{position:absolute;inset:0;background-image:linear-gradient(0deg,color-mix(in srgb,var(--accent) 18%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%, transparent) 1px,transparent 1px);background-size:64px 64px;opacity:.12;-webkit-mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);transform:translateZ(0)}
+.rk-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent,#ff2d16);margin-bottom:1.6rem;opacity:.85}
+.rk-h{font-family:'Anton',var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,9vw,9rem);line-height:.9;letter-spacing:-.02em;margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.06em;max-width:1300px}
+.rk-c{display:inline-block;transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--tr,0deg));transition:none;will-change:transform,opacity;opacity:var(--op,1)}
+.rk-c--sp{width:.4em}
+.rk-italic{position:absolute;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(8rem,22vw,22rem);color:color-mix(in srgb,var(--accent) 28%, transparent);letter-spacing:-.05em;pointer-events:none;mix-blend-mode:screen;transform:translate(var(--ix,0),var(--iy,0)) rotate(-6deg);will-change:transform;z-index:0}
+.rk-h, .rk-eb, .rk-p, .rk-meta{position:relative;z-index:1}
+.rk-p{margin:2rem 0 0;max-width:42ch;font-size:1rem;color:color-mix(in srgb,var(--fg) 70%, transparent);line-height:1.55}
+.rk-meta{margin-top:auto;display:flex;gap:clamp(1rem,4vw,4rem);font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--fg) 55%, transparent);padding-top:clamp(2rem,4vw,3rem)}
+@media (prefers-reduced-motion: reduce){.rk-c{transform:none!important;opacity:1!important}.rk-italic{transform:rotate(-6deg)!important}}
+</style>
+<script>
+(function(){
+  var sec=document.currentScript.closest('.rk-sec');
+  if(!sec)return;
+  var chars=sec.querySelectorAll('.rk-c');
+  var italic=sec.querySelector('.rk-italic');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  // seed random offsets per char
+  chars.forEach(function(el,i){
+    el.__rx=(Math.random()*2-1)*60; el.__ry=(Math.random()*2-1)*40; el.__rr=(Math.random()*2-1)*45;
+  });
+  function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t}
+  function frame(){
+    var r=sec.getBoundingClientRect();
+    var h=sec.offsetHeight-innerHeight;
+    var p=Math.max(0,Math.min(1, -r.top/h ));
+    // 3 chapters: 0-0.33 disperse, 0.33-0.66 settle, 0.66-1 hold/zoom
+    var phase=p<.33?(p/.33):(p<.66?(1-(p-.33)/.33):0);
+    var e=ease(phase);
+    chars.forEach(function(el){
+      el.style.setProperty('--tx', (el.__rx*e)+'px');
+      el.style.setProperty('--ty', (el.__ry*e)+'px');
+      el.style.setProperty('--tr', (el.__rr*e)+'deg');
+      el.style.setProperty('--op', (1 - .35*e).toFixed(3));
+    });
+    if(italic){
+      var pp=ease(p);
+      italic.style.setProperty('--ix', (-200 + 400*pp)+'px');
+      italic.style.setProperty('--iy', (60 - 120*pp)+'px');
+      italic.style.opacity = (.4 + .5*pp).toFixed(3);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</section>
 <section class="sec sec--flush" id="cases"><article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('../assets/12-experimental-dev-hero.jpg')"><div class="wrap"><div class="eyebrow">Project 01</div><h2>Selected Work</h2><p class="lead">Selected client + lab projects.</p></div></article><article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('../assets/12-experimental-dev-hero.jpg')"><div class="wrap"><div class="eyebrow">Project 02</div><h2>Experiments</h2><p class="lead">Open-source shaders and toys.</p></div></article><article class="case" data-reveal style="background-image:linear-gradient(180deg,transparent,var(--bg)),url('../assets/12-experimental-dev-hero.jpg')"><div class="wrap"><div class="eyebrow">Project 03</div><h2>Availability</h2><p class="lead">Available Q3 2026.</p></div></article></section>
 <section class="hs-sec" id="gallery">
 <div class="hs-pin">

@@ -33,6 +33,68 @@
 <section class="sec manifesto" id="about"><div class="wrap narrow">
   <p class="manifesto-p" data-reveal data-reveal-d="1">We do not do templates. We do not do safe. We do not do "on brand" when the brand is boring.</p><p class="manifesto-p" data-reveal data-reveal-d="2">Every system we ship is built to be remembered, then argued about, then copied.</p><p class="manifesto-p" data-reveal data-reveal-d="3">If it blends in, we failed. It will not blend in.</p>
 </div></section>
+<section class="rk-sec" id="kinetic">
+<div class="rk-stage">
+  <div class="rk-grid" aria-hidden="true"></div>
+  <div class="rk-eb">Creative Studio — EST 2019</div>
+  <h2 class="rk-h"><span class="rk-c" style="--i:0">W</span><span class="rk-c" style="--i:1">E</span><span class="rk-c rk-c--sp" style="--i:2">&nbsp;</span><span class="rk-c" style="--i:3">B</span><span class="rk-c" style="--i:4">R</span><span class="rk-c" style="--i:5">E</span><span class="rk-c" style="--i:6">A</span><span class="rk-c" style="--i:7">K</span><span class="rk-c rk-c--sp" style="--i:8">&nbsp;</span><span class="rk-c" style="--i:9">T</span><span class="rk-c" style="--i:10">H</span><span class="rk-c" style="--i:11">E</span><span class="rk-c rk-c--sp" style="--i:12">&nbsp;</span><span class="rk-c" style="--i:13">G</span><span class="rk-c" style="--i:14">R</span><span class="rk-c" style="--i:15">I</span><span class="rk-c" style="--i:16">D</span><span class="rk-c rk-c--sp" style="--i:17">&nbsp;</span><span class="rk-c" style="--i:18">O</span><span class="rk-c" style="--i:19">N</span><span class="rk-c rk-c--sp" style="--i:20">&nbsp;</span><span class="rk-c" style="--i:21">P</span><span class="rk-c" style="--i:22">U</span><span class="rk-c" style="--i:23">R</span><span class="rk-c" style="--i:24">P</span><span class="rk-c" style="--i:25">O</span><span class="rk-c" style="--i:26">S</span><span class="rk-c" style="--i:27">E</span></h2>
+  <div class="rk-italic" aria-hidden="true">relats</div>
+  <p class="rk-p">no filler. just teeth.</p>
+  <div class="rk-meta">
+    <span>01 — Disperse</span><span>02 — Settle</span><span>03 — Hold</span>
+  </div>
+</div>
+<style>
+.rk-sec{position:relative;height:360vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8);overflow:hidden}
+.rk-stage{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(2rem,5vw,5rem);text-align:center}
+.rk-grid{position:absolute;inset:0;background-image:linear-gradient(0deg,color-mix(in srgb,var(--accent) 18%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%, transparent) 1px,transparent 1px);background-size:64px 64px;opacity:.12;-webkit-mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);transform:translateZ(0)}
+.rk-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent,#ff2d16);margin-bottom:1.6rem;opacity:.85}
+.rk-h{font-family:'Anton',var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,9vw,9rem);line-height:.9;letter-spacing:-.02em;margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.06em;max-width:1300px}
+.rk-c{display:inline-block;transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--tr,0deg));transition:none;will-change:transform,opacity;opacity:var(--op,1)}
+.rk-c--sp{width:.4em}
+.rk-italic{position:absolute;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(8rem,22vw,22rem);color:color-mix(in srgb,var(--accent) 28%, transparent);letter-spacing:-.05em;pointer-events:none;mix-blend-mode:screen;transform:translate(var(--ix,0),var(--iy,0)) rotate(-6deg);will-change:transform;z-index:0}
+.rk-h, .rk-eb, .rk-p, .rk-meta{position:relative;z-index:1}
+.rk-p{margin:2rem 0 0;max-width:42ch;font-size:1rem;color:color-mix(in srgb,var(--fg) 70%, transparent);line-height:1.55}
+.rk-meta{margin-top:auto;display:flex;gap:clamp(1rem,4vw,4rem);font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--fg) 55%, transparent);padding-top:clamp(2rem,4vw,3rem)}
+@media (prefers-reduced-motion: reduce){.rk-c{transform:none!important;opacity:1!important}.rk-italic{transform:rotate(-6deg)!important}}
+</style>
+<script>
+(function(){
+  var sec=document.currentScript.closest('.rk-sec');
+  if(!sec)return;
+  var chars=sec.querySelectorAll('.rk-c');
+  var italic=sec.querySelector('.rk-italic');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  // seed random offsets per char
+  chars.forEach(function(el,i){
+    el.__rx=(Math.random()*2-1)*60; el.__ry=(Math.random()*2-1)*40; el.__rr=(Math.random()*2-1)*45;
+  });
+  function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t}
+  function frame(){
+    var r=sec.getBoundingClientRect();
+    var h=sec.offsetHeight-innerHeight;
+    var p=Math.max(0,Math.min(1, -r.top/h ));
+    // 3 chapters: 0-0.33 disperse, 0.33-0.66 settle, 0.66-1 hold/zoom
+    var phase=p<.33?(p/.33):(p<.66?(1-(p-.33)/.33):0);
+    var e=ease(phase);
+    chars.forEach(function(el){
+      el.style.setProperty('--tx', (el.__rx*e)+'px');
+      el.style.setProperty('--ty', (el.__ry*e)+'px');
+      el.style.setProperty('--tr', (el.__rr*e)+'deg');
+      el.style.setProperty('--op', (1 - .35*e).toFixed(3));
+    });
+    if(italic){
+      var pp=ease(p);
+      italic.style.setProperty('--ix', (-200 + 400*pp)+'px');
+      italic.style.setProperty('--iy', (60 - 120*pp)+'px');
+      italic.style.opacity = (.4 + .5*pp).toFixed(3);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</section>
 <section class="hs-sec" id="gallery">
 <div class="hs-pin">
   <div class="hs-head"><div class="hs-eb">Creative Studio — EST 2019</div><h2 class="hs-h2">Selected works.</h2></div>

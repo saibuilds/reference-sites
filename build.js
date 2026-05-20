@@ -162,7 +162,7 @@ const STYLES = [
   { id:'03-dark-brutalist', name:'Dark Brutalist', refs:'Guilty Mind · SHAPESHIFT · Sazabi',
     vars:{'--bg':'#000000','--surface':'#000000','--fg':'#FFFFFF','--accent':'#FF2D16','--card':'transparent','--card-bd':'#FFFFFF','--btn-radius':'0','--card-radius':'0'},
     disp:'Anton', body:'IBM Plex Mono', threeD:false, brutal:true,
-    layout:['heroType','manifesto','galleryHorizontalScroll','rawProof','numberedGet','emailInvert','footerBare'],
+    layout:['heroType','manifesto','relatsKinetic','galleryHorizontalScroll','rawProof','numberedGet','emailInvert','footerBare'],
     extra:{ manifesto:['We do not do templates. We do not do safe. We do not do "on brand" when the brand is boring.',
       'Every system we ship is built to be remembered, then argued about, then copied.',
       'If it blends in, we failed. It will not blend in.'] },
@@ -314,7 +314,7 @@ const STYLES = [
   { id:'11-japanese-web3', name:'Japanese / Community', refs:'OF Sakazuki',
     vars:{'--bg':'#0C0807','--surface':'#1A100E','--fg':'#F0E6D3','--accent':'#C2670C','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(194,103,12,.28)'},
     disp:'Cormorant Garamond', body:'Space Grotesk', threeD:true, vanta:'fog',
-    layout:['heroProduct','circleVault','scrollDepth','membership','quoteCards','parentheticalFooter'],
+    layout:['heroProduct','kanjiMarquee','circleVault','scrollDepth','membership','quoteCards','parentheticalFooter'],
     extra:{ vault:[['盃 · The Circle','A community measured in trust, not headcount.'],
       ['蔵 · The Vault','Curated craft, released slowly, to members first.'],
       ['儀 · The Rituals','Gatherings, seasonal and rare, by introduction.']],
@@ -335,7 +335,7 @@ const STYLES = [
   { id:'12-experimental-dev', name:'Experimental / Dev', refs:'E.C.H.O. · Robert Borghesi · IDOM',
     vars:{'--bg':'#000000','--surface':'#070707','--fg':'#EDEDED','--accent':'#FF3B3B','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,59,59,.26)','--btn-radius':'0'},
     disp:'Space Grotesk', body:'IBM Plex Mono', threeD:true, minimal:true,
-    layout:['heroCanvas','caseStudies','galleryHorizontalScroll','capabilitySlides','aboutTwoPara','contactBlack'],
+    layout:['heroCanvas','relatsKinetic','caseStudies','galleryHorizontalScroll','capabilitySlides','aboutTwoPara','contactBlack'],
     extra:{ caps:[['WebGL / Shaders','Custom GLSL, post-processing, 60fps budgets.'],
       ['Motion Systems','GSAP timelines, scroll choreography, transitions.'],
       ['Creative Tooling','Generative systems, editors, internal toys.'],
@@ -1268,6 +1268,91 @@ function emailInvert(x){ const {c}=x; return `<section class="sec email-cap" id=
 function featureRows(x){ const {c}=x; return `<section class="sec" id="work"><div class="wrap">${sectionHead('What you build','From idea to live.')}
   ${c.svc.map((s,i)=>`<div class="frow${i%2?' frow--rev':''}" data-reveal><div class="frow-txt"><div class="eyebrow">0${i+1}</div><h3>${esc(s)}</h3><p class="muted">${esc(c.svcd[i])}</p></div><div class="frow-vis" aria-hidden="true"></div></div>`).join('')}</div></section>`; }
 function logoMarquee(x){ const {c}=x; const w=[c.brand,c.kicker,c.svc[0],c.svc[1],c.svc[2]]; const row=w.concat(w).concat(w).map(t=>`<span>${esc(t)}</span><span class="dot">·</span>`).join(''); return `<div class="logo-mq" aria-hidden="true"><div class="logo-mq-track">${row}</div></div>`; }
+function relatsKinetic(x){
+  const {c} = x;
+  const phrase = (c.h1||'Form follows energy.').toUpperCase();
+  const sub = c.sub || '';
+  // split into chars; spaces become non-breaking gaps
+  const chars = phrase.split('').map((ch,i)=>{
+    const isSp = ch===' ';
+    return `<span class="rk-c${isSp?' rk-c--sp':''}" style="--i:${i}">${isSp?'&nbsp;':esc(ch)}</span>`;
+  }).join('');
+  return `<section class="rk-sec" id="kinetic">
+<div class="rk-stage">
+  <div class="rk-grid" aria-hidden="true"></div>
+  <div class="rk-eb">${esc(c.kicker||'Periflex // motion study')}</div>
+  <h2 class="rk-h">${chars}</h2>
+  <div class="rk-italic" aria-hidden="true">relats</div>
+  <p class="rk-p">${esc(sub)}</p>
+  <div class="rk-meta">
+    <span>01 — Disperse</span><span>02 — Settle</span><span>03 — Hold</span>
+  </div>
+</div>
+<style>
+.rk-sec{position:relative;height:360vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8);overflow:hidden}
+.rk-stage{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(2rem,5vw,5rem);text-align:center}
+.rk-grid{position:absolute;inset:0;background-image:linear-gradient(0deg,color-mix(in srgb,var(--accent) 18%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%, transparent) 1px,transparent 1px);background-size:64px 64px;opacity:.12;-webkit-mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);transform:translateZ(0)}
+.rk-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent,#ff2d16);margin-bottom:1.6rem;opacity:.85}
+.rk-h{font-family:'Anton',var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,9vw,9rem);line-height:.9;letter-spacing:-.02em;margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.06em;max-width:1300px}
+.rk-c{display:inline-block;transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--tr,0deg));transition:none;will-change:transform,opacity;opacity:var(--op,1)}
+.rk-c--sp{width:.4em}
+.rk-italic{position:absolute;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(8rem,22vw,22rem);color:color-mix(in srgb,var(--accent) 28%, transparent);letter-spacing:-.05em;pointer-events:none;mix-blend-mode:screen;transform:translate(var(--ix,0),var(--iy,0)) rotate(-6deg);will-change:transform;z-index:0}
+.rk-h, .rk-eb, .rk-p, .rk-meta{position:relative;z-index:1}
+.rk-p{margin:2rem 0 0;max-width:42ch;font-size:1rem;color:color-mix(in srgb,var(--fg) 70%, transparent);line-height:1.55}
+.rk-meta{margin-top:auto;display:flex;gap:clamp(1rem,4vw,4rem);font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--fg) 55%, transparent);padding-top:clamp(2rem,4vw,3rem)}
+@media (prefers-reduced-motion: reduce){.rk-c{transform:none!important;opacity:1!important}.rk-italic{transform:rotate(-6deg)!important}}
+</style>
+<script>
+(function(){
+  var sec=document.currentScript.closest('.rk-sec');
+  if(!sec)return;
+  var chars=sec.querySelectorAll('.rk-c');
+  var italic=sec.querySelector('.rk-italic');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  // seed random offsets per char
+  chars.forEach(function(el,i){
+    el.__rx=(Math.random()*2-1)*60; el.__ry=(Math.random()*2-1)*40; el.__rr=(Math.random()*2-1)*45;
+  });
+  function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t}
+  function frame(){
+    var r=sec.getBoundingClientRect();
+    var h=sec.offsetHeight-innerHeight;
+    var p=Math.max(0,Math.min(1, -r.top/h ));
+    // 3 chapters: 0-0.33 disperse, 0.33-0.66 settle, 0.66-1 hold/zoom
+    var phase=p<.33?(p/.33):(p<.66?(1-(p-.33)/.33):0);
+    var e=ease(phase);
+    chars.forEach(function(el){
+      el.style.setProperty('--tx', (el.__rx*e)+'px');
+      el.style.setProperty('--ty', (el.__ry*e)+'px');
+      el.style.setProperty('--tr', (el.__rr*e)+'deg');
+      el.style.setProperty('--op', (1 - .35*e).toFixed(3));
+    });
+    if(italic){
+      var pp=ease(p);
+      italic.style.setProperty('--ix', (-200 + 400*pp)+'px');
+      italic.style.setProperty('--iy', (60 - 120*pp)+'px');
+      italic.style.opacity = (.4 + .5*pp).toFixed(3);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</section>`;
+}
+function kanjiMarquee(x){
+  const glyphs=['盃','蔵','儀','円','和','静','道','匠','侘','寂','間','縁','禅','器','炎'];
+  const row=glyphs.concat(glyphs).concat(glyphs).map(g=>`<span class="kj-g">${g}</span>`).join('');
+  return `<section class="kj-sec" aria-hidden="true"><div class="kj-track">${row}</div>
+<style>
+.kj-sec{position:relative;overflow:hidden;padding:clamp(2rem,5vw,5rem) 0;background:linear-gradient(180deg,var(--bg) 0,color-mix(in srgb,var(--accent) 14%, var(--bg)) 50%,var(--bg) 100%);border-block:1px solid var(--card-bd,rgba(255,255,255,.1));-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.kj-track{display:flex;gap:clamp(2rem,5vw,5rem);white-space:nowrap;animation:kjFlow 38s linear infinite;will-change:transform;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(4rem,9vw,8rem);line-height:1;color:color-mix(in srgb,var(--accent) 75%, var(--fg));opacity:.86;letter-spacing:-.02em}
+.kj-g{flex:0 0 auto;text-shadow:0 0 60px color-mix(in srgb,var(--accent) 45%, transparent)}
+@keyframes kjFlow{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+@media (prefers-reduced-motion: reduce){.kj-track{animation:none}}
+</style>
+</section>`;
+}
 function pricing(x){ const {ex,c}=x; const t=ex.tiers||[['Starter','$0',c.svcd[0]],['Pro','$24',c.svcd[1]],['Scale','Talk',c.svcd[2]]]; return `<section class="sec" id="pricing"><div class="wrap">${sectionHead('Pricing','Simple, by design.')}
   <div class="grid g3 price-grid">${t.map((p,i)=>`<article class="price${i===1?' price--hot':''}" data-reveal data-reveal-d="${i+1}"><div class="price-name">${esc(p[0])}</div><div class="price-amt">${esc(p[1])}</div><p class="muted">${esc(p[2])}</p><a href="#" class="btn ${i===1?'btn-primary':'btn-ghost'} magnetic">${esc(c.cta)}</a></article>`).join('')}</div></div></section>`; }
 function faq(x){ const {ex}=x; const f=ex.faq||[]; return `<section class="sec" id="faq"><div class="wrap narrow">${sectionHead('Questions','The short answers.')}
@@ -1334,7 +1419,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,
