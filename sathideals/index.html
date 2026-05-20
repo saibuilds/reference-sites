@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SathiDeals — Toronto real estate, actually understood.</title>
+<meta name="description" content="Twelve hand-picked Toronto listings. One deal of the day. Agents who answer."/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"/>
+<style>
+:root{
+  --bg:#0A0F2C; --surface:#141B45; --indigo:#1F2A6E; --indigo2:#3B47A6;
+  --saffron:#F5A623; --gold:#E8B547; --paper:#F4EFE3; --fg:#EEF1FF;
+  --muted:#A8B0D4; --card:rgba(255,255,255,.04); --card-bd:rgba(245,166,35,.18);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;letter-spacing:-.01em;margin:0;color:var(--paper)}
+h1 em,h2 em,h3 em{font-style:italic;color:var(--saffron)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 6vw}
+
+/* Top bar */
+.sd-nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:18px 6vw;mix-blend-mode:difference;color:var(--paper)}
+.sd-nav .brand{font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;letter-spacing:.02em}
+.sd-nav .links{display:flex;gap:30px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase}
+.sd-nav .links a{opacity:.8;transition:opacity .2s}
+.sd-nav .links a:hover{opacity:1}
+
+/* Hero — horizontal-scroll resort layout, re-skinned */
+.sd-hero{position:relative;height:100vh;overflow:hidden;background:linear-gradient(135deg,var(--bg) 0%,var(--indigo) 60%,#0E163E 100%)}
+.sd-hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.55}
+.sd-hero .grain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.12;background-image:radial-gradient(rgba(255,255,255,.7) .4px,transparent .4px);background-size:3px 3px}
+.sd-hero .haze{position:absolute;inset:0;background:radial-gradient(80% 60% at 70% 40%,rgba(245,166,35,.18) 0,transparent 60%),radial-gradient(60% 50% at 20% 70%,rgba(59,71,166,.4) 0,transparent 60%)}
+.sd-hero-inner{position:relative;z-index:2;display:grid;grid-template-rows:1fr auto;height:100%;padding:14vh 6vw 6vh}
+.sd-hero .kicker{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--saffron);text-transform:uppercase;opacity:.85}
+.sd-hero h1{font-size:clamp(54px,9.5vw,164px);line-height:.94;font-weight:500;max-width:14ch;margin-top:.3em}
+.sd-hero .sub{margin-top:2em;max-width:46ch;color:var(--muted);font-size:17px;line-height:1.55}
+.sd-hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.sd-hero .stats{display:flex;gap:50px;flex-wrap:wrap}
+.sd-hero .stat .v{font-family:"Cormorant Garamond",serif;font-size:40px;font-style:italic;color:var(--paper);line-height:1}
+.sd-hero .stat .l{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.36em;color:var(--muted);text-transform:uppercase;margin-top:.6em}
+.sd-hero .scroll-cue{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;color:var(--saffron);text-transform:uppercase;opacity:.7}
+
+/* Deal of the day band */
+.sd-deal{position:relative;background:linear-gradient(180deg,#0E163E,#0A0F2C);padding:12vh 0;border-top:1px solid var(--card-bd);border-bottom:1px solid var(--card-bd)}
+.sd-deal .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+.sd-deal .eyebrow{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.45em;color:var(--saffron);text-transform:uppercase;margin-bottom:1.4em}
+.sd-deal h2{font-size:clamp(40px,5.6vw,76px);line-height:1;font-weight:500;max-width:18ch}
+.sd-deal .meta{margin-top:2em;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;line-height:1.8}
+.sd-deal .timer{display:flex;gap:18px;margin-top:3em}
+.sd-deal .tcell{padding:18px 22px;border:1px solid var(--card-bd);background:var(--card);border-radius:10px;min-width:78px;text-align:center}
+.sd-deal .tcell .n{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:38px;color:var(--saffron);line-height:1}
+.sd-deal .tcell .u{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.32em;color:var(--muted);text-transform:uppercase;margin-top:.5em}
+.sd-deal .price{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(72px,11vw,180px);line-height:.9;color:var(--paper)}
+.sd-deal .price sup{font-size:.4em;vertical-align:top;color:var(--saffron);font-style:normal;letter-spacing:.18em}
+.sd-deal .price .strike{display:block;font-size:.22em;letter-spacing:.18em;color:var(--muted);text-decoration:line-through;font-style:normal;margin-top:1.2em;font-family:"JetBrains Mono",monospace}
+
+/* Marketplace grid */
+.sd-market{position:relative;padding:14vh 0;background:var(--bg)}
+.sd-market .head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:6vh}
+.sd-market .head .eyebrow{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.45em;color:var(--saffron);text-transform:uppercase;margin-bottom:1em}
+.sd-market .head h2{font-size:clamp(36px,5vw,68px);line-height:1;font-weight:500;max-width:20ch}
+.sd-market .filters{display:flex;gap:10px;flex-wrap:wrap}
+.sd-market .filters button{appearance:none;background:transparent;color:var(--muted);border:1px solid var(--card-bd);padding:10px 16px;border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.sd-market .filters button.is-on,.sd-market .filters button:hover{color:var(--bg);background:var(--saffron);border-color:var(--saffron)}
+.listings{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.listing{position:relative;border:1px solid var(--card-bd);background:var(--card);border-radius:14px;overflow:hidden;transition:transform .35s,border-color .35s}
+.listing:hover{transform:translateY(-4px);border-color:var(--saffron)}
+.listing .vis{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--indigo)}
+.listing svg{width:100%;height:100%;display:block}
+.listing .badge{position:absolute;top:14px;left:14px;padding:6px 12px;background:var(--saffron);color:var(--bg);font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;border-radius:999px}
+.listing .body{padding:22px 22px 26px}
+.listing .addr{font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;color:var(--paper);line-height:1.15}
+.listing .meta{margin-top:.6em;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.listing .price{margin-top:1.2em;font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:500;color:var(--saffron)}
+.listing .price small{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);margin-left:8px;font-weight:400}
+
+/* Agents */
+.sd-agents{padding:14vh 0;background:linear-gradient(180deg,var(--bg),#0E163E);border-top:1px solid var(--card-bd)}
+.sd-agents .eyebrow{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.45em;color:var(--saffron);text-transform:uppercase;margin-bottom:1em}
+.sd-agents h2{font-size:clamp(36px,5vw,68px);line-height:1;font-weight:500;max-width:20ch;margin-bottom:6vh}
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.agent{padding:30px;border:1px solid var(--card-bd);background:var(--card);border-radius:16px;text-align:center;transition:border-color .3s}
+.agent:hover{border-color:var(--saffron)}
+.agent .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 1.6em;background:linear-gradient(135deg,var(--indigo2),var(--saffron));display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:36px;color:var(--paper)}
+.agent h3{font-size:24px;font-style:italic}
+.agent .role{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.3em;color:var(--saffron);text-transform:uppercase;margin-top:.6em}
+.agent .bio{margin-top:1.2em;color:var(--muted);font-size:14px;line-height:1.55}
+.agent .stats{display:flex;justify-content:center;gap:24px;margin-top:1.8em;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.agent .stats b{display:block;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;color:var(--paper);font-weight:500;letter-spacing:0}
+
+/* CTA */
+.sd-cta{padding:14vh 6vw;text-align:center;background:#0E163E;border-top:1px solid var(--card-bd)}
+.sd-cta h2{font-size:clamp(40px,6vw,84px);line-height:1;font-weight:500;margin:0 auto 1em;max-width:18ch}
+.sd-cta .cta-btn{display:inline-block;margin-top:2em;padding:18px 38px;background:var(--saffron);color:var(--bg);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;border-radius:999px;transition:transform .25s,box-shadow .25s}
+.sd-cta .cta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(245,166,35,.32)}
+
+footer.sd-foot{padding:6vh 6vw 4vh;border-top:1px solid var(--card-bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;background:var(--bg)}
+@media (max-width:820px){
+  .sd-deal .grid{grid-template-columns:1fr}
+  .sd-nav .links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="sd-nav">
+  <a class="brand" href="#">SathiDeals</a>
+  <div class="links">
+    <a href="#deal">Deal of the day</a>
+    <a href="#market">Listings</a>
+    <a href="#agents">Agents</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="sd-hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="haze"></div>
+  <div class="grain"></div>
+  <div class="sd-hero-inner">
+    <div>
+      <div class="kicker">Toronto · GTA · Since 2019</div>
+      <h1>Toronto real estate, <em>actually understood.</em></h1>
+      <p class="sub">Twelve hand-picked listings a week. One deal of the day. Agents who answer the phone before noon. No bidding-war theatre, no glossy lies — just the right buy at the right price.</p>
+    </div>
+    <div class="row">
+      <div class="stats">
+        <div class="stat"><div class="v">412</div><div class="l">Deals closed</div></div>
+        <div class="stat"><div class="v">$1.4B</div><div class="l">Volume · 2025</div></div>
+        <div class="stat"><div class="v">4.9★</div><div class="l">Client rating</div></div>
+      </div>
+      <div class="scroll-cue">↓ Today's deal</div>
+    </div>
+  </div>
+</section>
+
+<section class="sd-deal" id="deal">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">Deal of the Day · Wed 20 May</div>
+        <h2>Detached on <em>Maplewood</em>. Pre-list at $1.49M.</h2>
+        <div class="meta">3+1 bed · 2 bath · 1,840 sqft<br>East York · MLS coming Friday<br>Walk-up basement · 30×120 lot</div>
+        <div class="timer" id="dealTimer">
+          <div class="tcell"><div class="n" data-tu="h">07</div><div class="u">Hours</div></div>
+          <div class="tcell"><div class="n" data-tu="m">42</div><div class="u">Min</div></div>
+          <div class="tcell"><div class="n" data-tu="s">18</div><div class="u">Sec</div></div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">$<sup>CAD</sup>1.49<span style="font-size:.55em">M</span><span class="strike">List price $1.62M</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sd-market" id="market">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">This week's twelve</div>
+        <h2>Toronto, end-to-end. <em>Curated weekly.</em></h2>
+      </div>
+      <div class="filters" id="filters">
+        <button class="is-on" data-f="all">All</button>
+        <button data-f="detached">Detached</button>
+        <button data-f="condo">Condo</button>
+        <button data-f="townhouse">Townhouse</button>
+        <button data-f="invest">Investment</button>
+      </div>
+    </div>
+    <div class="listings" id="listings"></div>
+  </div>
+</section>
+
+<section class="sd-agents" id="agents">
+  <div class="wrap">
+    <div class="eyebrow">The team</div>
+    <h2>Four agents. Three languages. <em>One phone number.</em></h2>
+    <div class="agent-grid">
+      <div class="agent">
+        <div class="avatar">SK</div>
+        <h3>Sai Kumar</h3>
+        <div class="role">Founder · East GTA</div>
+        <p class="bio">Fifteen years in Scarborough &amp; Markham. Specialty: investment duplexes &amp; garden-suite-ready lots.</p>
+        <div class="stats"><div><b>118</b>Closed</div><div><b>9d</b>Avg DOM</div><div><b>4.9★</b>Rating</div></div>
+      </div>
+      <div class="agent">
+        <div class="avatar">PR</div>
+        <h3>Priya Rao</h3>
+        <div class="role">Senior Agent · Etobicoke</div>
+        <p class="bio">Mortgage-broker background. Translates pre-construction contracts into plain English.</p>
+        <div class="stats"><div><b>92</b>Closed</div><div><b>11d</b>Avg DOM</div><div><b>4.8★</b>Rating</div></div>
+      </div>
+      <div class="agent">
+        <div class="avatar">JT</div>
+        <h3>Jian Tan</h3>
+        <div class="role">Condo Lead · Downtown</div>
+        <p class="bio">Lives the King West / Liberty Village stack. Knows which buildings have the rentable parking spots.</p>
+        <div class="stats"><div><b>136</b>Closed</div><div><b>7d</b>Avg DOM</div><div><b>5.0★</b>Rating</div></div>
+      </div>
+      <div class="agent">
+        <div class="avatar">AM</div>
+        <h3>Aisha Mohamed</h3>
+        <div class="role">Family Homes · North York</div>
+        <p class="bio">Lawrence Park, Bayview Village, Willowdale. School-district forensics &amp; off-market access.</p>
+        <div class="stats"><div><b>66</b>Closed</div><div><b>12d</b>Avg DOM</div><div><b>4.9★</b>Rating</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sd-cta" id="contact">
+  <h2>One call. <em>Actual</em> answers.</h2>
+  <a class="cta-btn" href="tel:+14165550199">416 · 555 · 0199</a>
+</section>
+
+<footer class="sd-foot">
+  <span>© 2026 SathiDeals · Toronto, ON · Brokerage Lic. #5XXXXXX</span>
+  <span>hello@sathideals.ca</span>
+</footer>
+
+<script>
+/* hero saffron-on-indigo dot field */
+(function(){
+  var c=document.getElementById('heroCanvas'),ctx=c.getContext('2d');
+  function size(){c.width=c.offsetWidth*devicePixelRatio;c.height=c.offsetHeight*devicePixelRatio}
+  size();window.addEventListener('resize',size);
+  var pts=[];for(var i=0;i<140;i++)pts.push({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.3,vx:(Math.random()-.5)*.0006,vy:(Math.random()-.5)*.0006});
+  function draw(){
+    var w=c.width,h=c.height;
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>1)p.vx*=-1;if(p.y<0||p.y>1)p.vy*=-1;
+      ctx.fillStyle='rgba(245,166,35,'+(.18+p.r*.12)+')';
+      ctx.beginPath();ctx.arc(p.x*w,p.y*h,p.r*devicePixelRatio*1.4,0,Math.PI*2);ctx.fill();
+    }
+    /* faint connecting lines */
+    ctx.strokeStyle='rgba(59,71,166,.18)';ctx.lineWidth=1;
+    for(var i=0;i<pts.length;i++)for(var j=i+1;j<pts.length;j++){
+      var a=pts[i],b=pts[j];var dx=(a.x-b.x),dy=(a.y-b.y);var d=dx*dx+dy*dy;
+      if(d<.015){ctx.beginPath();ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);ctx.stroke()}
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* deal-of-day countdown */
+(function(){
+  var h=document.querySelector('[data-tu="h"]'),m=document.querySelector('[data-tu="m"]'),s=document.querySelector('[data-tu="s"]');
+  var end=new Date();end.setHours(23,59,59,0);
+  function pad(n){return String(n).padStart(2,'0')}
+  function tick(){
+    var diff=Math.max(0,end-new Date());
+    var H=Math.floor(diff/3600000),M=Math.floor(diff%3600000/60000),S=Math.floor(diff%60000/1000);
+    h.textContent=pad(H);m.textContent=pad(M);s.textContent=pad(S);
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* listings — 12 mocked, SVG illustrations */
+(function(){
+  var data=[
+    {a:'42 Wexford Blvd',n:'Scarborough · Wexford-Maryvale',t:'detached',b:'3+1·2ba',p:'$1,099,000',sub:'Walk to Wexford Heights · 35×125 lot',hue:25,badge:'Just listed'},
+    {a:'Unit 1208 · 8 Charlotte',n:'Downtown · King West',t:'condo',b:'1+den·1ba',p:'$759,000',sub:'628 sqft · S/W corner · parking',hue:220,badge:'Open Sat'},
+    {a:'14B Sumach Mews',n:'Cabbagetown',t:'townhouse',b:'3·3ba',p:'$1,389,000',sub:'1,910 sqft · garage · roof deck',hue:200,badge:'Off-market'},
+    {a:'68 Northwood Dr',n:'Willowdale East',t:'detached',b:'4+1·4ba',p:'$2,495,000',sub:'2018 rebuild · finished basement',hue:30,badge:'New'},
+    {a:'5119 Yonge · 1801',n:'North York Centre',t:'condo',b:'2·2ba',p:'$839,000',sub:'877 sqft · TTC at the door',hue:210,badge:'Price drop'},
+    {a:'209 Brock Ave',n:'Roncesvalles',t:'invest',b:'duplex',p:'$1,275,000',sub:'Up-down legal · CAP 4.4%',hue:35,badge:'Investment'},
+    {a:'12 Springmount',n:'Wallace Emerson',t:'detached',b:'3·2ba',p:'$1,189,000',sub:'25×110 · garage suite eligible',hue:28,badge:'Hot'},
+    {a:'4022 Bloor W · 22B',n:'Etobicoke · Markland Wood',t:'condo',b:'2+1·2ba',p:'$689,000',sub:'1,025 sqft · low maint fees',hue:215,badge:'Open Sun'},
+    {a:'88 Wishing Well Rd',n:'L\'Amoreaux',t:'townhouse',b:'3·3ba',p:'$929,000',sub:'End unit · finished walk-out',hue:205,badge:'New'},
+    {a:'46 Glen Manor',n:'The Beaches',t:'detached',b:'4·3ba',p:'$2,189,000',sub:'Lake-facing · ravine-side garden',hue:32,badge:'Just listed'},
+    {a:'1717 Avenue Rd · PH3',n:'Lawrence Park',t:'condo',b:'3·3ba',p:'$1,549,000',sub:'1,640 sqft penthouse · terrace',hue:38,badge:'Penthouse'},
+    {a:'34 Springhurst',n:'Parkdale',t:'invest',b:'triplex',p:'$1,725,000',sub:'Three units · vacant possession',hue:36,badge:'Investment'},
+  ];
+  function listingSvg(hue){
+    var b=hue<100?'#F5A623':'#3B47A6';var l=hue<100?'#1F2A6E':'#F5A623';
+    return '<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">'
+      +'<defs><linearGradient id="g'+hue+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+b+'" stop-opacity=".9"/><stop offset="1" stop-color="#0A0F2C" stop-opacity="1"/></linearGradient></defs>'
+      +'<rect width="400" height="300" fill="url(#g'+hue+')"/>'
+      +'<g fill="none" stroke="'+l+'" stroke-opacity=".42" stroke-width="1">'
+      +'<path d="M40 220 L140 140 L240 200 L360 120 L360 260 L40 260 Z"/>'
+      +'<path d="M70 210 L70 170 L100 170 L100 210 Z"/>'
+      +'<path d="M180 200 L180 160 L220 160 L220 200 Z"/>'
+      +'<path d="M280 180 L280 140 L320 140 L320 180 Z"/>'
+      +'<circle cx="320" cy="60" r="22" stroke-opacity=".7"/>'
+      +'</g>'
+      +'<g fill="'+l+'" fill-opacity=".5">'
+      +'<rect x="78" y="178" width="6" height="14"/>'
+      +'<rect x="190" y="168" width="6" height="14"/>'
+      +'<rect x="292" y="148" width="6" height="14"/>'
+      +'</g></svg>';
+  }
+  var ul=document.getElementById('listings');
+  function render(filter){
+    ul.innerHTML=data.filter(function(d){return filter==='all'||d.t===filter}).map(function(d){
+      return '<article class="listing" data-t="'+d.t+'">'
+        +'<div class="vis">'+listingSvg(d.hue)+'<span class="badge">'+d.badge+'</span></div>'
+        +'<div class="body">'
+        +'<div class="addr">'+d.a+'</div>'
+        +'<div class="meta">'+d.n+' · '+d.b+'</div>'
+        +'<div class="price">'+d.p+' <small>'+d.sub+'</small></div>'
+        +'</div></article>';
+    }).join('');
+  }
+  render('all');
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    document.querySelectorAll('#filters button').forEach(function(x){x.classList.remove('is-on')});
+    b.classList.add('is-on');render(b.dataset.f);
+  });
+})();
+</script>
+</body>
+</html>
