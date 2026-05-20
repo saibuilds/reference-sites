@@ -143,7 +143,7 @@ const STYLES = [
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
     vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#E6B873','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
-    layout:['heroVideo','statsBand','glassServices','processSteps','quoteCards','ctaBig','footerCols'],
+    layout:['heroVideoGSAP','statsBand','glassServices','processSteps','quoteCards','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
       ['Engineer','Lanes, modes and contingencies, costed to the hour.'],
       ['Execute','Live tracking, one point of contact, no surprises.'],
@@ -178,7 +178,7 @@ const STYLES = [
   { id:'04-3d-spline-webgl', name:'3D / WebGL', refs:'Spline Ice Cube · E.C.H.O. · JoyJam',
     vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#5BE0FF','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(91,224,255,.18)'},
     disp:'Space Grotesk', body:'Inter', threeD:true,
-    layout:['heroCanvas','howGlass','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
+    layout:['heroSpline','howGlass','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
       ['Can we bring our own 3D?','glTF / USDZ in, optimised automatically on upload.'],
       ['What about mobile?','Adaptive LOD; the same scene degrades gracefully to phones.']],
@@ -199,7 +199,7 @@ const STYLES = [
   { id:'05-vaporwave', name:'Vaporwave', refs:'Sidewave',
     vars:{'--bg':'#1A0033','--surface':'#2A0A4A','--fg':'#FDF0FF','--accent':'#FF8C00','--card':'rgba(255,255,255,.06)','--card-bd':'rgba(255,0,110,.32)'},
     disp:'Archivo Black', body:'Space Grotesk', threeD:false, ripple:true,
-    layout:['heroRipple','waveBand','releaseGrid','quoteCards','emailInvert','footerBare'],
+    layout:['heroVanta','waveBand','releaseGrid','quoteCards','emailInvert','footerBare'],
     extra:{ releases:[['001 · Nightdrive','EP · 6 tracks'],['002 · Afterglow','Single'],
       ['003 · Violet Hour','EP · 5 tracks'],['004 · Signal','Single']] },
     g:{ brand:'SIDEWAVE', kicker:'Sound Collective', h1:'Feel the frequency.',
@@ -395,7 +395,7 @@ const STYLES = [
   { id:'14-cosmic-platform', name:'Cosmic Engine', refs:'Starry Labs',
     vars:{'--bg':'#070611','--surface':'#11102A','--fg':'#EDEBFA','--accent':'#9E8CFF','--card':'rgba(255,255,255,.045)','--card-bd':'rgba(158,140,255,.20)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false,
-    layout:['heroProduct','manifesto','featureRows','processSteps','pricing','faq','contactBlack'],
+    layout:['heroThreeGlobe','manifesto','featureRows','processSteps','pricing','faq','contactBlack'],
     extra:{
       manifesto:[
         'Time is not a clock. It is the distance between conscious events — measurable, addressable, computable.',
@@ -708,6 +708,168 @@ ${spacer}
 </script>
 </div>`;
 }
+function heroSpline(x){ // 3D Spline scene hero
+  const {c,s} = x;
+  const scene = (s.extra && s.extra.spline) || 'https://prod.spline.design/6Wq1Q7xQQ8e6yYNm/scene.splinecode';
+  return `<section class="sp-hero">
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.0/build/spline-viewer.js"></script>
+<spline-viewer class="sp-stage" url="${esc(scene)}" loading-anim></spline-viewer>
+<div class="sp-vignette" aria-hidden="true"></div>
+<div class="sp-frame">
+  <div class="sp-kicker">${esc(c.kicker)}</div>
+  <h1 class="sp-h1">${esc(c.h1)}</h1>
+  <p class="sp-sub">${esc(c.sub)}</p>
+  <a class="sp-cta" href="#shop">${esc(c.cta)} &rarr;</a>
+</div>
+<style>
+.sp-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+.sp-stage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.sp-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 60%,transparent 30%,rgba(0,0,0,.45) 70%,#000 100%),linear-gradient(180deg,rgba(0,0,0,.55),transparent 30%,transparent 70%,rgba(0,0,0,.55));pointer-events:none}
+.sp-frame{position:absolute;left:clamp(1.4rem,4vw,3rem);bottom:clamp(2rem,6vw,4rem);max-width:min(60vw,560px);z-index:2}
+.sp-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#c9a961);margin-bottom:1.4rem}
+.sp-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5.6rem);line-height:.98;margin:0 0 1.4rem;letter-spacing:-.02em}
+.sp-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.7);margin:0 0 1.8rem;max-width:38ch}
+.sp-cta{display:inline-block;padding:.85rem 1.6rem;border:1px solid var(--accent,#c9a961);color:var(--accent,#c9a961);border-radius:999px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .25s ease}
+.sp-cta:hover{background:var(--accent,#c9a961);color:#000}
+</style>
+</section>`;
+}
+function heroThreeGlobe(x){ // Three.js cosmic globe hero
+  const {c} = x;
+  return `<section class="tg-hero">
+<canvas class="tg-stage" id="tgStage" aria-hidden="true"></canvas>
+<div class="tg-frame">
+  <div class="tg-kicker">${esc(c.kicker)}</div>
+  <h1 class="tg-h1">${esc(c.h1)}</h1>
+  <p class="tg-sub">${esc(c.sub)}</p>
+  <div class="tg-cta-row"><a class="tg-cta" href="#pricing">${esc(c.cta)}</a><a class="tg-link" href="#how">See how &rarr;</a></div>
+</div>
+<style>
+.tg-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#171535 0%,#070611 70%);color:var(--fg,#edebfa)}
+.tg-stage{position:absolute;inset:0;z-index:0;width:100%;height:100%}
+.tg-frame{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:0 1.4rem}
+.tg-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#9e8cff);margin-bottom:1.4rem}
+.tg-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.8rem,7vw,6.4rem);line-height:1;margin:0 0 1.4rem;letter-spacing:-.02em;max-width:18ch}
+.tg-sub{font-size:1.05rem;line-height:1.55;color:rgba(237,235,250,.65);margin:0 0 2.2rem;max-width:50ch}
+.tg-cta-row{display:inline-flex;gap:1rem;align-items:center}
+.tg-cta{padding:.95rem 1.8rem;background:var(--accent,#9e8cff);color:#0a0a0a;border-radius:999px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;font-weight:600}
+.tg-cta:hover{filter:brightness(1.1)}
+.tg-link{color:rgba(237,235,250,.7);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none}
+.tg-link:hover{color:var(--accent,#9e8cff)}
+</style>
+<script>
+(function(){
+  if(typeof THREE==='undefined')return;
+  var c=document.getElementById('tgStage');if(!c)return;
+  var r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
+  var s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);
+  function size(){var w=innerWidth,h=innerHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  size();addEventListener('resize',size);
+  cam.position.z=3.4;
+  var geom=new THREE.IcosahedronGeometry(1.2,3),mat=new THREE.MeshBasicMaterial({color:0x9e8cff,wireframe:true,transparent:true,opacity:.42});
+  var globe=new THREE.Mesh(geom,mat);s.add(globe);
+  var pgeo=new THREE.BufferGeometry(),pts=[],COUNT=380;
+  for(var i=0;i<COUNT;i++){var th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1),rr=1.6+Math.random()*.6;pts.push(rr*Math.sin(ph)*Math.cos(th),rr*Math.sin(ph)*Math.sin(th),rr*Math.cos(ph));}
+  pgeo.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
+  var pmat=new THREE.PointsMaterial({color:0xedebfa,size:.015,transparent:true,opacity:.7});
+  var ring=new THREE.Points(pgeo,pmat);s.add(ring);
+  function tick(){globe.rotation.y+=.0018;globe.rotation.x+=.0008;ring.rotation.y-=.0012;ring.rotation.x+=.0004;r.render(s,cam);requestAnimationFrame(tick);}
+  tick();
+})();
+</script>
+</section>`;
+}
+function heroVanta(x){ // Vanta WAVES vaporwave hero
+  const {c} = x;
+  return `<section class="vt-hero" id="vt-bg">
+<div class="vt-grid" aria-hidden="true"></div>
+<div class="vt-frame">
+  <div class="vt-kicker">${esc(c.kicker)}</div>
+  <h1 class="vt-h1">${esc(c.h1)}</h1>
+  <p class="vt-sub">${esc(c.sub)}</p>
+  <a class="vt-cta" href="#shop">${esc(c.cta)}</a>
+</div>
+<style>
+.vt-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:linear-gradient(180deg,#1a0a2e 0%,#2e1a4e 50%,#0a0a1a 100%);color:#f0e6ff}
+.vt-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(180deg,transparent 80%,rgba(255,82,213,.4)),repeating-linear-gradient(0deg,transparent 0,transparent 39px,rgba(158,140,255,.18) 40px),repeating-linear-gradient(90deg,transparent 0,transparent 39px,rgba(158,140,255,.18) 40px);transform:perspective(600px) rotateX(60deg) translateY(45%);transform-origin:bottom;opacity:.65;pointer-events:none}
+.vt-frame{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:0 1.4rem}
+.vt-kicker{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:#ff52d5;margin-bottom:1.6rem;text-shadow:0 0 8px rgba(255,82,213,.6)}
+.vt-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.8rem,8vw,7rem);line-height:1;margin:0 0 1.4rem;color:#f0e6ff;text-shadow:0 0 20px rgba(158,140,255,.5),0 0 40px rgba(255,82,213,.3)}
+.vt-sub{font-size:1.05rem;line-height:1.55;color:rgba(240,230,255,.75);margin:0 0 2.2rem;max-width:50ch}
+.vt-cta{padding:.95rem 1.8rem;background:linear-gradient(90deg,#ff52d5,#9e8cff);color:#0a0a1a;border-radius:999px;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;font-weight:700;box-shadow:0 0 30px rgba(255,82,213,.4)}
+.vt-cta:hover{filter:brightness(1.15)}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
+<script>
+(function(){if(typeof VANTA==='undefined'||typeof THREE==='undefined')return;VANTA.WAVES({el:'#vt-bg',color:0x9e8cff,shininess:50,waveHeight:18,waveSpeed:.6,zoom:.75,backgroundColor:0x1a0a2e});})();
+</script>
+</section>`;
+}
+function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
+  const {c,s} = x;
+  return `<section class="vg-hero">
+<video class="vg-video" autoplay muted loop playsinline poster="${resolveAsset(s)}"></video>
+<div class="vg-scrim" aria-hidden="true"></div>
+<div class="vg-frame">
+  <div class="vg-kicker">${esc(c.kicker)}</div>
+  <h1 class="vg-h1">${esc(c.h1)}</h1>
+  <p class="vg-sub">${esc(c.sub)}</p>
+  <a class="vg-cta" href="#shop">${esc(c.cta)} &rarr;</a>
+</div>
+<div class="vg-stats">
+  ${(c.stats||[['','']]).slice(0,3).map(([n,l])=>`<div class="vg-stat"><div class="vg-n">${esc(n)}</div><div class="vg-l">${esc(l)}</div></div>`).join('')}
+</div>
+<style>
+.vg-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0d0f12;color:#f2f2f2}
+.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%)}
+.vg-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,18,.65) 0%,rgba(13,15,18,.35) 40%,rgba(13,15,18,.85) 100%)}
+.vg-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(70vw,820px)}
+.vg-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#e8a948);margin-bottom:1.4rem}
+.vg-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,7vw,6.4rem);line-height:1;margin:0 0 1.4rem;letter-spacing:-.02em}
+.vg-sub{font-size:1.05rem;line-height:1.55;color:rgba(242,242,242,.72);margin:0 0 2rem;max-width:54ch}
+.vg-cta{display:inline-block;padding:.95rem 1.8rem;background:var(--accent,#e8a948);color:#0d0f12;border-radius:4px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:600;width:fit-content}
+.vg-cta:hover{filter:brightness(1.08)}
+.vg-stats{position:absolute;bottom:clamp(1.4rem,3vw,2.4rem);left:clamp(1.4rem,5vw,4rem);right:clamp(1.4rem,5vw,4rem);z-index:2;display:flex;gap:clamp(2rem,5vw,4rem);border-top:1px solid rgba(242,242,242,.18);padding-top:1.4rem}
+.vg-stat{display:flex;flex-direction:column;gap:.3rem}
+.vg-n{font-family:var(--font-display),serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--accent,#e8a948)}
+.vg-l{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,242,242,.55)}
+</style>
+</section>`;
+}
+function galleryHorizontalScroll(x){ // pinned horizontal scroll panel
+  const {c,ex} = x;
+  const g = (ex && ex.gallery && ex.gallery.length) ? ex.gallery : (c.svc||[]).map((t,i)=>[t, (c.svcd||[])[i]||'']);
+  return `<section class="hs-sec" id="gallery">
+<div class="hs-pin">
+  <div class="hs-head"><div class="hs-eb">${esc(c.kicker)}</div><h2 class="hs-h2">Selected works.</h2></div>
+  <div class="hs-track">
+    ${g.map((p,i)=>`<article class="hs-panel"><div class="hs-num">${String(i+1).padStart(2,'0')}</div><h3 class="hs-pt">${esc(p[0]||'')}</h3><p class="hs-pp">${esc(p[1]||'')}</p></article>`).join('')}
+  </div>
+</div>
+<style>
+.hs-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+.hs-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;padding:clamp(2rem,5vw,4rem) 0}
+.hs-head{padding:0 clamp(1.4rem,4vw,3rem);margin-bottom:2.4rem;flex-shrink:0}
+.hs-eb{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#c9a961);margin-bottom:.8rem}
+.hs-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2rem,4vw,3.6rem);line-height:1;margin:0;letter-spacing:-.02em}
+.hs-track{display:flex;gap:clamp(1rem,2vw,2rem);padding:0 clamp(1.4rem,4vw,3rem);flex:1;align-items:stretch;will-change:transform}
+.hs-panel{flex:0 0 min(70vw,520px);background:var(--card,rgba(245,241,232,.04));border:1px solid var(--card-bd,rgba(245,241,232,.12));border-radius:6px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.hs-num{font-family:var(--font-display),serif;font-size:3rem;font-weight:300;color:var(--accent,#c9a961);line-height:1}
+.hs-pt{font-family:var(--font-display),serif;font-size:1.6rem;font-weight:400;margin:0;line-height:1.1}
+.hs-pp{font-size:.95rem;color:rgba(245,241,232,.65);margin:0;line-height:1.5}
+</style>
+<script>
+(function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+  gsap.registerPlugin(ScrollTrigger);
+  var track=document.querySelector('.hs-track');if(!track)return;
+  var sec=document.querySelector('.hs-sec');
+  var dist=track.scrollWidth-innerWidth+48;
+  gsap.to(track,{x:-dist,ease:'none',scrollTrigger:{trigger:sec,start:'top top',end:'+='+dist,scrub:1}});
+})();
+</script>
+</section>`;
+}
 function heroSplit(x){ // aviation — split + clock + ticker
   const {c,s} = x;
   return `<header class="hero hero--split">
@@ -865,7 +1027,7 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSplit,heroPhoto,heroSaas,
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,galleryHorizontalScroll,heroSplit,heroPhoto,heroSaas,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,

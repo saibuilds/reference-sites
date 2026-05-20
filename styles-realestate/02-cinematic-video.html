@@ -22,18 +22,34 @@
 <nav class="nav"><div class="brand">MERIDIAN</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Book a consultation</a></nav>
-<header class="hero hero--video">
-  <img class="media" src="../assets/02-cinematic-video-hero.jpg" alt="" aria-hidden="true" loading="eager" decoding="async">
-  <div class="scrim"></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Real Estate Group</div>
-    <h1>Your next move, on schedule.</h1>
-    <p class="lead" data-reveal data-reveal-d="2">Buying, selling and relocation — engineered to close on time, every time.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#contact" class="btn btn-primary magnetic">Book a consultation</a></div>
-  </div>
-  <div class="hero-badge" data-reveal data-reveal-d="4">1,400 Closings &middot; 99 % list-to-sale</div>
-  <span class="scrollcue" aria-hidden="true">Scroll &darr;</span>
-</header>
+<section class="vg-hero">
+<video class="vg-video" autoplay muted loop playsinline poster="../assets/02-cinematic-video-hero.jpg"></video>
+<div class="vg-scrim" aria-hidden="true"></div>
+<div class="vg-frame">
+  <div class="vg-kicker">Real Estate Group</div>
+  <h1 class="vg-h1">Your next move, on schedule.</h1>
+  <p class="vg-sub">Buying, selling and relocation — engineered to close on time, every time.</p>
+  <a class="vg-cta" href="#shop">Book a consultation &rarr;</a>
+</div>
+<div class="vg-stats">
+  <div class="vg-stat"><div class="vg-n">1,400</div><div class="vg-l">Closings</div></div><div class="vg-stat"><div class="vg-n">18</div><div class="vg-l">Days avg.</div></div><div class="vg-stat"><div class="vg-n">99</div><div class="vg-l">% list-to-sale</div></div>
+</div>
+<style>
+.vg-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0d0f12;color:#f2f2f2}
+.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%)}
+.vg-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,18,.65) 0%,rgba(13,15,18,.35) 40%,rgba(13,15,18,.85) 100%)}
+.vg-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(70vw,820px)}
+.vg-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#e8a948);margin-bottom:1.4rem}
+.vg-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,7vw,6.4rem);line-height:1;margin:0 0 1.4rem;letter-spacing:-.02em}
+.vg-sub{font-size:1.05rem;line-height:1.55;color:rgba(242,242,242,.72);margin:0 0 2rem;max-width:54ch}
+.vg-cta{display:inline-block;padding:.95rem 1.8rem;background:var(--accent,#e8a948);color:#0d0f12;border-radius:4px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:600;width:fit-content}
+.vg-cta:hover{filter:brightness(1.08)}
+.vg-stats{position:absolute;bottom:clamp(1.4rem,3vw,2.4rem);left:clamp(1.4rem,5vw,4rem);right:clamp(1.4rem,5vw,4rem);z-index:2;display:flex;gap:clamp(2rem,5vw,4rem);border-top:1px solid rgba(242,242,242,.18);padding-top:1.4rem}
+.vg-stat{display:flex;flex-direction:column;gap:.3rem}
+.vg-n{font-family:var(--font-display),serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--accent,#e8a948)}
+.vg-l{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,242,242,.55)}
+</style>
+</section>
 <main>
 <section class="sec statsband" id="stats"><div class="wrap"><div class="stats"><div class="stat" data-reveal><div class="num" data-count="1400" data-prefix="" data-suffix="">0</div><div class="lbl">Closings</div></div><div class="stat" data-reveal><div class="num" data-count="18" data-prefix="" data-suffix="">0</div><div class="lbl">Days avg.</div></div><div class="stat" data-reveal><div class="num" data-count="99" data-prefix="" data-suffix="">0</div><div class="lbl">% list-to-sale</div></div></div></div></section>
 <section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Capabilities</div><h2 class="clip-line">Buy Side, List &amp; Sell &amp; Relocation.</h2></div>

@@ -22,16 +22,29 @@
 <nav class="nav"><div class="brand">SIDEWAVE</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Hear the wave</a></nav>
-<header class="hero hero--ripple">
-  <div class="ripple-wrap" aria-hidden="true"><div class="glow"></div>
-    <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div><div class="ring r5"></div></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Sound Collective</div>
-    <h1>Feel the frequency.</h1>
-    <p class="lead" data-reveal data-reveal-d="2">An audio-reactive label and live event series. Wave after wave after wave.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#listen" class="btn btn-primary magnetic">Hear the wave</a></div>
-  </div>
-</header>
+<section class="vt-hero" id="vt-bg">
+<div class="vt-grid" aria-hidden="true"></div>
+<div class="vt-frame">
+  <div class="vt-kicker">Sound Collective</div>
+  <h1 class="vt-h1">Feel the frequency.</h1>
+  <p class="vt-sub">An audio-reactive label and live event series. Wave after wave after wave.</p>
+  <a class="vt-cta" href="#shop">Hear the wave</a>
+</div>
+<style>
+.vt-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:linear-gradient(180deg,#1a0a2e 0%,#2e1a4e 50%,#0a0a1a 100%);color:#f0e6ff}
+.vt-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(180deg,transparent 80%,rgba(255,82,213,.4)),repeating-linear-gradient(0deg,transparent 0,transparent 39px,rgba(158,140,255,.18) 40px),repeating-linear-gradient(90deg,transparent 0,transparent 39px,rgba(158,140,255,.18) 40px);transform:perspective(600px) rotateX(60deg) translateY(45%);transform-origin:bottom;opacity:.65;pointer-events:none}
+.vt-frame{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:0 1.4rem}
+.vt-kicker{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:#ff52d5;margin-bottom:1.6rem;text-shadow:0 0 8px rgba(255,82,213,.6)}
+.vt-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.8rem,8vw,7rem);line-height:1;margin:0 0 1.4rem;color:#f0e6ff;text-shadow:0 0 20px rgba(158,140,255,.5),0 0 40px rgba(255,82,213,.3)}
+.vt-sub{font-size:1.05rem;line-height:1.55;color:rgba(240,230,255,.75);margin:0 0 2.2rem;max-width:50ch}
+.vt-cta{padding:.95rem 1.8rem;background:linear-gradient(90deg,#ff52d5,#9e8cff);color:#0a0a1a;border-radius:999px;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;font-weight:700;box-shadow:0 0 30px rgba(255,82,213,.4)}
+.vt-cta:hover{filter:brightness(1.15)}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
+<script>
+(function(){if(typeof VANTA==='undefined'||typeof THREE==='undefined')return;VANTA.WAVES({el:'#vt-bg',color:0x9e8cff,shininess:50,waveHeight:18,waveSpeed:.6,zoom:.75,backgroundColor:0x1a0a2e});})();
+</script>
+</section>
 <main>
 <section class="sec wave-sec" aria-hidden="true"><div class="wrap"><div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div></section>
 <section class="sec" id="listen"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Releases</div><h2 class="clip-line">Wave after wave.</h2></div><div class="grid g2"><article class="rel" data-reveal data-reveal-d="1"><div class="rel-vis" aria-hidden="true"></div><div><h3>001 · Nightdrive</h3><p class="muted">EP · 6 tracks</p></div></article><article class="rel" data-reveal data-reveal-d="2"><div class="rel-vis" aria-hidden="true"></div><div><h3>002 · Afterglow</h3><p class="muted">Single</p></div></article><article class="rel" data-reveal data-reveal-d="3"><div class="rel-vis" aria-hidden="true"></div><div><h3>003 · Violet Hour</h3><p class="muted">EP · 5 tracks</p></div></article><article class="rel" data-reveal data-reveal-d="4"><div class="rel-vis" aria-hidden="true"></div><div><h3>004 · Signal</h3><p class="muted">Single</p></div></article></div></div></section>
