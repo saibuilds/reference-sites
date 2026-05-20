@@ -115,3 +115,22 @@ Each carouselClassic IIFE binds via `document.currentScript.closest('.cx-sec')` 
 - "use codex or other claude subagents to get done dont use local ai for now" → never delegate to ollama / local-general-worker on this repo until further notice.
 - "find ways and get this done make sure the sites are exactly the same as the ones shown in the insta reels" → primary success metric is visual parity with the IG reel each archetype was named after.
 - "Never merge to main. Push only to claude/setup-mcp-api-keys-t4GTr" → branch discipline is hard rule.
+
+## 2026-05 — Visual verification (Chrome MCP DOM check)
+
+Ran live verification against `python -m http.server 8765` from repo root over Chrome MCP (no static screenshots — used DOM probes + console error checks since `screenshot` is not a Chrome MCP tool, only `javascript_tool` + `read_console_messages`).
+
+Pages probed and outcome:
+- `styles/16-terminal-industrial.html` → title=`TERMINAL — Industrial AI · NOC-25.04`, bg=`rgb(5,5,5)`, --accent=`#FF5C00`, 8 sections, .cx-track present, .sd-stage present, .routes present (3 cards). 0 console errors.
+- `styles/04-3d-spline-webgl.html` → `#th-c` + `.th-canvas` + 1 importmap + 1 module + `.sd-stage` all present. theatreScene wired.
+- `styles/07-saas-glass.html` → `#bh-c` + `.bh-canvas` + babylon.js script tag present. babylonHero wired.
+- `styles/12-experimental-dev.html` → `#rp-c` + `.rp-canvas` + `.rp-drop` button + `.sd-stage` + 1 importmap present. rapierPhysicsHero wired.
+- `styles/14-cosmic-platform.html` → `.p5-holder` + p5.js script present. p5Sketch wired (note: holder is .class not #id).
+
+**Selector gotcha logged**: routesGrid uses `.routes` (plural class), NOT `.tg-routes`. theatreScene uses canvas `#th-c` with class `.th-canvas` (id is short form). p5Sketch uses `.p5-holder` div, not an id. When probing always grep build.js for the actual selector emitted — do not assume from renderer name.
+
+**Chrome MCP capability note**: there is no `mcp__Claude_in_Chrome__screenshot` tool. To inspect a built page visually we have: `navigate`, `javascript_tool` (DOM probe via evaluated expression), `read_console_messages`, `read_page`, `get_page_text`, `find` (natural-language element search). Pixel-level comparison requires `mcp__computer-use__screenshot` on the desktop (after `request_access` for Chrome).
+
+## 2026-05 — Browser_batch is mandatory
+
+System reminded after single-call navigate: "Prefer browser_batch — significantly faster." Batched the 4-page renderer audit in one call (5 actions) instead of 8 separate calls. ~5x speedup. Use `browser_batch` whenever ≥2 chained browser actions are predictable.
