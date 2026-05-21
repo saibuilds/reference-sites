@@ -45,14 +45,27 @@ a{color:inherit;text-decoration:none}
 .mlb-loader .emblem .l3{animation-delay:.6s;stroke:var(--ember)}
 .mlb-loader .emblem .l4{animation-delay:.85s;stroke:var(--moss)}
 .mlb-loader .kick{margin-top:24px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.55em;color:var(--copper);text-transform:uppercase;opacity:0;animation:mlbFadeIn .8s 1s forwards}
+.mlb-loader .fammark{margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.55em;color:var(--copper);text-transform:uppercase;opacity:0;animation:mlbFamMark .6s 1s forwards,mlbFamOut .35s 1.6s forwards}
 @keyframes mlbDraw{to{stroke-dashoffset:0}}
 @keyframes mlbFadeIn{to{opacity:.95}}
+@keyframes mlbFamMark{to{opacity:.8}}
+@keyframes mlbFamOut{to{opacity:0}}
 @keyframes mlbCurtainTop{to{transform:translateY(-100%)}}
 @keyframes mlbCurtainBot{to{transform:translateY(100%)}}
 @keyframes mlbLoaderOut{to{opacity:0;visibility:hidden}}
 
+/* ============ FAMILY BAR ============ */
+.mlb-fambar{position:fixed;top:0;left:0;right:0;z-index:60;height:28px;background:var(--bg);border-bottom:1px solid rgba(201,120,68,.15);display:flex;justify-content:space-between;align-items:center;padding:0 5vw;font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-size:9px;letter-spacing:.5em}
+.mlb-fambar .fb-mark{color:var(--muted);opacity:.85}
+.mlb-fambar .fb-links{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.mlb-fambar .fb-links a{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--muted);opacity:.7;transition:color .3s,opacity .3s;padding:4px 2px}
+.mlb-fambar .fb-links a:hover{color:var(--copper);opacity:1}
+.mlb-fambar .fb-links a.here{color:var(--copper);opacity:1;border-bottom:1px solid var(--copper);padding-bottom:3px}
+.mlb-fambar .fb-sep{opacity:.35;color:var(--muted);letter-spacing:0;font-size:10px}
+@media (max-width:760px){.mlb-fambar{font-size:8px;letter-spacing:.35em;padding:0 4vw}.mlb-fambar .fb-mark{display:none}.mlb-fambar .fb-links a{font-size:8px;letter-spacing:.32em}}
+
 /* ============ NAV ============ */
-.mlb-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 5vw;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+.mlb-nav{position:fixed;top:28px;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 5vw;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
 .mlb-nav.scrolled{background:rgba(15,8,5,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
 .mlb-logo{display:flex;align-items:center;gap:14px;color:var(--paper)}
 .mlb-logo svg{width:42px;height:42px;overflow:visible}
@@ -244,6 +257,24 @@ a{color:inherit;text-decoration:none}
 .mlb-letter .contact{margin-top:46px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.45em;color:var(--ink);text-transform:uppercase;opacity:.6}
 
 /* ============ FOOTER ============ */
+/* ============ BRAND FAMILY CLOSING ============ */
+.mlb-famclose{position:relative;background:var(--bg);padding:14vh 6vw 10vh;border-top:1px solid var(--line)}
+.mlb-famclose .head{text-align:center;max-width:1100px;margin:0 auto 7vh}
+.mlb-famclose .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.55em;color:var(--copper);text-transform:uppercase;margin-bottom:24px;opacity:.75}
+.mlb-famclose h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(32px,4.6vw,60px);line-height:1.06;letter-spacing:-.01em;color:var(--paper)}
+.mlb-famclose h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--copper);font-weight:300}
+.mlb-famclose .cards{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.mlb-famclose .fcard{position:relative;display:block;padding:36px 30px;border:1px solid var(--line);background:var(--surface);transition:transform 280ms ease,border-color 280ms ease,box-shadow 280ms ease;text-decoration:none;color:inherit}
+.mlb-famclose .fcard .cat{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;margin-bottom:22px}
+.mlb-famclose .fcard .bname{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:28px;color:var(--paper);letter-spacing:-.01em;margin-bottom:14px;line-height:1}
+.mlb-famclose .fcard .tagl{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:16px;color:var(--paper-soft);line-height:1.45;opacity:.85}
+.mlb-famclose .fcard .here-lab{position:absolute;top:18px;right:22px;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.45em;color:var(--copper);text-transform:uppercase;opacity:.9}
+.mlb-famclose .fcard.here{border-color:var(--copper);background:rgba(201,120,68,.05)}
+.mlb-famclose .fcard.to-sd:hover{border-color:#C9A961;transform:translateY(-2px);box-shadow:0 14px 36px rgba(201,169,97,.12)}
+.mlb-famclose .fcard.to-mlb:hover{border-color:#C97844;transform:translateY(-2px);box-shadow:0 14px 36px rgba(201,120,68,.12)}
+.mlb-famclose .fcard.to-dj:hover{border-color:#FF6B1A;transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,26,.12)}
+@media (max-width:760px){.mlb-famclose .cards{grid-template-columns:1fr}}
+
 .mlb-foot{position:relative;background:var(--ink);padding:8vh 6vw 5vh;border-top:1px solid var(--line)}
 .mlb-foot .top{display:flex;justify-content:center;margin-bottom:5vh}
 .mlb-foot .top svg{width:64px;height:64px}
@@ -311,6 +342,19 @@ a{color:inherit;text-decoration:none}
       <circle class="l4" cx="138" cy="132" r="5"/>
     </svg>
     <div class="kick">EST. TORONTO · 2014</div>
+    <div class="fammark">PRESENTED BY SAI &amp; FAMILY</div>
+  </div>
+</div>
+
+<!-- ============ FAMILY BAR ============ -->
+<div class="mlb-fambar" aria-label="Sai and Family Ateliers">
+  <span class="fb-mark">SAI &amp; FAMILY · ATELIERS OF TORONTO</span>
+  <div class="fb-links">
+    <a href="../sathideals/">SATHIDEALS · REAL ESTATE</a>
+    <span class="fb-sep">·</span>
+    <a class="here" href="./" aria-current="page">MYLEGALBASEMENT · SUITES</a>
+    <span class="fb-sep">·</span>
+    <a href="../dj/">DJ CUSTOM RENO · CABINETRY</a>
   </div>
 </div>
 
@@ -560,6 +604,32 @@ a{color:inherit;text-decoration:none}
       <span>sai@mylegalbasement.ca</span>
       <span>Toronto &middot; 24 wards</span>
     </div>
+  </div>
+</section>
+
+<!-- ============ BRAND FAMILY CLOSING ============ -->
+<section class="mlb-famclose" aria-label="Sai and Family Atelier">
+  <div class="head">
+    <div class="eye">— Sai &amp; Family · Three Ateliers —</div>
+    <h2>Part of the Sai &amp; Family <em>Atelier</em></h2>
+  </div>
+  <div class="cards">
+    <a class="fcard to-sd" href="../sathideals/">
+      <div class="cat">Real Estate</div>
+      <div class="bname">SathiDeals</div>
+      <div class="tagl">A quieter kind of luxury, in Toronto neighbourhoods.</div>
+    </a>
+    <div class="fcard here">
+      <span class="here-lab">Currently Viewing</span>
+      <div class="cat">Suites</div>
+      <div class="bname">MyLegalBasement</div>
+      <div class="tagl">Two homes, one lot. Built legally, rented profitably.</div>
+    </div>
+    <a class="fcard to-dj" href="../dj/">
+      <div class="cat">Cabinetry</div>
+      <div class="bname">DJ Custom Reno</div>
+      <div class="tagl">Cabinetry and renovation, engineered like a contractor.</div>
+    </a>
   </div>
 </section>
 

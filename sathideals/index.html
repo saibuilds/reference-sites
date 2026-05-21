@@ -44,14 +44,27 @@ a{color:inherit;text-decoration:none}
 .ss-loader .emblem .p2{animation-delay:.4s}
 .ss-loader .emblem .p3{animation-delay:.7s}
 .ss-loader .kick{margin-top:22px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;opacity:0;animation:ssFadeIn .8s 1s forwards}
+.ss-loader .fammark{margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;opacity:0;animation:ssFamMark .6s 1s forwards,ssFamOut .35s 1.6s forwards}
 @keyframes ssDraw{to{stroke-dashoffset:0}}
 @keyframes ssFadeIn{to{opacity:.95}}
+@keyframes ssFamMark{to{opacity:.8}}
+@keyframes ssFamOut{to{opacity:0}}
 @keyframes ssCurtainTop{to{transform:translateY(-100%)}}
 @keyframes ssCurtainBot{to{transform:translateY(100%)}}
 @keyframes ssLoaderOut{to{opacity:0;visibility:hidden}}
 
+/* ============ FAMILY BAR ============ */
+.ss-fambar{position:fixed;top:0;left:0;right:0;z-index:60;height:28px;background:var(--bg);border-bottom:1px solid rgba(201,169,97,.15);display:flex;justify-content:space-between;align-items:center;padding:0 5vw;font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-size:9px;letter-spacing:.5em}
+.ss-fambar .fb-mark{color:var(--muted);opacity:.85}
+.ss-fambar .fb-links{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.ss-fambar .fb-links a{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--muted);opacity:.7;transition:color .3s,opacity .3s;padding:4px 2px}
+.ss-fambar .fb-links a:hover{color:var(--gold);opacity:1}
+.ss-fambar .fb-links a.here{color:var(--gold);opacity:1;border-bottom:1px solid var(--gold);padding-bottom:3px}
+.ss-fambar .fb-sep{opacity:.35;color:var(--muted);letter-spacing:0;font-size:10px}
+@media (max-width:760px){.ss-fambar{font-size:8px;letter-spacing:.35em;padding:0 4vw}.ss-fambar .fb-mark{display:none}.ss-fambar .fb-links a{font-size:8px;letter-spacing:.32em}}
+
 /* ============ NAV ============ */
-.ss-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 5vw;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+.ss-nav{position:fixed;top:28px;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 5vw;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
 .ss-nav.scrolled{background:rgba(10,10,11,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
 .ss-logo{display:flex;align-items:center;gap:14px;color:var(--paper)}
 .ss-logo svg{width:42px;height:42px;overflow:visible}
@@ -224,6 +237,24 @@ a{color:inherit;text-decoration:none}
 .ss-letter .cta .arrow::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%) rotate(45deg);width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor}
 .ss-letter .contact{margin-top:46px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.45em;color:var(--ink);text-transform:uppercase;opacity:.6}
 
+/* ============ BRAND FAMILY CLOSING ============ */
+.ss-famclose{position:relative;background:var(--bg);padding:14vh 6vw 10vh;border-top:1px solid var(--line)}
+.ss-famclose .head{text-align:center;max-width:1100px;margin:0 auto 7vh}
+.ss-famclose .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;opacity:.75}
+.ss-famclose h2{font-family:"Italiana",serif;font-size:clamp(32px,4.6vw,60px);line-height:1.06;letter-spacing:-.015em;color:var(--paper);font-weight:400}
+.ss-famclose h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.ss-famclose .cards{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.ss-famclose .fcard{position:relative;display:block;padding:36px 30px;border:1px solid var(--line);background:var(--surface);transition:transform 280ms ease,border-color 280ms ease,box-shadow 280ms ease;text-decoration:none;color:inherit}
+.ss-famclose .fcard .cat{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;margin-bottom:22px}
+.ss-famclose .fcard .bname{font-family:"Italiana",serif;font-size:28px;color:var(--paper);letter-spacing:-.01em;margin-bottom:14px;line-height:1}
+.ss-famclose .fcard .tagl{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:16px;color:var(--paper-soft);line-height:1.45;opacity:.85}
+.ss-famclose .fcard .here-lab{position:absolute;top:18px;right:22px;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.45em;color:var(--gold);text-transform:uppercase;opacity:.9}
+.ss-famclose .fcard.here{border-color:var(--gold);background:rgba(201,169,97,.05)}
+.ss-famclose .fcard.to-sd:hover{border-color:#C9A961;transform:translateY(-2px);box-shadow:0 14px 36px rgba(201,169,97,.12)}
+.ss-famclose .fcard.to-mlb:hover{border-color:#C97844;transform:translateY(-2px);box-shadow:0 14px 36px rgba(201,120,68,.12)}
+.ss-famclose .fcard.to-dj:hover{border-color:#FF6B1A;transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,26,.12)}
+@media (max-width:760px){.ss-famclose .cards{grid-template-columns:1fr}}
+
 /* ============ FOOTER ============ */
 .ss-foot{position:relative;background:var(--ink);padding:8vh 6vw 5vh;border-top:1px solid var(--line)}
 .ss-foot .top{display:flex;justify-content:center;margin-bottom:5vh}
@@ -288,6 +319,19 @@ a{color:inherit;text-decoration:none}
       <path class="p3" d="M22 76 L66 76"/>
     </svg>
     <div class="kick">EST. TORONTO · MMXII</div>
+    <div class="fammark">PRESENTED BY SAI &amp; FAMILY</div>
+  </div>
+</div>
+
+<!-- ============ FAMILY BAR ============ -->
+<div class="ss-fambar" aria-label="Sai and Family Ateliers">
+  <span class="fb-mark">SAI &amp; FAMILY · ATELIERS OF TORONTO</span>
+  <div class="fb-links">
+    <a class="here" href="./" aria-current="page">SATHIDEALS · REAL ESTATE</a>
+    <span class="fb-sep">·</span>
+    <a href="../mylegalbasement/">MYLEGALBASEMENT · SUITES</a>
+    <span class="fb-sep">·</span>
+    <a href="../dj/">DJ CUSTOM RENO · CABINETRY</a>
   </div>
 </div>
 
@@ -511,6 +555,32 @@ a{color:inherit;text-decoration:none}
       <span>hello@sathideals.ca</span>
       <span>Studio · 88 Yorkville · TO</span>
     </div>
+  </div>
+</section>
+
+<!-- ============ BRAND FAMILY CLOSING ============ -->
+<section class="ss-famclose" aria-label="Sai and Family Atelier">
+  <div class="head">
+    <div class="eye">— Sai &amp; Family · Three Ateliers —</div>
+    <h2>Part of the Sai &amp; Family <em>Atelier</em></h2>
+  </div>
+  <div class="cards">
+    <div class="fcard here">
+      <span class="here-lab">Currently Viewing</span>
+      <div class="cat">Real Estate</div>
+      <div class="bname">SathiDeals</div>
+      <div class="tagl">A quieter kind of luxury, in Toronto neighbourhoods.</div>
+    </div>
+    <a class="fcard to-mlb" href="../mylegalbasement/">
+      <div class="cat">Suites</div>
+      <div class="bname">MyLegalBasement</div>
+      <div class="tagl">Two homes, one lot. Built legally, rented profitably.</div>
+    </a>
+    <a class="fcard to-dj" href="../dj/">
+      <div class="cat">Cabinetry</div>
+      <div class="bname">DJ Custom Reno</div>
+      <div class="tagl">Cabinetry and renovation, engineered like a contractor.</div>
+    </a>
   </div>
 </section>
 
