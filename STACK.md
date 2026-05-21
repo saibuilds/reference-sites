@@ -49,6 +49,18 @@ claude mcp list   # all three should show ✓ Connected
   before deploy.
 - **21st.dev Magic** — the MCP form of layer 1's gap-filler.
 
+**Bonus, works from `refsites-code` right now:** `tools/gemini.js` calls
+Gemini 2.5 Flash directly via REST — `generativelanguage.googleapis.com`
+is in this environment's allowlist (verified). Use it as a long-context
+sub-agent (1M token window) for summarising large files, structured
+extraction, or image analysis without burning Claude's context.
+
+```bash
+set -a && source .mcp.env && set +a
+node tools/gemini.js "your prompt"               # one-shot
+cat some-long-file | node tools/gemini.js        # pipe input
+```
+
 ---
 
 ## The 4th layer: reference research (closes the gap I can't fetch live sites)

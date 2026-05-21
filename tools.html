@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tools — Stack Catalogue</title>
+<meta name="description" content="Browsable catalogue of every tool, MCP, registry and AI service evaluated for this project. ★ = top-3 pick.">
+<style>
+  :root{
+    --bg:#0D0E12; --surface:#15171D; --card:#1A1D25; --bd:rgba(255,255,255,.06);
+    --fg:#ECE8DC; --mute:#8B8A87; --accent:#C9A86A; --good:#7FB686; --warn:#C97A5B;
+    --pick:#F0C674;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.5;-webkit-font-smoothing:antialiased}
+  header{padding:5rem 6vw 2rem;border-bottom:1px solid var(--bd)}
+  header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.4rem,5vw,4rem);margin:0 0 .8rem;font-weight:400;letter-spacing:-.01em}
+  header p.lead{margin:0 0 2rem;color:var(--mute);max-width:60ch;font-size:1.05rem}
+  .controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+  input[type="search"]{flex:1;min-width:220px;background:var(--surface);border:1px solid var(--bd);color:var(--fg);padding:.7rem 1rem;border-radius:8px;font:inherit;outline:none}
+  input[type="search"]:focus{border-color:var(--accent)}
+  .filter-btn{background:transparent;border:1px solid var(--bd);color:var(--fg);padding:.55rem 1rem;border-radius:999px;font:inherit;cursor:pointer;transition:all .15s;font-size:.9rem;white-space:nowrap}
+  .filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#0D0E12;font-weight:500}
+  .count{color:var(--mute);font-size:.85rem;margin-left:.4rem}
+  main{padding:2rem 6vw 6rem;max-width:1400px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.4rem}
+  .card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:.8rem;transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-2px);border-color:rgba(201,168,106,.35)}
+  .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem}
+  .cat{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .star{color:var(--pick);font-size:1.1rem;line-height:1}
+  .card h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:1.5rem;margin:0;letter-spacing:-.01em}
+  .card a.site{color:var(--mute);font-size:.85rem;text-decoration:none;border-bottom:1px solid transparent;width:fit-content}
+  .card a.site:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .desc{color:var(--fg);opacity:.85;font-size:.92rem;margin:0;flex:1}
+  .use{font-size:.78rem;color:var(--mute);border-top:1px solid var(--bd);padding-top:.7rem;margin-top:.2rem}
+  .use strong{color:var(--good);font-weight:500;letter-spacing:.5px}
+  .card.skip{opacity:.6}
+  .card.skip .cat{color:var(--warn)}
+  .card.pending{border-style:dashed}
+  .card.pending .cat{color:var(--warn)}
+  footer{padding:3rem 6vw;border-top:1px solid var(--bd);color:var(--mute);font-size:.9rem;display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:space-between;align-items:center}
+  footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(201,168,106,.4)}
+  footer a:hover{border-bottom-color:var(--accent)}
+  .empty{grid-column:1/-1;text-align:center;padding:3rem;color:var(--mute)}
+  kbd{font-family:'IBM Plex Mono',ui-monospace,monospace;background:var(--surface);padding:.1rem .4rem;border-radius:4px;border:1px solid var(--bd);font-size:.85em}
+</style>
+</head>
+<body>
+<header>
+  <h1>Tools — Stack Catalogue</h1>
+  <p class="lead">Every tool, MCP, registry and AI service evaluated for this project. <strong style="color:var(--pick)">★</strong> marks the top-3 mix. Full reasoning in <a href="ARSENAL.md" style="color:var(--accent)">ARSENAL.md</a>; one-page picks in <a href="STACK.md" style="color:var(--accent)">STACK.md</a>.</p>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search by name, description, or use case…" autocomplete="off">
+    <button class="filter-btn active" data-cat="all">All <span class="count" id="c-all"></span></button>
+    <button class="filter-btn" data-cat="frontend">Frontend</button>
+    <button class="filter-btn" data-cat="animation">Animation</button>
+    <button class="filter-btn" data-cat="3d">3D &amp; Scenes</button>
+    <button class="filter-btn" data-cat="media">Media gen</button>
+    <button class="filter-btn" data-cat="ai">AI agents / MCPs</button>
+    <button class="filter-btn" data-cat="builders">Site builders</button>
+    <button class="filter-btn" data-cat="research">Design &amp; research</button>
+    <button class="filter-btn" data-cat="pending">Pending</button>
+    <button class="filter-btn" data-cat="picks">★ Picks only</button>
+  </div>
+</header>
+<main>
+  <section class="grid" id="grid"></section>
+</main>
+<footer>
+  <div>Catalogue rendered from inline data — see <a href="ARSENAL.md">ARSENAL.md</a> for full analysis.</div>
+  <div>Live <a href="https://github.com/saibuilds/reference-sites">repo</a> · branch <kbd>claude/setup-mcp-api-keys-t4GTr</kbd></div>
+</footer>
+<script>
+const TOOLS = [
+  // ── Frontend foundation + spectacle ────────────────────────────────────
+  { name:"shadcn/ui", url:"https://ui.shadcn.com", cat:"frontend", pick:true,
+    desc:"Copy-paste React primitives (Button, Dialog, Form, Table) built on Radix + Tailwind. You own the code.",
+    use:"Foundation for every React build — dashboards, forms, interactive UI." },
+  { name:"Magic UI", url:"https://magicui.design", cat:"frontend", pick:true,
+    desc:"Animation-heavy components on shadcn + Motion: marquees, animated beams, blur-fade, shimmer button, dock, globe.",
+    use:"The body & spectacle sections of marketing pages." },
+  { name:"Skiper UI", url:"https://skiper-ui.com", cat:"frontend",
+    desc:"Heavy hero effects — image trails, scroll stacks, 3D scroll, hover-distortion. Copy-paste via shadcn CLI.",
+    use:"Signature hero blocks and big scroll moments." },
+  { name:"React Bits", url:"https://reactbits.dev", cat:"frontend",
+    desc:"Text-animation specialists: split-text, decrypted-text, blur-text, shiny-text, plus light backgrounds.",
+    use:"Headline reveals and type-led sections." },
+  { name:"Animate UI", url:"https://animate-ui.com", cat:"frontend",
+    desc:"Open-source animated React components — shadcn CLI + Motion + Tailwind. Broad interaction palette.",
+    use:"Drop-in alongside Magic UI for non-overlapping animated pieces." },
+  { name:"ForgeUI", url:"https://forgeui.in", cat:"frontend",
+    desc:"Free shadcn-style React components with Framer-Motion driven animations (forms, scroll reveals, loaders).",
+    use:"Animated form sections and scroll-reveals." },
+  { name:"Aceternity UI", url:"https://ui.aceternity.com", cat:"frontend",
+    desc:"Heavy effects — background beams, lamp, world map, sparkles. Overlaps with Magic UI; don't load both.",
+    use:"Premium hero accents. Pick one or the other, not both." },
+  { name:"Origin UI", url:"https://originui.com", cat:"frontend",
+    desc:"shadcn-faithful primitives with tasteful animations and a wider component count (date pickers, command bars).",
+    use:"Reach for it when shadcn's own set is missing a primitive." },
+  { name:"21st.dev", url:"https://21st.dev", cat:"frontend", pick:true,
+    desc:"Community registry of shadcn-style components + the Magic MCP that lets Claude/Cursor pull or generate components on demand by description.",
+    use:"On-demand component gap-filler when curated registries don't ship what you need." },
+  { name:"HeroUI", url:"https://heroui.com", cat:"frontend",
+    desc:"Modern React component library (formerly NextUI) — full design system, theming, installed as a package.",
+    use:"When you want a complete design system rather than wiring shadcn + spectacle registries." },
+  { name:"Tailwind UI / Plus", url:"https://tailwindcss.com/plus", cat:"frontend",
+    desc:"Paid premium components and templates from the Tailwind team. Most stable, well-engineered marketing set.",
+    use:"Worth it for a single team license when the client pays for it." },
+  { name:"Tremor", url:"https://tremor.so", cat:"frontend",
+    desc:"React + Tailwind components for dashboards & charts (KPI cards, area/bar/donut, tables). Built on Recharts.",
+    use:"Internal admin / metrics pages. Not for marketing." },
+  { name:"Uiverse.io", url:"https://uiverse.io", cat:"frontend",
+    desc:"Huge community marketplace of pure CSS/HTML snippets (buttons, cards, inputs, loaders). Not React.",
+    use:"One-off styled inputs / buttons when you don't want a whole registry." },
+  { name:"Nextra", url:"https://nextra.site", cat:"frontend",
+    desc:"Next.js docs-site framework (MDX, theme, search). Used by shadcn's own docs.",
+    use:"Public API docs site for any of the businesses' future product docs." },
+
+  // ── Animation ─────────────────────────────────────────────────────────
+  { name:"Motion", url:"https://motion.dev", cat:"animation", pick:true,
+    desc:"The renamed Framer Motion. Install: npm install motion. Import: { motion } from 'motion/react'.",
+    use:"Default animation library for any React client build. Springs, layout, gesture, scroll-link." },
+  { name:"GSAP + ScrollTrigger", url:"https://gsap.com", cat:"animation",
+    desc:"Page choreographer: scroll-pin, horizontal scroll, scrubbed timelines, SVG path morphs. Already wired in this static library.",
+    use:"Static HTML / vanilla JS page choreography. Reach for it in React only when Motion can't do what you need." },
+  { name:"Lenis", url:"https://lenis.darkroom.engineering", cat:"animation",
+    desc:"Smooth scroll. Tiny lib, big perceived-polish boost.",
+    use:"Always include — instant baseline polish." },
+  { name:"Lottie", url:"https://lottiefiles.com", cat:"animation",
+    desc:"Vector micro-animations (checkmarks, loaders, icon transitions) — JSON files rendered by lottie-web.",
+    use:"Iconography accents in dashboards or onboarding flows." },
+  { name:"Vanta.js", url:"https://www.vantajs.com", cat:"animation",
+    desc:"Animated backgrounds (waves, fog, net, birds) via Three.js. Cheap visual win.",
+    use:"Quick animated backgrounds when Spline / Motion would be overkill." },
+
+  // ── Video rendering ────────────────────────────────────────────────────
+  { name:"Remotion", url:"https://www.remotion.dev", cat:"animation",
+    desc:"React-based MP4 renderer — write components, output video files. Scaffolded in this repo at tools/remotion/.",
+    use:"Code-rendered brand reels per archetype. node tools/remotion/render.js." },
+
+  // ── 3D + interactive scenes ────────────────────────────────────────────
+  { name:"Spline AI", url:"https://spline.design", cat:"3d", pick:true,
+    desc:"AI inside the Spline editor generates a 3D scene; export as a scene URL or .splinecode and embed.",
+    use:"Hero scenes for 04-3d-spline-webgl. Default 3D pick — zero new plumbing." },
+  { name:"Omma by Spline", url:"https://omma.build", cat:"3d",
+    desc:"AI canvas that generates 3D + motion + UI from natural-language prompts into interactive web experiences. $29/mo Pro (launched Mar 2026).",
+    use:"Ambitious 'wow' heroes that need a whole experience, not just a scene." },
+  { name:"Unicorn Studio", url:"https://unicorn.studio", cat:"3d",
+    desc:"No-code WebGL 2D editor — parallax, mouse-reactive, scroll-linked layered scenes. Different category from Spline (2D-interactive, not 3D-deep).",
+    use:"Heroes that need interactivity without a full 3D scene." },
+  { name:"Meshy.ai", url:"https://meshy.ai", cat:"3d", pick:true,
+    desc:"Text-to-3D and image-to-3D. Outputs .glb / .fbx / .obj. Free tier + REST API.",
+    use:"Specific product objects — watch movement, jet, bottle — loaded by Three.js." },
+  { name:"Tripo3D", url:"https://www.tripo3d.ai", cat:"3d",
+    desc:"Similar to Meshy — text/image to 3D, .glb / .usdz. Often stronger on organic shapes.",
+    use:"A/B against Meshy on tricky organic / asymmetric meshes." },
+  { name:"Luma Genie", url:"https://lumalabs.ai/genie", cat:"3d",
+    desc:"Text-to-3D from Luma Labs. Web app only — no public API yet, manual exports.",
+    use:"Fallback when Spline AI / Meshy can't get the right aesthetic." },
+  { name:"Rodin (Hyper3D)", url:"https://hyperhuman.deemos.com/rodin", cat:"3d",
+    desc:"High-quality text-to-3D. Premium tier, narrower availability.",
+    use:"Best-in-class quality when budget allows." },
+
+  // ── Media generation (image / video) ───────────────────────────────────
+  { name:"Higgsfield", url:"https://higgsfield.ai", cat:"media", pick:true,
+    desc:"Cinematic stills + 5-sec brand reels in one MCP. Soul image, Kling/Seedance video. Paid.",
+    use:"Premium hero stills and video for showcase archetypes." },
+  { name:"Pollinations", url:"https://pollinations.ai", cat:"media", pick:true,
+    desc:"Free, no-auth GET-based image gen. Models: sana, flux, turbo. Already used to ship all 15 archetype heroes.",
+    use:"Free fallback for volume generation when Higgsfield isn't worth the spend." },
+  { name:"fal.ai", url:"https://fal.ai", cat:"media",
+    desc:"Umbrella host: nano-banana (Gemini 2.5 Flash Image), Flux, Seedance, Recraft, hundreds more. Single FAL_KEY.",
+    use:"Cheapest broad-coverage workhorse. Where real Gemini-image lives." },
+  { name:"Replicate", url:"https://replicate.com", cat:"media",
+    desc:"Run almost any open model. r8_… token. Cron-ready.",
+    use:"Niche open-source models (SDXL, Flux schnell, custom finetunes)." },
+  { name:"@nanana-ai/mcp-server-nano-banana", url:"https://github.com/nanana-ai", cat:"media", skip:true,
+    desc:"Misleading — it's a nanana.app reseller, NOT Google. Reads NANANA_API_TOKEN, not a Gemini key.",
+    use:"Skip. Use fal-ai for real Gemini 2.5 Flash Image." },
+  { name:"Stability / BFL / Runway / Luma / Kling / Hunyuan", url:"https://stability.ai", cat:"media",
+    desc:"Other premium gen APIs — all reachable only from refsites-media, all premium.",
+    use:"Reach for a specific one only when it has the look the others can't hit." },
+  { name:"ElevenLabs", url:"https://elevenlabs.io", cat:"media", skip:true,
+    desc:"Text-to-speech / voice clone. Out of scope for static reference sites.",
+    use:"Skip until a project needs AI voiceover (brand video, narration)." },
+
+  // ── AI agents + MCPs (the assistant layer) ─────────────────────────────
+  { name:"Gemini 2.5 Flash (sub-agent)", url:"https://ai.google.dev", cat:"ai", pick:true,
+    desc:"WORKS FROM THIS SESSION — generativelanguage.googleapis.com is allowlisted, GEMINI_API_KEY valid. Wrapper at tools/gemini.js (1M-token context, multimodal).",
+    use:"Long-context summarisation, structured extraction, image analysis from refsites-code." },
+  { name:"Context7 MCP", url:"https://context7.com", cat:"ai", pick:true,
+    desc:"Live docs lookup for any library (React, Next, Motion, Three, GSAP, Spline). Install user-scoped — no API key needed.",
+    use:"Say 'use context7' in any prompt; pulls current docs instead of stale training data." },
+  { name:"Playwright MCP", url:"https://github.com/microsoft/playwright-mcp", cat:"ai", pick:true,
+    desc:"Microsoft's headless browser MCP. Navigate, screenshot, click, fill forms. Install user-scoped.",
+    use:"Visual QA of rendered pages before deploy. Install in refsites-media (this session blocks the binaries)." },
+  { name:"21st.dev Magic MCP", url:"https://21st.dev/magic", cat:"ai", pick:true,
+    desc:"On-demand component generator MCP. Free tier; needs --api-key flag.",
+    use:"Claude pulls / generates a bespoke React component from a description mid-build." },
+  { name:"Canva MCP", url:"https://www.canva.com/developers", cat:"ai",
+    desc:"Already connected in this session. Search / generate / edit designs in Canva from chat.",
+    use:"Social posts and ads sharing the same brand kit." },
+  { name:"Figma Dev-Mode MCP", url:"https://www.figma.com/blog/introducing-figmas-dev-mode-mcp-server/", cat:"ai",
+    desc:"Turn real Figma comps into code automatically.",
+    use:"Once you have client comps in Figma." },
+  { name:"Manus.im", url:"https://manus.im", cat:"ai",
+    desc:"AI agent that builds polished landing pages from prompts end-to-end. Peer/competitor to Claude — not a tool I integrate with.",
+    use:"Alternative agent if you ever want to A/B against this Claude workflow on a real build." },
+
+  // ── Site builders ──────────────────────────────────────────────────────
+  { name:"Lovable", url:"https://lovable.dev", cat:"builders",
+    desc:"Generates a full Next.js + Tailwind app from a prompt; live preview; one-click Vercel deploy. Best out-of-box quality right now.",
+    use:"First builder to try with a PROMPTS.md block for a real business." },
+  { name:"Bolt.new", url:"https://bolt.new", cat:"builders",
+    desc:"In-browser editor, faster iteration; slightly less polished output than Lovable.",
+    use:"A/B against Lovable on the same prompt." },
+  { name:"v0 by Vercel", url:"https://v0.dev", cat:"builders",
+    desc:"Shadcn-style components, very clean, less 'complete site'.",
+    use:"Component-grade UI you assemble yourself, not whole sites." },
+  { name:"Framer", url:"https://framer.com", cat:"builders",
+    desc:"Visual builder, not prompt-first; superb animations; you don't own the code.",
+    use:"Marketing pages where you want pixel control without coding." },
+  { name:"Webflow", url:"https://webflow.com", cat:"builders",
+    desc:"Mature visual builder; CMS; not AI-prompted.",
+    use:"Long-term content sites with multiple editors." },
+  { name:"landing.love", url:"https://landing.love", cat:"builders",
+    desc:"AI landing-page generator (couldn't fully verify in search — flagging here so it's tracked).",
+    use:"Landing-page-specific niche alternative to Lovable / Bolt. Confirm with a link." },
+
+  // ── Design / research ──────────────────────────────────────────────────
+  { name:"getdesign.md", url:"https://getdesign.md", cat:"research", pick:true,
+    desc:"Curated library of DESIGN.md files for top sites (Apple, Figma, Airbnb, Cursor, Webflow, Replicate, MiniMax). Free; paid tier not needed for this project.",
+    use:"Drop a DESIGN.md into notes/ and I'll match the archetype precisely." },
+  { name:"DESIGN.md Generator (Chrome ext.)", url:"https://chromewebstore.google.com/detail/designmd-generator/jbgahjopiacfecejenojopjpljocdigb", cat:"research", pick:true,
+    desc:"Companion Chrome extension. Generates a DESIGN.md from any live page in your browser.",
+    use:"Closes the 'I can't fetch coco-veda.vercel.app' loop. Extract → drop in notes/ → tune archetype against real tokens." },
+  { name:"Awwwards: Sites of the Year", url:"https://www.awwwards.com/websites/sites_of_the_year/", cat:"research",
+    desc:"The highest-signal inspiration index. Skim winners, run DESIGN.md Generator on the 3-4 nearest in feel.",
+    use:"Source of design references for any client brief." },
+  { name:"Claude for Chrome", url:"https://claude.ai/download", cat:"research",
+    desc:"Browser extension on your own machine — uses your logged-in session to view reels, dashboards, gated sites.",
+    use:"When you need behaviour (scroll-linked animations, interactions, video) not just styles." },
+  { name:"Google Stitch", url:"https://stitch.withgoogle.com", cat:"research",
+    desc:"Google's design-to-code generator. Already wired in .mcp.json. Beta, free tier.",
+    use:"Rapid layout mockup upstream of code. Treat output as starting layout, not final." },
+  { name:"Firecrawl / Fetch MCPs", url:"https://www.firecrawl.dev", cat:"research",
+    desc:"Scrape live sites into structured markdown. Network-blocked in refsites-code; install only in a session with outbound.",
+    use:"refsites-research session if you ever open its network policy." },
+
+  // ── Pending — needs your input ────────────────────────────────────────
+  { name:"Barbni AI / Barbroni AI", url:"#", cat:"pending",
+    desc:"Not recognised under either spelling. Could be Bardeen.ai (no-code automation) or Barbara AI (industrial edge). Drop a link.",
+    use:"Pending clarification." },
+  { name:"UI Pro Max", url:"#", cat:"pending",
+    desc:"Four plausible matches: Nuxt UI Pro, Tailwind UI / Plus, one of the shadcn premium kits, or a Claude Code skill.",
+    use:"Pending clarification — link pins it." },
+  { name:"Vengene UI", url:"#", cat:"pending",
+    desc:"Couldn't find any product matching this name. Likely a misspelling. Vengeance UI?",
+    use:"Pending clarification." },
+  { name:"Neurobus", url:"#", cat:"pending",
+    desc:"Searched — found Neurobus.ai (defense/aerospace edge AI) and Cognizant's Neuro-SAN (multi-agent framework). Neither is a UI/web tool.",
+    use:"Pending — confirm which one you meant." },
+  { name:"Atomize Design", url:"#", cat:"pending",
+    desc:"Could be Atomize React (smaller React UI kit) or atomic design methodology (Brad Frost).",
+    use:"Pending clarification." },
+];
+
+const grid = document.getElementById('grid');
+const search = document.getElementById('q');
+const buttons = document.querySelectorAll('.filter-btn');
+document.getElementById('c-all').textContent = '(' + TOOLS.length + ')';
+
+let activeCat = 'all';
+let query = '';
+
+function render() {
+  const q = query.toLowerCase().trim();
+  const filtered = TOOLS.filter(t => {
+    const inCat =
+      activeCat === 'all'   ? true :
+      activeCat === 'picks' ? !!t.pick :
+                              t.cat === activeCat;
+    if (!inCat) return false;
+    if (!q) return true;
+    return (t.name + ' ' + (t.desc || '') + ' ' + (t.use || '')).toLowerCase().includes(q);
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty">No tools match. Try a different search or category.</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(t => `
+    <article class="card ${t.skip ? 'skip' : ''} ${t.cat === 'pending' ? 'pending' : ''}">
+      <div class="card-head">
+        <span class="cat">${t.cat}${t.skip ? ' · skip' : ''}</span>
+        ${t.pick ? '<span class="star" title="Top-3 pick">★</span>' : ''}
+      </div>
+      <h3>${t.name}</h3>
+      ${t.url && t.url !== '#' ? `<a class="site" href="${t.url}" target="_blank" rel="noopener">${t.url.replace(/^https?:\/\//,'').replace(/\/$/,'')}</a>` : ''}
+      <p class="desc">${t.desc}</p>
+      <div class="use"><strong>USE FOR</strong> &nbsp;${t.use}</div>
+    </article>
+  `).join('');
+}
+
+buttons.forEach(b => b.addEventListener('click', () => {
+  buttons.forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  activeCat = b.dataset.cat;
+  render();
+}));
+search.addEventListener('input', e => { query = e.target.value; render(); });
+
+render();
+</script>
+</body>
+</html>

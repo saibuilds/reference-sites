@@ -72,6 +72,7 @@ Higgsfield / fal / Pollinations output 2D images + short video. For real
 |---|---|---|
 | **Omma by Spline** (`omma.build`) | Interactive web experiences combining **3D + motion + UI + code**, generated from natural language. Outputs publishable scenes (web / mobile / XR). Paid ($29/mo Pro). | The most ambitious option: a full hero *experience*, not just a model. Launched March 2026; integrates with the Spline ecosystem. Try this *before* hand-wiring Three.js if a client wants a "wow" hero. |
 | **Spline AI** (inside Spline.design) | Spline scene URL or `.splinecode` — embed via `<spline-viewer>` or load with the Spline runtime | The `04-3d-spline-webgl` archetype directly. Hero *scenes* / abstract objects / device mocks. No new pipeline needed. **Default pick** if Omma is overkill. |
+| **Unicorn Studio** (`unicorn.studio`) | No-code WebGL **2D + motion** scene editor; exports embeddable JS scenes (parallax, mouse-reactive, scroll-linked). | A different category from Spline (Unicorn is 2D-WebGL-interactive, not full 3D). Use when the hero needs a flat-but-interactive scene (mouse-reactive gradients, scroll-linked layered illustration) and a full 3D scene would be overkill. Sits cleanly alongside Spline AI — pick by whether the hero is 2D-flat or 3D-deep. |
 | **Meshy.ai** | `.glb` / `.fbx` / `.obj` (text-to-3D and image-to-3D) | A specific *object* (watch, bottle, jet, coconut, chair) loaded directly by Three.js. Free tier + REST API (`api.meshy.ai`). |
 | **Tripo3D** (Tripo AI) | `.glb` / `.usdz` (text-to-3D and image-to-3D) | A/B against Meshy — often stronger on organic / asymmetric shapes. Has API. |
 | **Luma Genie** | `.glb` from web app | Manual exports; no real API yet. Use when Spline AI can't get the look. |
@@ -342,6 +343,36 @@ system to spin sites for real businesses):
 Beyond the MCPs already in `.mcp.json`, these are the tools worth wiring
 once you take a `PROMPTS.md` prompt into a real React/Next.js client
 build (Lovable / Bolt / v0 / hand-coded).
+
+### Sub-agent callable from `refsites-code` right now — Gemini 2.5 Flash
+
+This is the only AI generation API actually reachable from this session
+(verified: `generativelanguage.googleapis.com` is in the egress
+allowlist; valid `GEMINI_API_KEY` is in `.mcp.env`). Wrapper lives at
+**`tools/gemini.js`** — confirmed working.
+
+```bash
+set -a && source .mcp.env && set +a
+node tools/gemini.js "Reply with one word: WORKS"             # quick test
+echo "Summarise this file:" "$(cat build.js)" | node tools/gemini.js
+node tools/gemini.js --model gemini-2.5-flash-lite "Cheap quick draft"
+```
+
+What it's actually good for here:
+
+- **Long-context summarisation** (1M-token input window) — read the
+  whole repo, an entire DESIGN.md, a transcript dump, and return a
+  compact answer without burning Claude's context.
+- **Cheap structured extraction** — pipe a DESIGN.md or HTML page into
+  it, ask for "palette as JSON," get clean output.
+- **Multimodal** — Gemini Flash sees images via base64; useful when you
+  drop a screenshot into the repo.
+- **Backup for the rate-limited path** — retries 5x on 503/429 with
+  exponential backoff (Gemini Flash gets overloaded sporadically).
+
+What it's *not* for: this is a peer LLM, not the orchestrator. I (Claude
+in `refsites-code`) keep driving — I delegate narrow text tasks to
+Gemini when long context or cheap throughput matters.
 
 ### MCPs to add at user scope (so they're available in every project)
 
