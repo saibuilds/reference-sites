@@ -5,11 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>MyLegalBasement — Toronto Basement & Garden Suite Specialist · Sai Nathan</title>
 <meta name="description" content="Two ways to add a second home to your property. Toronto's basement suite and garden suite specialist. Permits, build, and tenant placement under one roof."/>
+<meta property="og:type" content="website">
+<meta property="og:title" content="MyLegalBasement — Toronto Basement & Garden Suite Specialist · Sai Nathan">
+<meta property="og:description" content="Two ways to add a second home to your property. Toronto's basement suite and garden suite specialist. Permits, build, and tenant placement under one roof.">
+<meta property="og:image" content="../assets/brands/mlb-mark.svg">
+<meta property="og:url" content="https://reference-sites.pages.dev/mylegalbasement/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MyLegalBasement — Toronto Basement & Garden Suite Specialist · Sai Nathan">
+<meta name="twitter:description" content="Two ways to add a second home to your property. Toronto's basement suite and garden suite specialist. Permits, build, and tenant placement under one roof.">
+<meta name="twitter:image" content="../assets/brands/mlb-mark.svg">
+<meta name="theme-color" content="#0F0805">
+<link rel="canonical" href="https://reference-sites.pages.dev/mylegalbasement/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "MyLegalBasement & Garden Suite",
+  "description": "Legal basement apartments and garden suites across the GTA. Two homes on one lot.",
+  "areaServed": "Greater Toronto Area",
+  "founder": {"@type": "Person", "name": "Sai Nathan"},
+  "serviceType": ["Basement apartment conversion", "Garden suite construction", "Second-suite permits"]
+}
+</script>
 <link rel="apple-touch-icon" href="../assets/brands/mlb-mark.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap"/>
-<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
 <style>
 :root{
   --bg:#0F0805; --surface:#1A1108; --ink:#0B0604;
@@ -320,9 +342,21 @@ a{color:inherit;text-decoration:none}
   .mlb-process .act{opacity:1;transform:none}
   .mlb-split .card:hover{transform:none}
 }
+
+/* ============ SKIP LINK ============ */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:var(--copper);color:var(--ink);padding:10px 16px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;text-transform:uppercase}
+.skip-link:focus{left:8px;top:8px;outline:2px solid var(--paper)}
+
+/* ============ PRINT ============ */
+@media print{
+  .mlb-fambar,.mlb-nav,.mlb-famclose,.mlb-loader,canvas,.grain-layer{display:none !important}
+  body{background:white !important;color:black !important}
+  a{color:black !important;text-decoration:underline}
+}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <!-- ============ SVG GRAIN FILTER ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -359,8 +393,8 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <!-- ============ NAV ============ -->
-<nav class="mlb-nav" id="mlbNav" aria-label="Primary">
-  <a class="mlb-logo" href="#">
+<nav class="mlb-nav" id="mlbNav" role="navigation" aria-label="Primary">
+  <a class="mlb-logo" href="#" role="img" aria-label="MyLegalBasement logo">
     <svg viewBox="0 0 200 200" aria-hidden="true">
       <path class="draw d1" d="M35 80 L100 32 L165 80 L165 167 L35 167 Z"/>
       <path class="draw d2" d="M70 118 Q70 82 100 82 Q130 82 130 118 Z"/>
@@ -382,6 +416,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </nav>
 
+<main id="main" role="main">
 <!-- ============ HERO ============ -->
 <section class="mlb-hero" aria-label="Hero">
   <div class="parallax" id="mlbParallax"></div>
@@ -632,6 +667,8 @@ a{color:inherit;text-decoration:none}
     </a>
   </div>
 </section>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="mlb-foot">
@@ -910,12 +947,13 @@ a{color:inherit;text-decoration:none}
 })();
 
 /* ============ THREE.JS — Subtle ambient light-leak in hero ============ */
-(function(){
+function mlbInitThree(){
   if(!window.THREE)return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var hero=document.querySelector('.mlb-hero');
   if(!hero)return;
   var canvas=document.createElement('canvas');
+  canvas.setAttribute('aria-hidden','true');
   canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;mix-blend-mode:screen;opacity:.42';
   hero.appendChild(canvas);
   var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
@@ -945,7 +983,8 @@ a{color:inherit;text-decoration:none}
     requestAnimationFrame(loop);
   }
   resize();window.addEventListener('resize',resize);loop();
-})();
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',mlbInitThree);}else{mlbInitThree();}
 </script>
 </body>
 </html>

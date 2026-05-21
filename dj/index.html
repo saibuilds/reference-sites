@@ -5,11 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>DJ Custom Reno — Cabinetry &amp; Renovation Atelier · Toronto</title>
 <meta name="description" content="DJ Custom Reno. Toronto-built cabinetry, kitchens, basements and garden suites. Engineered like a contractor. Designed like a brand. By Sai Nathan and team."/>
+<meta property="og:type" content="website">
+<meta property="og:title" content="DJ Custom Reno — Cabinetry & Renovation Atelier · Toronto">
+<meta property="og:description" content="Toronto-built cabinetry, kitchens, basements and garden suites. Engineered like a contractor. Designed like a brand. By Sai Nathan and team.">
+<meta property="og:image" content="../assets/brands/dj-mark.svg">
+<meta property="og:url" content="https://reference-sites.pages.dev/dj/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DJ Custom Reno — Cabinetry & Renovation Atelier · Toronto">
+<meta name="twitter:description" content="Toronto-built cabinetry, kitchens, basements and garden suites. Engineered like a contractor. Designed like a brand. By Sai Nathan and team.">
+<meta name="twitter:image" content="../assets/brands/dj-mark.svg">
+<meta name="theme-color" content="#0E0E10">
+<link rel="canonical" href="https://reference-sites.pages.dev/dj/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "DJ Custom Reno",
+  "description": "Toronto-built cabinetry and renovations. Engineered like a contractor, designed like a brand.",
+  "areaServed": "Greater Toronto Area",
+  "founder": {"@type": "Person", "name": "Sai Nathan"},
+  "serviceType": ["Custom cabinetry", "Kitchen renovation", "Basement build-out", "Garden suite finish work"]
+}
+</script>
 <link rel="apple-touch-icon" href="../assets/brands/dj-mark.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"/>
-<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
 <style>
 :root{
   --bg:#0E0E10; --surface:#16161A; --steel:#2A2A30; --ink:#08080A;
@@ -340,9 +362,21 @@ a{color:inherit;text-decoration:none}
   .dj-materials .sw:hover{transform:none}
   .dj-hero .bp-grid::after{display:none}
 }
+
+/* ============ SKIP LINK ============ */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:var(--ember);color:var(--ink);padding:10px 16px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;text-transform:uppercase}
+.skip-link:focus{left:8px;top:8px;outline:2px solid var(--paper)}
+
+/* ============ PRINT ============ */
+@media print{
+  .dj-fambar,.dj-nav,.dj-famclose,.dj-loader,canvas,.grain-layer,.dj-hero .bp-grid,.dj-hero .grid-bg,.dj-hero .haze{display:none !important}
+  body{background:white !important;color:black !important}
+  a{color:black !important;text-decoration:underline}
+}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <!-- ============ SVG GRAIN FILTER ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -378,8 +412,8 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <!-- ============ NAV ============ -->
-<nav class="dj-nav" id="djNav" aria-label="Primary">
-  <a class="dj-logo" href="#">
+<nav class="dj-nav" id="djNav" role="navigation" aria-label="Primary">
+  <a class="dj-logo" href="#" role="img" aria-label="DJ Custom Reno logo">
     <svg viewBox="0 0 200 200" aria-hidden="true">
       <path class="draw d1" d="M30 58 H132 L150 92 H30 Z"/>
       <path class="draw d2" d="M30 108 H150 L168 142 H30 Z"/>
@@ -400,9 +434,10 @@ a{color:inherit;text-decoration:none}
   </div>
 </nav>
 
+<main id="main" role="main">
 <!-- ============ HERO ============ -->
 <section class="dj-hero" aria-label="Hero">
-  <canvas class="spark" id="djSpark"></canvas>
+  <canvas class="spark" id="djSpark" aria-hidden="true"></canvas>
   <div class="grid-bg"></div>
   <div class="bp-grid" aria-hidden="true"></div>
   <div class="haze"></div>
@@ -645,6 +680,8 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="dj-foot">
@@ -899,12 +936,13 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
 })();
 
 /* ============ THREE.JS — Ember light-leak in hero ============ */
-(function(){
+function djInitThree(){
   if(!window.THREE)return;
   if(REDUCED)return;
   var hero=document.querySelector('.dj-hero');
   if(!hero)return;
   var canvas=document.createElement('canvas');
+  canvas.setAttribute('aria-hidden','true');
   canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;mix-blend-mode:screen;opacity:.34';
   hero.appendChild(canvas);
   var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
@@ -934,7 +972,8 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
     requestAnimationFrame(loop);
   }
   resize();window.addEventListener('resize',resize);loop();
-})();
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',djInitThree);}else{djInitThree();}
 </script>
 </body>
 </html>
