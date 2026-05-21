@@ -63,6 +63,35 @@ Vercel. If output is shaky, run the same prompt on Bolt for comparison.
 - **ElevenLabs MCP** — TTS / voice clone. **Skip** for this project unless
   you want AI voiceover on a brand video. Static sites don't use it.
 
+### 3D asset generation (different category — Higgsfield does NOT do this)
+
+Higgsfield / fal / Pollinations output 2D images + short video. For real
+3D meshes or Spline scenes you need a different stack.
+
+| Tool | Output | Best for |
+|---|---|---|
+| **Spline AI** (inside Spline.design) | Spline scene URL or `.splinecode` — embed via `<spline-viewer>` or load with the Spline runtime | The `04-3d-spline-webgl` archetype directly. Hero *scenes* / abstract objects / device mocks. No new pipeline needed. **First pick.** |
+| **Meshy.ai** | `.glb` / `.fbx` / `.obj` (text-to-3D and image-to-3D) | A specific *object* (watch, bottle, jet, coconut, chair) loaded directly by Three.js. Free tier + REST API (`api.meshy.ai`). |
+| **Tripo3D** (Tripo AI) | `.glb` / `.usdz` (text-to-3D and image-to-3D) | A/B against Meshy — often stronger on organic / asymmetric shapes. Has API. |
+| **Luma Genie** | `.glb` from web app | Manual exports; no real API yet. Use when Spline AI can't get the look. |
+| **Rodin** (Hyper3D) | High-quality `.glb` | Premium tier; narrower availability. |
+| **Womp / Vectary** | Hosted 3D scenes — *editors*, not generators | Replace Spline as the editor if you ever leave Spline. Not relevant to AI generation. |
+
+**Pipeline (same shape as image gen):**
+
+```
+refsites-media (open network)  →
+  Spline AI scene URL  OR  Meshy/Tripo .glb
+→ commit to assets/3d/<id>.glb  or  paste scene URL into the archetype
+→ Three.js in shared/lib.js (or <spline-viewer>) renders it
+→ refsites-code rebuilds and pushes
+```
+
+**Try first:** Spline AI for the `04-3d-spline-webgl` archetype (zero new
+infra). Add Meshy.ai when a specific archetype needs a real product
+object — e.g. a watch movement glb for `01-luxury-dark`, a jet glb for
+`09-aviation-luxury`, a halved coconut for `13-wellness-botanical`.
+
 ### Animation libs (already wired in the library)
 
 | Lib | Used | Notes |
