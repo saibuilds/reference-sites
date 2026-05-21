@@ -31,7 +31,10 @@ a{color:inherit;text-decoration:none}
 .sd-logo .p2{animation-delay:.25s;stroke:var(--indigo2)}
 .sd-logo .p3{animation-delay:.5s;stroke:var(--paper)}
 .sd-logo .p4{animation-delay:.75s;stroke:var(--saffron)}
+.sd-logo .halo{fill:none;stroke:var(--gold);stroke-width:1.2;opacity:0;transform-origin:30px 30px;animation:sdHaloIn 1.5s 2s ease-out forwards,sdHaloPulse 4s 3.5s ease-in-out infinite;filter:drop-shadow(0 0 12px var(--gold))}
 @keyframes sdDraw{to{stroke-dashoffset:0}}
+@keyframes sdHaloIn{from{opacity:0;transform:scale(.6)}to{opacity:.55;transform:scale(1)}}
+@keyframes sdHaloPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.75;transform:scale(1.08)}}
 .sd-logo .wordmark{font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;letter-spacing:.01em;opacity:0;animation:sdWord 1.2s 1.1s cubic-bezier(.2,.6,.2,1) forwards}
 @keyframes sdWord{from{opacity:0;letter-spacing:.4em}to{opacity:1;letter-spacing:.01em}}
 .sd-nav .links{display:flex;gap:30px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;opacity:.85}
@@ -40,8 +43,10 @@ a{color:inherit;text-decoration:none}
 
 /* === HERO: title + particle backdrop === */
 .sd-hero{position:relative;height:100vh;overflow:hidden;background:linear-gradient(135deg,var(--bg) 0%,var(--indigo) 60%,#0E163E 100%)}
-.sd-hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.6}
+.sd-hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.6;z-index:1}
 .sd-hero .haze{position:absolute;inset:0;background:radial-gradient(80% 60% at 70% 40%,rgba(245,166,35,.22) 0,transparent 60%),radial-gradient(60% 50% at 20% 70%,rgba(59,71,166,.45) 0,transparent 60%)}
+.sd-hero .leaf{position:absolute;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(28% 22% at 18% 32%,rgba(245,166,35,.15) 0,transparent 60%),radial-gradient(22% 18% at 78% 28%,rgba(232,181,71,.13) 0,transparent 60%),radial-gradient(30% 24% at 62% 78%,rgba(245,166,35,.12) 0,transparent 60%),radial-gradient(18% 16% at 32% 82%,rgba(232,181,71,.14) 0,transparent 60%);animation:sdLeafDrift 30s ease-in-out infinite alternate;will-change:transform}
+@keyframes sdLeafDrift{0%{transform:translate3d(-2%,-1%,0) rotate(0deg)}50%{transform:translate3d(2%,1.5%,0) rotate(.5deg)}100%{transform:translate3d(-1%,2%,0) rotate(-.4deg)}}
 .sd-hero .grain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.14;background-image:radial-gradient(rgba(255,255,255,.7) .4px,transparent .4px);background-size:3px 3px}
 .sd-hero-inner{position:relative;z-index:2;display:grid;grid-template-rows:1fr auto;height:100%;padding:14vh 6vw 6vh}
 .sd-hero .kicker{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--saffron);text-transform:uppercase;opacity:.85}
@@ -54,6 +59,43 @@ a{color:inherit;text-decoration:none}
 .sd-hero .stat .l{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.36em;color:var(--muted);text-transform:uppercase;margin-top:.6em}
 .sd-hero .scroll-cue{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;color:var(--saffron);text-transform:uppercase;opacity:.7;animation:sdHint 2s ease-in-out infinite}
 @keyframes sdHint{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(4px);opacity:.95}}
+
+/* === Trust Signals strip === */
+.sd-trust{position:relative;background:linear-gradient(90deg,rgba(31,42,110,0) 0%,rgba(31,42,110,.3) 30%,rgba(31,42,110,.3) 70%,rgba(31,42,110,0) 100%);border-top:1px solid var(--card-bd);border-bottom:1px solid var(--card-bd);padding:22px 6vw}
+.sd-trust .row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;max-width:1280px;margin:0 auto}
+.sd-trust .item{display:flex;align-items:center;gap:12px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;color:var(--paper);text-transform:uppercase;opacity:.85}
+.sd-trust .item svg{width:16px;height:16px;flex:none;stroke:var(--saffron);fill:none;stroke-width:1.5}
+
+/* === Press Ticker === */
+.sd-ticker{position:relative;overflow:hidden;padding:36px 0;background:var(--bg);border-top:1px solid var(--card-bd);border-bottom:1px solid var(--card-bd)}
+.sd-ticker::before,.sd-ticker::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.sd-ticker::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.sd-ticker::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.sd-ticker .track{display:flex;width:max-content;animation:sdTicker 40s linear infinite;gap:0}
+.sd-ticker:hover .track{animation-play-state:paused}
+.sd-ticker .item{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:26px;color:var(--gold);opacity:.7;padding:0 38px;white-space:nowrap;display:inline-flex;align-items:center}
+.sd-ticker .item::after{content:"·";margin-left:38px;opacity:.5}
+@keyframes sdTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* === Letter from Sai === */
+.sd-letter{position:relative;padding:14vh 6vw;background:var(--bg);display:flex;justify-content:center}
+.sd-letter .card{position:relative;max-width:780px;width:100%;padding:64px 56px;background:linear-gradient(160deg,var(--indigo) 0%,var(--surface) 100%);border:1px solid var(--card-bd);border-radius:14px;text-align:center}
+.sd-letter .card .corner{position:absolute;width:40px;height:40px;stroke:var(--gold);fill:none;stroke-width:1.2;opacity:.8}
+.sd-letter .card .corner.tl{top:14px;left:14px}
+.sd-letter .card .corner.tr{top:14px;right:14px;transform:scaleX(-1)}
+.sd-letter .card .corner.bl{bottom:14px;left:14px;transform:scaleY(-1)}
+.sd-letter .card .corner.br{bottom:14px;right:14px;transform:scale(-1,-1)}
+.sd-letter .eyebrow{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--saffron);text-transform:uppercase;margin-bottom:2em}
+.sd-letter blockquote{margin:0;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(22px,2.4vw,30px);line-height:1.5;color:var(--paper);font-weight:400}
+.sd-letter blockquote em{color:var(--saffron);font-style:italic}
+.sd-letter .signoff{margin-top:2.4em;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;color:var(--gold)}
+.sd-letter .signoff small{display:block;font-family:"JetBrains Mono",monospace;font-style:normal;font-size:9.5px;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;margin-top:.8em}
+
+@media (prefers-reduced-motion: reduce){
+  .sd-logo .halo{animation:none;opacity:.55}
+  .sd-hero .leaf{animation:none}
+  .sd-ticker .track{animation:none}
+}
 
 /* === SCROLL FILM: 3 property models === */
 .sd-film{position:relative;width:100%;background:var(--bg)}
@@ -127,6 +169,7 @@ footer.sd-foot{padding:6vh 6vw 4vh;border-top:1px solid var(--card-bd);display:f
 <nav class="sd-nav">
   <a class="sd-logo" href="#">
     <svg viewBox="0 0 60 60" aria-hidden="true">
+      <circle class="halo" cx="30" cy="30" r="24"/>
       <path class="path p1" d="M8 44 L8 28 L30 12 L52 28 L52 44 Z"/>
       <path class="path p2" d="M16 44 L16 32 L26 32 L26 44 M34 44 L34 30 L44 30 L44 44"/>
       <path class="path p3" d="M30 12 L30 6 M30 6 L24 4 M30 6 L36 4"/>
@@ -143,6 +186,7 @@ footer.sd-foot{padding:6vh 6vw 4vh;border-top:1px solid var(--card-bd);display:f
 </nav>
 
 <section class="sd-hero">
+  <div class="leaf" aria-hidden="true"></div>
   <canvas id="heroCanvas"></canvas>
   <div class="haze"></div>
   <div class="grain"></div>
@@ -159,6 +203,28 @@ footer.sd-foot{padding:6vh 6vw 4vh;border-top:1px solid var(--card-bd);display:f
         <div class="stat"><div class="v">4.9★</div><div class="l">Client rating</div></div>
       </div>
       <div class="scroll-cue">↓ Scroll the portfolio</div>
+    </div>
+  </div>
+</section>
+
+<!-- === Trust Signals === -->
+<section class="sd-trust" aria-label="Credentials">
+  <div class="row">
+    <div class="item">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8 L7 10 L11 6"/></svg>
+      <span>TRREB Member</span>
+    </div>
+    <div class="item">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4 L8 8 L11 10"/></svg>
+      <span>RECO Licensed</span>
+    </div>
+    <div class="item">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 13 L8 3 L14 13 Z"/><path d="M8 7 L8 11"/></svg>
+      <span>412 Closings</span>
+    </div>
+    <div class="item">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="7" r="3"/><path d="M3 14 C3 11 5 9 8 9 C11 9 13 11 13 14"/></svg>
+      <span>Toronto + GTA</span>
     </div>
   </div>
 </section>
@@ -223,6 +289,39 @@ footer.sd-foot{padding:6vh 6vw 4vh;border-top:1px solid var(--card-bd);display:f
       </div>
     </div>
     <div class="listings" id="listingsGrid"></div>
+  </div>
+</section>
+
+<!-- === Featured Press Ticker === -->
+<section class="sd-ticker" aria-label="Featured press">
+  <div class="track">
+    <span class="item">Toronto Star</span>
+    <span class="item">The Globe and Mail</span>
+    <span class="item">Storeys</span>
+    <span class="item">BlogTO</span>
+    <span class="item">CP24</span>
+    <span class="item">Toronto Life</span>
+    <span class="item" aria-hidden="true">Toronto Star</span>
+    <span class="item" aria-hidden="true">The Globe and Mail</span>
+    <span class="item" aria-hidden="true">Storeys</span>
+    <span class="item" aria-hidden="true">BlogTO</span>
+    <span class="item" aria-hidden="true">CP24</span>
+    <span class="item" aria-hidden="true">Toronto Life</span>
+  </div>
+</section>
+
+<!-- === Letter from Sai === -->
+<section class="sd-letter" aria-label="A letter from Sai">
+  <div class="card">
+    <svg class="corner tl" viewBox="0 0 40 40" aria-hidden="true"><path d="M2 18 C2 9 9 2 18 2 M2 2 L10 2 M2 2 L2 10"/></svg>
+    <svg class="corner tr" viewBox="0 0 40 40" aria-hidden="true"><path d="M2 18 C2 9 9 2 18 2 M2 2 L10 2 M2 2 L2 10"/></svg>
+    <svg class="corner bl" viewBox="0 0 40 40" aria-hidden="true"><path d="M2 18 C2 9 9 2 18 2 M2 2 L10 2 M2 2 L2 10"/></svg>
+    <svg class="corner br" viewBox="0 0 40 40" aria-hidden="true"><path d="M2 18 C2 9 9 2 18 2 M2 2 L10 2 M2 2 L2 10"/></svg>
+    <div class="eyebrow">— A letter from Sai —</div>
+    <blockquote>
+      I've walked <em>412 homes</em> through closing. Every deal teaches me one thing: <em>clarity beats hustle</em>. A good agent isn't the one who calls you the most — it's the one who tells you the truth about the foundation, the comparables, and the offer you shouldn't make. I bring a tape measure to every showing, I answer the phone before noon, and I'd rather lose a commission than sell you the wrong house. That's the deal. That's SathiDeals.
+    </blockquote>
+    <div class="signoff">— Sai Nathan<small>Broker · Toronto · GTA</small></div>
   </div>
 </section>
 
