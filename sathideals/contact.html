@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Contact — SathiDeals · Begin a quiet conversation</title>
+<meta name="description" content="Begin a quiet conversation with SathiDeals. By appointment, from a studio in Don Mills, Toronto. We reply within 24 hours, Mon-Sat."/>
+<meta name="theme-color" content="#0A0A0B">
+<link rel="apple-touch-icon" href="../assets/brands/sathideals-logo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap"/>
+<style>
+:root{--bg:#0A0A0B;--surface:#15151A;--ink:#0E0E10;--paper:#F1ECE3;--paper-soft:#E8E1D3;--fg:#E8E1D3;--muted:#878176;--gold:#C9A961;--gold-soft:#D4B777;--copper:#B07D52;--rose:#E8C5A5;--line:rgba(201,169,97,.18)}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-weight:300}
+::selection{background:var(--gold);color:var(--ink)}h1,h2,h3,h4{margin:0;color:var(--paper);font-family:"Italiana",Georgia,serif;font-weight:400;letter-spacing:-.02em}a{color:inherit;text-decoration:none}
+.rule{display:inline-block;height:1px;width:48px;background:var(--gold);vertical-align:middle;margin:0 14px;opacity:.7}
+.ss-loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-items:center;animation:ssLoaderOut 1.2s 1.0s cubic-bezier(.76,0,.24,1) forwards;pointer-events:none}
+.ss-loader::before,.ss-loader::after{content:"";position:absolute;left:0;right:0;height:50%;background:var(--ink);z-index:2}
+.ss-loader::before{top:0;animation:ssCurtainTop .9s .9s cubic-bezier(.76,0,.24,1) forwards}.ss-loader::after{bottom:0;animation:ssCurtainBot .9s .9s cubic-bezier(.76,0,.24,1) forwards}
+.ss-loader .core{position:relative;z-index:1;text-align:center}.ss-loader .emblem{width:72px;height:72px;margin:0 auto}
+.ss-loader .emblem path,.ss-loader .emblem circle{fill:none;stroke:var(--gold);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300;animation:ssDraw 1.0s .1s cubic-bezier(.65,0,.35,1) forwards}
+.ss-loader .emblem .p2{animation-delay:.3s}.ss-loader .emblem .p3{animation-delay:.55s}
+.ss-loader .kick{margin-top:20px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;opacity:0;animation:ssFadeIn .6s .7s forwards}
+@keyframes ssDraw{to{stroke-dashoffset:0}}@keyframes ssFadeIn{to{opacity:.9}}@keyframes ssCurtainTop{to{transform:translateY(-100%)}}@keyframes ssCurtainBot{to{transform:translateY(100%)}}@keyframes ssLoaderOut{to{opacity:0;visibility:hidden}}
+.ss-fambar{position:fixed;top:0;left:0;right:0;z-index:60;height:28px;background:var(--bg);border-bottom:1px solid rgba(201,169,97,.15);display:flex;justify-content:space-between;align-items:center;padding:0 5vw;font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-size:9px;letter-spacing:.5em}
+.ss-fambar .fb-mark{color:var(--muted);opacity:.85}.ss-fambar .fb-links{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.ss-fambar .fb-links a{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--muted);opacity:.7;transition:color .3s,opacity .3s;padding:4px 2px}
+.ss-fambar .fb-links a:hover{color:var(--gold);opacity:1}.ss-fambar .fb-links a.here{color:var(--gold);opacity:1;border-bottom:1px solid var(--gold);padding-bottom:3px}
+.ss-fambar .fb-sep{opacity:.35;color:var(--muted);letter-spacing:0;font-size:10px}
+@media (max-width:760px){.ss-fambar{font-size:8px;letter-spacing:.35em;padding:0 4vw}.ss-fambar .fb-mark{display:none}.ss-fambar .fb-links a{font-size:8px;letter-spacing:.32em}}
+.ss-nav{position:fixed;top:28px;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;background:rgba(10,10,11,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.ss-nav .ss-logo{display:flex;align-items:center;gap:14px;color:var(--paper);font-family:"Italiana",serif;font-size:17px;letter-spacing:.04em}.ss-nav .ss-logo em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold)}
+.ss-nav .links{display:flex;gap:28px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--paper-soft);align-items:center}
+.ss-nav .links a{position:relative;padding-bottom:4px;opacity:.85;transition:color .3s,opacity .3s}.ss-nav .links a:hover{color:var(--gold);opacity:1}
+.ss-nav .links a.here{color:var(--gold);opacity:1;border-bottom:1px solid var(--gold)}
+.ss-nav .links .sep{opacity:.3;color:var(--muted);letter-spacing:0}.ss-nav .back{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);opacity:.8}
+.ss-nav .back:hover{opacity:1}@media (max-width:860px){.ss-nav .links{display:none}}
+.ct-cover{position:relative;min-height:40vh;display:grid;place-items:center;padding:18vh 6vw 10vh;background:linear-gradient(180deg,var(--ink) 0%,#0F0F12 55%,var(--bg) 100%);border-bottom:1px solid var(--line);overflow:hidden}
+.ct-cover .haze{position:absolute;inset:-10% -2%;background:radial-gradient(60% 50% at 70% 38%,rgba(201,169,97,.13) 0,transparent 60%),radial-gradient(50% 40% at 22% 78%,rgba(176,125,82,.10) 0,transparent 60%);z-index:0}
+.ct-cover .core{position:relative;z-index:2;text-align:center;max-width:1100px}
+.ct-cover .num{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:32px}
+.ct-cover h1{font-family:"Italiana",serif;font-size:clamp(40px,6.4vw,96px);line-height:1.02;color:var(--paper);letter-spacing:-.01em;font-weight:400}
+.ct-cover h1 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.ct-cover .tag{margin-top:28px;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:clamp(20px,2.4vw,30px);color:var(--paper-soft);max-width:48ch;margin-left:auto;margin-right:auto;line-height:1.4;opacity:.92}
+.ct-main{padding:14vh 6vw;border-bottom:1px solid var(--line)}.ct-main .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:7vw}
+.ct-meth .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:22px}
+.ct-meth h2{font-family:"Italiana",serif;font-size:clamp(30px,3.6vw,46px);color:var(--paper);margin-bottom:38px}.ct-meth h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.ct-meth .item{padding:22px 0;border-bottom:1px solid var(--line)}
+.ct-meth .lab{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.45em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.ct-meth .val{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:21px;color:var(--paper);line-height:1.4;letter-spacing:-.005em}
+.ct-meth .val a{border-bottom:1px solid transparent;transition:border-color .3s,color .3s}.ct-meth .val a:hover{color:var(--gold);border-color:var(--gold)}
+.ct-meth .note{margin-top:30px;padding:16px 22px;border:1px solid var(--line);border-radius:2px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.45em;color:var(--muted);text-transform:uppercase;text-align:center;background:var(--surface);opacity:.86}
+.ct-form .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:22px}
+.ct-form h2{font-family:"Italiana",serif;font-size:clamp(30px,3.6vw,46px);color:var(--paper);margin-bottom:38px}.ct-form h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.ct-form .field{margin-bottom:30px}
+.ct-form label{display:block;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;opacity:.88}
+.ct-form input,.ct-form select,.ct-form textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);padding:10px 0;font-family:"Cormorant Garamond",serif;font-weight:300;font-size:19px;color:var(--paper);outline:none;transition:border-color .3s;border-radius:0;-webkit-appearance:none;appearance:none}
+.ct-form input:focus,.ct-form select:focus,.ct-form textarea:focus{border-color:var(--gold)}
+.ct-form select{cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 14px) 22px,calc(100% - 8px) 22px;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:30px;color:var(--paper)}
+.ct-form select option{background:var(--ink);color:var(--paper)}
+.ct-form textarea{resize:vertical;min-height:120px;line-height:1.5}
+.ct-form button{margin-top:12px;padding:18px 36px;background:var(--paper);color:var(--ink);font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.45em;text-transform:uppercase;border:1px solid var(--paper);border-radius:999px;cursor:pointer;transition:background .35s,color .35s,transform .35s}
+.ct-form button:hover{background:var(--gold);border-color:var(--gold);color:var(--ink);transform:translateY(-2px)}
+@media (max-width:860px){.ct-main .inner{grid-template-columns:1fr;gap:6vh}}
+.ct-faq{padding:12vh 6vw;border-bottom:1px solid var(--line);background:var(--ink)}.ct-faq .head{text-align:center;margin-bottom:6vh}
+.ct-faq .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+.ct-faq h2{font-family:"Italiana",serif;font-size:clamp(28px,3.6vw,46px);color:var(--paper)}.ct-faq h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.ct-faq .list{max-width:860px;margin:0 auto}
+.ct-faq details{border-bottom:1px solid var(--line);padding:22px 0}
+.ct-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;font-family:"Italiana",serif;font-size:clamp(20px,2.2vw,26px);color:var(--paper);letter-spacing:-.005em}
+.ct-faq summary::-webkit-details-marker{display:none}
+.ct-faq summary::after{content:"+";font-family:"JetBrains Mono",monospace;color:var(--gold);font-size:22px;margin-top:2px;transition:transform .3s}
+.ct-faq details[open] summary::after{content:"\2013"}
+.ct-faq .ans{margin-top:14px;font-family:"Cormorant Garamond",serif;font-weight:300;font-size:18px;color:var(--paper-soft);line-height:1.6;opacity:.9}
+.dp-fam{padding:14vh 6vw;background:linear-gradient(180deg,var(--bg) 0%,#0C0C0E 100%);border-bottom:1px solid var(--line)}.dp-fam .inner{max-width:1200px;margin:0 auto;text-align:center}
+.dp-fam .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+.dp-fam h2{font-family:"Italiana",serif;font-size:clamp(28px,3.8vw,48px);color:var(--paper);margin-bottom:6vh}.dp-fam h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.dp-fam .row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.dp-fam .brand{position:relative;padding:36px 28px;border:1px solid var(--line);border-radius:4px;background:var(--surface);display:flex;flex-direction:column;gap:14px;align-items:center;transition:transform .4s,border-color .4s}
+.dp-fam .brand:hover{transform:translateY(-3px);border-color:var(--gold)}.dp-fam .brand.active{border-color:var(--gold);background:rgba(201,169,97,.06)}
+.dp-fam .brand .dot{width:8px;height:8px;border-radius:50%;background:transparent;border:1px solid var(--gold)}.dp-fam .brand.active .dot{background:var(--gold)}
+.dp-fam .brand .nm{font-family:"Italiana",serif;font-size:22px;color:var(--paper);letter-spacing:-.005em}.dp-fam .brand .nm em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+.dp-fam .brand .ds{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:14px;color:var(--paper-soft);opacity:.8;text-align:center}
+@media (max-width:860px){.dp-fam .row{grid-template-columns:1fr}}
+.dp-foot{padding:6vh 6vw 5vh;background:var(--ink);text-align:center;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.42em;color:var(--muted);text-transform:uppercase;opacity:.65;line-height:2.4}.dp-foot span{margin:0 14px}
+@media (prefers-reduced-motion: reduce){.ss-loader,.ss-loader::before,.ss-loader::after,.ss-loader .emblem path,.ss-loader .emblem circle,.ss-loader .kick{animation:none!important}.ss-loader{display:none}}
+</style>
+</head>
+<body>
+
+<div class="ss-loader" aria-hidden="true">
+  <div class="core">
+    <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true">
+      <path class="p1" d="M8 28 L24 12 L40 28 L40 42 L8 42 Z"/>
+      <path class="p2" d="M20 26 C20 22 24 21 28 22 C32 23 32 27 28 29 C24 31 20 32 20 36 C20 40 26 41 30 40"/>
+      <path class="p3" d="M12 42 L36 42"/>
+    </svg>
+    <div class="kick">SATHIDEALS &middot; BEGIN</div>
+  </div>
+</div>
+
+<div class="ss-fambar" aria-label="Sai and Family Ateliers">
+  <span class="fb-mark">SAI &amp; FAMILY &middot; ATELIERS OF TORONTO</span>
+  <div class="fb-links">
+    <a class="here" href="./index.html" aria-current="page">SATHIDEALS &middot; REAL ESTATE</a>
+    <span class="fb-sep">&middot;</span>
+    <a href="../mylegalbasement/index.html">MYLEGALBASEMENT &middot; SUITES</a>
+    <span class="fb-sep">&middot;</span>
+    <a href="../dj/index.html">DJ CUSTOM RENO &middot; CABINETRY</a>
+  </div>
+</div>
+
+<nav class="ss-nav" role="navigation" aria-label="Primary">
+  <a class="ss-logo" href="./index.html"><span>Sathi <em>&amp;</em> Sai</span></a>
+  <div class="links">
+    <a href="./index.html#portfolio">Portfolio</a><span class="sep">&middot;</span>
+    <a href="./index.html#process">Process</a><span class="sep">&middot;</span>
+    <a href="./about.html">About</a><span class="sep">&middot;</span>
+    <a class="here" href="./contact.html" aria-current="page">Begin</a>
+  </div>
+  <a class="back" href="./index.html">&larr; Home</a>
+</nav>
+
+<main id="main" role="main">
+
+<section class="ct-cover" aria-label="Contact cover">
+  <div class="haze"></div>
+  <div class="core">
+    <div class="num">CONTACT N&deg; 01 &middot; BEGIN</div>
+    <h1>Begin a quiet <em>conversation</em>.</h1>
+    <div class="tag">Forty minutes at a kitchen table. One honest opinion. No deck, no pitch, no urgency.</div>
+  </div>
+</section>
+
+<section class="ct-main" aria-label="Contact methods and inquiry">
+  <div class="inner">
+    <aside class="ct-meth">
+      <div class="eye">&mdash; The Studio &mdash;</div>
+      <h2>Reach <em>the table</em>.</h2>
+      <div class="item">
+        <div class="lab">Email</div>
+        <div class="val"><a href="mailto:hello@sathideals.ca">hello@sathideals.ca</a></div>
+      </div>
+      <div class="item">
+        <div class="lab">Phone</div>
+        <div class="val"><a href="tel:+14165550199">+1 416 555 0199</a></div>
+      </div>
+      <div class="item">
+        <div class="lab">Studio</div>
+        <div class="val">By appointment &mdash; Studio in Don Mills, Toronto</div>
+      </div>
+      <div class="item">
+        <div class="lab">Instagram</div>
+        <div class="val"><a href="https://instagram.com/sathideals" rel="noopener">@sathideals</a></div>
+      </div>
+      <div class="note">WE REPLY WITHIN 24 HOURS &middot; MON&ndash;SAT</div>
+    </aside>
+    <div class="ct-form">
+      <div class="eye">&mdash; The Inquiry &mdash;</div>
+      <h2>Write us <em>a line</em>.</h2>
+      <form action="#" method="post" novalidate>
+        <div class="field">
+          <label for="ct-name">Your name</label>
+          <input id="ct-name" name="name" type="text" required autocomplete="name"/>
+        </div>
+        <div class="field">
+          <label for="ct-email">Email</label>
+          <input id="ct-email" name="email" type="email" required autocomplete="email"/>
+        </div>
+        <div class="field">
+          <label for="ct-phone">Phone (optional)</label>
+          <input id="ct-phone" name="phone" type="tel" autocomplete="tel"/>
+        </div>
+        <div class="field">
+          <label for="ct-type">What can we help with?</label>
+          <select id="ct-type" name="type" required>
+            <option value="">Select one&hellip;</option>
+            <option value="buy">Buy a home</option>
+            <option value="sell">Sell a home</option>
+            <option value="invest">Invest / portfolio counsel</option>
+            <option value="offmarket">Off-market mandate</option>
+            <option value="advisory">Advisory only</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ct-budget">Budget range</label>
+          <select id="ct-budget" name="budget">
+            <option value="">Select one&hellip;</option>
+            <option>Under $1M</option>
+            <option>$1M &ndash; $2.5M</option>
+            <option>$2.5M &ndash; $5M</option>
+            <option>$5M &ndash; $10M</option>
+            <option>$10M and up</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ct-msg">Your note</label>
+          <textarea id="ct-msg" name="message" rows="5" placeholder="Tell us a little about the move you have in mind&hellip;"></textarea>
+        </div>
+        <button type="submit">Send the letter &rarr;</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="ct-faq" aria-label="Frequently asked">
+  <div class="head">
+    <div class="eye">&mdash; Questions, Answered &mdash;</div>
+    <h2>Three things <em>asked often</em>.</h2>
+  </div>
+  <div class="list">
+    <details>
+      <summary>Do you take buyers under $1M?</summary>
+      <div class="ans">Yes &mdash; selectively. Our roster is capped at sixty-five families, so we accept first-time buyers when the relationship feels right and the search is realistic. We will tell you on the first call.</div>
+    </details>
+    <details>
+      <summary>What neighbourhoods do you focus on?</summary>
+      <div class="ans">Forest Hill, Rosedale, Lawrence Park, the Bridle Path, Yorkville, and a handful of midtown blocks. We walk the neighbourhoods twice a week and know the laneways from St. Clair to Eglinton.</div>
+    </details>
+    <details>
+      <summary>How do you charge?</summary>
+      <div class="ans">Standard buy- and sell-side commission on transactions. Advisory and off-market mandates are billed quarterly, on an open retainer agreed at the kitchen-table meeting.</div>
+    </details>
+  </div>
+</section>
+
+<section class="dp-fam" aria-label="Sai and Family Brands">
+  <div class="inner">
+    <div class="eye">&mdash; Part of the Family &mdash;</div>
+    <h2>Sai &amp; Family <em>Atelier</em> &middot; Three rooms, one table.</h2>
+    <div class="row">
+      <a class="brand active" href="./index.html"><span class="dot"></span><span class="nm">Sathi <em>&amp;</em> Sai</span><span class="ds">Real estate &middot; quietly considered moves.</span></a>
+      <a class="brand" href="../mylegalbasement/index.html"><span class="dot"></span><span class="nm">My<em>Legal</em>Basement</span><span class="ds">Second suites &middot; basements &amp; gardens.</span></a>
+      <a class="brand" href="../dj/index.html"><span class="dot"></span><span class="nm">DJ <em>Custom</em> Reno</span><span class="ds">Cabinetry &middot; built like a contractor.</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="dp-foot">
+  <span>&copy; MMXXVI Sathi &amp; Sai</span><span>&middot;</span><span>Toronto</span><span>&middot;</span><span>Brokerage 4729</span><span>&middot;</span><span>Contact &middot; N&deg; 01</span>
+</footer>
+
+</body>
+</html>
