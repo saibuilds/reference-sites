@@ -72,7 +72,41 @@ Vercel. If output is shaky, run the same prompt on Bolt for comparison.
 | **Three.js** | on `04-3d-spline-webgl`, `04-3d` | For 3D hero backgrounds. |
 | **Vanta.js** | optional | Cheap animated backgrounds (waves, fog, net). |
 | **Lottie** | optional | Micro-interactions (icons, checkmarks). |
-| **Framer Motion** | only if you go React | Component animations in Lovable/Bolt output. |
+| **Framer Motion** | only if you go React | Component animations in Lovable/Bolt output. See expanded note below. |
+
+### Framer Motion — expanded
+
+A production-grade React animation library by the Framer team (despite
+the name, you do not need the Framer builder to use it). Declarative
+`<motion.div animate=… />` API, layout animations, gesture handling,
+spring physics, scroll-linked animations via `useScroll`/`useTransform`.
+
+- **Where it fits:** as soon as you take a prompt out of `PROMPTS.md`
+  into Lovable / Bolt / v0, the output is React + Tailwind — that's the
+  ideal home for Framer Motion. The current static reference library is
+  HTML + GSAP + Lenis; Framer Motion isn't used there and shouldn't be
+  retrofitted.
+- **GSAP vs Framer Motion in this project:** GSAP wins for scroll-pin,
+  horizontal scroll, scrubbed timelines, SVG path morphs. Framer Motion
+  wins for component-level enter/exit + gesture + layout transitions in
+  React. Use both: GSAP for the page choreography, Framer Motion for
+  the components inside it.
+- **Add to a prompt as:** `ANIMATION: GSAP + ScrollTrigger for scroll
+  choreography; Lenis for smooth scroll; Framer Motion for component
+  enter/exit, layout transitions, and hover/gesture states; springs
+  (stiffness 200, damping 24) for natural feel.`
+
+### Component libraries & generated-UI sources
+
+| Source | What it is | Status from this env | Best for |
+|---|---|---|---|
+| **21st.dev** | A registry / marketplace of high-quality shadcn-style React components (heroes, marquees, bento grids, animated cards, etc.). Also ships a **`@21st-dev/magic` MCP server** that lets the editor (Cursor / Claude / Windsurf) pull a chosen component into your project via a single tool call. | MCP not installed here; their site itself isn't allowlisted, but the MCP can be added to any session that has outbound. | **Single fastest way to make builder output look polished.** Wire the Magic MCP into `refsites-media` (or `refsites-code` once network is opened). Then for any prompt: "use the 21st.dev hero `<name>` and animated cards `<name>`" — the MCP drops them in. Tier: free for solo, paid for teams. |
+| **UI Pro Max** | I'm not certain which one you mean. Plausible matches: (a) **Nuxt UI Pro** (Vue, paid premium components by NuxtLabs), (b) **Tailwind UI** (paid, by Tailwind Labs — the "Plus / Pro" tier), (c) **Aceternity UI / Magic UI / Origin UI** (popular animated shadcn-style kits often described as "pro max"), or (d) a Claude Code **skill** by that name. Send the link or screenshot and I'll add a proper write-up. | — | — |
+
+If "UI Pro Max" turns out to be one of the shadcn-style premium kits,
+the recommendation is the same shape as 21st.dev: install once, then
+reference component names directly in your `PROMPTS.md` blocks for any
+business build.
 
 ### Design / asset side
 
