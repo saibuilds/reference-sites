@@ -130,11 +130,27 @@ business build.
   these to `refsites-media` or a 4th `refsites-backend` only when you
   start shipping real client sites.
 
-### "barbroni ai"
+### Pending — items you mentioned that I couldn't pin down
 
-Honestly — I don't recognise that name and I won't guess at what to
-analyse. Did you mean **Bardeen.ai** (no-code automation), or is it
-something else? Drop the link or a screenshot and I'll add it here.
+These are tracked, not forgotten. I won't guess at what to analyse —
+drop a **link, screenshot, or one-line description** and I'll write
+them up properly alongside the rest of the arsenal.
+
+- **Barbni AI / Barbroni AI** — not recognised under either spelling.
+  Possible matches I can confirm or rule out with a link: **Bardeen.ai**
+  (no-code automation), **Barbara AI** (industrial edge computing), or
+  something more recent that hasn't surfaced in search yet. Where did
+  you come across it — Instagram reel, X thread, product hunt, somewhere
+  in the chat someone screenshotted?
+- **UI Pro Max** — also unclear which one. Four plausible matches
+  (covered in the components-and-registries table above): **Nuxt UI Pro**
+  (Vue, NuxtLabs paid), **Tailwind UI / Plus** (Tailwind Labs paid),
+  one of the shadcn-style premium animation kits (**Aceternity UI**,
+  **Magic UI**, **Origin UI**), or a **Claude Code skill** by that name.
+  Link pins it.
+
+Anything else you've mentioned in passing that I haven't covered — give
+me one line per item and I'll either write it up or flag it here.
 
 ---
 
