@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1080, initial-scale=1">
+<title>MyLegalBasement — Square 1:1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F0805;
+    --surface:#1A1108;
+    --copper:#C97844;
+    --ember:#E89B6A;
+    --cream:#F2E8D8;
+    --muted:#9B8C7B;
+    --gold:#D4AF37;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1080px;overflow:hidden;background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+  body{position:relative}
+
+  .haze{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 15% 30%, rgba(232,155,106,0.12), transparent 45%),
+      radial-gradient(circle at 85% 70%, rgba(201,120,68,0.10), transparent 50%),
+      radial-gradient(circle at 50% 120%, rgba(232,155,106,0.08), transparent 60%);
+    opacity:0;
+    animation: hazeIn 0.5s ease forwards, hazeDrift 35s ease-in-out 0.5s infinite;
+  }
+  @keyframes hazeIn{to{opacity:1}}
+  @keyframes hazeDrift{
+    0%,100%{background-position:0% 0%, 0% 0%, 0% 0%; transform:scale(1)}
+    50%{background-position:5% 8%, -4% -6%, 3% -5%; transform:scale(1.04)}
+  }
+
+  .particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .particles span{
+    position:absolute;width:5px;height:5px;border-radius:50%;
+    background:radial-gradient(circle, rgba(232,155,106,0.7), transparent 70%);
+    bottom:-20px;
+    animation: rise linear infinite;
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0);opacity:0}
+    10%{opacity:0.7}
+    100%{transform:translateY(-1200px) translateX(30px);opacity:0}
+  }
+
+  .stage{
+    position:relative;width:100%;height:100%;
+    display:grid;
+    grid-template-columns: 440px 1fr;
+    grid-template-rows: 1fr 140px;
+    gap:40px;
+    padding:80px 80px 0;
+    animation: loop 9s linear infinite;
+  }
+  @keyframes loop{0%,100%{opacity:1}}
+
+  .left{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .right{
+    display:flex;flex-direction:column;justify-content:center;
+  }
+
+  .logo-wrap{
+    width:380px;height:380px;
+    display:flex;align-items:center;justify-content:center;
+    filter: drop-shadow(0 8px 30px rgba(201,120,68,0.25));
+  }
+  .logo-wrap svg{width:100%;height:100%}
+
+  .draw{stroke-dasharray:600;stroke-dashoffset:600;animation:draw 0.9s ease forwards;opacity:0}
+  .fillIn{opacity:0;animation:fillIn 0.6s ease forwards}
+  .key{opacity:0;transform-origin:138px 133px;animation:keyIn 0.4s ease forwards, keyDing 0.3s ease 0.4s forwards}
+  @keyframes draw{0%{opacity:1;stroke-dashoffset:600}100%{opacity:1;stroke-dashoffset:0}}
+  @keyframes fillIn{to{opacity:1}}
+  @keyframes keyIn{0%{opacity:0;transform:scale(0.6)}100%{opacity:1;transform:scale(1)}}
+  @keyframes keyDing{
+    0%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(212,175,55,0))}
+    50%{transform:scale(1.25);filter:drop-shadow(0 0 14px rgba(212,175,55,0.85))}
+    100%{transform:scale(1);filter:drop-shadow(0 0 4px rgba(212,175,55,0.3))}
+  }
+  .p1{animation-delay:0.5s}.p2{animation-delay:0.5s}.p3{animation-delay:0.8s}.p4{animation-delay:1.1s}
+  .p5{animation-delay:1.4s}.p6{animation-delay:1.7s}.p7{animation-delay:2.0s}.p8{animation-delay:2.0s}
+  .p9{animation-delay:2.3s,2.7s}
+
+  .brand{
+    margin-top:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;letter-spacing:0.4em;text-transform:uppercase;color:var(--muted);
+    opacity:0;animation:fade 0.6s ease 2.3s forwards;
+    text-align:center;
+  }
+  @keyframes fade{to{opacity:1}}
+
+  .tagline{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-weight:500;
+    font-size:clamp(40px,5.4vw,80px);
+    line-height:1.1;color:var(--cream);
+  }
+  .tagline em{color:var(--copper);font-style:italic;font-weight:600}
+  .tagline .w{display:inline-block;opacity:0;transform:translateY(20px);animation:wordIn 0.5s ease forwards}
+  .tagline .w1{animation-delay:2.5s}.tagline .w2{animation-delay:2.65s}.tagline .w3{animation-delay:2.8s}
+  .tagline .w4{animation-delay:2.95s}.tagline .w5{animation-delay:3.15s}.tagline .w6{animation-delay:3.3s}
+  .tagline .w7{animation-delay:3.45s}
+  @keyframes wordIn{to{opacity:1;transform:translateY(0)}}
+
+  .stats{
+    margin-top:36px;
+    display:flex;gap:32px;
+    opacity:0;transform:translateY(30px);
+    animation: slideUp 0.8s ease 3.8s forwards;
+  }
+  @keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+  .stat{flex:1}
+  .stat .num{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:42px;color:var(--ember);font-weight:600;
+  }
+  .stat .lbl{
+    margin-top:4px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--muted);
+  }
+
+  .sub{
+    margin-top:28px;
+    font-family:'Inter',sans-serif;
+    font-size:19px;color:var(--cream);opacity:0;
+    animation: fade 0.7s ease 5.2s forwards;
+  }
+  .sub .dot{color:var(--copper);margin:0 6px}
+
+  .bar{
+    margin-top:14px;height:3px;width:100%;background:rgba(201,120,68,0.15);
+    border-radius:2px;overflow:hidden;
+    opacity:0;animation: fade 0.4s ease 5.2s forwards;
+  }
+  .bar::after{
+    content:"";display:block;height:100%;width:0%;
+    background:linear-gradient(90deg,var(--copper),var(--ember));
+    animation: fill 1.2s ease 5.4s forwards;
+  }
+  @keyframes fill{to{width:100%}}
+
+  .cta{
+    grid-column: 1 / -1;
+    align-self:end;
+    margin:0 -80px;
+    padding:36px 0;
+    text-align:center;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:28px;
+    color:var(--cream);
+    background:linear-gradient(110deg,var(--copper) 0%,var(--ember) 50%,var(--copper) 100%);
+    background-size:200% 100%;
+    box-shadow: inset 0 0 30px rgba(232,155,106,0.45), 0 -12px 40px rgba(201,120,68,0.25);
+    opacity:0;transform:translateY(30px);
+    animation: slideUp 0.7s ease 6.5s forwards, shimmer 3s linear 7.2s infinite;
+  }
+  @keyframes shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important}
+    .haze,.brand,.stats,.sub,.bar,.cta,.tagline .w,.draw,.fillIn,.key{opacity:1 !important;transform:none !important;stroke-dashoffset:0 !important}
+    .bar::after{width:100% !important}
+  }
+</style>
+</head>
+<body>
+  <div class="haze"></div>
+  <div class="particles">
+    <span style="left:8%;animation-duration:18s;animation-delay:0s"></span>
+    <span style="left:24%;animation-duration:22s;animation-delay:3s"></span>
+    <span style="left:40%;animation-duration:20s;animation-delay:6s"></span>
+    <span style="left:62%;animation-duration:25s;animation-delay:1s"></span>
+    <span style="left:80%;animation-duration:19s;animation-delay:8s"></span>
+    <span style="left:92%;animation-duration:23s;animation-delay:4s"></span>
+  </div>
+
+  <div class="stage">
+    <div class="left">
+      <div class="logo-wrap">
+        <svg viewBox="0 0 200 200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="draw p1" d="M37 81.5 L100 33.5 L163 81.5 L163 168.5 L37 168.5 Z" stroke="#0F0805" stroke-opacity="0.25" stroke-width="5"/>
+          <path class="draw p2" d="M35 80 L100 32 L165 80 L165 167 L35 167 Z" stroke="#C97844" stroke-width="5"/>
+          <g class="fillIn p3">
+            <rect x="45" y="135" width="110" height="22" rx="2" fill="#E89B6A" fill-opacity="0.6"/>
+            <line x1="45" y1="135" x2="155" y2="135" stroke="#E89B6A" stroke-opacity="0.6" stroke-width="2"/>
+          </g>
+          <path class="draw p4" d="M70 118 Q70 82 100 82 Q130 82 130 118 Z" fill="#C97844" fill-opacity="0.85" stroke="#F2E8D8" stroke-width="5"/>
+          <path class="draw p5" d="M58 118 L142 118 Q142 126 132 128 L68 128 Q58 126 58 118 Z" fill="#C97844" fill-opacity="0.85" stroke="#F2E8D8" stroke-width="5"/>
+          <line class="draw p6" x1="100" y1="84" x2="100" y2="118" stroke="#F2E8D8" stroke-width="4"/>
+          <path class="draw p7" d="M82 118 Q86 96 100 88" stroke="#F2E8D8" stroke-width="2.5" stroke-opacity="0.65"/>
+          <path class="draw p8" d="M118 118 Q114 96 100 88" stroke="#F2E8D8" stroke-width="2.5" stroke-opacity="0.65"/>
+          <g class="key">
+            <circle cx="138" cy="132" r="5" stroke="#D4AF37" stroke-width="3" fill="none"/>
+            <line x1="142" y1="133" x2="155" y2="133" stroke="#D4AF37" stroke-width="3"/>
+            <line x1="152" y1="133" x2="152" y2="138" stroke="#D4AF37" stroke-width="3"/>
+          </g>
+        </svg>
+      </div>
+      <div class="brand">MyLegalBasement &middot; by Sai Nathan</div>
+    </div>
+
+    <div class="right">
+      <div class="tagline">
+        <span class="w w1">From</span> <span class="w w2">dark</span> <span class="w w3">basement</span><br>
+        <span class="w w4">to</span> <span class="w w5"><em>legal</em></span> <span class="w w6">income</span> <span class="w w7">suite.</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">147</div><div class="lbl">Suites Permitted</div></div>
+        <div class="stat"><div class="num">$4.2M</div><div class="lbl">Rent Generated</div></div>
+        <div class="stat"><div class="num">24</div><div class="lbl">Wards</div></div>
+      </div>
+      <div class="sub">Toronto-area permit<span class="dot">&middot;</span>build<span class="dot">&middot;</span>tenant<span class="dot">&middot;</span>$1,900&ndash;$2,400/mo</div>
+      <div class="bar"></div>
+    </div>
+
+    <div class="cta">Start your suite &rarr; mylegalbasement.ca</div>
+  </div>
+</body>
+</html>

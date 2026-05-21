@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Garden Suite Mark</title>
+  <desc>Moss house silhouette enclosing a modernized hard hat with sage halo and an olive leaf sprout.</desc>
+
+  <!-- House inner shadow -->
+  <path d="M37 81.5 L100 33.5 L163 81.5 L163 168.5 L37 168.5 Z"
+        stroke="#070A07" stroke-opacity="0.25" stroke-width="5"/>
+
+  <!-- House outline -->
+  <path d="M35 80 L100 32 L165 80 L165 167 L35 167 Z"
+        stroke="#84A07C" stroke-width="5"/>
+
+  <!-- Sage halo arc encircling the hat -->
+  <path d="M52 122 Q100 56 148 122"
+        stroke="#9DB59B" stroke-width="3" stroke-opacity="0.7"/>
+
+  <!-- Leaf sprout behind hat upper-right -->
+  <path d="M128 80 Q142 64 152 70 Q150 84 134 90 Z"
+        fill="#D8C58A" fill-opacity="0.85"
+        stroke="#D8C58A" stroke-width="2"/>
+  <path d="M134 88 Q142 78 150 72"
+        stroke="#84A07C" stroke-width="1.8" stroke-opacity="0.7"/>
+  <line x1="128" y1="90" x2="132" y2="98"
+        stroke="#D8C58A" stroke-width="2.5"/>
+
+  <!-- Hard hat dome -->
+  <path d="M70 118 Q70 82 100 82 Q130 82 130 118 Z"
+        fill="#84A07C" fill-opacity="0.85"
+        stroke="#EFE8D8" stroke-width="5"/>
+
+  <!-- Hat brim -->
+  <path d="M58 118 L142 118 Q142 126 132 128 L68 128 Q58 126 58 118 Z"
+        fill="#84A07C" fill-opacity="0.85"
+        stroke="#EFE8D8" stroke-width="5"/>
+
+  <!-- Center ridge -->
+  <line x1="100" y1="84" x2="100" y2="118"
+        stroke="#EFE8D8" stroke-width="4"/>
+
+  <!-- Side ridge facets -->
+  <path d="M82 118 Q86 96 100 88" stroke="#EFE8D8" stroke-width="2.5" stroke-opacity="0.65"/>
+  <path d="M118 118 Q114 96 100 88" stroke="#EFE8D8" stroke-width="2.5" stroke-opacity="0.65"/>
+</svg>
