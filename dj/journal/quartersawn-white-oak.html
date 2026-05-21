@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Quartersawn White Oak, and Why We Keep Coming Back &mdash; DJ Custom Reno Journal</title>
+<meta name="description" content="It is expensive, hard to sequence, and stubborn under finish. It is also the only wood we have ever specified twice for the same client. Here is why."/>
+<meta name="theme-color" content="#0E0E10">
+<link rel="apple-touch-icon" href="../../assets/brands/dj-mark.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"/>
+<style>
+:root{--bg:#0E0E10;--surface:#16161A;--steel:#2A2A30;--ink:#08080A;--paper:#F4F4F2;--paper-soft:#E6E6E2;--fg:#E8E8E6;--muted:#888892;--muted-2:#5A5A62;--ember:#FF6B1A;--amber:#FFA85C;--char:#1C1C20;--accent:#FF6B1A;--line:rgba(255,107,26,.18);--line-soft:rgba(244,244,242,.08)}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-weight:300}
+::selection{background:var(--accent);color:var(--ink)}h1,h2,h3,h4{margin:0;color:var(--paper);font-family:"Space Grotesk",system-ui,sans-serif;font-weight:500;letter-spacing:-.015em}a{color:inherit;text-decoration:none}
+.rule{display:inline-block;height:1px;width:48px;background:var(--accent);vertical-align:middle;margin:0 14px;opacity:.7}
+.dj-loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-items:center;animation:djLoaderOut 1.3s 1.1s cubic-bezier(.76,0,.24,1) forwards;pointer-events:none}
+.dj-loader::before,.dj-loader::after{content:"";position:absolute;left:0;right:0;height:50%;background:var(--ink);z-index:2}
+.dj-loader::before{top:0;animation:djCurtainTop .9s 1.0s cubic-bezier(.76,0,.24,1) forwards}.dj-loader::after{bottom:0;animation:djCurtainBot .9s 1.0s cubic-bezier(.76,0,.24,1) forwards}
+.dj-loader .core{position:relative;z-index:1;text-align:center}.dj-loader .emblem{width:88px;height:88px;margin:0 auto}
+.dj-loader .emblem path{fill:none;stroke:var(--paper);stroke-width:1.4;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:300;stroke-dashoffset:300;animation:djDraw 1.0s .1s cubic-bezier(.65,0,.35,1) forwards}
+.dj-loader .emblem .b2{animation-delay:.3s}.dj-loader .emblem .b3{stroke:var(--accent);animation-delay:.55s}
+.dj-loader .kick{margin-top:22px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.55em;color:var(--accent);text-transform:uppercase;opacity:0;animation:djFadeIn .6s .8s forwards}
+@keyframes djDraw{to{stroke-dashoffset:0}}@keyframes djFadeIn{to{opacity:.9}}@keyframes djCurtainTop{to{transform:translateY(-100%)}}@keyframes djCurtainBot{to{transform:translateY(100%)}}@keyframes djLoaderOut{to{opacity:0;visibility:hidden}}
+.dj-fambar{position:fixed;top:0;left:0;right:0;z-index:60;height:28px;background:var(--bg);border-bottom:1px solid rgba(255,107,26,.15);display:flex;justify-content:space-between;align-items:center;padding:0 5vw;font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-size:9px;letter-spacing:.5em}
+.dj-fambar .fb-mark{color:var(--muted);opacity:.85}.dj-fambar .fb-links{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.dj-fambar .fb-links a{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--muted);opacity:.72;transition:color .3s,opacity .3s;padding:4px 2px}
+.dj-fambar .fb-links a:hover{color:var(--ember);opacity:1}.dj-fambar .fb-links a.here{color:var(--ember);opacity:1;border-bottom:1px solid var(--ember);padding-bottom:3px}
+.dj-fambar .fb-sep{opacity:.35;color:var(--muted);letter-spacing:0;font-size:10px}
+@media (max-width:760px){.dj-fambar{font-size:8px;letter-spacing:.35em;padding:0 4vw}.dj-fambar .fb-mark{display:none}.dj-fambar .fb-links a{font-size:8px;letter-spacing:.32em}}
+.dj-nav{position:fixed;top:28px;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;background:rgba(14,14,16,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.dj-nav .dj-logo{display:flex;align-items:center;gap:14px;color:var(--paper);font-family:"Space Grotesk",sans-serif;font-size:14px;letter-spacing:.32em;text-transform:uppercase;font-weight:500}.dj-nav .dj-logo em{font-style:normal;color:var(--ember);font-weight:400}
+.dj-nav .links{display:flex;gap:28px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--paper-soft);align-items:center}
+.dj-nav .links a{position:relative;padding-bottom:4px;opacity:.82;transition:color .3s,opacity .3s}.dj-nav .links a:hover{color:var(--ember);opacity:1}
+.dj-nav .links .sep{opacity:.3;color:var(--muted);letter-spacing:0}.dj-nav .back{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--ember);opacity:.8}
+.dj-nav .back:hover{opacity:1}@media (max-width:860px){.dj-nav .links{display:none}}
+.ph-head{position:relative;min-height:50vh;display:grid;place-items:center;padding:18vh 6vw 12vh;background:linear-gradient(180deg,var(--ink) 0%,#101014 55%,var(--bg) 100%);border-bottom:1px solid var(--line);overflow:hidden}
+.ph-head .haze{position:absolute;inset:-10% -2%;background:radial-gradient(60% 50% at 70% 38%,rgba(255,107,26,.18) 0,transparent 60%),radial-gradient(50% 40% at 22% 78%,rgba(255,168,92,.10) 0,transparent 60%);z-index:0}
+.ph-head .core{position:relative;z-index:2;text-align:center;max-width:1100px}
+.ph-head .meta{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.55em;color:var(--accent);text-transform:uppercase;margin-bottom:30px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap}
+.ph-head h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(40px,6.4vw,96px);line-height:1.04;color:var(--paper);letter-spacing:-.02em;font-weight:500;max-width:22ch;margin:0 auto}
+.ph-head h1 em{font-style:italic;color:var(--accent);font-weight:400}
+.ph-head .dek{margin-top:26px;font-family:Inter,sans-serif;font-style:italic;font-weight:300;font-size:clamp(18px,2.2vw,26px);color:var(--paper-soft);max-width:54ch;margin-left:auto;margin-right:auto;line-height:1.45;opacity:.92}
+.ph-head .by{margin-top:36px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase}
+.ar-body{padding:12vh 6vw;border-bottom:1px solid var(--line);background:var(--bg)}.ar-body .inner{max-width:740px;margin:0 auto}
+.ar-body p{font-family:Inter,sans-serif;font-weight:300;font-size:17px;color:var(--paper-soft);line-height:1.72;margin:0 0 1.4em;letter-spacing:.005em}
+.ar-body > .inner > p:first-of-type::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:62px;float:left;line-height:.9;padding:6px 14px 0 0;color:var(--accent)}
+.ar-body h3{font-family:"Space Grotesk",sans-serif;font-size:clamp(24px,2.8vw,34px);color:var(--paper);margin:6vh 0 2.4vh;letter-spacing:-.015em;line-height:1.15;font-weight:500}.ar-body h3 em{font-style:italic;color:var(--accent);font-weight:400}
+.ar-body .pull{margin:6vh 0;padding:18px 0 18px 30px;border-left:2px solid var(--accent);font-family:"Space Grotesk",sans-serif;font-style:italic;font-weight:400;font-size:clamp(20px,2.4vw,28px);color:var(--paper);line-height:1.32;letter-spacing:-.01em}
+.ar-body .pull em{color:var(--accent);font-style:italic;font-weight:500}
+.ar-body ol{margin:3vh 0 5vh;padding:0;list-style:none;counter-reset:journal}
+.ar-body ol li{counter-increment:journal;position:relative;padding:0 0 22px 56px;font-family:Inter,sans-serif;font-weight:300;font-size:17px;color:var(--paper-soft);line-height:1.65}
+.ar-body ol li::before{content:counter(journal,decimal-leading-zero);position:absolute;left:0;top:2px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.3em;color:var(--accent)}
+.ar-body .callout{margin:5vh 0;padding:30px 32px;border:1px solid var(--accent);background:rgba(244,244,242,.03);border-radius:2px}
+.ar-body .callout .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.ar-body .callout p{margin:0;font-family:Inter,sans-serif;font-weight:300;font-size:16px;color:var(--paper-soft);line-height:1.6;font-style:italic}
+.ar-tags{padding:8vh 6vw;border-bottom:1px solid var(--line);text-align:center}
+.ar-tags .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--accent);text-transform:uppercase;margin-bottom:22px}
+.ar-tags .pills{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.ar-tags .pill{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.45em;color:var(--paper-soft);text-transform:uppercase;padding:10px 20px;border:1px solid var(--line);border-radius:2px;opacity:.85}
+.dp-rel{padding:14vh 6vw;border-bottom:1px solid var(--line)}.dp-rel .head{text-align:center;margin-bottom:7vh}.dp-rel .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--accent);text-transform:uppercase;margin-bottom:18px}
+.dp-rel h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(30px,4vw,52px);color:var(--paper);font-weight:500}.dp-rel h2 em{font-style:italic;color:var(--accent);font-weight:400}
+.dp-rel .row{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.dp-rel .card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:2px;background:var(--surface);min-height:300px;padding:36px 34px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .4s,border-color .4s}
+.dp-rel .card::before{content:"";position:absolute;inset:0;background:linear-gradient(140deg,var(--surface) 0%,#1A1A1F 60%,var(--bg) 100%)}
+.dp-rel .card::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 70% 30%,rgba(255,107,26,.18),transparent 60%),radial-gradient(40% 60% at 20% 80%,rgba(255,168,92,.10),transparent 60%)}
+.dp-rel .card > *{position:relative;z-index:2}.dp-rel .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.dp-rel .card .num{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.45em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
+.dp-rel .card h3{font-family:"Space Grotesk",sans-serif;font-size:clamp(24px,2.8vw,34px);color:var(--paper);letter-spacing:-.015em;line-height:1.1;font-weight:500}.dp-rel .card h3 em{font-style:italic;color:var(--accent);font-weight:400}
+.dp-rel .card .ds{margin-top:14px;font-family:Inter,sans-serif;font-style:italic;font-weight:300;font-size:15px;color:var(--paper-soft);opacity:.84;line-height:1.5}
+.dp-rel .card .arrow{margin-top:24px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.45em;color:var(--accent);text-transform:uppercase}
+@media (max-width:860px){.dp-rel .row{grid-template-columns:1fr}}
+.dp-fam{padding:14vh 6vw;background:linear-gradient(180deg,var(--bg) 0%,#0A0A0C 100%);border-bottom:1px solid var(--line)}.dp-fam .inner{max-width:1200px;margin:0 auto;text-align:center}
+.dp-fam .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--ember);text-transform:uppercase;margin-bottom:18px}
+.dp-fam h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(28px,3.8vw,48px);color:var(--paper);margin-bottom:6vh;font-weight:500}.dp-fam h2 em{font-style:italic;color:var(--ember);font-weight:400}
+.dp-fam .row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.dp-fam .brand{position:relative;padding:34px 28px;border:1px solid var(--line);border-radius:2px;background:var(--surface);display:flex;flex-direction:column;gap:14px;align-items:center;transition:transform .4s,border-color .4s}
+.dp-fam .brand:hover{transform:translateY(-3px);border-color:var(--ember)}.dp-fam .brand.active{border-color:var(--ember);background:rgba(255,107,26,.06)}
+.dp-fam .brand .dot{width:8px;height:8px;border-radius:50%;background:transparent;border:1px solid var(--ember)}.dp-fam .brand.active .dot{background:var(--ember)}
+.dp-fam .brand .nm{font-family:"Space Grotesk",sans-serif;font-size:20px;color:var(--paper);letter-spacing:-.005em;font-weight:500}.dp-fam .brand .nm em{font-style:italic;color:var(--ember);font-weight:400}
+.dp-fam .brand .ds{font-family:Inter,sans-serif;font-style:italic;font-weight:300;font-size:14px;color:var(--paper-soft);opacity:.8;text-align:center}
+@media (max-width:860px){.dp-fam .row{grid-template-columns:1fr}}
+.dp-foot{padding:6vh 6vw 5vh;background:var(--ink);text-align:center;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.42em;color:var(--muted);text-transform:uppercase;opacity:.65;line-height:2.4}.dp-foot span{margin:0 14px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.dj-loader{display:none}}
+</style>
+</head>
+<body>
+
+<div class="dj-loader" aria-hidden="true">
+  <div class="core">
+    <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
+      <path class="b1" d="M10 50 L10 14 L30 14 L30 50 Z"/>
+      <path class="b2" d="M34 50 L34 14 L54 14 L54 50 Z"/>
+      <path class="b3" d="M10 32 L54 32"/>
+    </svg>
+    <div class="kick">DJ CUSTOM RENO &middot; JOURNAL</div>
+  </div>
+</div>
+
+<div class="dj-fambar" aria-label="Sai and Family Ateliers">
+  <span class="fb-mark">SAI &amp; FAMILY &middot; ATELIERS OF TORONTO</span>
+  <div class="fb-links">
+    <a href="../../sathideals/index.html">SATHIDEALS &middot; REAL ESTATE</a>
+    <span class="fb-sep">&middot;</span>
+    <a href="../../mylegalbasement/index.html">MYLEGALBASEMENT &middot; SUITES</a>
+    <span class="fb-sep">&middot;</span>
+    <a class="here" href="../index.html" aria-current="page">DJ CUSTOM RENO &middot; CABINETRY</a>
+  </div>
+</div>
+
+<nav class="dj-nav" role="navigation" aria-label="Primary">
+  <a class="dj-logo" href="../index.html"><span>DJ <em>Custom</em> Reno</span></a>
+  <div class="links">
+    <a href="../index.html#portfolio">Built Work</a><span class="sep">&middot;</span>
+    <a href="../index.html#process">Process</a><span class="sep">&middot;</span>
+    <a href="./index.html">Journal</a><span class="sep">&middot;</span>
+    <a href="../index.html#contact">Begin</a>
+  </div>
+  <a class="back" href="./index.html">&larr; All Writing</a>
+</nav>
+
+<main id="main" role="main">
+
+<article>
+
+<header class="ph-head" aria-label="Article Header">
+  <div class="haze"></div>
+  <div class="core">
+    <div class="meta">MATERIALS<span class="rule"></span>2026 &middot; MAY 09<span class="rule"></span>10 MIN READ</div>
+    <h1>Quartersawn white oak, <em>and why we keep coming back</em>.</h1>
+    <div class="dek">It is more expensive, harder to sequence, and stubborn under finish. It is also the only wood we have ever specified twice for the same client.</div>
+    <div class="by">BY SAI NATHAN</div>
+  </div>
+</header>
+
+<section class="ar-body" aria-label="Article Body">
+  <div class="inner">
+    <p>The first time I worked with quartersawn white oak I was twenty-three years old and the lead carpenter on a kitchen in High Park. The boards arrived from a small mill north of Owen Sound stacked on a flatbed with a plastic tarp that had blown half-loose on the 400. The fleck was visible from the curb. The cabinetmaker I was apprenticed to walked out, ran a thumb across the broadest face on the top of the stack, looked at me, and said "this is the only wood that gets better the longer you leave it alone." I did not understand that sentence for another six years. I do now. This is the case for quartersawn white oak in a Toronto kitchen, made by someone who has been wrong about it twice and right about it a dozen more times.</p>
+
+    <h3>What "quartersawn" actually means.</h3>
+
+    <p>White oak comes off the log three ways. Flatsawn, which is what almost every big-box and most cabinet shops use, runs the saw tangent to the growth rings and produces the cathedral grain pattern most homeowners have in their mental picture of oak. Riftsawn cuts at thirty to sixty degrees off the rings and gives you long straight grain with almost no figure. Quartersawn cuts dead perpendicular to the rings and produces two things at once &mdash; a tight, almost pin-striped grain on the broad face, and the medullary-ray fleck that quartersawn white oak in particular is famous for. The fleck is the little iridescent silver flake that catches the light when you walk past the cabinet. It is the reason Stickley built an entire furniture company on this one cut, and it is the reason we still pay almost double the lumber-yard price for it.</p>
+
+    <h3>Why it costs what it costs.</h3>
+
+    <p>The mill loses about forty per cent of the log when it cuts quartersawn. You cannot just rip a flatsawn board and call it done; you have to re-saw radially, and the kerfs are wider, and the off-cuts are smaller, and the boards that come off the saw need three to four extra weeks in the kiln to stabilize because the wood is, by the physics of the cut, more dimensionally stable but slower to dry. Add the demand from architectural-millwork shops that specify it for built-in libraries, and the result is a board that costs us between $14 and $18 a board foot in Toronto right now, against $7 to $9 for flatsawn. On a 200-square-foot kitchen run, that delta is about $4,200 of raw material. Worth saying out loud.</p>
+
+    <h3>What you get for the extra money.</h3>
+
+    <p>You get three things, two of which the client sees on day one and one of which they only thank you for in year eight.</p>
+
+    <ol>
+      <li>The fleck. Side light across a quartersawn door at four in the afternoon does something flatsawn cannot do. It is not a finish trick. It is the cell structure. The fleck moves as you move past it. It is the difference between a cabinet that photographs well and one that lives well.</li>
+      <li>The grain consistency. Because the cut is perpendicular to the rings, the grain reads as parallel stripes across the entire face. On a long run of slab doors this is the single biggest aesthetic difference. No cathedral spike runs across a centre stile and ruins the line.</li>
+      <li>The stability. Quartersawn white oak moves roughly half as much across the grain as flatsawn. Across an eight-foot run of countertop fascia, that is the difference between a quarter inch of seasonal cupping and an eighth. In a Toronto kitchen that swings from 65 per cent summer humidity to 22 per cent winter, the eighth-inch board is still flat in year ten. The quarter-inch board is not.</li>
+    </ol>
+
+    <p class="pull"><em>You do not buy quartersawn white oak for the kitchen you are opening this Christmas.</em> You buy it for the kitchen you will be standing in when your child graduates high school.</p>
+
+    <h3>Where it is stubborn.</h3>
+
+    <p>Three things to know if you are about to spec it. First, the finishing schedule is longer. White oak has open pores that drink stain unevenly, and quartersawn drinks slightly differently than flatsawn from the same tree. We always do a stained sample on actual quartersawn off-cuts, never on flatsawn substitutes, because the colour reads two shades cooler on quartersawn under the same toner. Second, the fleck only shows under a film-building finish &mdash; a thin oil finish (the trendy choice) will mute the fleck almost entirely. If you want the fleck, you need a conversion varnish, a hard-wax oil at minimum two coats, or a water-based lacquer with a tinted sealer. Third, the boards arrive with more sapwood than flatsawn lots, because the cutting geometry pulls the saw closer to the edge of the log; budget for ten per cent more material than your cut list says you need.</p>
+
+    <div class="callout">
+      <div class="eye">&mdash; A Shop Note &mdash;</div>
+      <p>The single best way to test whether a kitchen design is going to live well is to put a 30-by-30-inch quartersawn white oak sample door on a kitchen island for a week. If you walk past it three times a day and notice the fleck on day six, you have the right wood. If you stopped noticing after day two, save the four thousand dollars and use riftsawn.</p>
+    </div>
+
+    <h3>The kitchens we have re-specified it for.</h3>
+
+    <p>We have done a hundred and forty kitchens. Roughly eighty of them have been some variant of painted shaker. Of the sixty that were wood-grain finishes, fourteen were quartersawn white oak. Of those fourteen, four were repeat clients who, when they renovated a second house, asked for the same wood in the second kitchen. No other species in our shop has that re-specification rate. Walnut, our second-most-used hardwood, sits at one repeat. Maple sits at zero. Quartersawn white oak is the only material we have built that ages into the room rather than against it, and that is the one sentence I would put on the spec sheet if I could only put one.</p>
+
+    <p>The boards we pulled off that flatbed on Bloor in 2016 are in a kitchen that has now hosted ten Christmases. The countertop got refinished once, in 2022, because a dropped pan dented the edge. The doors have not been touched. The fleck still catches the four-PM light. We have built that exact spec four more times since.</p>
+  </div>
+</section>
+
+<section class="ar-tags" aria-label="Tags">
+  <div class="eye">&mdash; Filed Under &mdash;</div>
+  <div class="pills">
+    <span class="pill">MATERIALS</span>
+    <span class="pill">WHITE OAK</span>
+    <span class="pill">HARDWOOD</span>
+    <span class="pill">FINISHES</span>
+  </div>
+</section>
+
+<section class="dp-rel" aria-label="Continue Reading">
+  <div class="head">
+    <div class="eye">&mdash; Continue Reading &mdash;</div>
+    <h2>More from <em>the bench</em>.</h2>
+  </div>
+  <div class="row">
+    <a class="card" href="./a-week-in-the-shop.html">
+      <div class="num">SHOP NOTES</div>
+      <h3>A week in <em>the shop</em>.</h3>
+      <div class="ds">Five days, four jobs, one broken planer blade. What an actual week at our Etobicoke bench looks like, hour by honest hour.</div>
+      <div class="arrow">READ &rarr;</div>
+    </a>
+    <a class="card" href="./the-shaker-door-revisited.html">
+      <div class="num">TECHNIQUE</div>
+      <h3>The shaker door, <em>revisited</em>.</h3>
+      <div class="ds">A door style that was supposed to be simple has quietly become the most technical thing we build.</div>
+      <div class="arrow">READ &rarr;</div>
+    </a>
+  </div>
+</section>
+
+</article>
+
+<section class="dp-fam" aria-label="Sai and Family Brands">
+  <div class="inner">
+    <div class="eye">&mdash; Part of the Family &mdash;</div>
+    <h2>Sai &amp; Family <em>Atelier</em> &middot; Three rooms, one table.</h2>
+    <div class="row">
+      <a class="brand" href="../../sathideals/index.html"><span class="dot"></span><span class="nm">Sathi <em>&amp;</em> Sai</span><span class="ds">Real estate &middot; quietly considered moves.</span></a>
+      <a class="brand" href="../../mylegalbasement/index.html"><span class="dot"></span><span class="nm">My<em>Legal</em>Basement</span><span class="ds">Second suites &middot; basements &amp; gardens.</span></a>
+      <a class="brand active" href="../index.html"><span class="dot"></span><span class="nm">DJ <em>Custom</em> Reno</span><span class="ds">Cabinetry &middot; built like a contractor.</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="dp-foot">
+  <span>&copy; MMXXVI DJ Custom Reno</span><span>&middot;</span><span>Etobicoke</span><span>&middot;</span><span>HCRA 18244</span><span>&middot;</span><span>The Journal &middot; Materials</span>
+</footer>
+
+</body>
+</html>
