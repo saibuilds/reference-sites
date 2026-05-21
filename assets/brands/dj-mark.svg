@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="djTitle djDesc">
+  <title id="djTitle">DJ Custom Reno mark</title>
+  <desc id="djDesc">Two stacked horizontal bars with a 25-degree diagonal slice on the right, forming a stylized D wrapping into a J. Industrial, minimalist, contractor-precise. An orange chevron accents the lower right.</desc>
+  <defs>
+    <style>
+      .fill{fill:#F4F4F2;stroke-width:0}
+      .outline{fill:none;stroke:#F4F4F2;stroke-width:2;stroke-linejoin:miter;stroke-linecap:butt;stroke-dasharray:520;stroke-dashoffset:520}
+      .accent{fill:#FF6B1A;stroke-width:0}
+      .accentOutline{fill:none;stroke:#FF6B1A;stroke-width:2;stroke-linejoin:miter;stroke-dasharray:120;stroke-dashoffset:120}
+    </style>
+  </defs>
+  <!-- Top bar: slightly shorter, right edge sliced ~25 deg -->
+  <path class="fill bar bar1" d="M30 58 H132 L150 92 H30 Z"/>
+  <path class="outline bar bar1o" d="M30 58 H132 L150 92 H30 Z"/>
+  <!-- Bottom bar: full width, mirrored slice continues the D->J silhouette -->
+  <path class="fill bar bar2" d="M30 108 H150 L168 142 H30 Z"/>
+  <path class="outline bar bar2o" d="M30 108 H150 L168 142 H30 Z"/>
+  <!-- Accent chevron: torque orange power mark below the J-tail -->
+  <path class="accent chev" d="M138 156 L162 156 L154 170 L130 170 Z"/>
+  <path class="accentOutline chevo" d="M138 156 L162 156 L154 170 L130 170 Z"/>
+</svg>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1.0">
+<title>DJ Custom Reno — 1x1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0E10;
+    --surface:#16161A;
+    --steel:#2A2A30;
+    --cream:#F4F4F2;
+    --fg:#E8E8E6;
+    --muted:#888892;
+    --ember:#FF6B1A;
+    --amber:#FFA85C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1080px;overflow:hidden;background:var(--bg);color:var(--fg);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+  .stage{position:relative;width:1080px;height:1080px;overflow:hidden;animation:bgfade 0.4s ease forwards;opacity:0}
+  @keyframes bgfade{to{opacity:1}}
+
+  .mesh{position:absolute;inset:-10%;background:
+      radial-gradient(circle at 25% 35%, rgba(255,107,26,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 75% 65%, rgba(255,168,92,0.08) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(255,107,26,0.04) 0%, transparent 60%);
+      animation:meshDrift 35s ease-in-out infinite alternate;z-index:0}
+  @keyframes meshDrift{
+    0%{transform:translate(0,0) scale(1)}
+    50%{transform:translate(-3%,2%) scale(1.05)}
+    100%{transform:translate(2%,-2%) scale(1.02)}
+  }
+  .grid{position:absolute;inset:0;background-image:
+      linear-gradient(rgba(244,244,242,0.04) 1px,transparent 1px),
+      linear-gradient(90deg, rgba(244,244,242,0.04) 1px,transparent 1px);
+      background-size:72px 72px;z-index:1;pointer-events:none}
+
+  .sparks{position:absolute;inset:0;z-index:2;pointer-events:none}
+  .spark{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--ember);box-shadow:0 0 12px var(--ember),0 0 24px rgba(255,107,26,0.4);opacity:0.6}
+  .spark:nth-child(1){left:14%;bottom:-20px;animation:drift1 12s ease-in-out infinite alternate}
+  .spark:nth-child(2){left:36%;bottom:-50px;width:3px;height:3px;animation:drift2 14s ease-in-out infinite alternate;animation-delay:-2s}
+  .spark:nth-child(3){left:56%;bottom:-30px;animation:drift3 13s ease-in-out infinite alternate;animation-delay:-5s}
+  .spark:nth-child(4){left:74%;bottom:-80px;width:5px;height:5px;animation:drift1 15s ease-in-out infinite alternate;animation-delay:-3s}
+  .spark:nth-child(5){left:88%;bottom:-10px;width:3px;height:3px;animation:drift2 11s ease-in-out infinite alternate;animation-delay:-7s}
+  @keyframes drift1{0%{transform:translate3d(0,0,0);opacity:0}20%{opacity:0.8}100%{transform:translate3d(20px,-1100px,0);opacity:0}}
+  @keyframes drift2{0%{transform:translate3d(0,0,0);opacity:0}25%{opacity:0.7}100%{transform:translate3d(-30px,-1180px,0);opacity:0}}
+  @keyframes drift3{0%{transform:translate3d(0,0,0);opacity:0}30%{opacity:0.9}100%{transform:translate3d(15px,-1220px,0);opacity:0}}
+
+  /* Layout: logo left, text right, CTA bottom */
+  .content{position:relative;z-index:5;width:100%;height:100%;display:grid;grid-template-columns:380px 1fr;grid-template-rows:1fr auto;gap:40px;padding:80px 80px 0}
+  .left{display:flex;flex-direction:column;justify-content:center;gap:30px}
+  .right{display:flex;flex-direction:column;justify-content:center;gap:36px;padding-right:20px}
+
+  .logo{width:280px;height:280px;opacity:0;animation:logoIn 0.4s ease forwards;animation-delay:0.4s}
+  @keyframes logoIn{to{opacity:1}}
+  .logo .bar1,.logo .bar2{stroke-dasharray:600;stroke-dashoffset:600;fill-opacity:0;animation:drawBar 0.9s ease forwards, fillBar 0.6s ease forwards 1.4s}
+  .logo .bar1{animation-delay:0.4s,1.4s}
+  .logo .bar2{animation-delay:0.7s,1.5s}
+  @keyframes drawBar{to{stroke-dashoffset:0}}
+  @keyframes fillBar{to{fill-opacity:1}}
+  .logo .chevron{stroke-dasharray:200;stroke-dashoffset:200;opacity:0;animation:drawChev 0.5s ease forwards 1.6s, chevPulse 1.8s ease-in-out infinite 2.4s}
+  @keyframes drawChev{to{stroke-dashoffset:0;opacity:1}}
+  @keyframes chevPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 6px rgba(255,107,26,0.4))}50%{transform:scale(1.15);filter:drop-shadow(0 0 16px rgba(255,107,26,0.9))}}
+  .logo svg{overflow:visible}
+  .brand-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:42px;letter-spacing:-0.02em;color:var(--cream);opacity:0;animation:fadeUp 0.6s ease forwards 1.8s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  .tagline{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(50px,6.5vw,82px);line-height:1.02;letter-spacing:-0.025em;color:var(--cream)}
+  .tagline .word{display:inline-block;opacity:0;transform:translateY(40px);animation:wordUp 0.6s ease forwards}
+  .tagline .accent{font-style:italic;color:var(--ember)}
+  .tagline .w1{animation-delay:2.0s}.tagline .w2{animation-delay:2.15s}.tagline .w3{animation-delay:2.30s}.tagline .w4{animation-delay:2.45s}.tagline .w5{animation-delay:2.65s}.tagline .w6{animation-delay:2.80s}.tagline .w7{animation-delay:2.95s}.tagline .w8{animation-delay:3.10s}
+  @keyframes wordUp{to{opacity:1;transform:translateY(0)}}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{display:flex;flex-direction:column;gap:8px;opacity:0;transform:translateY(30px);animation:wordUp 0.6s ease forwards}
+  .stat:nth-child(1){animation-delay:3.4s}
+  .stat:nth-child(2){animation-delay:3.6s}
+  .stat:nth-child(3){animation-delay:3.8s}
+  .stat:nth-child(4){animation-delay:4.0s}
+  .stat .num{font-family:'Space Grotesk',sans-serif;font-style:italic;font-weight:500;font-size:44px;color:var(--cream);letter-spacing:-0.02em;line-height:1}
+  .stat .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.4em;color:var(--muted)}
+
+  .sub-wrap{display:flex;flex-direction:column;gap:14px}
+  .sub{font-family:'Inter',sans-serif;font-weight:400;font-size:22px;color:var(--muted);letter-spacing:0.01em;opacity:0;animation:fadeUp 0.8s ease forwards 4.8s}
+  .progress{width:100%;height:2px;background:var(--steel);position:relative;overflow:hidden}
+  .progress::after{content:"";position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--ember),var(--amber));animation:progFill 1s ease forwards 5.0s}
+  @keyframes progFill{to{width:100%}}
+
+  /* CTA full-width bottom strip */
+  .cta-strip{grid-column:1 / -1;margin:0 -80px;padding:36px 80px;display:flex;align-items:center;justify-content:center;background:linear-gradient(110deg,var(--ember) 0%,var(--amber) 35%,var(--ember) 65%,var(--amber) 100%);background-size:200% 100%;opacity:0;transform:translateY(40px);animation:ctaIn 0.7s ease forwards 6.0s, shimmer 2.5s ease infinite 6.7s}
+  @keyframes ctaIn{to{opacity:1;transform:translateY(0)}}
+  @keyframes shimmer{0%{background-position:0% 0%}100%{background-position:200% 0%}}
+  .cta-strip a{color:var(--bg);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;letter-spacing:-0.01em;text-decoration:none;display:inline-flex;align-items:center;gap:14px}
+  .cta-strip .arrow{display:inline-block;animation:arrowNudge 1.5s ease-in-out infinite 7s}
+  @keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:0.001s !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition:none !important}
+    .stage{opacity:1}.logo{opacity:1}.logo .bar1,.logo .bar2{stroke-dashoffset:0;fill-opacity:1}.logo .chevron{stroke-dashoffset:0;opacity:1}
+    .brand-name,.tagline .word,.stat,.sub,.cta-strip{opacity:1;transform:none}
+    .progress::after{width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="mesh"></div>
+  <div class="grid"></div>
+  <div class="sparks">
+    <div class="spark"></div><div class="spark"></div><div class="spark"></div><div class="spark"></div><div class="spark"></div>
+  </div>
+
+  <div class="content">
+    <div class="left">
+      <div class="logo">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="bar1" d="M 50 70 L 130 70 L 145 85 L 130 100 L 50 100 Z" stroke="#F4F4F2" stroke-width="3" fill="#F4F4F2"/>
+          <path class="bar2" d="M 50 115 L 110 115 L 125 130 L 110 145 L 50 145 Z" stroke="#F4F4F2" stroke-width="3" fill="#F4F4F2"/>
+          <path class="chevron" d="M 130 155 L 145 165 L 130 175" stroke="#FF6B1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="brand-name">DJ Custom Reno</div>
+    </div>
+
+    <div class="right">
+      <div class="tagline">
+        <span class="word w1">Built</span> <span class="word w2">like</span> <span class="word w3">a</span> <span class="word w4 accent">contractor.</span><br>
+        <span class="word w5">Designed</span> <span class="word w6">like</span> <span class="word w7">a</span> <span class="word w8 accent">brand.</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="num">187</div><div class="lbl">Kitchens</div></div>
+        <div class="stat"><div class="num">64</div><div class="lbl">Basements</div></div>
+        <div class="stat"><div class="num">28</div><div class="lbl">Garden Suites</div></div>
+        <div class="stat"><div class="num">12</div><div class="lbl">Years</div></div>
+      </div>
+
+      <div class="sub-wrap">
+        <div class="sub">Kitchens · Basements · Garden Suites · Permitted Builds — Toronto</div>
+        <div class="progress"></div>
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <a href="https://djcustomreno.ca">Book your site visit <span class="arrow">→</span> djcustomreno.ca</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
