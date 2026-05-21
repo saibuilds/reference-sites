@@ -144,13 +144,47 @@ business build.
 - **Canva MCP** — already connected; useful for social/ads off the same
   brand kit.
 
-### Reference research
+### Reference research — how to feed me real sites without network access
 
-- **Claude for Chrome** (browser extension, **your** computer) — the only
-  realistic way to "watch reels / scrape live brand sites" in your
-  account.
+This is the practical answer to the recurring "I can't fetch
+`coco-veda.vercel.app` / Instagram reels / Vercel previews" loop:
+
+- **`getdesign.md`** (`getdesign.md`) — a curated library of
+  **DESIGN.md** analyses for top sites (Apple, Figma, Airbnb, Meta, BMW,
+  IBM, Cursor, Webflow, Replicate, MiniMax, Composio, etc.). Each
+  DESIGN.md is a structured breakdown of that site's design system —
+  tokens, type, spacing, components, motion — in a format meant to be
+  read by an AI coding agent. **Drop one into the repo and I can
+  reproduce its aesthetic with high fidelity, no live fetch needed.**
+  This is the closest substitute to "Claude can see the site." Most
+  useful pages: the per-company DESIGN.md pages (`getdesign.md/<company>/design-md`).
+- **DESIGN.md Generator Chrome extension** — pairs with the above. Open
+  any site (e.g. `coco-veda.vercel.app`) on your laptop, run the
+  extension, and it generates a DESIGN.md from the live page's styles.
+  Save that file → drop it in the repo (`notes/coco-veda.design.md` or
+  similar) → I read it and tune the matching archetype against the
+  *actual* tokens/patterns instead of guessing. This finally closes the
+  loop on sites I can't reach.
+- **Claude for Chrome** (extension, your machine) — still the right tool
+  when you need *behaviour* not just styles (scroll-linked animations,
+  interactive states, video). Pair it with the DESIGN.md Generator for
+  full coverage.
 - **Firecrawl / Fetch MCPs** — would let *this* session scrape live
   sites, but they're useless until the env's network policy is opened.
+  If you ever open `refsites-research`'s policy, install these there.
+
+**The workflow that actually works now:**
+
+```
+1. You open the target site on your laptop (e.g. coco-veda.vercel.app)
+2. Run DESIGN.md Generator → saves coco-veda.design.md
+3. Drop it into notes/ in this repo (or paste contents in chat)
+4. I refine the matching archetype from its actual tokens/patterns
+5. Push, deploy, compare
+```
+
+That's the unlock — no more guessing-from-research for sites I'm asked
+to match.
 
 ### "$50k site" backend (if you take the library into real-business builds)
 
