@@ -210,6 +210,12 @@ a{color:inherit;text-decoration:none}
 .mlb-portfolio .card.t-garden .rent{border-color:var(--moss);color:var(--moss);background:rgba(132,160,124,.12)}
 .mlb-portfolio .card .badge{position:absolute;top:30px;right:30px;z-index:3;padding:9px 18px;border:1px solid var(--copper);border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--copper);background:rgba(15,8,5,.55);backdrop-filter:blur(8px)}
 .mlb-portfolio .card.t-garden .badge{border-color:var(--moss);color:var(--moss)}
+.mlb-portfolio .card-link{text-decoration:none;color:inherit;display:block;flex:none;width:75vw;max-width:1080px;height:70vh;scroll-snap-align:center;-webkit-tap-highlight-color:transparent}
+.mlb-portfolio .card-link .card{width:100%;height:100%}
+.mlb-portfolio .card .view-cta{position:absolute;left:44px;bottom:16px;z-index:4;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;color:var(--copper);text-transform:uppercase;opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.mlb-portfolio .card.t-garden .view-cta{color:var(--moss)}
+.mlb-portfolio .card-link:hover .card .view-cta,.mlb-portfolio .card-link:focus-visible .card .view-cta{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){.mlb-portfolio .card .view-cta{transition:none}}
 
 /* ============ PERMITS GRID ============ */
 .mlb-permits{position:relative;padding:18vh 0 14vh;background:linear-gradient(180deg,var(--bg),#160C06 50%,var(--bg));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -324,7 +330,9 @@ a{color:inherit;text-decoration:none}
   .mlb-foot .cols{grid-template-columns:repeat(2,1fr);gap:32px}
   .mlb-nav .links{display:none}
   .mlb-portfolio .card{width:88vw;height:68vh}
+  .mlb-portfolio .card-link{width:88vw;height:68vh}
   .mlb-portfolio .card .meta{left:28px;right:28px;bottom:28px}
+  .mlb-portfolio .card .view-cta{left:28px;bottom:10px}
 }
 @media (max-width:560px){
   .mlb-foot .cols{grid-template-columns:1fr}
@@ -338,6 +346,7 @@ a{color:inherit;text-decoration:none}
   .mlb-portfolio .pin{position:relative;height:auto;padding:18vh 0 8vh}
   .mlb-portfolio .strip{position:relative;flex-wrap:wrap;justify-content:center;padding:0 6vw;gap:24px}
   .mlb-portfolio .card{width:100%;max-width:560px;height:auto;aspect-ratio:4/5}
+  .mlb-portfolio .card-link{width:100%;max-width:560px;height:auto}
   .mlb-portfolio .head{position:relative;top:0;left:0;right:0;padding:0 6vw;margin-bottom:6vh}
   .mlb-process .act{opacity:1;transform:none}
   .mlb-split .card:hover{transform:none}
@@ -775,14 +784,14 @@ a{color:inherit;text-decoration:none}
   var strip=document.getElementById('mlbStrip');
   if(!strip)return;
   var data=[
-    {n:'I',type:'basement',loc:'Scarborough',addr:'47 Hupfield Trail',spec:'BASEMENT · 850 SF · 2 BED · SEP ENTRY',rent:'$2,400 / mo'},
-    {n:'II',type:'garden',loc:'Don Mills',addr:'12 Greenland Road',spec:'GARDEN · 720 SF · 1 BED · DETACHED',rent:'$2,800 / mo'},
-    {n:'III',type:'basement',loc:'East York',addr:'1442 Coxwell Avenue',spec:'BASEMENT · 980 SF · 2 BED · WALK-OUT',rent:'$2,650 / mo'},
-    {n:'IV',type:'garden',loc:'North York',addr:'88 Yorkminster Road',spec:'GARDEN · 640 SF · 1 BED · LANEWAY',rent:'$2,500 / mo'},
-    {n:'V',type:'basement',loc:'Etobicoke',addr:'23 Mimico Avenue',spec:'BASEMENT · 760 SF · 1 BED · SEP ENTRY',rent:'$2,300 / mo'},
-    {n:'VI',type:'garden',loc:'Beaches',addr:'144 Queen Street East',spec:'GARDEN · 580 SF · STUDIO · DETACHED',rent:'$2,400 / mo'},
-    {n:'VII',type:'basement',loc:'Scarborough',addr:'88 Birchmount Road',spec:'BASEMENT · 920 SF · 2 BED · WALK-OUT',rent:'$2,550 / mo'},
-    {n:'VIII',type:'garden',loc:'Mississauga',addr:'1234 Mineola Avenue',spec:'GARDEN · 700 SF · 1 BED · DETACHED',rent:'$2,750 / mo'}
+    {n:'I',type:'basement',loc:'Scarborough',addr:'47 Hupfield Trail',spec:'BASEMENT · 850 SF · 2 BED · SEP ENTRY',rent:'$2,400 / mo',slug:'scarborough-hupfield-basement'},
+    {n:'II',type:'garden',loc:'Don Mills',addr:'12 Greenland Road',spec:'GARDEN · 720 SF · 1 BED · DETACHED',rent:'$2,800 / mo',slug:'don-mills-greenland-garden'},
+    {n:'III',type:'basement',loc:'East York',addr:'1442 Coxwell Avenue',spec:'BASEMENT · 980 SF · 2 BED · WALK-OUT',rent:'$2,650 / mo',slug:'east-york-coxwell-basement'},
+    {n:'IV',type:'garden',loc:'North York',addr:'88 Yorkminster Road',spec:'GARDEN · 640 SF · 1 BED · LANEWAY',rent:'$2,500 / mo',slug:'north-york-yorkminster-garden'},
+    {n:'V',type:'basement',loc:'Etobicoke',addr:'23 Mimico Avenue',spec:'BASEMENT · 760 SF · 1 BED · SEP ENTRY',rent:'$2,300 / mo',slug:'etobicoke-mimico-basement'},
+    {n:'VI',type:'garden',loc:'Beaches',addr:'144 Queen Street East',spec:'GARDEN · 580 SF · STUDIO · DETACHED',rent:'$2,400 / mo',slug:'beaches-queen-garden'},
+    {n:'VII',type:'basement',loc:'Scarborough',addr:'88 Birchmount Road',spec:'BASEMENT · 920 SF · 2 BED · WALK-OUT',rent:'$2,550 / mo',slug:'scarborough-birchmount-basement'},
+    {n:'VIII',type:'garden',loc:'Mississauga',addr:'1234 Mineola Avenue',spec:'GARDEN · 700 SF · 1 BED · DETACHED',rent:'$2,750 / mo',slug:'mississauga-mineola-garden'}
   ];
   var archi=function(seed,type){
     var stroke=type==='garden'?'#84A07C':'#C97844';
@@ -800,7 +809,7 @@ a{color:inherit;text-decoration:none}
     var badge=d.type==='basement'?'BASEMENT':'GARDEN';
     var rentParts=d.rent.split('/');
     var amt=(rentParts[0]||'').trim();
-    return '<article class="card '+cls+'"><div class="vis"></div><div class="archi">'+archi(i,d.type)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#mlbGrain)"></div><span class="badge">'+badge+'</span><div class="meta"><div class="num">'+d.n+' / VIII · Selected Builds</div><h3>'+d.loc+' <em>·</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="rent"><span class="amt">'+amt+'</span><span class="per">/MO</span></div></div></article>';
+    return '<a class="card-link" href="./projects/'+d.slug+'.html" aria-label="View build: '+d.loc+' — '+d.addr+'"><article class="card '+cls+'"><div class="vis"></div><div class="archi">'+archi(i,d.type)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#mlbGrain)"></div><span class="badge">'+badge+'</span><div class="meta"><div class="num">'+d.n+' / VIII · Selected Builds</div><h3>'+d.loc+' <em>·</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="rent"><span class="amt">'+amt+'</span><span class="per">/MO</span></div></div><span class="view-cta">View Project &rarr;</span></article></a>';
   }).join('');
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var section=document.querySelector('.mlb-portfolio');

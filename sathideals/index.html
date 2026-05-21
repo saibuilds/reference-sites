@@ -169,6 +169,11 @@ a{color:inherit;text-decoration:none}
 .ss-portfolio .card .spec{margin-top:18px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.32em;color:var(--paper-soft);text-transform:uppercase;opacity:.85}
 .ss-portfolio .card .desc{margin-top:14px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--paper-soft);max-width:54ch;line-height:1.4;opacity:.85}
 .ss-portfolio .card .badge{position:absolute;top:30px;right:30px;z-index:3;padding:9px 18px;border:1px solid var(--gold);border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);background:rgba(10,10,11,.45);backdrop-filter:blur(8px)}
+.ss-portfolio .card-link{text-decoration:none;color:inherit;display:block;flex:none;width:78vw;max-width:1100px;height:74vh;-webkit-tap-highlight-color:transparent}
+.ss-portfolio .card-link .card{width:100%;height:100%}
+.ss-portfolio .card .view-cta{position:absolute;left:48px;bottom:18px;z-index:4;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.ss-portfolio .card-link:hover .card .view-cta,.ss-portfolio .card-link:focus-visible .card .view-cta{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){.ss-portfolio .card .view-cta{transition:none}}
 .ss-prog{position:fixed;top:50%;right:34px;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;align-items:center;gap:14px;opacity:0;transition:opacity .5s cubic-bezier(.2,.6,.2,1)}
 .ss-prog.visible{display:flex;opacity:1}
 .ss-prog .rail{position:absolute;top:6px;bottom:6px;left:50%;width:1px;background:rgba(241,236,227,.14);transform:translateX(-50%)}
@@ -300,7 +305,9 @@ a{color:inherit;text-decoration:none}
   .ss-foot .cols{grid-template-columns:1fr;gap:32px}
   .ss-nav .links{display:none}
   .ss-portfolio .card{width:88vw;height:68vh}
+  .ss-portfolio .card-link{width:88vw;height:68vh}
   .ss-portfolio .card .meta{left:28px;right:28px;bottom:28px}
+  .ss-portfolio .card .view-cta{left:28px;bottom:10px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -311,6 +318,7 @@ a{color:inherit;text-decoration:none}
   .ss-portfolio .pin{position:relative;height:auto;padding:18vh 0 8vh}
   .ss-portfolio .strip{position:relative;flex-wrap:wrap;justify-content:center;padding:0 6vw;gap:24px}
   .ss-portfolio .card{width:100%;max-width:560px;height:auto;aspect-ratio:4/5}
+  .ss-portfolio .card-link{width:100%;max-width:560px;height:auto}
   .ss-portfolio .head{position:relative;top:0;left:0;right:0;padding:0 6vw;margin-bottom:6vh}
   .ss-process .act,.ss-family .person{opacity:1;transform:none}
   .ss-prog{display:none !important}
@@ -704,11 +712,11 @@ a{color:inherit;text-decoration:none}
   var strip=document.getElementById('ssStrip');
   if(!strip)return;
   var data=[
-    {n:'I',loc:'Bridle Path',addr:'23 Park Lane Circle',spec:'$8.4M · 6 BED · 9 BATH · 12,400 SF',desc:'Limestone, oak, slow gardens. A house that asks to be lived in, not posted.',badge:'For Sale'},
-    {n:'II',loc:'Yorkville',addr:'18 Yorkville Avenue · PH',spec:'$6.95M · 3 BED · 4 BATH · 4,200 SF',desc:'Penthouse over the avenue. South light, north calm, west sunsets.',badge:'For Sale'},
-    {n:'III',loc:'Oakville',addr:'1442 Lakeshore Road East',spec:'$5.2M · 5 BED · 6 BATH · 7,800 SF',desc:'Lakefront cedar. Walk to the harbour, swim from the dock, return for dinner.',badge:'Just Sold'},
-    {n:'IV',loc:'Mississauga',addr:'1234 Mineola Avenue',spec:'$3.9M · 5 BED · 5 BATH · 5,400 SF',desc:'Mineola East. Mature lot, quiet street, the kind of corner where children learn to ride.',badge:'For Sale'},
-    {n:'V',loc:'Forest Hill',addr:'88 Russell Hill Road',spec:'$11.2M · 7 BED · 9 BATH · 14,800 SF',desc:'A house with provenance. Original 1928 millwork, sympathetic 2019 restoration.',badge:'Off Market'}
+    {n:'I',loc:'Bridle Path',addr:'23 Park Lane Circle',spec:'$8.4M · 6 BED · 9 BATH · 12,400 SF',desc:'Limestone, oak, slow gardens. A house that asks to be lived in, not posted.',badge:'For Sale',slug:'bridle-path-park-lane'},
+    {n:'II',loc:'Yorkville',addr:'18 Yorkville Avenue · PH',spec:'$6.95M · 3 BED · 4 BATH · 4,200 SF',desc:'Penthouse over the avenue. South light, north calm, west sunsets.',badge:'For Sale',slug:'yorkville-penthouse'},
+    {n:'III',loc:'Oakville',addr:'1442 Lakeshore Road East',spec:'$5.2M · 5 BED · 6 BATH · 7,800 SF',desc:'Lakefront cedar. Walk to the harbour, swim from the dock, return for dinner.',badge:'Just Sold',slug:'oakville-lakeshore'},
+    {n:'IV',loc:'Mississauga',addr:'1234 Mineola Avenue',spec:'$3.9M · 5 BED · 5 BATH · 5,400 SF',desc:'Mineola East. Mature lot, quiet street, the kind of corner where children learn to ride.',badge:'For Sale',slug:'mississauga-mineola'},
+    {n:'V',loc:'Forest Hill',addr:'88 Russell Hill Road',spec:'$11.2M · 7 BED · 9 BATH · 14,800 SF',desc:'A house with provenance. Original 1928 millwork, sympathetic 2019 restoration.',badge:'Off Market',slug:'forest-hill-russell-hill'}
   ];
   var archi=function(seed){
     var s=seed%3;
@@ -721,7 +729,7 @@ a{color:inherit;text-decoration:none}
     return '<svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#C9A961" stroke-width=".7" stroke-opacity=".55"><path d="M40 480 L40 280 L380 180 L380 480 Z"/><path d="M380 480 L380 320 L560 280 L740 320 L740 480 Z"/><path d="M0 480 L800 480"/><path d="M80 480 L80 380 L160 380 L160 480 M220 480 L220 380 L300 380 L300 480"/><path d="M420 480 L420 380 L500 380 L500 480 M540 480 L540 380 L620 380 L620 480"/><path d="M120 580 C300 540 500 540 700 580"/></g></svg>';
   };
   strip.innerHTML=data.map(function(d,i){
-    return '<article class="card"><div class="vis"></div><div class="archi">'+archi(i)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#ssGrain)"></div><span class="badge">'+d.badge+'</span><div class="meta"><div class="num">'+d.n+' / V · Selected Works</div><h3>'+d.loc+' <em>·</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="desc">'+d.desc+'</div></div></article>';
+    return '<a class="card-link" href="./projects/'+d.slug+'.html" aria-label="View project: '+d.loc+' — '+d.addr+'"><article class="card"><div class="vis"></div><div class="archi">'+archi(i)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#ssGrain)"></div><span class="badge">'+d.badge+'</span><div class="meta"><div class="num">'+d.n+' / V · Selected Works</div><h3>'+d.loc+' <em>·</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="desc">'+d.desc+'</div></div><span class="view-cta">View Project &rarr;</span></article></a>';
   }).join('');
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var section=document.querySelector('.ss-portfolio');

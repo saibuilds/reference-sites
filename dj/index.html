@@ -169,6 +169,11 @@ a{color:inherit;text-decoration:none}
 .dj-portfolio .card .spec{margin-top:16px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.32em;color:var(--paper-soft);text-transform:uppercase;opacity:.85}
 .dj-portfolio .card .desc{margin-top:14px;font-family:Inter,sans-serif;font-style:italic;font-size:17px;color:var(--paper-soft);max-width:54ch;line-height:1.5;opacity:.82;font-weight:300}
 .dj-portfolio .card .badge{position:absolute;top:30px;right:30px;z-index:3;padding:9px 18px;border:1px solid var(--ember);border-radius:2px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--ember);background:rgba(8,8,10,.55);backdrop-filter:blur(8px)}
+.dj-portfolio .card-link{text-decoration:none;color:inherit;display:block;flex:none;width:74vw;max-width:1080px;height:72vh;-webkit-tap-highlight-color:transparent}
+.dj-portfolio .card-link .card{width:100%;height:100%}
+.dj-portfolio .card .view-cta{position:absolute;left:44px;bottom:14px;z-index:4;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.4em;color:var(--ember);text-transform:uppercase;opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.dj-portfolio .card-link:hover .card .view-cta,.dj-portfolio .card-link:focus-visible .card .view-cta{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){.dj-portfolio .card .view-cta{transition:none}}
 .dj-portfolio .progress{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,107,26,.12);z-index:4}
 .dj-portfolio .progress .bar{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ember);transition:width .08s linear}
 
@@ -340,7 +345,9 @@ a{color:inherit;text-decoration:none}
   .dj-foot .cols{grid-template-columns:repeat(2,1fr);gap:32px}
   .dj-nav .links{display:none}
   .dj-portfolio .card{width:88vw;height:68vh}
+  .dj-portfolio .card-link{width:88vw;height:68vh}
   .dj-portfolio .card .meta{left:28px;right:28px;bottom:28px}
+  .dj-portfolio .card .view-cta{left:28px;bottom:10px}
   .dj-materials .grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:560px){
@@ -357,6 +364,7 @@ a{color:inherit;text-decoration:none}
   .dj-portfolio .pin{position:relative;height:auto;padding:18vh 0 8vh}
   .dj-portfolio .strip{position:relative;flex-wrap:wrap;justify-content:center;padding:0 6vw;gap:24px}
   .dj-portfolio .card{width:100%;max-width:560px;height:auto;aspect-ratio:4/5}
+  .dj-portfolio .card-link{width:100%;max-width:560px;height:auto}
   .dj-portfolio .head{position:relative;top:0;left:0;right:0;padding:0 6vw;margin-bottom:6vh}
   .dj-process .act{opacity:1;transform:none}
   .dj-materials .sw:hover{transform:none}
@@ -775,12 +783,12 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
   var strip=document.getElementById('djStrip');
   if(!strip)return;
   var data=[
-    {n:'I',type:'kitchen',loc:'Yonge &amp; Eg',addr:'Cantilevered Kitchen',spec:'220 SF &middot; WALNUT + BRASS &middot; 11 WK',desc:'Walnut slab cabinetry, paneled Sub-Zero, Calacatta quartz waterfall island floated on a six-foot steel cantilever.',badge:'BUILT'},
-    {n:'II',type:'basement',loc:'Don Mills',addr:'Speakeasy Basement',spec:'980 SF &middot; WHISKEY LOUNGE &middot; 14 WK',desc:'Moody lower-level rebuild &mdash; rift oak panelling, leather banquette, hidden bar door, single-glass garage door to the garden.',badge:'BUILT'},
-    {n:'III',type:'kitchen',loc:'Forest Hill',addr:'Atelier Pantry',spec:'18 LIN-FT &middot; CUSTOM &middot; PAINTED INSET',desc:'A 16-foot custom cabinetry wall &mdash; paint-grade inset doors, fluted glass, polished nickel pulls, integrated coffee station.',badge:'BUILT'},
-    {n:'IV',type:'garden',loc:'Scarborough',addr:'Garden Suite',spec:'720 SF &middot; MAPLE-CLAD &middot; 16 WK',desc:'Detached 1-bed garden suite for long-term rental &mdash; maple cladding, in-floor radiant, full TARION coverage, finaled.',badge:'IN BUILD'},
-    {n:'V',type:'cellar',loc:'Mississauga',addr:'Wine Cellar',spec:'110 SF &middot; CEDAR + LED &middot; 5 WK',desc:'A compact 900-bottle cellar &mdash; cedar racking, climate control, low-temp LED grazing, brass label rails.',badge:'BUILT'},
-    {n:'VI',type:'kitchen',loc:'East York',addr:'Family Kitchen',spec:'280 SF &middot; WHITE OAK SHAKER &middot; 9 WK',desc:'Rift white oak shaker, painted-island contrast, deep apron sink, ten-foot quartz island for three growing children.',badge:'SHOWCASE'}
+    {n:'I',type:'kitchen',loc:'Yonge &amp; Eg',addr:'Cantilevered Kitchen',spec:'220 SF &middot; WALNUT + BRASS &middot; 11 WK',desc:'Walnut slab cabinetry, paneled Sub-Zero, Calacatta quartz waterfall island floated on a six-foot steel cantilever.',badge:'BUILT',slug:'yonge-eg-cantilevered-kitchen'},
+    {n:'II',type:'basement',loc:'Don Mills',addr:'Speakeasy Basement',spec:'980 SF &middot; WHISKEY LOUNGE &middot; 14 WK',desc:'Moody lower-level rebuild &mdash; rift oak panelling, leather banquette, hidden bar door, single-glass garage door to the garden.',badge:'BUILT',slug:'don-mills-speakeasy-basement'},
+    {n:'III',type:'kitchen',loc:'Forest Hill',addr:'Atelier Pantry',spec:'18 LIN-FT &middot; CUSTOM &middot; PAINTED INSET',desc:'A 16-foot custom cabinetry wall &mdash; paint-grade inset doors, fluted glass, polished nickel pulls, integrated coffee station.',badge:'BUILT',slug:'forest-hill-atelier-pantry'},
+    {n:'IV',type:'garden',loc:'Scarborough',addr:'Garden Suite',spec:'720 SF &middot; MAPLE-CLAD &middot; 16 WK',desc:'Detached 1-bed garden suite for long-term rental &mdash; maple cladding, in-floor radiant, full TARION coverage, finaled.',badge:'IN BUILD',slug:'scarborough-garden-suite'},
+    {n:'V',type:'cellar',loc:'Mississauga',addr:'Wine Cellar',spec:'110 SF &middot; CEDAR + LED &middot; 5 WK',desc:'A compact 900-bottle cellar &mdash; cedar racking, climate control, low-temp LED grazing, brass label rails.',badge:'BUILT',slug:'mississauga-wine-cellar'},
+    {n:'VI',type:'kitchen',loc:'East York',addr:'Family Kitchen',spec:'280 SF &middot; WHITE OAK SHAKER &middot; 9 WK',desc:'Rift white oak shaker, painted-island contrast, deep apron sink, ten-foot quartz island for three growing children.',badge:'SHOWCASE',slug:'east-york-family-kitchen'}
   ];
   var archi=function(seed,type){
     var stroke=type==='basement'?'#6E8AB2':(type==='garden'?'#FFA85C':(type==='cellar'?'#C97844':'#FF6B1A'));
@@ -794,7 +802,7 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
     return '<svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="'+stroke+'" stroke-width=".7" stroke-opacity=".55"><path d="M40 480 L40 280 L380 180 L380 480 Z"/><path d="M380 480 L380 320 L560 280 L740 320 L740 480 Z"/><path d="M0 480 L800 480"/><path d="M80 480 L80 380 L160 380 L160 480 M220 480 L220 380 L300 380 L300 480"/><path d="M420 480 L420 380 L500 380 L500 480 M540 480 L540 380 L620 380 L620 480"/><path d="M120 580 C300 540 500 540 700 580"/></g></svg>';
   };
   strip.innerHTML=data.map(function(d,i){
-    return '<article class="card t-'+d.type+'"><div class="vis"></div><div class="archi">'+archi(i,d.type)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#djGrain)"></div><span class="badge">'+d.badge+'</span><div class="meta"><div class="num">'+d.n+' / VI &middot; Selected Builds</div><h3>'+d.loc+' <em>&middot;</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="desc">'+d.desc+'</div></div></article>';
+    return '<a class="card-link" href="./projects/'+d.slug+'.html" aria-label="View build: '+d.loc+' — '+d.addr+'"><article class="card t-'+d.type+'"><div class="vis"></div><div class="archi">'+archi(i,d.type)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#djGrain)"></div><span class="badge">'+d.badge+'</span><div class="meta"><div class="num">'+d.n+' / VI &middot; Selected Builds</div><h3>'+d.loc+' <em>&middot;</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="desc">'+d.desc+'</div></div><span class="view-cta">View Project &rarr;</span></article></a>';
   }).join('');
   var progressBar=document.getElementById('djPortfolioProgress');
   if(REDUCED){if(progressBar)progressBar.style.width='100%';return;}
