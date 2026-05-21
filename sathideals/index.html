@@ -83,13 +83,18 @@ a{color:inherit;text-decoration:none}
 .ss-hero .scroll-cue .ln{display:inline-block;width:48px;height:1px;background:var(--gold)}
 .ss-hero .scroll-cue .ch{display:inline-block;width:8px;height:8px;border-left:1px solid var(--gold);border-bottom:1px solid var(--gold);transform:rotate(-45deg);margin-left:6px}
 @keyframes ssHint{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(5px);opacity:1}}
+.ss-hero .horizon{position:absolute;left:0;right:0;top:45%;height:1px;background:linear-gradient(90deg,transparent 0%,var(--gold) 18%,var(--gold) 82%,transparent 100%);opacity:0;transform:scaleX(.2);transform-origin:center;z-index:2;animation:ssHorizon 2.4s 1.8s cubic-bezier(.2,.6,.2,1) forwards}
+@keyframes ssHorizon{to{opacity:.55;transform:scaleX(1)}}
+.ss-hero canvas{transition:transform .5s cubic-bezier(.2,.6,.2,1)}
 
 /* ============ MANIFESTO ============ */
 .ss-manifesto{position:relative;background:var(--paper);color:var(--ink);min-height:100vh;display:grid;place-items:center;padding:18vh 8vw}
 .ss-manifesto .inner{max-width:1100px;text-align:center}
 .ss-manifesto .eye{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.55em;color:var(--copper);text-transform:uppercase;margin-bottom:5vh;opacity:.7}
-.ss-manifesto blockquote{margin:0;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:clamp(28px,4.5vw,64px);line-height:1.18;color:var(--ink);letter-spacing:-.005em}
+.ss-manifesto blockquote{margin:0;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:clamp(28px,4.5vw,64px);line-height:1.18;color:var(--ink);letter-spacing:-.005em;position:relative}
 .ss-manifesto blockquote em{font-style:italic;color:var(--copper)}
+.ss-manifesto blockquote::before{content:"\201C";position:absolute;left:50%;top:-.42em;transform:translateX(-58%);font-family:"Italiana",Georgia,serif;font-style:normal;font-size:220px;line-height:1;color:var(--gold);opacity:.14;pointer-events:none;z-index:0}
+.ss-manifesto blockquote > *{position:relative;z-index:1}
 .ss-manifesto .rule{display:block;width:64px;height:1px;background:var(--copper);margin:6vh auto 2vh;opacity:.7}
 .ss-manifesto .sig{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.42em;color:var(--ink);opacity:.55;text-transform:uppercase}
 .ss-manifesto .script{margin-top:3vh}
@@ -129,6 +134,14 @@ a{color:inherit;text-decoration:none}
 .ss-portfolio .card .spec{margin-top:18px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.32em;color:var(--paper-soft);text-transform:uppercase;opacity:.85}
 .ss-portfolio .card .desc{margin-top:14px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--paper-soft);max-width:54ch;line-height:1.4;opacity:.85}
 .ss-portfolio .card .badge{position:absolute;top:30px;right:30px;z-index:3;padding:9px 18px;border:1px solid var(--gold);border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);background:rgba(10,10,11,.45);backdrop-filter:blur(8px)}
+.ss-prog{position:fixed;top:50%;right:34px;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;align-items:center;gap:14px;opacity:0;transition:opacity .5s cubic-bezier(.2,.6,.2,1)}
+.ss-prog.visible{display:flex;opacity:1}
+.ss-prog .rail{position:absolute;top:6px;bottom:6px;left:50%;width:1px;background:rgba(241,236,227,.14);transform:translateX(-50%)}
+.ss-prog .fill{position:absolute;top:6px;left:50%;width:1px;background:var(--gold);transform:translateX(-50%);height:0;transition:height .3s cubic-bezier(.2,.6,.2,1)}
+.ss-prog .dot{position:relative;width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);background:transparent;transition:background .35s,transform .35s cubic-bezier(.2,.6,.2,1)}
+.ss-prog .dot.done{background:var(--gold)}
+.ss-prog .dot.active{background:var(--gold);transform:scale(1.4);box-shadow:0 0 0 4px rgba(201,169,97,.18)}
+.ss-prog .dot.upcoming{border-color:rgba(241,236,227,.2)}
 
 /* ============ PROCESS — 4 acts ============ */
 .ss-process{position:relative;padding:18vh 0 14vh;background:var(--bg)}
@@ -182,10 +195,14 @@ a{color:inherit;text-decoration:none}
 .ss-map h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
 .ss-map .head .lede{margin-top:24px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--paper-soft);max-width:50ch;line-height:1.5;opacity:.85}
 .ss-map .grid{padding:0 6vw;display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1px solid var(--line)}
-.ss-map .hood{padding:22px 0;border-bottom:1px solid var(--line);font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:17px;color:var(--paper-soft);position:relative;cursor:pointer;transition:color .3s,padding-left .35s cubic-bezier(.2,.6,.2,1)}
-.ss-map .hood::before{content:"";position:absolute;left:0;top:50%;transform:translate(-14px,-50%) scale(0);width:6px;height:6px;border-radius:50%;background:var(--gold);transition:transform .35s cubic-bezier(.2,.6,.2,1)}
-.ss-map .hood:hover{color:var(--gold);padding-left:18px}
-.ss-map .hood:hover::before{transform:translate(0,-50%) scale(1)}
+.ss-map .hood{padding:22px 18px;border-bottom:1px solid var(--line);font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:17px;color:var(--paper-soft);position:relative;cursor:pointer;background:transparent;overflow:hidden;transition:background 280ms cubic-bezier(.65,.05,.35,1),color 280ms cubic-bezier(.65,.05,.35,1)}
+.ss-map .hood .label{display:inline-block;position:relative;z-index:2;transition:transform 280ms cubic-bezier(.65,.05,.35,1)}
+.ss-map .hood .uline{position:absolute;left:18px;bottom:14px;height:1px;width:calc(100% - 36px);background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 280ms cubic-bezier(.65,.05,.35,1);z-index:2}
+.ss-map .hood .arrow{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-family:"Italiana",serif;font-size:18px;color:var(--gold);opacity:0;transition:opacity 280ms cubic-bezier(.65,.05,.35,1),right 280ms cubic-bezier(.65,.05,.35,1);z-index:2}
+.ss-map .hood:hover{background:rgba(241,236,227,.04);color:var(--gold)}
+.ss-map .hood:hover .label{transform:translateY(-4px)}
+.ss-map .hood:hover .uline{transform:scaleX(1)}
+.ss-map .hood:hover .arrow{opacity:1;right:14px}
 @media (max-width:980px){.ss-map .grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:560px){.ss-map .grid{grid-template-columns:repeat(2,1fr)}}
 
@@ -199,7 +216,7 @@ a{color:inherit;text-decoration:none}
 .ss-letter .body p{margin:0 0 1.1em}
 .ss-letter .sig{margin-top:46px;display:flex;flex-direction:column;align-items:center;gap:18px}
 .ss-letter .sig svg{width:220px;height:auto}
-.ss-letter .sig svg path{fill:none;stroke:var(--copper);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 2.6s cubic-bezier(.65,0,.35,1)}
+.ss-letter .sig svg path{fill:none;stroke:var(--copper);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 2.4s cubic-bezier(.25,.1,.25,1)}
 .ss-letter .sig.in svg path{stroke-dashoffset:0}
 .ss-letter .cta{display:inline-flex;align-items:center;gap:18px;margin-top:54px;padding:22px 42px;background:var(--ink);color:var(--paper);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.45em;text-transform:uppercase;border:1px solid var(--ink);border-radius:999px;transition:transform .35s,background .35s,color .35s,border-color .35s}
 .ss-letter .cta:hover{transform:translateY(-2px);background:var(--copper);border-color:var(--copper);color:var(--ink)}
@@ -219,6 +236,10 @@ a{color:inherit;text-decoration:none}
 .ss-foot .col ul{list-style:none;padding:0;margin:0}
 .ss-foot .legal{margin-top:5vh;text-align:center;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.42em;color:var(--muted);text-transform:uppercase;opacity:.55;line-height:2.4}
 .ss-foot .legal span{margin:0 14px}
+.ss-foot .est{margin-top:5vh;text-align:center;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.55em;color:var(--muted);text-transform:uppercase;opacity:.7}
+.ss-foot .tridot{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:14px;margin-bottom:14px}
+.ss-foot .tridot span{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.4}
+.ss-foot .legal{margin-top:0}
 
 @media (max-width:980px){
   .ss-process .act{grid-template-columns:1fr;gap:24px}
@@ -239,6 +260,9 @@ a{color:inherit;text-decoration:none}
   .ss-portfolio .card{width:100%;max-width:560px;height:auto;aspect-ratio:4/5}
   .ss-portfolio .head{position:relative;top:0;left:0;right:0;padding:0 6vw;margin-bottom:6vh}
   .ss-process .act,.ss-family .person{opacity:1;transform:none}
+  .ss-prog{display:none !important}
+  .ss-hero .horizon{opacity:.55;transform:scaleX(1);animation:none}
+  .ss-letter .sig svg path{stroke-dashoffset:0 !important;transition:none !important}
 }
 </style>
 </head>
@@ -293,6 +317,7 @@ a{color:inherit;text-decoration:none}
 <!-- ============ HERO ============ -->
 <section class="ss-hero" aria-label="Hero">
   <div class="parallax" id="ssParallax"></div>
+  <div class="horizon" aria-hidden="true"></div>
   <div class="grain-layer" style="filter:url(#ssGrain)"></div>
   <div class="ss-hero-inner">
     <div class="top-kick">TORONTO<span class="rule"></span>MISSISSAUGA<span class="rule"></span>GTA</div>
@@ -327,6 +352,17 @@ a{color:inherit;text-decoration:none}
 <section class="ss-press" aria-label="Press">
   <div class="track" id="ssPressTrack"></div>
 </section>
+
+<!-- ============ PORTFOLIO PROGRESS RAIL ============ -->
+<aside class="ss-prog" id="ssProg" aria-hidden="true">
+  <span class="rail"></span>
+  <span class="fill" id="ssProgFill"></span>
+  <span class="dot upcoming"></span>
+  <span class="dot upcoming"></span>
+  <span class="dot upcoming"></span>
+  <span class="dot upcoming"></span>
+  <span class="dot upcoming"></span>
+</aside>
 
 <!-- ============ PORTFOLIO ============ -->
 <section class="ss-portfolio" id="portfolio" aria-label="Portfolio">
@@ -515,6 +551,8 @@ a{color:inherit;text-decoration:none}
       </ul>
     </div>
   </div>
+  <div class="est">EST. 2019 &middot; TORONTO</div>
+  <div class="tridot" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="legal">
     <span>&copy; 2026 Sathi &amp; Sai · Real Estate Family</span>
     <span>TRREB #2244018</span>
@@ -591,6 +629,34 @@ a{color:inherit;text-decoration:none}
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
   onScroll();
+
+  /* ===== Progress rail (5 dots) ===== */
+  var prog=document.getElementById('ssProg');
+  var fill=document.getElementById('ssProgFill');
+  if(!prog||!fill)return;
+  var dots=prog.querySelectorAll('.dot');
+  if(!('IntersectionObserver' in window))return;
+  var visIO=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){prog.classList.toggle('visible',e.isIntersecting)});
+  },{threshold:0});
+  visIO.observe(section);
+  function onProg(){
+    var rect=section.getBoundingClientRect();
+    var total=section.offsetHeight-window.innerHeight;
+    var y=Math.min(Math.max(-rect.top,0),total);
+    var p=total>0?y/total:0;
+    fill.style.height=(p*100)+'%';
+    var idx=Math.min(Math.floor(p*dots.length),dots.length-1);
+    dots.forEach(function(d,i){
+      d.classList.remove('done','active','upcoming');
+      if(i<idx)d.classList.add('done');
+      else if(i===idx)d.classList.add('active');
+      else d.classList.add('upcoming');
+    });
+  }
+  window.addEventListener('scroll',onProg,{passive:true});
+  window.addEventListener('resize',onProg);
+  onProg();
 })();
 
 /* ============ MAP NEIGHBOURHOODS ============ */
@@ -598,7 +664,7 @@ a{color:inherit;text-decoration:none}
   var grid=document.getElementById('ssMapGrid');
   if(!grid)return;
   var hoods=['Yorkville','Forest Hill','Rosedale','Bridle Path','Hoggs Hollow','Lawrence Park','Oakville','Mississauga','Etobicoke','Burlington','Vaughan','Richmond Hill','Markham','King City','The Annex','Leaside','Don Mills','Port Credit'];
-  grid.innerHTML=hoods.map(function(h){return '<div class="hood">'+h+'</div>'}).join('');
+  grid.innerHTML=hoods.map(function(h){return '<div class="hood"><span class="label">'+h+'</span><span class="uline"></span><span class="arrow">&rarr;</span></div>'}).join('');
 })();
 
 /* ============ SCROLL REVEAL ============ */
@@ -651,6 +717,32 @@ a{color:inherit;text-decoration:none}
     p.position.set((i-1)*3,Math.sin(i)*2,-i*1.5);
     scene.add(p);planes.push(p);
   }
+  /* Golden dust particles drifting upward */
+  var DUST=200;
+  var dustGeo=new THREE.BufferGeometry();
+  var positions=new Float32Array(DUST*3);
+  var speeds=new Float32Array(DUST);
+  var swayPhase=new Float32Array(DUST);
+  for(var k=0;k<DUST;k++){
+    positions[k*3]=(Math.random()-.5)*14;
+    positions[k*3+1]=(Math.random()-.5)*10;
+    positions[k*3+2]=(Math.random()-.5)*4;
+    speeds[k]=.06+Math.random()*.22;
+    swayPhase[k]=Math.random()*Math.PI*2;
+  }
+  dustGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));
+  var dustMat=new THREE.PointsMaterial({color:0xC9A961,size:.035,transparent:true,opacity:.62,depthWrite:false,sizeAttenuation:true});
+  var dust=new THREE.Points(dustGeo,dustMat);
+  scene.add(dust);
+
+  /* Mouse parallax */
+  var mx=0,my=0,tx=0,ty=0;
+  window.addEventListener('mousemove',function(ev){
+    var nx=(ev.clientX/window.innerWidth)*2-1;
+    var ny=(ev.clientY/window.innerHeight)*2-1;
+    tx=nx*8;ty=ny*8;
+  },{passive:true});
+
   var t0=performance.now();
   function loop(){
     var t=(performance.now()-t0)/1000;
@@ -659,6 +751,15 @@ a{color:inherit;text-decoration:none}
       p.position.y=Math.cos(t*0.2+i*1.4)*1.6;
       p.rotation.z=t*0.04*(i%2?1:-1);
     });
+    var pos=dustGeo.attributes.position.array;
+    for(var k=0;k<DUST;k++){
+      pos[k*3+1]+=speeds[k]*.016;
+      pos[k*3]+=Math.sin(t*.4+swayPhase[k])*.0015;
+      if(pos[k*3+1]>5.5){pos[k*3+1]=-5.5;pos[k*3]=(Math.random()-.5)*14}
+    }
+    dustGeo.attributes.position.needsUpdate=true;
+    mx+=(tx-mx)*.06;my+=(ty-my)*.06;
+    canvas.style.transform='translate3d('+mx.toFixed(2)+'px,'+my.toFixed(2)+'px,0)';
     renderer.render(scene,camera);
     requestAnimationFrame(loop);
   }

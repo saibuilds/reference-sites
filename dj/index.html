@@ -73,6 +73,9 @@ a{color:inherit;text-decoration:none}
 .dj-hero{position:relative;height:100vh;overflow:hidden;background:linear-gradient(180deg,var(--ink) 0%,#101014 55%,var(--bg) 100%)}
 .dj-hero canvas.spark{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:block;mix-blend-mode:screen;opacity:.95}
 .dj-hero .grid-bg{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;background-image:linear-gradient(rgba(244,244,242,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(244,244,242,.6) 1px,transparent 1px);background-size:88px 88px}
+.dj-hero .bp-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(255,107,26,.04) .5px,transparent .5px),linear-gradient(90deg,rgba(255,107,26,.04) .5px,transparent .5px);background-size:60px 60px}
+.dj-hero .bp-grid::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(255,107,26,.55),transparent);left:-2px;animation:djBpSweep 5s linear infinite}
+@keyframes djBpSweep{0%{left:-2px;opacity:0}6%{opacity:1}94%{opacity:1}100%{left:100%;opacity:0}}
 .dj-hero .haze{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(60% 50% at 82% 14%,rgba(255,107,26,.14) 0,transparent 60%),radial-gradient(40% 40% at 18% 82%,rgba(255,168,92,.07) 0,transparent 60%)}
 .dj-hero-inner{position:relative;z-index:3;display:grid;grid-template-rows:auto 1fr auto;height:100%;padding:18vh 6vw 5vh}
 .dj-hero .top-kick{display:flex;align-items:center;gap:0;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5em;color:var(--ember);text-transform:uppercase}
@@ -131,6 +134,8 @@ a{color:inherit;text-decoration:none}
 .dj-portfolio .card .spec{margin-top:16px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.32em;color:var(--paper-soft);text-transform:uppercase;opacity:.85}
 .dj-portfolio .card .desc{margin-top:14px;font-family:Inter,sans-serif;font-style:italic;font-size:17px;color:var(--paper-soft);max-width:54ch;line-height:1.5;opacity:.82;font-weight:300}
 .dj-portfolio .card .badge{position:absolute;top:30px;right:30px;z-index:3;padding:9px 18px;border:1px solid var(--ember);border-radius:2px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--ember);background:rgba(8,8,10,.55);backdrop-filter:blur(8px)}
+.dj-portfolio .progress{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,107,26,.12);z-index:4}
+.dj-portfolio .progress .bar{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ember);transition:width .08s linear}
 
 /* ============ PROCESS — 4 acts ============ */
 .dj-process{position:relative;padding:18vh 0 14vh;background:var(--bg)}
@@ -155,13 +160,16 @@ a{color:inherit;text-decoration:none}
 .dj-materials h2 em{font-style:italic;color:var(--ember);font-weight:400}
 .dj-materials .lede{margin-top:24px;font-family:Inter,sans-serif;font-style:italic;font-size:18px;color:var(--paper-soft);max-width:54ch;line-height:1.55;opacity:.85;font-weight:300}
 .dj-materials .grid{padding:0 6vw;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.dj-materials .sw{position:relative;aspect-ratio:4/5;border:1px solid var(--line);border-radius:2px;overflow:hidden;transition:transform .45s cubic-bezier(.2,.6,.2,1),box-shadow .45s,border-color .45s;cursor:pointer}
+.dj-materials .sw{position:relative;aspect-ratio:4/5;border:1px solid var(--line);border-radius:2px;overflow:hidden;transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s cubic-bezier(.4,0,.2,1),border-color .22s cubic-bezier(.4,0,.2,1);cursor:pointer}
 .dj-materials .sw:hover{transform:translateY(-6px);border-color:var(--ember);box-shadow:0 24px 80px -10px rgba(255,107,26,.32)}
-.dj-materials .sw .surface{position:absolute;inset:0;transition:filter .45s}
+.dj-materials .sw .surface{position:absolute;inset:0;transition:filter .22s cubic-bezier(.4,0,.2,1)}
 .dj-materials .sw:hover .surface{filter:brightness(1.08)}
 .dj-materials .sw .surface::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 30% 20%,rgba(255,255,255,.08),transparent 60%),radial-gradient(50% 50% at 80% 90%,rgba(0,0,0,.4),transparent 60%)}
-.dj-materials .sw .lbl{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.38em;color:var(--paper);text-transform:uppercase;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.dj-materials .sw .lbl{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.38em;color:var(--paper);text-transform:uppercase;text-shadow:0 1px 2px rgba(0,0,0,.6);transition:transform .22s cubic-bezier(.4,0,.2,1)}
+.dj-materials .sw:hover .lbl{transform:translateY(-6px)}
 .dj-materials .sw .lbl .n{font-family:"Space Grotesk",sans-serif;font-style:italic;font-size:16px;letter-spacing:.04em;color:var(--paper);text-transform:none;font-weight:400}
+.dj-materials .sw .spec-link{position:absolute;left:18px;right:18px;bottom:6px;z-index:2;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.45em;color:var(--ember);text-transform:uppercase;opacity:0;transform:translateY(4px);transition:opacity .22s cubic-bezier(.4,0,.2,1),transform .22s cubic-bezier(.4,0,.2,1);text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.dj-materials .sw:hover .spec-link{opacity:1;transform:translateY(0)}
 .dj-materials .sw .num{position:absolute;top:14px;left:18px;z-index:2;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.4em;color:var(--ember);text-transform:uppercase;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .dj-materials .sw.s1 .surface{background:linear-gradient(135deg,#E8C893 0%,#C4985A 50%,#8C6534 100%)}
 .dj-materials .sw.s2 .surface{background:linear-gradient(135deg,#6E4A2E 0%,#4A2E1A 50%,#2A1A0E 100%)}
@@ -197,6 +205,21 @@ a{color:inherit;text-decoration:none}
 .dj-calc .output .range-lab{margin-top:36px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
 .dj-calc .output .range{font-family:"Space Grotesk",sans-serif;font-style:italic;font-weight:400;font-size:clamp(22px,3vw,32px);line-height:1.1;color:var(--paper-soft);letter-spacing:-.005em}
 .dj-calc .output .note{margin-top:30px;font-family:Inter,sans-serif;font-style:italic;font-size:14px;color:var(--muted);max-width:36ch;line-height:1.55;font-weight:300}
+.dj-calc .breakdown{margin-top:28px}
+.dj-calc .breakdown .bar{display:flex;width:100%;height:12px;background:var(--char);border:1px solid var(--line);overflow:hidden}
+.dj-calc .breakdown .seg-bar{height:100%;transition:width .4s cubic-bezier(.2,.6,.2,1);min-width:0}
+.dj-calc .breakdown .seg-bar.sb-base{background:#3A3A42}
+.dj-calc .breakdown .seg-bar.sb-mat{background:var(--amber);border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+.dj-calc .breakdown .seg-bar.sb-feat{background:var(--ember)}
+.dj-calc .breakdown .legend{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--paper-soft)}
+.dj-calc .breakdown .legend .lg{display:flex;flex-direction:column;gap:6px;opacity:.9}
+.dj-calc .breakdown .legend .lg .k{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:8.5px;letter-spacing:.42em}
+.dj-calc .breakdown .legend .lg .k::before{content:"";width:8px;height:8px;display:inline-block}
+.dj-calc .breakdown .legend .lg.l-base .k::before{background:#3A3A42}
+.dj-calc .breakdown .legend .lg.l-mat .k::before{background:var(--amber)}
+.dj-calc .breakdown .legend .lg.l-feat .k::before{background:var(--ember)}
+.dj-calc .breakdown .legend .lg .val{color:var(--paper);font-size:11px;letter-spacing:.18em}
+.dj-calc .breakdown .legend .lg .pct{color:var(--muted);font-size:8.5px;letter-spacing:.32em}
 @media (max-width:880px){.dj-calc .panel{grid-template-columns:1fr}.dj-calc .output{border-left:0;border-top:1px solid var(--line);padding:36px 0 0}}
 
 /* ============ FAQ ACCORDION ============ */
@@ -211,9 +234,14 @@ a{color:inherit;text-decoration:none}
 .dj-faq summary{list-style:none;cursor:pointer;padding:28px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:22px;color:var(--paper);letter-spacing:-.005em;transition:color .3s}
 .dj-faq summary::-webkit-details-marker{display:none}
 .dj-faq summary:hover{color:var(--ember)}
-.dj-faq summary .chev{flex:none;width:18px;height:18px;display:grid;place-items:center;transition:transform .35s cubic-bezier(.2,.6,.2,1);color:var(--ember)}
+.dj-faq summary .qn{flex:none;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.42em;color:var(--ember);text-transform:uppercase;margin-right:18px;opacity:.85}
+.dj-faq summary .qt{flex:1}
+.dj-faq summary .chev{flex:none;width:18px;height:18px;display:grid;place-items:center;transition:transform .35s cubic-bezier(.2,.6,.2,1);color:var(--ember);font-family:"JetBrains Mono",monospace;font-size:22px;line-height:1;font-weight:400}
 .dj-faq details[open] summary .chev{transform:rotate(90deg)}
-.dj-faq summary .chev svg{width:100%;height:100%}
+.dj-faq summary .chev svg{display:none}
+.dj-faq .ans-wrap{position:relative;padding-top:0}
+.dj-faq .ans-rule{display:block;height:1px;background:var(--ember);width:0;transition:width .26s ease-out;margin-bottom:18px;opacity:.85}
+.dj-faq details[open] .ans-rule{width:100%}
 .dj-faq .ans{padding:0 0 30px;font-family:Inter,sans-serif;font-weight:300;font-size:15px;line-height:1.7;color:var(--paper-soft);max-width:72ch;opacity:.86}
 
 /* ============ LETTER ============ */
@@ -249,6 +277,10 @@ a{color:inherit;text-decoration:none}
 .dj-foot .credentials{margin-top:5vh;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.45em;color:var(--amber);text-transform:uppercase;opacity:.7}
 .dj-foot .legal{margin-top:24px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.42em;color:var(--muted);text-transform:uppercase;opacity:.55;line-height:2.4}
 .dj-foot .legal span{margin:0 14px}
+.dj-foot .serial{margin-top:32px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.55em;color:var(--muted);text-transform:uppercase;display:flex;justify-content:center;align-items:center;gap:14px}
+.dj-foot .serial .edot{width:5px;height:5px;background:var(--ember);border-radius:50%;display:inline-block}
+.dj-foot .disciplines{margin-top:22px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.dj-foot .disciplines .pill{padding:4px 10px;border:1px solid var(--ember);border-radius:2px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.45em;color:var(--paper);text-transform:uppercase;background:transparent}
 
 @media (max-width:980px){
   .dj-process .act{grid-template-columns:1fr;gap:24px}
@@ -275,6 +307,7 @@ a{color:inherit;text-decoration:none}
   .dj-portfolio .head{position:relative;top:0;left:0;right:0;padding:0 6vw;margin-bottom:6vh}
   .dj-process .act{opacity:1;transform:none}
   .dj-materials .sw:hover{transform:none}
+  .dj-hero .bp-grid::after{display:none}
 }
 </style>
 </head>
@@ -327,6 +360,7 @@ a{color:inherit;text-decoration:none}
 <section class="dj-hero" aria-label="Hero">
   <canvas class="spark" id="djSpark"></canvas>
   <div class="grid-bg"></div>
+  <div class="bp-grid" aria-hidden="true"></div>
   <div class="haze"></div>
   <div class="grain-layer" style="filter:url(#djGrain)"></div>
   <div class="dj-hero-inner">
@@ -365,6 +399,7 @@ a{color:inherit;text-decoration:none}
       <div class="label">2023 — 2026 · 6 of 279</div>
     </div>
     <div class="strip" id="djStrip"></div>
+    <div class="progress" aria-hidden="true"><div class="bar" id="djPortfolioProgress"></div></div>
   </div>
 </section>
 
@@ -418,14 +453,14 @@ a{color:inherit;text-decoration:none}
     <div class="lede">A short, opinionated palette. Every cabinet, counter and hardware finish we use in production comes from this wall. No mystery substitutes, no &ldquo;builder grade&rdquo; downgrade at site.</div>
   </div>
   <div class="grid">
-    <div class="sw s1"><div class="surface"></div><div class="num">N&deg; 01</div><div class="lbl"><span class="n">Maple</span><span>Wood &middot; Soft</span></div></div>
-    <div class="sw s2"><div class="surface"></div><div class="num">N&deg; 02</div><div class="lbl"><span class="n">Walnut</span><span>Wood &middot; Hard</span></div></div>
-    <div class="sw s3"><div class="surface"></div><div class="num">N&deg; 03</div><div class="lbl"><span class="n">White Oak</span><span>Wood &middot; Rift</span></div></div>
-    <div class="sw s4"><div class="surface"></div><div class="num">N&deg; 04</div><div class="lbl"><span class="n">Quartz</span><span>Engineered</span></div></div>
-    <div class="sw s5"><div class="surface"></div><div class="num">N&deg; 05</div><div class="lbl"><span class="n">Marble</span><span>Calacatta</span></div></div>
-    <div class="sw s6"><div class="surface"></div><div class="num">N&deg; 06</div><div class="lbl"><span class="n">Brushed Steel</span><span>Metal &middot; Cool</span></div></div>
-    <div class="sw s7"><div class="surface"></div><div class="num">N&deg; 07</div><div class="lbl"><span class="n">Brass</span><span>Metal &middot; Warm</span></div></div>
-    <div class="sw s8"><div class="surface"></div><div class="num">N&deg; 08</div><div class="lbl"><span class="n">Matte Black</span><span>Powder Coat</span></div></div>
+    <div class="sw s1"><div class="surface"></div><div class="num">N&deg; 01</div><div class="lbl"><span class="n">Maple</span><span>Wood &middot; Soft</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s2"><div class="surface"></div><div class="num">N&deg; 02</div><div class="lbl"><span class="n">Walnut</span><span>Wood &middot; Hard</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s3"><div class="surface"></div><div class="num">N&deg; 03</div><div class="lbl"><span class="n">White Oak</span><span>Wood &middot; Rift</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s4"><div class="surface"></div><div class="num">N&deg; 04</div><div class="lbl"><span class="n">Quartz</span><span>Engineered</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s5"><div class="surface"></div><div class="num">N&deg; 05</div><div class="lbl"><span class="n">Marble</span><span>Calacatta</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s6"><div class="surface"></div><div class="num">N&deg; 06</div><div class="lbl"><span class="n">Brushed Steel</span><span>Metal &middot; Cool</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s7"><div class="surface"></div><div class="num">N&deg; 07</div><div class="lbl"><span class="n">Brass</span><span>Metal &middot; Warm</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
+    <div class="sw s8"><div class="surface"></div><div class="num">N&deg; 08</div><div class="lbl"><span class="n">Matte Black</span><span>Powder Coat</span></div><div class="spec-link">Spec Sheet &rarr;</div></div>
   </div>
 </section>
 
@@ -465,6 +500,18 @@ a{color:inherit;text-decoration:none}
       <div class="price" id="djPrice">$0</div>
       <div class="range-lab">Typical Spread &middot; &plusmn;15%</div>
       <div class="range" id="djRange">$0 — $0</div>
+      <div class="breakdown" aria-hidden="true">
+        <div class="bar">
+          <div class="seg-bar sb-base" id="djSegBase" style="width:60%"></div>
+          <div class="seg-bar sb-mat" id="djSegMat" style="width:30%"></div>
+          <div class="seg-bar sb-feat" id="djSegFeat" style="width:10%"></div>
+        </div>
+        <div class="legend">
+          <div class="lg l-base"><span class="k">Base</span><span class="val" id="djLgBase">$0</span><span class="pct" id="djLgBaseP">0%</span></div>
+          <div class="lg l-mat"><span class="k">Materials</span><span class="val" id="djLgMat">$0</span><span class="pct" id="djLgMatP">0%</span></div>
+          <div class="lg l-feat"><span class="k">Features</span><span class="val" id="djLgFeat">$0</span><span class="pct" id="djLgFeatP">0%</span></div>
+        </div>
+      </div>
       <div class="note">A working estimate based on Toronto labour rates, our in-house shop, and current material pricing. Your exact number, in writing, after a site survey.</div>
     </div>
   </div>
@@ -478,28 +525,28 @@ a{color:inherit;text-decoration:none}
   </div>
   <div class="list">
     <details>
-      <summary>How long for a kitchen? <span class="chev"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3 L12 9 L5 15"/></svg></span></summary>
-      <div class="ans">Typical full kitchen build is 8 to 12 weeks on site, plus 4 to 6 weeks in our cabinet shop running in parallel. Heritage homes or structural work (load-bearing wall removal, joist reinforcement) add 1 to 2 weeks. We commit to a hand-over date on the spec book and tie payment draws to milestones, not the calendar.</div>
+      <summary><span class="qn">Q.01</span><span class="qt">How long for a kitchen?</span> <span class="chev">&rsaquo;</span></summary>
+      <div class="ans-wrap"><span class="ans-rule"></span><div class="ans">Typical full kitchen build is 8 to 12 weeks on site, plus 4 to 6 weeks in our cabinet shop running in parallel. Heritage homes or structural work (load-bearing wall removal, joist reinforcement) add 1 to 2 weeks. We commit to a hand-over date on the spec book and tie payment draws to milestones, not the calendar.</div></div>
     </details>
     <details>
-      <summary>What is the cabinet lead time? <span class="chev"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3 L12 9 L5 15"/></svg></span></summary>
-      <div class="ans">Custom cabinets are built in our Etobicoke shop. From signed spec book to delivery: 4 to 6 weeks for paint-grade and quarter-sawn species, 6 to 8 weeks for rift white oak and walnut, 8 to 10 weeks for inset doors with hand-fit drawer fronts. Hardware (Blum, Hafele) is stocked.</div>
+      <summary><span class="qn">Q.02</span><span class="qt">What is the cabinet lead time?</span> <span class="chev">&rsaquo;</span></summary>
+      <div class="ans-wrap"><span class="ans-rule"></span><div class="ans">Custom cabinets are built in our Etobicoke shop. From signed spec book to delivery: 4 to 6 weeks for paint-grade and quarter-sawn species, 6 to 8 weeks for rift white oak and walnut, 8 to 10 weeks for inset doors with hand-fit drawer fronts. Hardware (Blum, Hafele) is stocked.</div></div>
     </details>
     <details>
-      <summary>Is the permit included? <span class="chev"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3 L12 9 L5 15"/></svg></span></summary>
-      <div class="ans">BCIN-stamped drawings, City of Toronto permit application, and plans-examination cycles are all included in the fixed-price contract for any project requiring permit (most basements, all garden suites, kitchens with structural or plumbing relocations). Permit fees are passed through at cost with the city receipt attached.</div>
+      <summary><span class="qn">Q.03</span><span class="qt">Is the permit included?</span> <span class="chev">&rsaquo;</span></summary>
+      <div class="ans-wrap"><span class="ans-rule"></span><div class="ans">BCIN-stamped drawings, City of Toronto permit application, and plans-examination cycles are all included in the fixed-price contract for any project requiring permit (most basements, all garden suites, kitchens with structural or plumbing relocations). Permit fees are passed through at cost with the city receipt attached.</div></div>
     </details>
     <details>
-      <summary>What warranty do you offer? <span class="chev"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3 L12 9 L5 15"/></svg></span></summary>
-      <div class="ans">5 years on cabinetry, drawer slides, hinges and powder-coated hardware. 2 years on tile, grout, paint and trim. TARION-registered new-home warranty on garden suites (1-year workmanship, 2-year mechanical, 7-year structural). We come back at month 6, 12 and 24 to adjust hinges, snug screws and touch up paint &mdash; in the contract, not the brochure.</div>
+      <summary><span class="qn">Q.04</span><span class="qt">What warranty do you offer?</span> <span class="chev">&rsaquo;</span></summary>
+      <div class="ans-wrap"><span class="ans-rule"></span><div class="ans">5 years on cabinetry, drawer slides, hinges and powder-coated hardware. 2 years on tile, grout, paint and trim. TARION-registered new-home warranty on garden suites (1-year workmanship, 2-year mechanical, 7-year structural). We come back at month 6, 12 and 24 to adjust hinges, snug screws and touch up paint &mdash; in the contract, not the brochure.</div></div>
     </details>
     <details>
-      <summary>Can the garden suite be financed? <span class="chev"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3 L12 9 L5 15"/></svg></span></summary>
-      <div class="ans">Yes. Most clients refinance against their existing home equity to fund a garden suite, then service the new debt with the rental income. We work with three mortgage brokers who specialise in CMHC Multi-Unit Mortgage Loan Insurance and the city of Toronto&rsquo;s Second-Suite incentive programmes. We do introductions, not commissions.</div>
+      <summary><span class="qn">Q.05</span><span class="qt">Can the garden suite be financed?</span> <span class="chev">&rsaquo;</span></summary>
+      <div class="ans-wrap"><span class="ans-rule"></span><div class="ans">Yes. Most clients refinance against their existing home equity to fund a garden suite, then service the new debt with the rental income. We work with three mortgage brokers who specialise in CMHC Multi-Unit Mortgage Loan Insurance and the city of Toronto&rsquo;s Second-Suite incentive programmes. We do introductions, not commissions.</div></div>
     </details>
     <details>
-      <summary>Toronto vs GTA &mdash; same pricing? <span class="chev"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3 L12 9 L5 15"/></svg></span></summary>
-      <div class="ans">Within Toronto and the inner 416 (Etobicoke, North York, Scarborough, East York) the price is flat. Mississauga, Vaughan, Markham and Richmond Hill carry a 4-to-6 percent travel premium to cover the second site supervisor we put on those projects. Beyond Highway 407 we quote case-by-case, usually only for repeat clients.</div>
+      <summary><span class="qn">Q.06</span><span class="qt">Toronto vs GTA &mdash; same pricing?</span> <span class="chev">&rsaquo;</span></summary>
+      <div class="ans-wrap"><span class="ans-rule"></span><div class="ans">Within Toronto and the inner 416 (Etobicoke, North York, Scarborough, East York) the price is flat. Mississauga, Vaughan, Markham and Richmond Hill carry a 4-to-6 percent travel premium to cover the second site supervisor we put on those projects. Beyond Highway 407 we quote case-by-case, usually only for repeat clients.</div></div>
     </details>
   </div>
 </section>
@@ -582,10 +629,16 @@ a{color:inherit;text-decoration:none}
     <span>HCRA Licensed</span>
     <span>ESA Certified</span>
   </div>
+  <div class="serial"><span>DJ-CR</span><span>&middot;</span><span class="edot"></span><span>BUILD N&deg; 2026-051</span></div>
   <div class="legal">
     <span>&copy; 2026 DJ Custom Reno</span>
     <span>Built by Sai Nathan</span>
     <span>Toronto &middot; GTA</span>
+  </div>
+  <div class="disciplines">
+    <span class="pill">Cabinetry</span>
+    <span class="pill">Joinery</span>
+    <span class="pill">Finish</span>
   </div>
 </footer>
 
@@ -636,7 +689,8 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
   strip.innerHTML=data.map(function(d,i){
     return '<article class="card t-'+d.type+'"><div class="vis"></div><div class="archi">'+archi(i,d.type)+'</div><div class="scrim"></div><div class="grain-layer" style="filter:url(#djGrain)"></div><span class="badge">'+d.badge+'</span><div class="meta"><div class="num">'+d.n+' / VI &middot; Selected Builds</div><h3>'+d.loc+' <em>&middot;</em> '+d.addr+'</h3><div class="spec">'+d.spec+'</div><div class="desc">'+d.desc+'</div></div></article>';
   }).join('');
-  if(REDUCED)return;
+  var progressBar=document.getElementById('djPortfolioProgress');
+  if(REDUCED){if(progressBar)progressBar.style.width='100%';return;}
   var section=document.querySelector('.dj-portfolio');
   function onScroll(){
     var rect=section.getBoundingClientRect();
@@ -645,6 +699,7 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
     var p=total>0?y/total:0;
     var maxX=strip.scrollWidth-window.innerWidth;
     strip.style.transform='translate3d('+(-p*maxX)+'px,0,0)';
+    if(progressBar)progressBar.style.width=(p*100)+'%';
   }
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
@@ -686,14 +741,34 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
   var range=document.getElementById('djRange');
   if(!sf||!price)return;
   var state={sf:220,mult:1.45,feat:0};
+  var segBase=document.getElementById('djSegBase');
+  var segMat=document.getElementById('djSegMat');
+  var segFeat=document.getElementById('djSegFeat');
+  var lgBase=document.getElementById('djLgBase');
+  var lgMat=document.getElementById('djLgMat');
+  var lgFeat=document.getElementById('djLgFeat');
+  var lgBaseP=document.getElementById('djLgBaseP');
+  var lgMatP=document.getElementById('djLgMatP');
+  var lgFeatP=document.getElementById('djLgFeatP');
   function fmt(n){return '$'+Math.round(n).toLocaleString('en-US')}
   function compute(){
     var base=state.sf*450;
-    var withQ=base*state.mult;
-    var total=withQ+state.feat*4500;
+    var matUp=base*(state.mult-1);
+    var feat=state.feat*4500;
+    var total=base+matUp+feat;
     price.textContent=fmt(total);
     range.textContent=fmt(total*0.85)+' — '+fmt(total*1.15);
     sfV.textContent=state.sf+' sf';
+    if(segBase){
+      var t=total||1;
+      var pB=base/t*100,pM=matUp/t*100,pF=feat/t*100;
+      segBase.style.width=pB+'%';
+      segMat.style.width=pM+'%';
+      segFeat.style.width=pF+'%';
+      lgBase.textContent=fmt(base);lgBaseP.textContent=Math.round(pB)+'%';
+      lgMat.textContent=fmt(matUp);lgMatP.textContent=Math.round(pM)+'%';
+      lgFeat.textContent=fmt(feat);lgFeatP.textContent=Math.round(pF)+'%';
+    }
   }
   sf.addEventListener('input',function(){state.sf=parseInt(sf.value,10);compute()});
   qualSeg.addEventListener('click',function(e){
