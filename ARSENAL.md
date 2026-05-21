@@ -70,7 +70,8 @@ Higgsfield / fal / Pollinations output 2D images + short video. For real
 
 | Tool | Output | Best for |
 |---|---|---|
-| **Spline AI** (inside Spline.design) | Spline scene URL or `.splinecode` — embed via `<spline-viewer>` or load with the Spline runtime | The `04-3d-spline-webgl` archetype directly. Hero *scenes* / abstract objects / device mocks. No new pipeline needed. **First pick.** |
+| **Omma by Spline** (`omma.build`) | Interactive web experiences combining **3D + motion + UI + code**, generated from natural language. Outputs publishable scenes (web / mobile / XR). Paid ($29/mo Pro). | The most ambitious option: a full hero *experience*, not just a model. Launched March 2026; integrates with the Spline ecosystem. Try this *before* hand-wiring Three.js if a client wants a "wow" hero. |
+| **Spline AI** (inside Spline.design) | Spline scene URL or `.splinecode` — embed via `<spline-viewer>` or load with the Spline runtime | The `04-3d-spline-webgl` archetype directly. Hero *scenes* / abstract objects / device mocks. No new pipeline needed. **Default pick** if Omma is overkill. |
 | **Meshy.ai** | `.glb` / `.fbx` / `.obj` (text-to-3D and image-to-3D) | A specific *object* (watch, bottle, jet, coconut, chair) loaded directly by Three.js. Free tier + REST API (`api.meshy.ai`). |
 | **Tripo3D** (Tripo AI) | `.glb` / `.usdz` (text-to-3D and image-to-3D) | A/B against Meshy — often stronger on organic / asymmetric shapes. Has API. |
 | **Luma Genie** | `.glb` from web app | Manual exports; no real API yet. Use when Spline AI can't get the look. |
@@ -137,6 +138,45 @@ the recommendation is the same shape as 21st.dev: install once, then
 reference component names directly in your `PROMPTS.md` blocks for any
 business build.
 
+### Other registries / kits worth knowing
+
+These don't fit the spectacle layer (one curated single-author set per
+animation use-case) but cover adjacent needs.
+
+| Tool | What it is | When to reach for it |
+|---|---|---|
+| **HeroUI** (`heroui.com`, formerly NextUI) | Modern React component library with its own design system + theming engine. Not copy-paste — installed as a package. Strong defaults, animated by default. | If you'd rather adopt a *whole design system* than wire shadcn + spectacle registries yourself. Faster v0; less control. |
+| **Tailwind UI / Plus** (`tailwindcss.com/plus`) | Paid premium components and templates from the Tailwind team. The original "agency-grade" copy-paste set. | When the client is willing to pay for the most stable, well-engineered marketing components. Worth it for a single team license. |
+| **Tremor** (`tremor.so`, by Vercel) | React + Tailwind components specifically for **dashboards and charts** (KPI cards, area/bar/donut charts, tables). Built on Recharts under the hood. | Any internal admin / metrics page. *Not* for marketing pages. |
+| **Uiverse.io** | Huge **community marketplace of pure CSS/HTML** snippets — buttons, cards, inputs, loaders, checkboxes. Not React. | Grabbing one-off styled inputs/buttons when you don't want to drag a whole registry in. Convert the CSS to a Tailwind+React component yourself. |
+| **Nextra** (`nextra.site`) | **Docs-site framework** for Next.js (MDX, theme, search). Used by shadcn's own docs. Not a component library. | When you need a polished docs site (e.g. a public API docs page for the future Starry Labs / dm-ck-core kernel). |
+
+### Video rendering: Remotion (scaffold included in this repo)
+
+A Node + React library that renders React components into **MP4 video**.
+Code-only, no API/network, deterministic.
+
+A working scaffold lives at **`tools/remotion/`** in this repo:
+
+```bash
+cd tools/remotion
+npm install
+node render.js                       # render all archetypes -> ../../assets/<id>-hero.mp4
+node render.js 13-wellness-botanical # render one
+npm run studio                       # open Remotion's live preview at localhost:3000
+```
+
+It reads `STYLES[]` from `build.js`, passes each archetype's palette /
+fonts / brand copy as `inputProps` into a single composition
+(`src/HeroReel.tsx`), and writes per-archetype MP4s into `assets/`.
+Skips files that already exist. Restyle the reel itself by editing
+`src/HeroReel.tsx`; change archetype content in `build.js` and the next
+render reflects it. See `tools/remotion/README.md` for details.
+
+This is `motion`'s sibling, not its replacement — Remotion is for *video
+files*, Motion is for *on-page animation*. Both can coexist in a real
+client build.
+
 ### Design / asset side
 
 - **Figma Dev-Mode MCP** — install if you want to turn real Figma comps
@@ -172,6 +212,13 @@ This is the practical answer to the recurring "I can't fetch
 - **Firecrawl / Fetch MCPs** — would let *this* session scrape live
   sites, but they're useless until the env's network policy is opened.
   If you ever open `refsites-research`'s policy, install these there.
+- **Awwwards "Sites of the Year"** (`awwwards.com/websites/sites_of_the_year/`)
+  — the highest-signal *inspiration index*. Skim the year's winners on
+  your laptop, pick the 3–4 nearest in feel to whatever client work is
+  next, run **DESIGN.md Generator** on each, drop the resulting .md
+  files into `notes/`. That gives me a structured token/pattern read of
+  what's actually winning in the field, without me ever needing to
+  reach the network.
 
 **The workflow that actually works now:**
 
@@ -211,6 +258,20 @@ them up properly alongside the rest of the arsenal.
   one of the shadcn-style premium animation kits (**Aceternity UI**,
   **Magic UI**, **Origin UI**), or a **Claude Code skill** by that name.
   Link pins it.
+- **Vengene UI** — couldn't find any product matching this name in a
+  web search. Likely a misspelling. Could be **Vengeance UI**? Or
+  something you saw in a niche post. Drop the link.
+- **Neurobus** — searched and found two real products with this name,
+  but neither is a UI/web-dev tool: **Neurobus.ai** (deeptech edge AI
+  for defense/aerospace — drones, satellites) and **Cognizant's
+  Neuro-SAN** (multi-agent AI orchestration framework). Neither fits
+  the pattern of the other tools in this list. Did you mean one of
+  those, or a different "Neuro-" project?
+- **Atomize Design** — could be **Atomize React** (a smaller React UI
+  kit / Bootstrap-style component library), or you may be referring to
+  **atomic design** (Brad Frost's methodology — atoms → molecules →
+  organisms — which is a *principle* rather than a tool). Confirm
+  which.
 
 Anything else you've mentioned in passing that I haven't covered — give
 me one line per item and I'll either write it up or flag it here.
@@ -340,6 +401,8 @@ copy-paste on top of shadcn + Motion):
 | **Skiper UI** | `skiper-ui.com` | Image trails, scroll stacks, 3D scroll, hover-distortion. The richest "wow"-factor effects in the lot. | Hero blocks and signature scroll moments. |
 | **Magic UI** | `magicui.design` | Marquees, animated beams, blur-fade, shimmer button, dock, globe, retro grid. Cleanest "modern SaaS landing" components — overlaps heavily with what big AI startup sites use. | The body sections — proof, features, social-band. |
 | **React Bits** | `reactbits.dev` | Strong text animations (split-text, decrypted-text, blur-text, shiny-text) and lightweight backgrounds (waves, dots, particles). | Headline reveals, type-led sections, simple animated backdrops. |
+| **Animate UI** | `animate-ui.com` | Open-source animated React components built on **shadcn CLI + Motion + Tailwind**. Closest in spirit to Magic UI; slightly broader interaction palette (hover-card animations, animated tabs, badges). | Use as a Magic-UI alternative or alongside it for non-overlapping pieces. |
+| **ForgeUI** | `forgeui.in` | Shadcn-style React components emphasising **Framer-Motion-driven** animations (hover effects, scroll reveals, loaders, animated form). Free, copy-paste. | Drop-in for animated forms and on-scroll reveals when the curated set above is missing the exact pattern. |
 | **Aceternity UI** | `ui.aceternity.com` | Heavy effects (background beams, lamp, world map, sparkles). Some overlap with Magic UI. | Premium-feel hero accents — pick *one* registry per project, ideally not both Aceternity and Magic UI together. |
 | **Origin UI** | `originui.com` | shadcn-faithful primitives with small tasteful animations and a wider component count (date pickers, command bars, tooltips). | Reach for it when shadcn's own set is missing a primitive you need. |
 
