@@ -294,9 +294,26 @@ duplicate the role.
 | Layer | Library | Role |
 |---|---|---|
 | **Foundation** | `shadcn/ui` (Radix + Tailwind, copy-paste — you own the code) | Buttons, dialogs, forms, tables, dropdowns. Use for the *structure* of dashboards/admin UIs and every interactive primitive. |
-| **Spectacle** | `Skiper UI` (animation-heavy, also copy-paste via the shadcn CLI; depends on Motion) | Marquees, image trails, scroll stacks, 3D hero blocks, big animated CTAs. Use for marketing/landing sections. |
+| **Spectacle** | `Skiper UI` · `Magic UI` · `React Bits` (animation-heavy, all copy-paste via the shadcn CLI; all depend on Motion) | Marquees, image trails, scroll stacks, 3D blocks, big animated CTAs. Use for marketing/landing sections. |
 | **On-demand** | 21st.dev Magic (MCP, above) | Generated bespoke components when the design isn't in any registry. |
-| **Alt registries** | Aceternity UI, Magic UI, Origin UI | Pick at most one alongside Skiper — don't sprawl across five. |
+| **Alt registries** | Aceternity UI, Origin UI | Pick at most one *more* alongside Skiper / Magic UI / React Bits — don't sprawl across five. |
+
+**Spectacle-layer registries side-by-side** (all free, all
+copy-paste on top of shadcn + Motion):
+
+| Registry | Site | Strengths | Use when |
+|---|---|---|---|
+| **Skiper UI** | `skiper-ui.com` | Image trails, scroll stacks, 3D scroll, hover-distortion. The richest "wow"-factor effects in the lot. | Hero blocks and signature scroll moments. |
+| **Magic UI** | `magicui.design` | Marquees, animated beams, blur-fade, shimmer button, dock, globe, retro grid. Cleanest "modern SaaS landing" components — overlaps heavily with what big AI startup sites use. | The body sections — proof, features, social-band. |
+| **React Bits** | `reactbits.dev` | Strong text animations (split-text, decrypted-text, blur-text, shiny-text) and lightweight backgrounds (waves, dots, particles). | Headline reveals, type-led sections, simple animated backdrops. |
+| **Aceternity UI** | `ui.aceternity.com` | Heavy effects (background beams, lamp, world map, sparkles). Some overlap with Magic UI. | Premium-feel hero accents — pick *one* registry per project, ideally not both Aceternity and Magic UI together. |
+| **Origin UI** | `originui.com` | shadcn-faithful primitives with small tasteful animations and a wider component count (date pickers, command bars, tooltips). | Reach for it when shadcn's own set is missing a primitive you need. |
+
+**Default mix for marketing-page client builds:** shadcn (foundation) +
+**Magic UI** (body sections, marquees, animated beams) + **Skiper UI**
+(hero spectacle) + **React Bits** (text/headline animation) + Motion +
+21st.dev Magic on demand. Don't load all of these for a dashboard build
+— stay on shadcn there.
 
 Install order in any new client project:
 
