@@ -26,6 +26,7 @@ const FONTS = {
   'Fraunces':'Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700',
   'JetBrains Mono':'JetBrains+Mono:wght@300;400',
   'Instrument Serif':'Instrument+Serif:ital@0;1',
+  'Noto Sans JP':'Noto+Sans+JP:wght@300;400;500;700',
 };
 function fontHref(list){
   const s = [...new Set(list)].map(f=>'family='+FONTS[f]).join('&');
@@ -52,7 +53,7 @@ const GEN_PROMPT = {
   '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
   '03-dark-brutalist':'High-contrast brutalist photographic abstraction, hard black-and-white diagonal light, raw concrete, single red accent, no text',
   '04-3d-spline-webgl':'Glossy iridescent 3D abstract render, cyan glass and chrome, soft studio gradient, real-time engine look, no text',
-  '05-vaporwave':'Retro synthwave horizon, large gradient sun behind scanline bands, magenta-to-orange, perspective grid, no text',
+  '05-vaporwave':'Audio-reactive vaporwave hero, neon magenta and cyan ripples over deep violet, scanline glow, perspective grid, NOT orange, no text',
   '06-soft-editorial':'Soft editorial fashion still life, warm sand and cream tones, diffuse window light, slow-fashion calm, no text',
   '07-saas-glass':'Abstract frosted-glass product UI floating on a violet mesh gradient, soft depth blur, premium SaaS, no text',
   '08-architecture-editorial':'Moody architectural photograph, concrete and timber against landscape, overcast tonal light, large negative space, no text',
@@ -122,7 +123,7 @@ function resolveAsset(s){
    `extra` holds archetype-level texture copy reused by both variants. */
 const STYLES = [
   { id:'01-luxury-dark', name:'Luxury Dark', refs:'Cartier · Obsidian Dew · OF Sakazuki',
-    vars:{'--bg':'#0A0A0A','--surface':'#161412','--fg':'#F5F0E8','--accent':'#C9A96E','--card':'rgba(255,255,255,.035)','--card-bd':'rgba(201,169,110,.18)'},
+    vars:{'--bg':'#0A0A0A','--surface':'#161412','--fg':'#F5F0E8','--accent':'#C9A96E','--card':'rgba(255,255,255,.035)','--card-bd':'rgba(201,169,110,.12)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:true,
     layout:['heroProduct','storyQuote','scrollDepth','galleryHorizontalScroll','productGrid','carouselClassic','scrollReel','materialScroll','footerBare'],
     extra:{ quote:'A single complication. A lifetime of restraint.',
@@ -161,7 +162,7 @@ const STYLES = [
         stats:[['1,400','Closings'],['18','Days avg.'],['99','% list-to-sale']] } },
 
   { id:'03-dark-brutalist', name:'Dark Brutalist', refs:'Guilty Mind · SHAPESHIFT · Sazabi',
-    vars:{'--bg':'#000000','--surface':'#000000','--fg':'#FFFFFF','--accent':'#FF2D16','--card':'transparent','--card-bd':'#FFFFFF','--btn-radius':'0','--card-radius':'0'},
+    vars:{'--bg':'#000000','--surface':'#000000','--fg':'#FFFFFF','--accent':'#FF1F0F','--card':'transparent','--card-bd':'#FFFFFF','--btn-radius':'0','--card-radius':'0'},
     disp:'Anton', body:'IBM Plex Mono', threeD:false, brutal:true,
     layout:['heroType','manifesto','relatsKinetic','galleryHorizontalScroll','rawProof','scrollDepth','numberedGet','emailInvert','footerBare'],
     extra:{ manifesto:['We do not do templates. We do not do safe. We do not do "on brand" when the brand is boring.',
@@ -177,7 +178,7 @@ const STYLES = [
         stats:[['340','SOLD'],['$210M','VOLUME'],['0','BORING LISTINGS']] } },
 
   { id:'04-3d-spline-webgl', name:'3D / WebGL', refs:'Spline Ice Cube · E.C.H.O. · JoyJam',
-    vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#5BE0FF','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(91,224,255,.18)'},
+    vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#7CF7FF','--accent-2':'#FF5BE0','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(124,247,255,.20)'},
     disp:'Space Grotesk', body:'Inter', threeD:true,
     layout:['r3fScene','howGlass','theatreScene','babylonHero','rapierPhysicsHero','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
@@ -233,7 +234,7 @@ const STYLES = [
         stats:[['40','Homes / year'],['1','Advisor'],['97','% referral']] } },
 
   { id:'07-saas-glass', name:'SaaS Glass', refs:'JoyJam · GSAP Engine · Hashgraph',
-    vars:{'--bg':'#070710','--surface':'#0E0E1C','--fg':'#EEF1FF','--accent':'#7B61FF','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.12)'},
+    vars:{'--bg':'#070710','--surface':'#0E0E1C','--fg':'#EEF1FF','--accent':'#8B5CF6','--accent-2':'#22D3EE','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.12)'},
     disp:'Syne', body:'Inter', threeD:true,
     layout:['heroSaas','stackCards','babylonHero','r3fScene','personaCols','logoMarquee','pricing','faq','ctaGradient','footerCols'],
     extra:{ faq:[['Is there a free tier?','Yes — generous, no card, no expiry.'],
@@ -254,7 +255,7 @@ const STYLES = [
         stats:[['9,400','Agents'],['$2.1B','Closed'],['4.9','★ rating']] } },
 
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
-    vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#9B9086','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
+    vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#A89376','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
     layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','carouselClassic','scrollDepth','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
@@ -289,7 +290,7 @@ const STYLES = [
         stats:[['40','Markets'],['24h','To viewing'],['24/7','Advisor']] } },
 
   { id:'10-food-beauty-dtc', name:'Food / Beauty DTC', refs:"Casper's Caviar · Obsidian Dew",
-    vars:{'--bg':'#080808','--surface':'#161210','--fg':'#F3EBDD','--accent':'#B48226','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(180,130,40,.24)'},
+    vars:{'--bg':'#080808','--surface':'#161210','--fg':'#F3EBDD','--accent':'#D4A24A','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(212,162,74,.26)'},
     disp:'Playfair Display', body:'Inter', threeD:true, sticky:true,
     layout:['heroProduct','ingredientMosaic','scrollDepth','ritualSteps','testimonialMarquee','productShelf','carouselClassic','emailInvert','footerBare'],
     extra:{ mosaic:[['Single Origin','One estuary. One season. One grade.'],
@@ -314,7 +315,7 @@ const STYLES = [
 
   { id:'11-japanese-web3', name:'Japanese / Community', refs:'OF Sakazuki',
     vars:{'--bg':'#0C0807','--surface':'#1A100E','--fg':'#F0E6D3','--accent':'#C2670C','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(194,103,12,.28)'},
-    disp:'Cormorant Garamond', body:'Space Grotesk', threeD:true, vanta:'fog',
+    disp:'Cormorant Garamond', body:'Noto Sans JP', threeD:true, vanta:'fog',
     layout:['heroProduct','kanjiMarquee','circleVault','scrollDepth','membership','quoteCards','parentheticalFooter'],
     extra:{ vault:[['盃 · The Circle','A community measured in trust, not headcount.'],
       ['蔵 · The Vault','Curated craft, released slowly, to members first.'],
@@ -334,7 +335,7 @@ const STYLES = [
         stats:[['88','Members'],['1','Waitlist'],['100','% off-market']] } },
 
   { id:'12-experimental-dev', name:'Experimental / Dev', refs:'E.C.H.O. · Robert Borghesi · IDOM',
-    vars:{'--bg':'#000000','--surface':'#070707','--fg':'#EDEDED','--accent':'#FF3B3B','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,59,59,.26)','--btn-radius':'0'},
+    vars:{'--bg':'#000000','--surface':'#070707','--fg':'#EDEDED','--accent':'#FF3B3B','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,59,59,.14)','--btn-radius':'0'},
     disp:'Space Grotesk', body:'IBM Plex Mono', threeD:true, minimal:true,
     layout:['heroCanvas','relatsKinetic','caseStudies','rapierPhysicsHero','theatreScene','galleryHorizontalScroll','capabilitySlides','scrollDepth','aboutTwoPara','contactBlack'],
     extra:{ caps:[['WebGL / Shaders','Custom GLSL, post-processing, 60fps budgets.'],
@@ -353,7 +354,7 @@ const STYLES = [
         stats:[['41','Builds'],['7','Awards'],['1','Human']] } },
 
   { id:'13-wellness-botanical', name:'Wellness Botanical', refs:'Coco Veda',
-    vars:{'--bg':'#050302','--surface':'#0E0805','--fg':'#f4e6cf','--accent':'#e9b26b','--amber':'#de7c0d','--cream':'#f4e6cf','--gold':'#e9b26b','--card':'rgba(244,230,207,.05)','--card-bd':'rgba(244,230,207,.14)'},
+    vars:{'--bg':'#050302','--surface':'#0E0805','--fg':'#f4e6cf','--accent':'#e9b26b','--amber':'#de7c0d','--amber-deep':'#B8580A','--cream':'#f4e6cf','--gold':'#e9b26b','--card':'rgba(244,230,207,.05)','--card-bd':'rgba(244,230,207,.14)'},
     disp:'Fraunces', body:'Inter', threeD:false, light:false,
     layout:['heroCinematicFilm','editorialStatement','statsBand','asymGrid','scrollDepth','productShelf','ritualSteps','ingredientMosaic','carouselClassic','journalCards','newsletter','footerBare'],
     extra:{ quote:'Picked at the perfect moment. Pressed cold. Bottled whole.',
@@ -430,7 +431,7 @@ const STYLES = [
         stats:[['30K','Lines in the kernel'],['195','Countries scored'],['1','API to build on']] } },
 
   { id:'15-resort-residences', name:'Resort & Residences', refs:'Aman · Six Senses',
-    vars:{'--bg':'#F5F0E6','--surface':'#E9DFC9','--fg':'#2B2620','--accent':'#9C7B4A','--card':'rgba(255,255,255,.60)','--card-bd':'rgba(43,38,32,.14)'},
+    vars:{'--bg':'#F5F0E6','--surface':'#E9DFC9','--fg':'#2B2620','--accent':'#8A6638','--card':'rgba(255,255,255,.60)','--card-bd':'rgba(43,38,32,.14)'},
     disp:'Cormorant Garamond', body:'Inter', threeD:false, light:true,
     layout:['heroBuildSequence','editorialStatement','galleryHorizontalScroll','asymGrid','scrollDepth','scrollReel','ritualSteps','carouselClassic','ingredientMosaic','journalCards','newsletter','footerBare'],
     extra:{
@@ -466,7 +467,7 @@ const STYLES = [
         stats:[['18','Branded residences'],['Freehold','Title held'],['365','Days of service']] } },
 
   { id:'16-terminal-industrial', name:'Terminal Industrial', refs:'terminal-industries.com · Stripe · Linear',
-    vars:{'--bg':'#050505','--surface':'#0B0B0D','--fg':'#EDEDED','--accent':'#FF5C00','--accent-2':'#1AFF8C','--card':'rgba(255,255,255,.025)','--card-bd':'rgba(255,255,255,.10)','--btn-radius':'2px','--card-radius':'2px'},
+    vars:{'--bg':'#050505','--surface':'#0B0B0D','--fg':'#EDEDED','--accent':'#FF5C00','--accent-2':'#1AFF8C','--card':'rgba(255,255,255,.025)','--card-bd':'rgba(255,255,255,.06)','--btn-radius':'0','--card-radius':'0'},
     disp:'Space Grotesk', body:'IBM Plex Mono', threeD:false, industrial:true,
     layout:['heroVideoGSAP','statsBand','routesGrid','scrollDepth','featureRows','carouselClassic','galleryHorizontalScroll','processSteps','logoMarquee','contactBlack'],
     extra:{ steps:[

@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>:root{--bg:#F5F0E6;--surface:#E9DFC9;--fg:#2B2620;--accent:#9C7B4A;--card:rgba(255,255,255,.60);--card-bd:rgba(43,38,32,.14);--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
+<style>:root{--bg:#F5F0E6;--surface:#E9DFC9;--fg:#2B2620;--accent:#8A6638;--card:rgba(255,255,255,.60);--card-bd:rgba(43,38,32,.14);--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -29,12 +29,12 @@
 <div class="bs-monogram" aria-hidden="true">
   <svg viewBox="0 0 240 240" width="120" height="120">
     <defs><linearGradient id="bsG" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#9C7B4A" stop-opacity=".95"/>
-      <stop offset="1" stop-color="#9C7B4A" stop-opacity=".55"/></linearGradient></defs>
+      <stop offset="0" stop-color="#8A6638" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#8A6638" stop-opacity=".55"/></linearGradient></defs>
     <circle class="bs-p bs-p1" cx="120" cy="120" r="104" fill="none" stroke="url(#bsG)" stroke-width="1.2"/>
-    <circle class="bs-p bs-p2" cx="120" cy="120" r="78"  fill="none" stroke="#9C7B4A" stroke-width=".8" stroke-opacity=".55"/>
-    <text class="bs-p bs-mn" x="120" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-size="92" font-weight="300" fill="#9C7B4A" letter-spacing="-2">A</text>
-    <line class="bs-p bs-l1" x1="38"  y1="208" x2="202" y2="208" stroke="#9C7B4A" stroke-opacity=".4" stroke-width=".8"/>
+    <circle class="bs-p bs-p2" cx="120" cy="120" r="78"  fill="none" stroke="#8A6638" stroke-width=".8" stroke-opacity=".55"/>
+    <text class="bs-p bs-mn" x="120" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-size="92" font-weight="300" fill="#8A6638" letter-spacing="-2">A</text>
+    <line class="bs-p bs-l1" x1="38"  y1="208" x2="202" y2="208" stroke="#8A6638" stroke-opacity=".4" stroke-width=".8"/>
   </svg>
   <div class="bs-wordmark">AMARA</div>
 </div>
@@ -64,25 +64,25 @@
 .bs-monogram .bs-p2{animation-delay:.95s;stroke-dasharray:520;stroke-dashoffset:520}
 .bs-monogram .bs-l1{animation-delay:1.4s;stroke-dasharray:200;stroke-dashoffset:200}
 .bs-monogram .bs-mn{opacity:0;animation:bsType 1.4s 1.6s ease forwards;stroke-dasharray:0}
-.bs-wordmark{font-family:var(--font-display),serif;font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;color:#9C7B4A;opacity:0;transform:translateX(-8px);animation:bsSlide 1.1s 1.9s ease forwards}
+.bs-wordmark{font-family:var(--font-display),serif;font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;color:#8A6638;opacity:0;transform:translateX(-8px);animation:bsSlide 1.1s 1.9s ease forwards}
 @keyframes bsDraw{to{stroke-dashoffset:0}}
 @keyframes bsType{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
 @keyframes bsSlide{to{opacity:1;transform:none}}
 @keyframes bsFadeMono{to{opacity:1}}
 .bs-frame{position:fixed;left:clamp(1.4rem,4vw,3rem);bottom:clamp(2rem,6vw,4rem);max-width:min(60vw,560px);z-index:4}
-.bs-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#9C7B4A;margin-bottom:1.2rem;opacity:0;animation:bsUp .9s 2.2s ease forwards}
+.bs-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#8A6638;margin-bottom:1.2rem;opacity:0;animation:bsUp .9s 2.2s ease forwards}
 .bs-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5.6rem);line-height:.98;margin:0 0 1.2rem;letter-spacing:-.02em;opacity:0;animation:bsUp 1.2s 2.4s ease forwards}
 .bs-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.7);margin:0 0 1.6rem;max-width:38ch;opacity:0;animation:bsUp 1.1s 2.7s ease forwards}
 .bs-cta-row{display:flex;align-items:center;gap:1.2rem;opacity:0;animation:bsUp 1.1s 3s ease forwards}
-.bs-cta{display:inline-block;padding:.85rem 1.6rem;border:1px solid #9C7B4A;color:#9C7B4A;border-radius:999px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .25s ease}
-.bs-cta:hover{background:#9C7B4A;color:#000}
+.bs-cta{display:inline-block;padding:.85rem 1.6rem;border:1px solid #8A6638;color:#8A6638;border-radius:999px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .25s ease}
+.bs-cta:hover{background:#8A6638;color:#000}
 .bs-chap{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,232,.5);transition:color .4s ease}
 @keyframes bsUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
 .bs-rail{position:fixed;right:clamp(1.2rem,3vw,2.4rem);top:50%;transform:translateY(-50%);z-index:4;display:none;flex-direction:column;gap:.7rem;align-items:flex-end;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.6rem;letter-spacing:.32em;color:rgba(245,241,232,.4)}
 @media(min-width:900px){.bs-rail{display:flex}}
 .bs-rail span{display:inline-block;width:1.6rem;text-align:right}
 .bs-r{display:inline-block;width:18px;height:1px;background:rgba(245,241,232,.25);margin-right:.5rem;vertical-align:middle;transition:all .3s ease}
-.bs-r.is-on{background:#9C7B4A;width:28px}
+.bs-r.is-on{background:#8A6638;width:28px}
 </style>
 <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
 <script>
@@ -92,7 +92,7 @@
     function sz(){BW=bg.width=innerWidth;BH=bg.height=innerHeight;}sz();addEventListener('resize',sz);
     (function tk(){t++;b.fillStyle='rgba(8,8,12,.18)';b.fillRect(0,0,BW,BH);
       for(var i=0;i<4;i++){var x=BW*(.2+.18*i)+Math.sin(t*.003+i)*60,y=BH*(.5+.12*Math.cos(t*.004+i*1.7));
-        var g=b.createRadialGradient(x,y,0,x,y,260);g.addColorStop(0,'#9C7B4A33');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,260,0,6.28);b.fill();}
+        var g=b.createRadialGradient(x,y,0,x,y,260);g.addColorStop(0,'#8A663833');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,260,0,6.28);b.fill();}
       requestAnimationFrame(tk);})();}
   if(typeof THREE==='undefined')return;
   var cv=document.getElementById('bs3d');if(!cv)return;
@@ -120,8 +120,8 @@
   var plaqueGeom=new THREE.PlaneGeometry(2.6,1.4);
   var pcv=document.createElement('canvas');pcv.width=512;pcv.height=256;
   var pc=pcv.getContext('2d');pc.fillStyle='rgba(0,0,0,0)';pc.fillRect(0,0,512,256);
-  pc.strokeStyle='#9C7B4A';pc.lineWidth=2;pc.beginPath();pc.arc(256,128,108,0,6.283);pc.stroke();
-  pc.font='600 132px Cormorant Garamond';pc.fillStyle='#9C7B4A';pc.textAlign='center';pc.textBaseline='middle';pc.fillText('A',256,138);
+  pc.strokeStyle='#8A6638';pc.lineWidth=2;pc.beginPath();pc.arc(256,128,108,0,6.283);pc.stroke();
+  pc.font='600 132px Cormorant Garamond';pc.fillStyle='#8A6638';pc.textAlign='center';pc.textBaseline='middle';pc.fillText('A',256,138);
   pc.font='600 22px Cormorant Garamond';pc.letterSpacing='8px';pc.fillStyle='rgba(245,241,232,.78)';pc.fillText('AMARA',256,236);
   var ptex=new THREE.CanvasTexture(pcv);ptex.anisotropy=4;
   var plaque=new THREE.Mesh(plaqueGeom,new THREE.MeshPhysicalMaterial({map:ptex,transparent:true,transmission:.55,roughness:.18,thickness:.4,clearcoat:1,opacity:0}));plaque.position.set(0,1.7,2.51);G.add(plaque);
@@ -195,15 +195,15 @@
 <section class="sd-sec" aria-label="Depth">
   <div class="sd-stage">
     <svg class="sd-layer sd-l3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#9C7B4A" stop-opacity=".22"/><stop offset="1" stop-color="#9C7B4A" stop-opacity="0"/></radialGradient></defs>
+      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#8A6638" stop-opacity=".22"/><stop offset="1" stop-color="#8A6638" stop-opacity="0"/></radialGradient></defs>
       <rect width="1600" height="900" fill="url(#sdSky)"/>
-      <circle cx="1200" cy="240" r="100" fill="#9C7B4A" fill-opacity=".5" filter="blur(40)"/>
+      <circle cx="1200" cy="240" r="100" fill="#8A6638" fill-opacity=".5" filter="blur(40)"/>
     </svg>
     <svg class="sd-layer sd-l2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="#9C7B4A" fill-opacity=".22"/>
+      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="#8A6638" fill-opacity=".22"/>
     </svg>
     <svg class="sd-layer sd-l1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="#9C7B4A" fill-opacity=".48"/>
+      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="#8A6638" fill-opacity=".48"/>
     </svg>
     <div class="sd-frame">
       <div class="sd-eyebrow">A coastline kept quiet</div>
@@ -219,7 +219,7 @@
   .sd-l2{transform:translateY(0);z-index:2}
   .sd-l1{transform:translateY(0);z-index:3}
   .sd-frame{position:relative;z-index:4;text-align:center;padding:0 1.6rem;max-width:min(80vw,720px)}
-  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#9C7B4A;margin-bottom:1.2rem}
+  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#8A6638;margin-bottom:1.2rem}
   .sd-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;letter-spacing:-.02em;margin:0 0 1.2rem;text-shadow:0 6px 24px rgba(0,0,0,.5)}
   .sd-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.75);margin:0 auto;max-width:48ch}
   </style>

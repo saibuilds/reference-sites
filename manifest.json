@@ -20,7 +20,7 @@
       "id": "03-dark-brutalist",
       "name": "Dark Brutalist",
       "refs": "Guilty Mind · SHAPESHIFT · Sazabi",
-      "accent": "#FF2D16",
+      "accent": "#FF1F0F",
       "g": "GUILTY/MIND",
       "re": "BLACK/DOOR"
     },
@@ -28,7 +28,7 @@
       "id": "04-3d-spline-webgl",
       "name": "3D / WebGL",
       "refs": "Spline Ice Cube · E.C.H.O. · JoyJam",
-      "accent": "#5BE0FF",
+      "accent": "#7CF7FF",
       "g": "ECHO LABS",
       "re": "DIMENSION"
     },
@@ -52,7 +52,7 @@
       "id": "07-saas-glass",
       "name": "SaaS Glass",
       "refs": "JoyJam · GSAP Engine · Hashgraph",
-      "accent": "#7B61FF",
+      "accent": "#8B5CF6",
       "g": "JoyJam",
       "re": "ListingOS"
     },
@@ -60,7 +60,7 @@
       "id": "08-architecture-editorial",
       "name": "Architecture Editorial",
       "refs": "Fall Line House · Fifth & Dune · Alpine",
-      "accent": "#9B9086",
+      "accent": "#A89376",
       "g": "FALL LINE",
       "re": "FALL LINE ESTATES"
     },
@@ -76,7 +76,7 @@
       "id": "10-food-beauty-dtc",
       "name": "Food / Beauty DTC",
       "refs": "Casper's Caviar · Obsidian Dew",
-      "accent": "#B48226",
+      "accent": "#D4A24A",
       "g": "CASPER'S",
       "re": "OBSIDIAN"
     },
@@ -116,7 +116,7 @@
       "id": "15-resort-residences",
       "name": "Resort & Residences",
       "refs": "Aman · Six Senses",
-      "accent": "#9C7B4A",
+      "accent": "#8A6638",
       "g": "AMARA",
       "re": "AMARA RESIDENCES"
     },
@@ -152,7 +152,7 @@
       "slug": "03-guilty-mind",
       "style": "03-dark-brutalist",
       "styleName": "Dark Brutalist",
-      "accent": "#FF2D16"
+      "accent": "#FF1F0F"
     },
     {
       "n": 4,
@@ -184,7 +184,7 @@
       "slug": "07-obsidian-dew",
       "style": "10-food-beauty-dtc",
       "styleName": "Food / Beauty DTC",
-      "accent": "#B48226"
+      "accent": "#D4A24A"
     },
     {
       "n": 8,
@@ -200,7 +200,7 @@
       "slug": "09-spline-ice-cube",
       "style": "04-3d-spline-webgl",
       "styleName": "3D / WebGL",
-      "accent": "#5BE0FF"
+      "accent": "#7CF7FF"
     },
     {
       "n": 10,
@@ -208,7 +208,7 @@
       "slug": "10-fall-line-house",
       "style": "08-architecture-editorial",
       "styleName": "Architecture Editorial",
-      "accent": "#9B9086"
+      "accent": "#A89376"
     },
     {
       "n": 11,
@@ -216,7 +216,7 @@
       "slug": "11-relats-periflex",
       "style": "03-dark-brutalist",
       "styleName": "Dark Brutalist",
-      "accent": "#FF2D16"
+      "accent": "#FF1F0F"
     },
     {
       "n": 12,
@@ -256,7 +256,7 @@
       "slug": "16-casper-s-caviar",
       "style": "10-food-beauty-dtc",
       "styleName": "Food / Beauty DTC",
-      "accent": "#B48226"
+      "accent": "#D4A24A"
     },
     {
       "n": 17,
@@ -280,7 +280,7 @@
       "slug": "19-alpine-chalets",
       "style": "08-architecture-editorial",
       "styleName": "Architecture Editorial",
-      "accent": "#9B9086"
+      "accent": "#A89376"
     },
     {
       "n": 20,
@@ -288,7 +288,7 @@
       "slug": "20-joyjam",
       "style": "07-saas-glass",
       "styleName": "SaaS Glass",
-      "accent": "#7B61FF"
+      "accent": "#8B5CF6"
     }
   ]
 }
