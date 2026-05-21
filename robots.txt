@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reference-sites.pages.dev/sitemap.xml
