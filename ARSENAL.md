@@ -315,6 +315,29 @@ copy-paste on top of shadcn + Motion):
 21st.dev Magic on demand. Don't load all of these for a dashboard build
 — stay on shadcn there.
 
+### Why 21st.dev is structurally different from the other registries
+
+Worth pinning down because it gets lumped in with Skiper / Magic UI /
+React Bits / Aceternity and it isn't really the same thing.
+
+| | Authorship | Visual coherence | Breadth | AI-driven |
+|---|---|---|---|---|
+| Skiper / Magic UI / React Bits / Aceternity | Single author per registry | High (one taste) | Narrow but deep on their specialty | No (you pick manually) |
+| **21st.dev** | Community (many authors) | Variable | Wide — niche components others lack | **Yes** (Magic MCP picks/generates for you) |
+
+So 21st.dev is **two things in one**: a community marketplace of
+shadcn-compatible components (`21st.dev/<author>/<component>`) *and* the
+Magic MCP that lets Claude/Cursor fetch the right one by description.
+The single-author registries above are *just* the components.
+
+Practical positioning in this project: use single-author registries
+(Magic UI / Skiper / React Bits) as the *coherent* core for any client
+build, and the 21st.dev Magic MCP as a **gap-filler** — when you need a
+niche component nobody else ships (kanban, calendar, dashboard widget),
+or when you want Claude itself to pull a component on demand mid-build.
+Always check what a chosen 21st.dev component drags in dependency-wise
+before adding it; community contributions vary.
+
 Install order in any new client project:
 
 ```bash
@@ -505,3 +528,93 @@ session.
 > deploys require care with real brand names and prices; multi-agent
 > coordination = `git fetch && rebase` before every push; `PROMPTS.md`
 > is the reusable engine.
+
+---
+
+## 8. Top 3 picks — what to actually use, and how they fit together
+
+After all the comparison, the opinionated answer:
+
+### Pick 1 — Media: Higgsfield + Pollinations (free fallback)
+
+- **Higgsfield** handles cinematic stills *and* 5-sec brand reels
+  through one MCP — premium quality, premium price.
+- **Pollinations** is the free safety net (already used by
+  `refsites-media` to ship the 15 hero JPGs).
+- Together: Higgsfield for the showcase shots, Pollinations for
+  everything else. Skip nanana / Replicate unless you have a specific
+  model only they host. `fal.ai` becomes worthwhile only when you want
+  a specific *fal-exclusive* model (Flux Pro Ultra, Seedance 2.0).
+
+### Pick 2 — 3D: Spline AI + Meshy.ai
+
+- **Spline AI** for hero *scenes* — slots into `04-3d-spline-webgl`
+  with zero plumbing. Just paste the exported scene URL.
+- **Meshy.ai** for product *objects* (`.glb`) — when an archetype
+  needs an actual model (watch movement for `01-luxury-dark`, jet for
+  `09-aviation-luxury`, halved coconut for `13-wellness-botanical`).
+  Three.js in `shared/lib.js` loads it.
+- Together: Spline = scenes, Meshy = objects. Skip Tripo / Luma / Rodin
+  unless you need a specific look these two can't produce.
+
+### Pick 3 — Frontend for client React builds: shadcn + Magic UI + Motion (with 21st.dev Magic MCP as on-demand gap-filler)
+
+- **shadcn/ui** = the primitive foundation (buttons, dialogs, forms,
+  tables, dropdowns). You own the code.
+- **Magic UI** = the coherent spectacle layer (marquees, animated
+  beams, blur fades, shimmer button, dock, globe). Most opinionated
+  "modern SaaS landing" set; drops cleanly onto shadcn via the same
+  CLI.
+- **Motion** = the animation library. Install as `motion`, import from
+  `motion/react`. **Not** `framer-motion` — that's the legacy name of
+  the same library; new projects install `motion`.
+- **21st.dev Magic MCP** = on-demand gap-filler — Claude pulls a
+  bespoke component from the community registry when nothing in your
+  curated set fits.
+- Skip the rest (Skiper / React Bits / Aceternity / Origin) unless a
+  specific archetype needs an effect those three cover better. Pick at
+  most one *additional* spectacle registry per project.
+
+### Wrapper enablers (install once, not optional)
+
+These don't "complete" anything by themselves — they make every other
+pick effective. Install user-scoped in `refsites-media`:
+
+```bash
+claude mcp add --scope user context7  -- npx -y @upstash/context7-mcp
+claude mcp add --scope user playwright -- npx -y @playwright/mcp@latest
+claude mcp add --scope user magic      -- npx -y @21st-dev/magic@latest --api-key=YOUR_21ST_KEY
+```
+
+- **Context7** = live docs for Motion / shadcn / Next / Three / GSAP /
+  Spline. Eliminates "Claude wrote an outdated API."
+- **Playwright** = headless browser; screenshots, navigation, visual
+  QA of the rendered pages.
+- **21st.dev Magic** = the MCP form of Pick 3's gap-filler.
+
+### How the three picks integrate end-to-end
+
+```
+refsites-media (open network)
+  └─ Higgsfield / Pollinations  →  assets/<id>-hero.jpg
+  └─ Higgsfield video           →  assets/<id>-hero.mp4
+  └─ Spline AI scene URL        →  pasted into 04-3d-spline-webgl
+  └─ Meshy.ai                   →  assets/3d/<id>.glb
+  └─ Context7 / Playwright / Magic MCPs installed user-scope
+
+refsites-code (this session)
+  └─ build.js + resolveAsset() picks up everything above automatically
+  └─ node build.js && node build-index.js  →  70 pages, all assets wired
+
+first real client React build (e.g. apps/sathideals/)
+  └─ Next.js + Tailwind + shadcn primitives
+  └─ Magic UI for spectacle sections (marquee, beams, animated proof)
+  └─ Motion for component animation + scroll-linked transitions
+  └─ 21st.dev Magic MCP fills any component gaps on demand
+  └─ Playwright MCP screenshots pages for QA before deploy
+  └─ Cloudflare / Vercel deploy
+```
+
+That's the whole pipeline — every "extra" tool (Skiper, React Bits,
+Aceternity, ElevenLabs, Figma MCP, Supabase, Stripe, Resend) lives
+outside this loop and stays optional until a real project demands it.
