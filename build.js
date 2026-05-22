@@ -47,7 +47,7 @@ const MOTIF = { '01-luxury-dark':'bloom','02-cinematic-video':'horizon','03-dark
   '04-3d-spline-webgl':'mesh','05-vaporwave':'sun','06-soft-editorial':'soft','07-saas-glass':'mesh',
   '08-architecture-editorial':'tonal','09-aviation-luxury':'horizon','10-food-beauty-dtc':'organic',
   '11-japanese-web3':'organic','12-experimental-dev':'slab','13-wellness-botanical':'organic',
-  '14-cosmic-platform':'cosmos','15-resort-residences':'tonal','16-terminal-industrial':'slab' };
+  '14-cosmic-platform':'cosmos','15-resort-residences':'tonal','16-terminal-industrial':'terminal' };
 const GEN_PROMPT = {
   '01-luxury-dark':'Cinematic macro of a haute-horlogerie movement, single warm gold key light on near-black, extreme restraint, museum lighting, no text',
   '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
@@ -107,6 +107,13 @@ ${[0,1,2,3,4,5].map(i=>`<rect x="500" y="${430+i*46}" width="600" height="22" fi
 <ellipse cx="1040" cy="470" rx="560" ry="560" fill="url(#a)" filter="url(#s)"/>
 <g fill="none" stroke="${accent}" stroke-opacity=".22" transform="rotate(-17 1040 470)">${[170,255,345,455].map(r=>`<ellipse cx="1040" cy="470" rx="${r}" ry="${Math.round(r*0.6)}"/>`).join('')}</g>
 <circle cx="1040" cy="470" r="40" fill="${accent}" opacity=".4" filter="url(#gg)"/><circle cx="1040" cy="470" r="6" fill="${fg}"/>`; }
+  else if(m==='terminal'){
+    const grid=[0,1,2,3,4,5,6,7,8].map(i=>`<line x1="${-300+i*320}" y1="1000" x2="${360+i*110}" y2="540" stroke="${fg}" stroke-opacity=".09"/>`).join('')
+      +[0,1,2,3,4].map(i=>`<line x1="0" y1="${600+i*95}" x2="1600" y2="${600+i*95}" stroke="${fg}" stroke-opacity="${(0.05+i*0.02).toFixed(2)}"/>`).join('');
+    const stacks=Array.from({length:9},(_,i)=>{const x=110+i*170,h=70+((i*61)%150),y=540-h,on=i%3===0;return `<rect x="${x}" y="${y}" width="140" height="${h}" fill="${on?accent:fg}" opacity="${on?'.82':'.10'}"/>`;}).join('');
+    const box=(x,y,w,h)=>`<g stroke="${accent}" stroke-opacity=".85" fill="none" stroke-width="2"><rect x="${x}" y="${y}" width="${w}" height="${h}" stroke-opacity=".4"/><path d="M${x} ${y+18} V${y} H${x+18} M${x+w-18} ${y} H${x+w} V${y+18} M${x+w} ${y+h-18} V${y+h} H${x+w-18} M${x+18} ${y+h} H${x} V${y+h-18}" stroke-width="3"/></g>`;
+    layer=`${grid}${stacks}${box(960,165,300,180)}${box(300,150,180,120)}<rect x="0" y="455" width="1600" height="3" fill="${accent}" opacity=".55"/>`;
+  }
   else layer=`<g fill="none">${Array.from({length:9},(_,r)=>Array.from({length:14},(_,c)=>`<circle cx="${80+c*112}" cy="${90+r*100}" r="2.4" fill="${accent}" fill-opacity=".32"/>`).join('')).join('')}</g>
 <ellipse cx="430" cy="360" rx="360" ry="360" fill="url(#a)" filter="url(#s)"/><ellipse cx="1180" cy="660" rx="340" ry="340" fill="url(#a)" filter="url(#s)" opacity=".7"/><ellipse cx="880" cy="520" rx="260" ry="260" fill="${accent}" opacity=".05" filter="url(#s)"/>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img">${defs}<rect width="${W}" height="${H}" fill="url(#b)"/>${atmo}${layer}<rect width="${W}" height="${H}" fill="url(#lk)"/><rect width="${W}" height="${H}" fill="url(#v)"/><rect width="${W}" height="${H}" filter="url(#g)" opacity=".5"/></svg>`;
