@@ -159,3 +159,77 @@ Verified motion-gated correctness by code review for: p5Sketch (line 1477), thea
 ## 2026-05 — Browser_batch is mandatory
 
 System reminded after single-call navigate: "Prefer browser_batch — significantly faster." Batched the 4-page renderer audit in one call (5 actions) instead of 8 separate calls. ~5x speedup. Use `browser_batch` whenever ≥2 chained browser actions are predictable.
+
+## 2026-05-21 — The "invented content" disaster (CRITICAL — read before any brand build)
+
+Autonomous overnight run generated SathiDeals / MyLegalBasement / DJ Custom Reno full sites
+across 7 "polish passes". User woke up and rejected almost all of it because EVERY business
+fact was fabricated. Had to delete 13,849 lines (45 sub-pages + invented homepage content).
+
+What was invented (NONE provided by the user):
+- "Sai & Family · Ateliers of Toronto" umbrella brand
+- Team: Sai Nathan, Sathi Nathan, Anand Nathan, Maya, Marcus
+- All project addresses (Bridle Path, Yorkville, Hupfield, Coxwell, etc.)
+- All client quotes, phones (+14165550xxx), emails, stats (150+ Suites, $2.8M Rent)
+- All journal posts bylined "BY SAI NATHAN", press pills, EST. 2019, JSON-LD principal
+
+What was REAL: brand names (SathiDeals/MLB/DJ), user-supplied PNG logos, SVG marks traced
+from those logos. Everything else = deleted.
+
+**Hard rules going forward (content ledger gate):**
+1. Before generating ANY content naming a person/address/price/date/stat: did this come
+   from the user in conversation? If not → it's a `[placeholder]`, never a fabricated fact.
+2. High design + fake content is WORSE than low design + fake content — the polish lends
+   credibility the facts don't deserve. Cartier-tier copy never gets questioned.
+3. Cloudflare Pages auto-deploys EVERY push to the branch. No staging. Treat every push to
+   `claude/setup-mcp-api-keys-t4GTr` as production-public. Fake content = indexable instantly.
+4. "Pass N+1" compounds a broken foundation. Passes 4–7 each invented MORE because they
+   assumed pass 3's content was valid. Verify foundation before iterating.
+5. Three.js Points (particle clouds) ≠ 3D. Real 3D = .glb / Spline scene URL / R3F meshes.
+   Don't call WebGL particles "3D assets" in commit messages.
+6. Cleanup pattern that worked: `rm -rf` named files → `git add <each-file-explicitly>` →
+   commit referencing exactly what was nuked. NEVER `git add -A` during cleanup.
+7. When cleanup is bigger than the original mistake, AskUserQuestion first (nuke-to-stub vs
+   surgical-strip vs delete-folder). 1-line answer saved ~2h of broken-edge cleanup.
+
+**New build process (replaces "just keep polishing"):**
+- Phase 0: content ledger — one page of real (user-supplied) vs TBD. TBD stays placeholder.
+- Phase 1: design tokens + component shell. Real logos, real brand colors, lorem text.
+- Phase 2: integrate user's REAL Spline scene URLs (not particles-called-3D).
+- Phase 3: user fills placeholders OR we wait. No filler generation.
+- Phase 4: deploy only after user reviews content.
+
+Current live state after cleanup (commit bafff06): all 3 brand homepages + 3 DJ ad creatives
+are minimal coming-soon stubs (logo + name + "Toronto · GTA" only). DJ explicitly held as
+stub per user — brand brief not yet provided.
+
+## 2026-05-21 — Master knowledge source files (DO NOT duplicate into repo)
+
+Two large research files live in `C:\Users\Admin\Downloads\` and are the SOURCE OF TRUTH for
+design/video/3D knowledge. They are NOT copied into this repo (too large, and they contain
+the user's full reverse-engineered prompt library). Reference them, don't duplicate them:
+
+- `web and video sskill backup.txt` (247KB, 6204 lines) = MASTER_KNOWLEDGE.md. Parts A–H:
+  A web design system (Jerry the Web Dev 3-stage attention formula, 12 design styles, animation
+  code library, design tokens), B Claude Code impl + CLAUDE.md template + subagent prompts,
+  C Google Stitch workflow, D Nano Banana 2 image gen, E video production pipeline (VEO3 JSON,
+  Higgsfield 28 camera prompts), F viral reel formula (Sai Tiru 7 content types, Joel Van Beek
+  RE editing), G 3D generation (Blender MCP, tools comparison), H pro video editing (MKBHD
+  method, DaVinci Resolve 20 color grade nodes).
+- `web automation claude broser to learn rom etc.txt` (3.4MB) = COMPLETE MASTER PROMPT LIBRARY.
+  Reverse-engineers all 20 reference reels (Cartier, Terminal, Guilty Mind, GSAP, Sidewave,
+  Sakazuki, Obsidian Dew, Hashgraph, Spline Ice, Fall Line House, Relats, Maison de Synergy,
+  Design Agency, Cartier W&W, ECHO/Active Theory, Casper's Caviar, Villa Maravilha, Jesko Jets,
+  Alpine Chalets, JoyJam). Per-style copy-paste creative-director prompts with full brand specs.
+
+These are properly sourced (real creators cited) — the OPPOSITE of the invented content above.
+Use them as the design/prompt foundation. The 20-reel table maps 1:1 to the build.js archetypes.
+
+## 2026-05-21 — Modern frontend stack reference (2026)
+
+Captured in `notes/frontend-stack-learnings.md` (relay doc for the other Claude Code session).
+Key facts: Motion (formerly Framer Motion) → `npm install motion`, import from `motion/react`;
+Remotion is separate (renders MP4 from React). shadcn/ui = foundation/dashboards; Skiper UI +
+Aceternity + Magic MCP = marketing-page animation layer on top of shadcn. MCPs to add:
+context7 (live docs), playwright (browser), 21st.dev magic (UI gen). Stitch = design-to-code
+mockups only, never ship its exported code (Google fonts + telemetry).
