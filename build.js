@@ -47,7 +47,7 @@ const MOTIF = { '01-luxury-dark':'bloom','02-cinematic-video':'horizon','03-dark
   '04-3d-spline-webgl':'mesh','05-vaporwave':'sun','06-soft-editorial':'soft','07-saas-glass':'mesh',
   '08-architecture-editorial':'tonal','09-aviation-luxury':'horizon','10-food-beauty-dtc':'organic',
   '11-japanese-web3':'organic','12-experimental-dev':'slab','13-wellness-botanical':'organic',
-  '14-cosmic-platform':'cosmos','15-resort-residences':'tonal' };
+  '14-cosmic-platform':'cosmos','15-resort-residences':'tonal','16-terminal-industrial':'slab' };
 const GEN_PROMPT = {
   '01-luxury-dark':'Cinematic macro of a haute-horlogerie movement, single warm gold key light on near-black, extreme restraint, museum lighting, no text',
   '02-cinematic-video':'Wide cinematic aerial of a cargo vessel at dawn, deep teal-black water, warm horizon glow, anamorphic, film grain, no text',
@@ -63,7 +63,8 @@ const GEN_PROMPT = {
   '12-experimental-dev':'Generative shader abstraction, raw red-on-black geometry, terminal aesthetic, experimental dev lab, no text',
   '13-wellness-botanical':'Soft natural still life of a halved coconut and green botanicals on warm cream linen, diffuse daylight, Ayurvedic wellness, editorial DTC, no text',
   '14-cosmic-platform':'Deep-space astrophotograph, faint star field with a luminous violet nebula bloom and thin orbital rings around one bright point, NASA-grade celestial calm, no text',
-  '15-resort-residences':'Cinematic dusk photograph of a low stone-and-timber luxury resort villa half-hidden in coastal trees above a private bay, warm lantern glow, calm sea, no people, no text' };
+  '15-resort-residences':'Cinematic dusk photograph of a low stone-and-timber luxury resort villa half-hidden in coastal trees above a private bay, warm lantern glow, calm sea, no people, no text',
+  '16-terminal-industrial':'Aerial night view of an automated logistics yard, rows of trucks and shipping containers under industrial floodlights, faint computer-vision tracking overlay, deep black with a single industrial-orange accent, precise and technical, no text' };
 function artSVG(id,p){
   const m = MOTIF[id]||'mesh', { bg,surface,accent,fg } = p, W=1600,H=1000;
   const defs = `<defs>
