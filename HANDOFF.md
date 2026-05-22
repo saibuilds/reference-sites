@@ -4,6 +4,44 @@ Paste the prompt at the bottom into a fresh Claude session (Cowork / Code /
 browser) that has **network access + generation credentials**. This file is
 the full context so the new session can continue without this chat.
 
+## ⮕ CURRENT FINISH LINE (read this first)
+
+State as of this update: **16 archetypes, 72 pages, deployed and green on
+Cloudflare.** Almost everything is done. What remains can ONLY be done in
+a session/computer with outbound network (the `refsites-code` cloud
+session has its egress allowlist blocking every image host — verified
+exhaustively: Higgsfield, fal, Replicate, Pollinations, Hunyuan all
+`403 Host not in allowlist`; Gemini image models are reachable but the
+key is on a free plan → `429 / Imagen paid-only`).
+
+**The one remaining gap:** `assets/16-terminal-industrial-hero.jpg` does
+not exist — it's the only archetype of 16 without a real hero raster
+(it currently falls back to its SVG). Its `GEN_PROMPT` is already wired
+in `build.js`.
+
+**To finish, on your computer or the media chat (which has Pollinations
+working):**
+
+```bash
+git pull
+node tools/gen-heroes.js          # generates ONLY missing heroes (skips the 15 that exist)
+                                  # → writes assets/16-terminal-industrial-hero.jpg via Pollinations
+node build.js && node build-index.js
+git add assets/16-terminal-industrial-hero.jpg styles* reels* index.html manifest.json
+git commit -m "Add 16-terminal-industrial hero" && git push
+```
+
+That closes the project. Optional next-phase extras (only if wanted):
+- Higher-quality re-gen of all heroes via Imagen 4 — requires enabling
+  billing on the `GEMINI_API_KEY` (then `generativelanguage.googleapis.com`
+  image models work; pipeline already proven from `refsites-code`).
+- Brand-reel MP4s via `tools/remotion/` (`cd tools/remotion && npm install
+  && node render.js`).
+- Real React client builds per `STACK.md` (shadcn + Magic UI + Motion).
+
+---
+
+
 ## What this project is
 
 A generator for a **reference-site library**. `node build.js` emits **70
