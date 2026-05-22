@@ -189,7 +189,7 @@ const STYLES = [
     vars:{'--bg':'#070A12','--surface':'#0E1322','--fg':'#EAF0FF','--accent':'#7CF7FF','--accent-2':'#FF5BE0','--card':'rgba(255,255,255,.04)','--card-bd':'rgba(124,247,255,.20)'},
     disp:'Space Grotesk', body:'Inter', threeD:true,
     layout:['r3fScene','howGlass','theatreScene','babylonHero','rapierPhysicsHero','scrollDepth','featureRows','logoMarquee','pricing','faq','ctaGradient','footerCols'],
-    extra:{ faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
+    extra:{ scene:'crystal', faq:[['Does it run in the browser?','Yes — WebGL2, 60fps target, no plugin, no app.'],
       ['Can we bring our own 3D?','glTF / USDZ in, optimised automatically on upload.'],
       ['What about mobile?','Adaptive LOD; the same scene degrades gracefully to phones.']],
       tiers:[['Studio','$0','One scene, watermark, community support'],
@@ -245,7 +245,7 @@ const STYLES = [
     vars:{'--bg':'#070710','--surface':'#0E0E1C','--fg':'#EEF1FF','--accent':'#8B5CF6','--accent-2':'#22D3EE','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.12)'},
     disp:'Syne', body:'Inter', threeD:true,
     layout:['heroSaas','stackCards','babylonHero','r3fScene','personaCols','logoMarquee','pricing','faq','ctaGradient','footerCols'],
-    extra:{ faq:[['Is there a free tier?','Yes — generous, no card, no expiry.'],
+    extra:{ scene:'tower', faq:[['Is there a free tier?','Yes — generous, no card, no expiry.'],
       ['Can I export my data?','One click, open formats, anytime.'],
       ['Do you take a cut of payments?','No platform fee on your revenue.']],
       tiers:[['Free','$0','Up to 3 projects, core analytics'],
@@ -1067,10 +1067,12 @@ function scrollReel(x){ // reusable scroll-driven crossfade reel — 4 frames
   </script>
 </section>`;
 }
-function r3fScene(x){ // react-three-fiber-style ESM scene, drei-style controls. GLB-friendly: extra.glb overrides.
-  const {c,s,ex} = x;
+function r3fScene(x){ // react-three-fiber-style ESM scene, drei-style controls. GLB-friendly: extra.glb overrides; ex.scene picks the procedural form.
+  const {c,s,ex,variant} = x;
   const accent = s.vars['--accent'] || '#9e8cff';
   const glb = (ex && ex.glb) || '';
+  // real-estate variants render a house model so the page reads as uniquely generated for property; ex.sceneRe overrides.
+  const scene = (variant==='re' ? ((ex && ex.sceneRe) || 'house') : ((ex && ex.scene) || 'knot')); // knot|house|tower|crystal|wave|orbit
   return `<section class="r3f-hero">
 <canvas class="r3f-canvas" id="r3fCanvas" aria-hidden="true"></canvas>
 <div class="r3f-grid" aria-hidden="true"></div>
@@ -1106,7 +1108,14 @@ function r3fScene(x){ // react-three-fiber-style ESM scene, drei-style controls.
   var cv=document.getElementById('r3fCanvas');if(!cv)return;
   var R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.outputColorSpace=THREE.SRGBColorSpace;R.toneMapping=THREE.ACESFilmicToneMapping;
   var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(45,1,.1,200);C.position.set(0,1.2,4);
-  function sz(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix();}sz();addEventListener('resize',sz);
+  var host=cv.parentNode||cv;
+  function dim(){ // measure from the canvas box, then parent, then viewport; never 0
+    var w=cv.clientWidth||host.clientWidth||window.innerWidth||1280;
+    var h=cv.clientHeight||host.clientHeight||window.innerHeight||720;
+    return {w:Math.max(1,w),h:Math.max(1,h)};
+  }
+  function sz(){var d=dim();R.setSize(d.w,d.h,false);C.aspect=d.w/d.h;C.updateProjectionMatrix();}sz();addEventListener('resize',sz);
+  if(typeof ResizeObserver!=='undefined'){try{new ResizeObserver(sz).observe(host);}catch(e){}}
   S.add(new THREE.HemisphereLight(0xffffff,0x1a1530,.6));
   var key=new THREE.DirectionalLight(0xfff2dc,1.4);key.position.set(4,6,4);S.add(key);
   var rim=new THREE.DirectionalLight(0x${accent.replace('#','')},.8);rim.position.set(-4,2,-3);S.add(rim);
@@ -1117,20 +1126,62 @@ function r3fScene(x){ // react-three-fiber-style ESM scene, drei-style controls.
   for(var i=0;i<480;i++){var r=2.2+Math.random()*2.8,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);pos.push(r*Math.sin(p)*Math.cos(t),r*Math.sin(p)*Math.sin(t),r*Math.cos(p));}
   pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
   var dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0xedebfa,size:.018,transparent:true,opacity:.65}));S.add(dust);
-  // model placeholder (replaced if GLB provided)
+  // model placeholder (replaced if GLB provided). ex.scene selects the procedural form so each site reads as uniquely generated.
   var hero;
   var glb='${esc(glb)}';
-  function placeholder(){
-    var g=new THREE.TorusKnotGeometry(.85,.28,180,28),m=new THREE.MeshPhysicalMaterial({color:0x${accent.replace('#','')},metalness:.45,roughness:.18,clearcoat:1,clearcoatRoughness:.06,sheen:1,sheenColor:0x${accent.replace('#','')}});
-    hero=new THREE.Mesh(g,m);S.add(hero);
+  var SCENE='${esc(scene)}';
+  var AC=0x${accent.replace('#','')};
+  function mat(o){o=o||{};return new THREE.MeshPhysicalMaterial({color:o.color===undefined?AC:o.color,metalness:o.metalness===undefined?.45:o.metalness,roughness:o.roughness===undefined?.22:o.roughness,clearcoat:o.clearcoat===undefined?.9:o.clearcoat,clearcoatRoughness:.08,transmission:o.transmission||0,thickness:o.thickness||0,transparent:!!o.transmission,sheen:o.sheen===undefined?.6:o.sheen,sheenColor:AC});}
+  function box(w,h,d,x,y,z,o){var b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(o));b.position.set(x,y,z);return b;}
+  function buildHero(kind){
+    var G=new THREE.Group();
+    if(kind==='house'){ // modern two-storey massing — for real-estate / brand sites
+      var glass=mat({color:AC,metalness:.1,roughness:.05,transmission:.9,thickness:.6,clearcoat:1});
+      var wall=mat({color:0xf4f1ea,metalness:.05,roughness:.85,clearcoat:.2,sheen:.1});
+      var wood=mat({color:0xb98a52,metalness:.1,roughness:.6,clearcoat:.2});
+      var gf=box(2.2,.9,1.7,0,-.55,0); gf.material=wall; G.add(gf); // ground floor
+      var u=box(1.7,.85,1.42,-.18,.32,0); u.material=wall; G.add(u); // upper floor, set back
+      var g0=box(1.0,.7,1.72,.62,-.55,0); g0.material=glass; G.add(g0); // ground glass band
+      var g1=box(.9,.55,1.44,.28,.32,0); g1.material=glass; G.add(g1); // upper glazing
+      var roof=box(1.8,.06,1.5,-.18,.78,0); roof.material=wood; G.add(roof);
+      var slab=box(2.4,.05,1.9,0,-1.02,0); slab.material=wall; G.add(slab); // base slab
+      G.userData.spin=.004;
+    } else if(kind==='tower'){ // stacked SaaS/abstract tower of slabs
+      for(var i=0;i<7;i++){var s2=1.1-i*.1,y=-.9+i*.32,rot=i*.22; var sl=box(s2,.16,s2,0,y,0,{metalness:.6,roughness:.18,clearcoat:1}); sl.rotation.y=rot; G.add(sl);}
+      var core=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,2.6,24),mat({color:AC,metalness:.8,roughness:.1})); G.add(core);
+      G.userData.spin=.006;
+    } else if(kind==='crystal'){ // faceted gem — luxury / web3
+      var gem=new THREE.Mesh(new THREE.OctahedronGeometry(1.25,0),mat({metalness:.2,roughness:.02,transmission:.92,thickness:1.4,clearcoat:1}));
+      var inner=new THREE.Mesh(new THREE.OctahedronGeometry(.55,0),mat({metalness:.9,roughness:.05}));
+      G.add(gem);G.add(inner);G.userData.spin=.0045;
+    } else if(kind==='wave'){ // rippled parametric plane — generative / dev
+      var seg=44,geo=new THREE.PlaneGeometry(3.4,3.4,seg,seg);geo.rotateX(-Math.PI/2.4);
+      var w=new THREE.Mesh(geo,mat({metalness:.5,roughness:.3,clearcoat:.6})); w.userData.wave=geo; G.add(w);
+      G.userData.spin=.0015;
+    } else if(kind==='orbit'){ // rings + core — cosmic / platform
+      var coreS=new THREE.Mesh(new THREE.IcosahedronGeometry(.7,2),mat({metalness:.7,roughness:.12})); G.add(coreS);
+      [1.2,1.6,2.0].forEach(function(r,i){var ring=new THREE.Mesh(new THREE.TorusGeometry(r,.02,12,120),mat({color:AC,metalness:.4,roughness:.3,clearcoat:.4}));ring.rotation.x=Math.PI/2.4+i*.5;ring.rotation.z=i*.7;G.add(ring);});
+      G.userData.spin=.003;
+    } else { // 'knot' default — keeps original look
+      G.add(new THREE.Mesh(new THREE.TorusKnotGeometry(.85,.28,180,28),mat({metalness:.45,roughness:.18,clearcoat:1,sheen:1})));
+      G.userData.spin=.005;
+    }
+    return G;
   }
+  function placeholder(){ hero=buildHero(SCENE); S.add(hero); }
   if(glb && THREE.GLTFLoader){
     new THREE.GLTFLoader().load(glb,function(gl){hero=gl.scene;hero.scale.set(1.4,1.4,1.4);S.add(hero);},undefined,placeholder);
   }else placeholder();
   // mouse drag-tilt (drei-style)
   var tx=0,ty=0,mx=0,my=0;
-  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;});
-  function tick(){tx+=(mx-tx)*.06;ty+=(my-ty)*.06;if(hero){hero.rotation.y+=.005+tx*.04;hero.rotation.x=-ty*.3;}halo.rotation.y-=.002;halo.rotation.x+=.001;dust.rotation.y+=.0006;C.position.x=tx*.6;C.position.y=1.2-ty*.4;C.lookAt(0,0,0);R.render(S,C);requestAnimationFrame(tick);}tick();
+  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();if(!r.width||!r.height)return;mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;});
+  var T=0;
+  function tick(){T+=.016;tx+=(mx-tx)*.06;ty+=(my-ty)*.06;
+    if(hero){var sp=(hero.userData&&hero.userData.spin)||.005;hero.rotation.y+=sp+tx*.04;hero.rotation.x=-ty*.3;
+      // animate the rippled plane if present
+      if(hero.children)hero.children.forEach(function(ch){var g=ch.userData&&ch.userData.wave;if(g){var p=g.attributes.position;for(var i=0;i<p.count;i++){var px=p.getX(i),pz=p.getZ(i);p.setY(i,Math.sin(px*1.6+T)*0.18+Math.cos(pz*1.4+T*.8)*0.14);}p.needsUpdate=true;g.computeVertexNormals();}});
+    }
+    halo.rotation.y-=.002;halo.rotation.x+=.001;dust.rotation.y+=.0006;C.position.x=tx*.6;C.position.y=1.2-ty*.4;C.lookAt(0,0,0);R.render(S,C);requestAnimationFrame(tick);}tick();
   // scroll-driven zoom-out as you leave hero
   addEventListener('scroll',function(){var r=cv.getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/innerHeight));C.position.z=4+p*3;},{passive:true});
 })();
@@ -1848,7 +1899,8 @@ function page(o){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>${threeD?`
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>`:''}`;
-  const x = { c, s, ex:s.extra||{}, accent:s.vars['--accent'], light:!!s.light };
+  const variant = (c===s.re) ? 're' : 'g';
+  const x = { c, s, ex:s.extra||{}, accent:s.vars['--accent'], light:!!s.light, variant };
   const bodyCls=[ s.brutal&&'brutal', s.light&&'light', s.minimal&&'minimal' ].filter(Boolean).join(' ');
   const heroKey = s.layout[0];
   const heroHTML = SECTIONS[heroKey](x);
