@@ -124,6 +124,9 @@ function resolveAsset(s){
   }
   return `../assets/${s.id}.svg`;
 }
+function resolveVideo(s){
+  return fs.existsSync(path.join(ROOT,'assets',`${s.id}-hero.mp4`)) ? `../assets/${s.id}-hero.mp4` : '';
+}
 
 /* ---------- 15 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
@@ -562,8 +565,12 @@ function heroProduct(x){ // luxury / food / japanese — glowing centred product
 }
 function heroVideo(x){
   const {c,s} = x;
+  const vsrc=resolveVideo(s);
+  const media = vsrc
+    ? `<video class="media" autoplay muted loop playsinline poster="${resolveAsset(s)}" src="${vsrc}" aria-hidden="true"></video>`
+    : `<img class="media" src="${resolveAsset(s)}" alt="" aria-hidden="true" loading="eager" decoding="async">`;
   return `<header class="hero hero--video">
-  <img class="media" src="${resolveAsset(s)}" alt="" aria-hidden="true" loading="eager" decoding="async">
+  ${media}
   <div class="scrim"></div>
   ${wrapOpen}
     <div class="eyebrow" data-reveal>${esc(c.kicker)}</div>
@@ -850,8 +857,9 @@ function heroVanta(x){ // Vanta WAVES vaporwave hero
 }
 function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
   const {c,s} = x;
+  const vsrc=resolveVideo(s);
   return `<section class="vg-hero">
-<video class="vg-video" autoplay muted loop playsinline poster="${resolveAsset(s)}"></video>
+<video class="vg-video" autoplay muted loop playsinline poster="${resolveAsset(s)}"${vsrc?` src="${vsrc}"`:''}></video>
 <div class="vg-scrim" aria-hidden="true"></div>
 <div class="vg-frame">
   <div class="vg-kicker">${esc(c.kicker)}</div>
