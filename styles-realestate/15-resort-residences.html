@@ -6,50 +6,410 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>:root{--bg:#15130F;--surface:#221E17;--fg:#F2EBDD;--accent:#C9A86A;--card:rgba(255,255,255,.045);--card-bd:rgba(201,168,106,.22);--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
+<style>:root{--bg:#F5F0E6;--surface:#E9DFC9;--fg:#2B2620;--accent:#8A6638;--card:rgba(255,255,255,.60);--card-bd:rgba(43,38,32,.14);--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
-<body>
+<body class="light">
 <div id="loader"><div class="lLogo">AMARA RESIDENCES</div><div class="lTrack"><div class="lBar"></div></div></div>
 <div id="cur" aria-hidden="true"></div><div id="cur2" aria-hidden="true"></div>
 <img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Library switcher">
   <a href="../styles/15-resort-residences.html" aria-label="Previous">&larr;</a>
-  <a href="../index.html">Index</a><span class="pos">30 / 70</span>
-  <a href="../reels/01-cartier-watch.html" aria-label="Next">&rarr;</a></nav>
+  <a href="../index.html">Index</a><span class="pos">30 / 72</span>
+  <a href="../styles/16-terminal-industrial.html" aria-label="Next">&rarr;</a></nav>
 <nav class="nav"><div class="brand">AMARA RESIDENCES</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Register interest</a></nav>
-<header class="hero hero--photo">
-  <img class="media" src="../assets/15-resort-residences.svg" alt="" aria-hidden="true" loading="eager" decoding="async">
-  <div class="scrim scrim--soft"></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Own a piece of the quiet</div>
-    <h1>A home, inside the resort.</h1>
-    <p class="lead" data-reveal data-reveal-d="2">A limited collection of freehold branded residences within the resort — full hotel service, a managed rental programme, and a bay that stays this quiet on purpose.</p>
-  </div>
-  <span class="scrollcue" aria-hidden="true">Selected works &darr;</span>
-</header>
+<section class="bs-hero">
+<canvas class="bs-bg" id="bsBg" aria-hidden="true"></canvas>
+<canvas class="bs-3d" id="bs3d" aria-hidden="true"></canvas>
+<div class="bs-vignette" aria-hidden="true"></div>
+<div class="bs-monogram" aria-hidden="true">
+  <svg viewBox="0 0 240 240" width="120" height="120">
+    <defs><linearGradient id="bsG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8A6638" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#8A6638" stop-opacity=".55"/></linearGradient></defs>
+    <circle class="bs-p bs-p1" cx="120" cy="120" r="104" fill="none" stroke="url(#bsG)" stroke-width="1.2"/>
+    <circle class="bs-p bs-p2" cx="120" cy="120" r="78"  fill="none" stroke="#8A6638" stroke-width=".8" stroke-opacity=".55"/>
+    <text class="bs-p bs-mn" x="120" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-size="92" font-weight="300" fill="#8A6638" letter-spacing="-2">AR</text>
+    <line class="bs-p bs-l1" x1="38"  y1="208" x2="202" y2="208" stroke="#8A6638" stroke-opacity=".4" stroke-width=".8"/>
+  </svg>
+  <div class="bs-wordmark">AMARA RESIDENCES</div>
+</div>
+<div class="bs-frame">
+  <div class="bs-eyebrow">Own a piece of the quiet</div>
+  <h1 class="bs-h1">A home, inside the resort.</h1>
+  <p class="bs-sub">A limited collection of freehold branded residences within the resort — full hotel service, a managed rental programme, and a bay that stays this quiet on purpose.</p>
+  <div class="bs-cta-row"><a class="bs-cta" href="#story">Register interest &rarr;</a><span class="bs-chap" id="bsChap">I &middot; Site</span></div>
+</div>
+<div class="bs-rail" aria-hidden="true">
+  <i class="bs-r bs-r1 is-on"></i><span>I</span>
+  <i class="bs-r bs-r2"></i><span>II</span>
+  <i class="bs-r bs-r3"></i><span>III</span>
+  <i class="bs-r bs-r4"></i><span>IV</span>
+</div>
+<div class="bs-spacer" aria-hidden="true"></div>
+<style>
+.bs-hero{position:relative;height:420vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8);overflow:visible}
+.bs-bg,.bs-3d{position:sticky;top:0;left:0;width:100vw;height:100vh;display:block}
+.bs-bg{position:fixed;inset:0;z-index:0}
+.bs-3d{position:fixed;inset:0;z-index:1}
+.bs-vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 60%,transparent 35%,rgba(0,0,0,.5) 75%,#000 100%),linear-gradient(180deg,rgba(0,0,0,.6),transparent 26%,transparent 70%,rgba(0,0,0,.55))}
+.bs-monogram{position:fixed;top:clamp(1.2rem,3vw,2.4rem);left:clamp(1.2rem,3vw,2.4rem);z-index:5;display:flex;align-items:center;gap:.9rem;opacity:0;animation:bsFadeMono 1.6s .35s ease forwards}
+.bs-monogram svg{display:block;flex-shrink:0}
+.bs-monogram .bs-p{stroke-dasharray:700;stroke-dashoffset:700;animation:bsDraw 2.4s ease forwards}
+.bs-monogram .bs-p1{animation-delay:.35s}
+.bs-monogram .bs-p2{animation-delay:.95s;stroke-dasharray:520;stroke-dashoffset:520}
+.bs-monogram .bs-l1{animation-delay:1.4s;stroke-dasharray:200;stroke-dashoffset:200}
+.bs-monogram .bs-mn{opacity:0;animation:bsType 1.4s 1.6s ease forwards;stroke-dasharray:0}
+.bs-wordmark{font-family:var(--font-display),serif;font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;color:#8A6638;opacity:0;transform:translateX(-8px);animation:bsSlide 1.1s 1.9s ease forwards}
+@keyframes bsDraw{to{stroke-dashoffset:0}}
+@keyframes bsType{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
+@keyframes bsSlide{to{opacity:1;transform:none}}
+@keyframes bsFadeMono{to{opacity:1}}
+.bs-frame{position:fixed;left:clamp(1.4rem,4vw,3rem);bottom:clamp(2rem,6vw,4rem);max-width:min(60vw,560px);z-index:4}
+.bs-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#8A6638;margin-bottom:1.2rem;opacity:0;animation:bsUp .9s 2.2s ease forwards}
+.bs-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5.6rem);line-height:.98;margin:0 0 1.2rem;letter-spacing:-.02em;opacity:0;animation:bsUp 1.2s 2.4s ease forwards}
+.bs-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.7);margin:0 0 1.6rem;max-width:38ch;opacity:0;animation:bsUp 1.1s 2.7s ease forwards}
+.bs-cta-row{display:flex;align-items:center;gap:1.2rem;opacity:0;animation:bsUp 1.1s 3s ease forwards}
+.bs-cta{display:inline-block;padding:.85rem 1.6rem;border:1px solid #8A6638;color:#8A6638;border-radius:999px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .25s ease}
+.bs-cta:hover{background:#8A6638;color:#000}
+.bs-chap{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,232,.5);transition:color .4s ease}
+@keyframes bsUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
+.bs-rail{position:fixed;right:clamp(1.2rem,3vw,2.4rem);top:50%;transform:translateY(-50%);z-index:4;display:none;flex-direction:column;gap:.7rem;align-items:flex-end;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.6rem;letter-spacing:.32em;color:rgba(245,241,232,.4)}
+@media(min-width:900px){.bs-rail{display:flex}}
+.bs-rail span{display:inline-block;width:1.6rem;text-align:right}
+.bs-r{display:inline-block;width:18px;height:1px;background:rgba(245,241,232,.25);margin-right:.5rem;vertical-align:middle;transition:all .3s ease}
+.bs-r.is-on{background:#8A6638;width:28px}
+</style>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script>
+(function(){
+  // ambient palette wash on cv-bg style canvas
+  var bg=document.getElementById('bsBg');if(bg){var b=bg.getContext('2d'),BW=0,BH=0,t=0;
+    function sz(){BW=bg.width=innerWidth;BH=bg.height=innerHeight;}sz();addEventListener('resize',sz);
+    (function tk(){t++;b.fillStyle='rgba(8,8,12,.18)';b.fillRect(0,0,BW,BH);
+      for(var i=0;i<4;i++){var x=BW*(.2+.18*i)+Math.sin(t*.003+i)*60,y=BH*(.5+.12*Math.cos(t*.004+i*1.7));
+        var g=b.createRadialGradient(x,y,0,x,y,260);g.addColorStop(0,'#8A663833');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,260,0,6.28);b.fill();}
+      requestAnimationFrame(tk);})();}
+  if(typeof THREE==='undefined')return;
+  var cv=document.getElementById('bs3d');if(!cv)return;
+  var R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+  var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,.1,200);
+  function sz(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix();}sz();addEventListener('resize',sz);
+  S.add(new THREE.HemisphereLight(0xfff2dc,0x141414,.55));
+  var key=new THREE.DirectionalLight(0xffe5c0,1.2);key.position.set(8,12,6);key.castShadow=true;S.add(key);
+  var ground=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:0x14110d,roughness:.92}));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;S.add(ground);
+  // build group — assembles in 4 chapters
+  var G=new THREE.Group();S.add(G);
+  // chapter II — foundation slab
+  var slab=new THREE.Mesh(new THREE.BoxGeometry(7,.4,5),new THREE.MeshStandardMaterial({color:0x2a241c,roughness:.75}));slab.position.y=.2;slab.castShadow=true;slab.receiveShadow=true;slab.scale.set(.001,.001,.001);G.add(slab);
+  // chapter III — 4 walls
+  var WALL=new THREE.MeshStandardMaterial({color:0xe8dcc0,roughness:.6});
+  var walls=[];
+  function mkWall(w,h,d,x,y,z){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),WALL);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;m.scale.y=.001;G.add(m);walls.push(m);return m;}
+  mkWall(7,2.6,.18,0,1.7,-2.4);
+  mkWall(7,2.6,.18,0,1.7,2.4);
+  mkWall(.18,2.6,4.8,-3.4,1.7,0);
+  mkWall(.18,2.6,4.8,3.4,1.7,0);
+  // chapter IV — roof + plaque (the brand monogram, dropped in last)
+  var roof=new THREE.Mesh(new THREE.BoxGeometry(7.6,.18,5.4),new THREE.MeshStandardMaterial({color:0x1a1714,roughness:.6,metalness:.2}));roof.position.y=3.1;roof.castShadow=true;roof.scale.set(.001,1,.001);G.add(roof);
+  // glass plaque holding the BRAND monogram inside the build
+  var plaqueGeom=new THREE.PlaneGeometry(2.6,1.4);
+  var pcv=document.createElement('canvas');pcv.width=512;pcv.height=256;
+  var pc=pcv.getContext('2d');pc.fillStyle='rgba(0,0,0,0)';pc.fillRect(0,0,512,256);
+  pc.strokeStyle='#8A6638';pc.lineWidth=2;pc.beginPath();pc.arc(256,128,108,0,6.283);pc.stroke();
+  pc.font='600 132px Cormorant Garamond';pc.fillStyle='#8A6638';pc.textAlign='center';pc.textBaseline='middle';pc.fillText('AR',256,138);
+  pc.font='600 22px Cormorant Garamond';pc.letterSpacing='8px';pc.fillStyle='rgba(245,241,232,.78)';pc.fillText('AMARA RESIDENCES',256,236);
+  var ptex=new THREE.CanvasTexture(pcv);ptex.anisotropy=4;
+  var plaque=new THREE.Mesh(plaqueGeom,new THREE.MeshPhysicalMaterial({map:ptex,transparent:true,transmission:.55,roughness:.18,thickness:.4,clearcoat:1,opacity:0}));plaque.position.set(0,1.7,2.51);G.add(plaque);
+  var lamp=new THREE.PointLight(0xffd9a0,0,8,2);lamp.position.set(0,2.4,0);G.add(lamp);
+  // ground markers — site outline drawn first
+  var outline=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(7,5)),new THREE.LineBasicMaterial({color:0xc9a961,transparent:true,opacity:0}));outline.rotation.x=-Math.PI/2;outline.position.y=.02;S.add(outline);
+  // expose stage hook for scroll-driven chapters
+  var chap=document.getElementById('bsChap'),rails=document.querySelectorAll('.bs-r'),labels=['I · Site','II · Slab','III · Frame','IV · Brand'];
+  window.__bsStage=function(p){
+    // 4 chapters: 0-.25 site, .25-.5 slab, .5-.75 frame, .75-1 roof+plaque
+    var c1=Math.max(0,Math.min(1,p/.25));
+    var c2=Math.max(0,Math.min(1,(p-.25)/.25));
+    var c3=Math.max(0,Math.min(1,(p-.5)/.25));
+    var c4=Math.max(0,Math.min(1,(p-.75)/.25));
+    outline.material.opacity=c1*.9;
+    slab.scale.set(c2,c2,c2);
+    walls.forEach(function(w,i){var k=Math.max(0,Math.min(1,c3-i*.05));w.scale.y=k;w.position.y=1.7-(1-k)*1.5;});
+    roof.scale.set(c4,1,c4);
+    plaque.material.opacity=Math.pow(c4,1.6)*.95;
+    lamp.intensity=c4*1.6;
+    var idx=p<.25?0:p<.5?1:p<.75?2:3;
+    if(chap)chap.textContent=labels[idx];
+    rails.forEach(function(r,i){r.classList.toggle('is-on',i===idx);});
+    // camera arc
+    var ang=p*Math.PI*.9-.2,rad=11-p*2;
+    C.position.set(Math.sin(ang)*rad,3.5+p*1.4,Math.cos(ang)*rad);
+    C.lookAt(0,1.4,0);
+  };
+  window.__bsStage(0);
+  function loop(){R.render(S,C);requestAnimationFrame(loop);}loop();
+  function onScroll(){var sec=document.querySelector('.bs-hero');if(!sec)return;var r=sec.getBoundingClientRect();var top=Math.max(0,-r.top);var max=Math.max(1,sec.offsetHeight-innerHeight);window.__bsStage(Math.min(1,top/max));}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</section>
 <main>
 <section class="sec" id="collection"><div class="wrap narrow" style="text-align:center">
   <p class="ed-statement" data-reveal>A limited collection of freehold branded residences within the resort — full hotel service, a managed rental programme, and a bay that stays this quiet on purpose.</p></div></section>
+<section class="hs-sec" id="gallery">
+<div class="hs-pin">
+  <div class="hs-head"><div class="hs-eb">Own a piece of the quiet</div><h2 class="hs-h2">Selected works.</h2></div>
+  <div class="hs-track">
+    <article class="hs-panel"><div class="hs-num">01</div><h3 class="hs-pt">The Residences</h3><p class="hs-pp">Eighteen architect-designed homes woven into the resort grounds.</p></article><article class="hs-panel"><div class="hs-num">02</div><h3 class="hs-pt">Ownership &amp; Service</h3><p class="hs-pp">Freehold title, full resort service, optional managed rental.</p></article><article class="hs-panel"><div class="hs-num">03</div><h3 class="hs-pt">The Investment</h3><p class="hs-pp">A scarce, branded, income-producing asset on protected land.</p></article>
+  </div>
+</div>
+<style>
+.hs-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+.hs-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;padding:clamp(2rem,5vw,4rem) 0}
+.hs-head{padding:0 clamp(1.4rem,4vw,3rem);margin-bottom:2.4rem;flex-shrink:0}
+.hs-eb{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#c9a961);margin-bottom:.8rem}
+.hs-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2rem,4vw,3.6rem);line-height:1;margin:0;letter-spacing:-.02em}
+.hs-track{display:flex;gap:clamp(1rem,2vw,2rem);padding:0 clamp(1.4rem,4vw,3rem);flex:1;align-items:stretch;will-change:transform}
+.hs-panel{flex:0 0 min(70vw,520px);background:var(--card,rgba(245,241,232,.04));border:1px solid var(--card-bd,rgba(245,241,232,.12));border-radius:6px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.hs-num{font-family:var(--font-display),serif;font-size:3rem;font-weight:300;color:var(--accent,#c9a961);line-height:1}
+.hs-pt{font-family:var(--font-display),serif;font-size:1.6rem;font-weight:400;margin:0;line-height:1.1}
+.hs-pp{font-size:.95rem;color:rgba(245,241,232,.65);margin:0;line-height:1.5}
+</style>
+<script>
+(function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+  gsap.registerPlugin(ScrollTrigger);
+  var track=document.querySelector('.hs-track');if(!track)return;
+  var sec=document.querySelector('.hs-sec');
+  var dist=track.scrollWidth-innerWidth+48;
+  gsap.to(track,{x:-dist,ease:'none',scrollTrigger:{trigger:sec,start:'top top',end:'+='+dist,scrub:1}});
+})();
+</script>
+</section>
 <section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The collection</div><h2 class="clip-line">Considered, not seasonal.</h2></div>
   <div class="asym"><figure class="asym-i asym-1" data-reveal data-reveal-d="1"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>01</span> The Residences</figcaption></figure><figure class="asym-i asym-2" data-reveal data-reveal-d="2"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>02</span> Ownership &amp; Service</figcaption></figure><figure class="asym-i asym-3" data-reveal data-reveal-d="3"><div class="asym-vis" aria-hidden="true"></div><figcaption><span>03</span> The Investment</figcaption></figure></div></div></section>
+<section class="sd-sec" aria-label="Depth">
+  <div class="sd-stage">
+    <svg class="sd-layer sd-l3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#8A6638" stop-opacity=".22"/><stop offset="1" stop-color="#8A6638" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1600" height="900" fill="url(#sdSky)"/>
+      <circle cx="1200" cy="240" r="100" fill="#8A6638" fill-opacity=".5" filter="blur(40)"/>
+    </svg>
+    <svg class="sd-layer sd-l2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="#8A6638" fill-opacity=".22"/>
+    </svg>
+    <svg class="sd-layer sd-l1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="#8A6638" fill-opacity=".48"/>
+    </svg>
+    <div class="sd-frame">
+      <div class="sd-eyebrow">Own a piece of the quiet</div>
+      <h2 class="sd-h2">A home, inside the resort.</h2>
+      <p class="sd-sub">A limited collection of freehold branded residences within the resort — full hotel service, a managed rental programme, and a bay that stays this quiet on purpose.</p>
+    </div>
+  </div>
+  <style>
+  .sd-sec{position:relative;height:220vh;background:linear-gradient(180deg,var(--bg,#0a0a0a),var(--surface,#11102a));color:var(--fg,#f5f1e8)}
+  .sd-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .sd-layer{position:absolute;inset:0;width:100%;height:100%;will-change:transform;filter:drop-shadow(0 12px 32px rgba(0,0,0,.45))}
+  .sd-l3{transform:translateY(0);z-index:1}
+  .sd-l2{transform:translateY(0);z-index:2}
+  .sd-l1{transform:translateY(0);z-index:3}
+  .sd-frame{position:relative;z-index:4;text-align:center;padding:0 1.6rem;max-width:min(80vw,720px)}
+  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#8A6638;margin-bottom:1.2rem}
+  .sd-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;letter-spacing:-.02em;margin:0 0 1.2rem;text-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .sd-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.75);margin:0 auto;max-width:48ch}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.sd-sec');if(!sec)return;
+    var l1=sec.querySelector('.sd-l1'),l2=sec.querySelector('.sd-l2'),l3=sec.querySelector('.sd-l3'),f=sec.querySelector('.sd-frame');
+    function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+    function on(){var r=sec.getBoundingClientRect(),t=Math.max(0,-r.top),m=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,t/m),e=ease(p);
+      if(l1)l1.style.transform='translate3d(0,'+(-e*120)+'px,0) scale('+(1+e*.08)+')';
+      if(l2)l2.style.transform='translate3d(0,'+(-e*70)+'px,0) scale('+(1+e*.04)+')';
+      if(l3)l3.style.transform='translate3d(0,'+(-e*30)+'px,0)';
+      if(f)f.style.transform='translate3d(0,'+(-e*40)+'px,0)';if(f)f.style.opacity=String(1-Math.max(0,(p-.7)/.3));
+    }addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
+<section class="rl-sec" aria-label="Reel">
+  <div class="rl-stage">
+    <canvas class="rl-bg" id="rlBg" aria-hidden="true"></canvas>
+    <div class="rl-frame" data-rl-idx="0">
+      <div class="rl-num">01</div>
+      <div class="rl-title">The Residences</div>
+      <div class="rl-sub">Eighteen architect-designed homes woven into the resort grounds.</div>
+    </div><div class="rl-frame" data-rl-idx="1">
+      <div class="rl-num">02</div>
+      <div class="rl-title">Ownership &amp; Service</div>
+      <div class="rl-sub">Freehold title, full resort service, optional managed rental.</div>
+    </div><div class="rl-frame" data-rl-idx="2">
+      <div class="rl-num">03</div>
+      <div class="rl-title">The Investment</div>
+      <div class="rl-sub">A scarce, branded, income-producing asset on protected land.</div>
+    </div><div class="rl-frame" data-rl-idx="3">
+      <div class="rl-num">04</div>
+      <div class="rl-title">A home, inside the resort.</div>
+      <div class="rl-sub">A limited collection of freehold branded residences within the resort — full hotel service, a managed rental programme, and a bay that stays this quiet on purpose.</div>
+    </div>
+    <div class="rl-progress" aria-hidden="true"><i class="rl-fill"></i></div>
+  </div>
+  <div class="rl-spacer" aria-hidden="true"></div>
+  <style>
+  .rl-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+  .rl-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .rl-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+  .rl-frame{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.6rem;opacity:0;transform:scale(.98);transition:opacity .6s ease,transform .9s ease;z-index:2}
+  .rl-frame[data-rl-idx="0"]{opacity:1;transform:none}
+  .rl-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;color:var(--accent,#c9a961);margin-bottom:1.6rem}
+  .rl-title{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.6rem,7vw,6.8rem);line-height:.98;letter-spacing:-.02em;max-width:18ch;margin-bottom:1.4rem}
+  .rl-sub{font-size:1.05rem;line-height:1.55;color:rgba(245,241,232,.7);max-width:50ch}
+  .rl-progress{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:3;width:min(30vw,260px);height:1px;background:rgba(245,241,232,.18)}
+  .rl-fill{display:block;height:100%;width:0;background:var(--accent,#c9a961);transition:width .12s linear}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.rl-sec');if(!sec)return;
+    var frames=sec.querySelectorAll('.rl-frame'),fill=sec.querySelector('.rl-fill');
+    var bg=sec.querySelector('.rl-bg');
+    if(bg){var b=bg.getContext('2d'),BW=0,BH=0,t=0;
+      function sz(){BW=bg.width=bg.clientWidth;BH=bg.height=bg.clientHeight;}sz();addEventListener('resize',sz);
+      (function tk(){t++;b.clearRect(0,0,BW,BH);for(var i=0;i<5;i++){var x=BW*(.18+.16*i)+Math.sin(t*.004+i)*40,y=BH*(.5+.18*Math.cos(t*.003+i*1.2));var g=b.createRadialGradient(x,y,0,x,y,180);g.addColorStop(0,'rgba(201,169,110,.18)');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,180,0,6.28);b.fill();}requestAnimationFrame(tk);})();}
+    function on(){
+      var r=sec.getBoundingClientRect(),top=Math.max(0,-r.top),max=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,top/max);
+      var seg=1/frames.length,active=Math.min(frames.length-1,Math.floor(p/seg));
+      for(var i=0;i<frames.length;i++){var l=(p-i*seg)/seg,o=0,sc=.98;if(i===active){o=l<.18?l/.18:(l>.82?1-(l-.82)/.18:1);sc=.98+.02*o;}frames[i].style.opacity=Math.max(0,Math.min(1,o));frames[i].style.transform='scale('+sc+')';}
+      if(fill)fill.style.width=(p*100).toFixed(1)+'%';
+    }
+    addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
 <section class="sec" id="ritual"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The ritual</div><h2 class="clip-line">How it is served.</h2></div>
   <ol class="ritual"><li data-reveal data-reveal-d="1"><span class="ritual-n">01</span><div><h3>Arrive</h3><p class="muted">A boat, not a lobby. The day slows on the water.</p></div></li><li data-reveal data-reveal-d="2"><span class="ritual-n">02</span><div><h3>Wander</h3><p class="muted">Sand paths, no cars, the architecture half-hidden in the trees.</p></div></li><li data-reveal data-reveal-d="3"><span class="ritual-n">03</span><div><h3>Be fed</h3><p class="muted">One table, produce from the land, nothing on a schedule.</p></div></li><li data-reveal data-reveal-d="4"><span class="ritual-n">04</span><div><h3>Disappear</h3><p class="muted">A villa, the sea, and no real reason to leave it.</p></div></li></ol></div></section>
+<section class="cx-sec" id="carousel" aria-roledescription="carousel" aria-label="Selected.">
+<div class="cx-wrap">
+  <div class="cx-head">
+    <div class="cx-eb">Own a piece of the quiet</div>
+    <h2 class="cx-h2">Selected.</h2>
+  </div>
+  <div class="cx-stage">
+    <button class="cx-nav cx-prev" type="button" aria-label="Previous slide">&larr;</button>
+    <div class="cx-track-wrap"><div class="cx-track">
+      <article class="cx-slide" data-i="0" role="group" aria-roledescription="slide" aria-label="1 of 4">
+          <div class="cx-num">01 / 04</div>
+          <h3 class="cx-st">The setting</h3>
+          <p class="cx-sp">A private bay reached only by water — no road, no neighbours.</p>
+          
+        </article><article class="cx-slide" data-i="1" role="group" aria-roledescription="slide" aria-label="2 of 4">
+          <div class="cx-num">02 / 04</div>
+          <h3 class="cx-st">The architecture</h3>
+          <p class="cx-sp">Low local stone and timber the landscape quietly swallows.</p>
+          
+        </article><article class="cx-slide" data-i="2" role="group" aria-roledescription="slide" aria-label="3 of 4">
+          <div class="cx-num">03 / 04</div>
+          <h3 class="cx-st">The privacy</h3>
+          <p class="cx-sp">Twenty-four villas across forty hectares. You will not see the others.</p>
+          
+        </article><article class="cx-slide" data-i="3" role="group" aria-roledescription="slide" aria-label="4 of 4">
+          <div class="cx-num">04 / 04</div>
+          <h3 class="cx-st">The service</h3>
+          <p class="cx-sp">One host per villa, anticipating rather than asking.</p>
+          
+        </article>
+    </div></div>
+    <button class="cx-nav cx-next" type="button" aria-label="Next slide">&rarr;</button>
+  </div>
+  <div class="cx-dots" role="tablist">
+    <button class="cx-dot cx-dot--on" type="button" role="tab" aria-label="Go to slide 1" data-i="0"></button><button class="cx-dot" type="button" role="tab" aria-label="Go to slide 2" data-i="1"></button><button class="cx-dot" type="button" role="tab" aria-label="Go to slide 3" data-i="2"></button><button class="cx-dot" type="button" role="tab" aria-label="Go to slide 4" data-i="3"></button>
+  </div>
+  <div class="cx-progress" aria-hidden="true"><div class="cx-progress-bar"></div></div>
+</div>
+<style>
+.cx-sec{position:relative;padding:clamp(3rem,6vw,6rem) 0;background:var(--bg);color:var(--fg);overflow:hidden}
+.cx-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.4rem,4vw,3rem)}
+.cx-head{margin-bottom:2.4rem}
+.cx-eb{font-family:var(--font-body),sans-serif;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;opacity:.9}
+.cx-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2rem,4vw,3.4rem);line-height:1;margin:0;letter-spacing:-.02em}
+.cx-stage{position:relative;display:flex;align-items:stretch;gap:1rem}
+.cx-track-wrap{flex:1;overflow:hidden;border-radius:8px;background:var(--surface,rgba(255,255,255,.02));border:1px solid var(--card-bd,rgba(255,255,255,.08))}
+.cx-track{display:flex;transition:transform .8s cubic-bezier(.65,0,.35,1);will-change:transform}
+.cx-slide{flex:0 0 100%;padding:clamp(2rem,5vw,4rem) clamp(1.6rem,4vw,3.2rem);min-height:340px;display:flex;flex-direction:column;gap:1rem;justify-content:center}
+.cx-num{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--accent) 80%, var(--fg));opacity:.85;margin-bottom:.6rem}
+.cx-st{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.1;margin:0;letter-spacing:-.01em}
+.cx-sp{margin:0;max-width:60ch;font-size:1rem;line-height:1.6;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.cx-sm{margin-top:auto;padding-top:1.4rem;font-family:var(--font-body),monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:color-mix(in srgb,var(--accent) 70%, var(--fg));opacity:.8}
+.cx-nav{flex:0 0 auto;align-self:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--card-bd,rgba(255,255,255,.18));background:transparent;color:var(--fg);font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .25s ease,transform .25s ease}
+.cx-nav:hover{background:color-mix(in srgb,var(--accent) 14%, transparent);transform:scale(1.05)}
+.cx-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cx-dots{display:flex;justify-content:center;gap:.6rem;margin-top:1.6rem}
+.cx-dot{width:8px;height:8px;border-radius:999px;border:none;background:color-mix(in srgb,var(--fg) 30%, transparent);cursor:pointer;padding:0;transition:width .35s ease,background .35s ease}
+.cx-dot--on{width:32px;background:var(--accent)}
+.cx-dot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cx-progress{margin-top:1.4rem;height:2px;background:color-mix(in srgb,var(--fg) 12%, transparent);border-radius:2px;overflow:hidden}
+.cx-progress-bar{height:100%;width:0;background:var(--accent);transition:width .15s linear}
+@media (max-width:640px){.cx-nav{display:none}.cx-slide{padding:1.6rem 1.2rem;min-height:280px}}
+@media (prefers-reduced-motion: reduce){.cx-track{transition:none}.cx-progress-bar{transition:none}}
+</style>
+<script>
+(function(){
+  var sec=document.currentScript.closest('.cx-sec'); if(!sec)return;
+  var track=sec.querySelector('.cx-track');
+  var slides=sec.querySelectorAll('.cx-slide');
+  var dots=sec.querySelectorAll('.cx-dot');
+  var prev=sec.querySelector('.cx-prev');
+  var next=sec.querySelector('.cx-next');
+  var bar=sec.querySelector('.cx-progress-bar');
+  var n=slides.length, i=0, timer=null, t0=0, dur=5000, paused=false;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(k){
+    i=((k%n)+n)%n;
+    track.style.transform='translateX('+(-i*100)+'%)';
+    dots.forEach(function(d,j){d.classList.toggle('cx-dot--on',j===i)});
+    t0=Date.now();
+  }
+  function tick(){
+    if(reduce||paused){requestAnimationFrame(tick);return}
+    var p=Math.min(1,(Date.now()-t0)/dur);
+    bar.style.width=(p*100)+'%';
+    if(p>=1){go(i+1)}
+    requestAnimationFrame(tick);
+  }
+  prev&&prev.addEventListener('click',function(){go(i-1)});
+  next&&next.addEventListener('click',function(){go(i+1)});
+  dots.forEach(function(d,j){d.addEventListener('click',function(){go(j)})});
+  sec.addEventListener('mouseenter',function(){paused=true});
+  sec.addEventListener('mouseleave',function(){paused=false;t0=Date.now()});
+  sec.addEventListener('focusin',function(){paused=true});
+  sec.addEventListener('focusout',function(){paused=false;t0=Date.now()});
+  // touch swipe
+  var sx=0,sy=0,sw=0;
+  track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;sw=0;paused=true},{passive:true});
+  track.addEventListener('touchmove',function(e){sw=e.touches[0].clientX-sx},{passive:true});
+  track.addEventListener('touchend',function(){if(Math.abs(sw)>40)go(i+(sw<0?1:-1));paused=false;t0=Date.now()});
+  // keyboard
+  sec.tabIndex=0;
+  sec.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')go(i-1);else if(e.key==='ArrowRight')go(i+1)});
+  go(0); t0=Date.now(); requestAnimationFrame(tick);
+})();
+</script>
+</section>
 <section class="sec" id="story"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>What it is</div><h2 class="clip-line">Few things. The right things.</h2></div>
   <div class="mosaic"><figure class="mtile m1" data-reveal data-reveal-d="1"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>The setting</strong><span class="muted">A private bay reached only by water — no road, no neighbours.</span></figcaption></figure><figure class="mtile m2" data-reveal data-reveal-d="2"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>The architecture</strong><span class="muted">Low local stone and timber the landscape quietly swallows.</span></figcaption></figure><figure class="mtile m3" data-reveal data-reveal-d="3"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>The privacy</strong><span class="muted">Twenty-four villas across forty hectares. You will not see the others.</span></figcaption></figure><figure class="mtile m4" data-reveal data-reveal-d="4"><div class="mtile-vis" aria-hidden="true"></div><figcaption><strong>The service</strong><span class="muted">One host per villa, anticipating rather than asking.</span></figcaption></figure></div></div></section>
-<section class="sec" id="membership"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Membership</div><h2 class="clip-line">By standard, not by volume.</h2></div>
-  <div class="grid g3"><article class="tier" data-reveal data-reveal-d="1"><div class="tier-name">Garden Villa</div><div class="tier-tag muted">from $1,400 / night</div><p class="muted">One bedroom, plunge pool, walled garden.</p></article><article class="tier tier--hot" data-reveal data-reveal-d="2"><div class="tier-name">Bay Pavilion</div><div class="tier-tag muted">from $2,600 / night</div><p class="muted">Two bedrooms, infinity edge, direct sand.</p></article><article class="tier" data-reveal data-reveal-d="3"><div class="tier-name">The Reserve</div><div class="tier-tag muted">On request</div><p class="muted">The whole headland, fully staffed, exclusive use.</p></article></div>
-  <div style="text-align:center;margin-top:3rem"><a href="#apply" class="btn btn-primary magnetic">Register interest &rarr;</a></div></div></section>
 <section class="sec" id="journal"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The journal</div><h2 class="clip-line">Notes, slowly.</h2></div>
   <div class="grid g3"><article class="jcard" data-reveal data-reveal-d="1"><div class="jcard-vis" aria-hidden="true"></div><h3>Building with the land</h3><p class="muted">Why we moved the resort, and not the trees.</p></article><article class="jcard" data-reveal data-reveal-d="2"><div class="jcard-vis" aria-hidden="true"></div><h3>The one-table kitchen</h3><p class="muted">A menu decided by the morning catch.</p></article><article class="jcard" data-reveal data-reveal-d="3"><div class="jcard-vis" aria-hidden="true"></div><h3>Keeping a bay quiet</h3><p class="muted">The case for fewer rooms, forever.</p></article></div></div></section>
-<footer class="foot foot--black" id="contact"><div class="wrap narrow">
-  <h2 class="clip-line">Register interest.</h2>
-  <form class="email-row" onsubmit="return false"><input type="email" placeholder="you@studio.dev" aria-label="Email" required><button class="btn btn-primary" type="submit">Send</button></form>
-  <div class="muted foot-meta">AMARA RESIDENCES — Own a piece of the quiet</div></div></footer>
+<section class="sec" id="letter"><div class="wrap narrow" style="text-align:center">
+  <h2 class="clip-line" style="margin:0 auto 1rem;max-width:20ch">A letter, for those who pay attention.</h2>
+  <form class="email-row" onsubmit="return false"><input type="email" placeholder="your email" aria-label="Email" required><button class="btn btn-primary" type="submit">Subscribe</button></form></div></section>
+<footer class="foot foot--bare"><div class="wrap" style="text-align:center">
+  <div class="brand-mark">AMARA RESIDENCES</div>
+  <a class="big-mail" href="mailto:hello@amararesidences.com">hello@amararesidences.com</a>
+  <div class="paren-links"><a href="#">Instagram</a></div></div></footer>
 </main>
 
 <script src="../shared/lib.js"></script>

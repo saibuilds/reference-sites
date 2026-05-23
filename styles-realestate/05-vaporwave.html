@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>:root{--bg:#1A0033;--surface:#2A0A4A;--fg:#FDF0FF;--accent:#FF8C00;--card:rgba(255,255,255,.06);--card-bd:rgba(255,0,110,.32);--font-display:'Archivo Black';--font-body:'Space Grotesk'}</style>
+<style>:root{--bg:#1A0033;--surface:#2A0A4A;--fg:#FDF0FF;--accent:#FF2BD6;--accent-2:#00F0FF;--card:rgba(255,255,255,.06);--card-bd:rgba(255,43,214,.36);--font-display:'Archivo Black';--font-body:'Space Grotesk'}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -17,23 +17,89 @@
 <img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Library switcher">
   <a href="../styles/05-vaporwave.html" aria-label="Previous">&larr;</a>
-  <a href="../index.html">Index</a><span class="pos">10 / 70</span>
+  <a href="../index.html">Index</a><span class="pos">10 / 72</span>
   <a href="../styles/06-soft-editorial.html" aria-label="Next">&rarr;</a></nav>
 <nav class="nav"><div class="brand">PULSE</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Find your space</a></nav>
-<header class="hero hero--ripple">
-  <div class="ripple-wrap" aria-hidden="true"><div class="glow"></div>
-    <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div><div class="ring r5"></div></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Lifestyle Real Estate</div>
-    <h1>Feel the neighbourhood.</h1>
-    <p class="lead" data-reveal data-reveal-d="2">Bold listings for bold buyers — lofts, studios and creative spaces with a heartbeat.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#listen" class="btn btn-primary magnetic">Find your space</a></div>
-  </div>
-</header>
+<section class="vt-hero" id="vt-bg">
+<div class="vt-grid" aria-hidden="true"></div>
+<div class="vt-frame">
+  <div class="vt-kicker">Lifestyle Real Estate</div>
+  <h1 class="vt-h1">Feel the neighbourhood.</h1>
+  <p class="vt-sub">Bold listings for bold buyers — lofts, studios and creative spaces with a heartbeat.</p>
+  <a class="vt-cta" href="#shop">Find your space</a>
+</div>
+<style>
+.vt-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:linear-gradient(180deg,#1a0a2e 0%,#2e1a4e 50%,#0a0a1a 100%);color:#f0e6ff}
+.vt-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(180deg,transparent 80%,rgba(255,82,213,.4)),repeating-linear-gradient(0deg,transparent 0,transparent 39px,rgba(158,140,255,.18) 40px),repeating-linear-gradient(90deg,transparent 0,transparent 39px,rgba(158,140,255,.18) 40px);transform:perspective(600px) rotateX(60deg) translateY(45%);transform-origin:bottom;opacity:.65;pointer-events:none}
+.vt-frame{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:0 1.4rem}
+.vt-kicker{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:#ff52d5;margin-bottom:1.6rem;text-shadow:0 0 8px rgba(255,82,213,.6)}
+.vt-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.8rem,8vw,7rem);line-height:1;margin:0 0 1.4rem;color:#f0e6ff;text-shadow:0 0 20px rgba(158,140,255,.5),0 0 40px rgba(255,82,213,.3)}
+.vt-sub{font-size:1.05rem;line-height:1.55;color:rgba(240,230,255,.75);margin:0 0 2.2rem;max-width:50ch}
+.vt-cta{padding:.95rem 1.8rem;background:linear-gradient(90deg,#ff52d5,#9e8cff);color:#0a0a1a;border-radius:999px;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;font-weight:700;box-shadow:0 0 30px rgba(255,82,213,.4)}
+.vt-cta:hover{filter:brightness(1.15)}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
+<script>
+(function(){if(typeof VANTA==='undefined'||typeof THREE==='undefined')return;VANTA.WAVES({el:'#vt-bg',color:0x9e8cff,shininess:50,waveHeight:18,waveSpeed:.6,zoom:.75,backgroundColor:0x1a0a2e});})();
+</script>
+</section>
 <main>
 <section class="sec wave-sec" aria-hidden="true"><div class="wrap"><div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div></section>
+<section class="p5-sec" id="phero">
+<div class="p5-holder" id="p5-h"></div>
+<div class="p5-overlay">
+  <div class="p5-eb">Lifestyle Real Estate</div>
+  <h1 class="p5-h">Feel the neighbourhood.</h1>
+  <p class="p5-p">Bold listings for bold buyers — lofts, studios and creative spaces with a heartbeat.</p>
+</div>
+<style>
+.p5-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.p5-holder{position:absolute;inset:0}
+.p5-holder canvas{display:block;width:100%!important;height:100%!important}
+.p5-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,5vw,5rem);pointer-events:none;max-width:1280px;margin:0 auto;z-index:1}
+.p5-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.p5-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.p5-p{margin:0;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+@media (prefers-reduced-motion: reduce){.p5-holder{display:none}.p5-sec{background:repeating-linear-gradient(45deg, color-mix(in srgb, var(--accent) 8%, transparent) 0 2px, transparent 2px 14px), var(--bg)}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var holder=document.getElementById('p5-h'); if(!holder)return;
+  var tries=0;
+  function start(){
+    if(!window.p5){ if(tries++<60) return setTimeout(start,50); return; }
+    if(!holder.clientWidth||!holder.clientHeight){ if(tries++<60) return setTimeout(start,50); }
+    var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+    new p5(function(p){
+    var pts=[], cnt=480, t=0;
+    p.setup=function(){
+      var w=holder.clientWidth, h=holder.clientHeight;
+      var cv=p.createCanvas(w,h); cv.parent(holder);
+      p.noStroke();
+      for(var i=0;i<cnt;i++)pts.push({x:p.random(w),y:p.random(h),s:p.random(.4,1.6)});
+    };
+    p.windowResized=function(){p.resizeCanvas(holder.clientWidth,holder.clientHeight)};
+    p.draw=function(){
+      p.background(0,0,0,18); t+=.003;
+      p.fill(p.color(accent)); p.noStroke();
+      for(var i=0;i<pts.length;i++){
+        var P=pts[i];
+        var n=p.noise(P.x*.0018,P.y*.0018,t)*p.TWO_PI*2;
+        P.x+=Math.cos(n)*P.s; P.y+=Math.sin(n)*P.s;
+        if(P.x<0||P.x>p.width||P.y<0||P.y>p.height){P.x=p.random(p.width);P.y=p.random(p.height)}
+        p.circle(P.x,P.y,P.s*1.6);
+      }
+    };
+    });
+  }
+  start();
+})();
+</script>
+</section>
 <section class="sec" id="listen"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Releases</div><h2 class="clip-line">Wave after wave.</h2></div><div class="grid g2"><article class="rel" data-reveal data-reveal-d="1"><div class="rel-vis" aria-hidden="true"></div><div><h3>001 · Nightdrive</h3><p class="muted">EP · 6 tracks</p></div></article><article class="rel" data-reveal data-reveal-d="2"><div class="rel-vis" aria-hidden="true"></div><div><h3>002 · Afterglow</h3><p class="muted">Single</p></div></article><article class="rel" data-reveal data-reveal-d="3"><div class="rel-vis" aria-hidden="true"></div><div><h3>003 · Violet Hour</h3><p class="muted">EP · 5 tracks</p></div></article><article class="rel" data-reveal data-reveal-d="4"><div class="rel-vis" aria-hidden="true"></div><div><h3>004 · Signal</h3><p class="muted">Single</p></div></article></div></div></section>
 <section class="sec" id="proof"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>In their words</div><h2 class="clip-line">Trusted where it matters.</h2></div>
   <div class="grid g3"><figure class="qcard" data-reveal data-reveal-d="1"><blockquote>Industrial conversions with character.</blockquote><figcaption class="muted">— PULSE</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="2"><blockquote>Live-work units for makers.</blockquote><figcaption class="muted">— Lifestyle Real Estate</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="3"><blockquote>Commercial creative footprints.</blockquote><figcaption class="muted">— PULSE</figcaption></figure></div></div></section>

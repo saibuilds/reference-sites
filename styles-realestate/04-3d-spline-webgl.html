@@ -6,11 +6,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>:root{--bg:#070A12;--surface:#0E1322;--fg:#EAF0FF;--accent:#5BE0FF;--card:rgba(255,255,255,.04);--card-bd:rgba(91,224,255,.18);--font-display:'Space Grotesk';--font-body:'Inter'}</style>
+<style>:root{--bg:#070A12;--surface:#0E1322;--fg:#EAF0FF;--accent:#7CF7FF;--accent-2:#FF5BE0;--card:rgba(255,255,255,.04);--card-bd:rgba(124,247,255,.20);--font-display:'Space Grotesk';--font-body:'Inter'}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 </head>
 <body>
 <div id="loader"><div class="lLogo">DIMENSION</div><div class="lTrack"><div class="lBar"></div></div></div>
@@ -18,26 +18,341 @@
 <img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Library switcher">
   <a href="../styles/04-3d-spline-webgl.html" aria-label="Previous">&larr;</a>
-  <a href="../index.html">Index</a><span class="pos">8 / 70</span>
+  <a href="../index.html">Index</a><span class="pos">8 / 72</span>
   <a href="../styles/05-vaporwave.html" aria-label="Next">&rarr;</a></nav>
 <nav class="nav"><div class="brand">DIMENSION</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Launch a 3D tour</a></nav>
-<header class="hero hero--canvas">
-  <canvas id="bg3d" aria-hidden="true"></canvas>
-  <div class="veil" style="background:radial-gradient(50% 50% at 50% 50%,transparent,var(--bg) 78%)"></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Immersive Property</div>
-    <h1>Tour homes in three dimensions.</h1>
-    <p class="lead" data-reveal data-reveal-d="2">Interactive 3D walkthroughs and configurable floorplans — buyers explore before they ever visit.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3">
-      <a href="#contact" class="btn btn-primary magnetic">Launch a 3D tour</a> <a href="#work" class="btn btn-ghost magnetic">Selected work</a>
-    </div>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.158.0/build/three.module.js","@dimforge/rapier3d-compat":"https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.12.0/rapier.es.js"}}</script>
+<section class="r3f-hero">
+<canvas class="r3f-canvas" id="r3fCanvas" aria-hidden="true"></canvas>
+<div class="r3f-grid" aria-hidden="true"></div>
+<div class="r3f-frame">
+  <div class="r3f-eyebrow">Immersive Property</div>
+  <h1 class="r3f-h1">Tour homes in three dimensions.</h1>
+  <p class="r3f-sub">Interactive 3D walkthroughs and configurable floorplans — buyers explore before they ever visit.</p>
+  <div class="r3f-cta-row">
+    <a class="r3f-cta" href="#story">Launch a 3D tour &rarr;</a>
+    <span class="r3f-hint">drag &middot; scroll &middot; hover</span>
   </div>
-  <span class="scrollcue" aria-hidden="true">Scroll</span>
-</header>
+</div>
+<style>
+.r3f-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#15132b 0%,#070611 70%);color:var(--fg,#edebfa)}
+.r3f-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%;cursor:grab}
+.r3f-canvas:active{cursor:grabbing}
+.r3f-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(158,140,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(158,140,255,.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 50%,#000 30%,transparent 80%);opacity:.6}
+.r3f-frame{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;height:100%;padding:0 clamp(1.4rem,5vw,4rem) clamp(2.4rem,6vw,4rem);max-width:min(60vw,640px);pointer-events:none}
+.r3f-frame > *{pointer-events:auto}
+.r3f-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#7CF7FF;margin-bottom:1.4rem}
+.r3f-h1{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.6rem,7vw,6.4rem);line-height:.98;margin:0 0 1.4rem;letter-spacing:-.02em}
+.r3f-sub{font-size:1.05rem;line-height:1.55;color:rgba(237,235,250,.7);margin:0 0 1.8rem;max-width:50ch}
+.r3f-cta-row{display:flex;align-items:center;gap:1.2rem}
+.r3f-cta{display:inline-block;padding:.95rem 1.8rem;background:#7CF7FF;color:#0a0a0a;border-radius:999px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;font-weight:600}
+.r3f-hint{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(237,235,250,.4)}
+</style>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+  if(typeof THREE==='undefined')return;
+  var cv=document.getElementById('r3fCanvas');if(!cv)return;
+  var R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.outputColorSpace=THREE.SRGBColorSpace;R.toneMapping=THREE.ACESFilmicToneMapping;
+  var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(45,1,.1,200);C.position.set(0,1.2,4);
+  var host=cv.parentNode||cv;
+  function dim(){ // measure from the canvas box, then parent, then viewport; never 0
+    var w=cv.clientWidth||host.clientWidth||window.innerWidth||1280;
+    var h=cv.clientHeight||host.clientHeight||window.innerHeight||720;
+    return {w:Math.max(1,w),h:Math.max(1,h)};
+  }
+  function sz(){var d=dim();R.setSize(d.w,d.h,false);C.aspect=d.w/d.h;C.updateProjectionMatrix();}sz();addEventListener('resize',sz);
+  if(typeof ResizeObserver!=='undefined'){try{new ResizeObserver(sz).observe(host);}catch(e){}}
+  S.add(new THREE.HemisphereLight(0xffffff,0x1a1530,.6));
+  var key=new THREE.DirectionalLight(0xfff2dc,1.4);key.position.set(4,6,4);S.add(key);
+  var rim=new THREE.DirectionalLight(0x7CF7FF,.8);rim.position.set(-4,2,-3);S.add(rim);
+  // halo
+  var halo=new THREE.Mesh(new THREE.IcosahedronGeometry(2.4,2),new THREE.MeshBasicMaterial({color:0x7CF7FF,wireframe:true,transparent:true,opacity:.16}));S.add(halo);
+  // particle field
+  var pg=new THREE.BufferGeometry(),pos=[];
+  for(var i=0;i<480;i++){var r=2.2+Math.random()*2.8,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);pos.push(r*Math.sin(p)*Math.cos(t),r*Math.sin(p)*Math.sin(t),r*Math.cos(p));}
+  pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  var dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0xedebfa,size:.018,transparent:true,opacity:.65}));S.add(dust);
+  // model placeholder (replaced if GLB provided). ex.scene selects the procedural form so each site reads as uniquely generated.
+  var hero;
+  var glb='';
+  var SCENE='house';
+  var AC=0x7CF7FF;
+  function mat(o){o=o||{};return new THREE.MeshPhysicalMaterial({color:o.color===undefined?AC:o.color,metalness:o.metalness===undefined?.45:o.metalness,roughness:o.roughness===undefined?.22:o.roughness,clearcoat:o.clearcoat===undefined?.9:o.clearcoat,clearcoatRoughness:.08,transmission:o.transmission||0,thickness:o.thickness||0,transparent:!!o.transmission,sheen:o.sheen===undefined?.6:o.sheen,sheenColor:AC});}
+  function box(w,h,d,x,y,z,o){var b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(o));b.position.set(x,y,z);return b;}
+  function buildHero(kind){
+    var G=new THREE.Group();
+    if(kind==='house'){ // modern two-storey massing — for real-estate / brand sites
+      var glass=mat({color:AC,metalness:.1,roughness:.05,transmission:.9,thickness:.6,clearcoat:1});
+      var wall=mat({color:0xf4f1ea,metalness:.05,roughness:.85,clearcoat:.2,sheen:.1});
+      var wood=mat({color:0xb98a52,metalness:.1,roughness:.6,clearcoat:.2});
+      var gf=box(2.2,.9,1.7,0,-.55,0); gf.material=wall; G.add(gf); // ground floor
+      var u=box(1.7,.85,1.42,-.18,.32,0); u.material=wall; G.add(u); // upper floor, set back
+      var g0=box(1.0,.7,1.72,.62,-.55,0); g0.material=glass; G.add(g0); // ground glass band
+      var g1=box(.9,.55,1.44,.28,.32,0); g1.material=glass; G.add(g1); // upper glazing
+      var roof=box(1.8,.06,1.5,-.18,.78,0); roof.material=wood; G.add(roof);
+      var slab=box(2.4,.05,1.9,0,-1.02,0); slab.material=wall; G.add(slab); // base slab
+      G.userData.spin=.004;
+    } else if(kind==='tower'){ // stacked SaaS/abstract tower of slabs
+      for(var i=0;i<7;i++){var s2=1.1-i*.1,y=-.9+i*.32,rot=i*.22; var sl=box(s2,.16,s2,0,y,0,{metalness:.6,roughness:.18,clearcoat:1}); sl.rotation.y=rot; G.add(sl);}
+      var core=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,2.6,24),mat({color:AC,metalness:.8,roughness:.1})); G.add(core);
+      G.userData.spin=.006;
+    } else if(kind==='crystal'){ // faceted gem — luxury / web3
+      var gem=new THREE.Mesh(new THREE.OctahedronGeometry(1.25,0),mat({metalness:.2,roughness:.02,transmission:.92,thickness:1.4,clearcoat:1}));
+      var inner=new THREE.Mesh(new THREE.OctahedronGeometry(.55,0),mat({metalness:.9,roughness:.05}));
+      G.add(gem);G.add(inner);G.userData.spin=.0045;
+    } else if(kind==='wave'){ // rippled parametric plane — generative / dev
+      var seg=44,geo=new THREE.PlaneGeometry(3.4,3.4,seg,seg);geo.rotateX(-Math.PI/2.4);
+      var w=new THREE.Mesh(geo,mat({metalness:.5,roughness:.3,clearcoat:.6})); w.userData.wave=geo; G.add(w);
+      G.userData.spin=.0015;
+    } else if(kind==='orbit'){ // rings + core — cosmic / platform
+      var coreS=new THREE.Mesh(new THREE.IcosahedronGeometry(.7,2),mat({metalness:.7,roughness:.12})); G.add(coreS);
+      [1.2,1.6,2.0].forEach(function(r,i){var ring=new THREE.Mesh(new THREE.TorusGeometry(r,.02,12,120),mat({color:AC,metalness:.4,roughness:.3,clearcoat:.4}));ring.rotation.x=Math.PI/2.4+i*.5;ring.rotation.z=i*.7;G.add(ring);});
+      G.userData.spin=.003;
+    } else { // 'knot' default — keeps original look
+      G.add(new THREE.Mesh(new THREE.TorusKnotGeometry(.85,.28,180,28),mat({metalness:.45,roughness:.18,clearcoat:1,sheen:1})));
+      G.userData.spin=.005;
+    }
+    return G;
+  }
+  function placeholder(){ hero=buildHero(SCENE); S.add(hero); }
+  if(glb && THREE.GLTFLoader){
+    new THREE.GLTFLoader().load(glb,function(gl){hero=gl.scene;hero.scale.set(1.4,1.4,1.4);S.add(hero);},undefined,placeholder);
+  }else placeholder();
+  // mouse drag-tilt (drei-style)
+  var tx=0,ty=0,mx=0,my=0;
+  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();if(!r.width||!r.height)return;mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;});
+  var T=0;
+  function tick(){T+=.016;tx+=(mx-tx)*.06;ty+=(my-ty)*.06;
+    if(hero){var sp=(hero.userData&&hero.userData.spin)||.005;hero.rotation.y+=sp+tx*.04;hero.rotation.x=-ty*.3;
+      // animate the rippled plane if present
+      if(hero.children)hero.children.forEach(function(ch){var g=ch.userData&&ch.userData.wave;if(g){var p=g.attributes.position;for(var i=0;i<p.count;i++){var px=p.getX(i),pz=p.getZ(i);p.setY(i,Math.sin(px*1.6+T)*0.18+Math.cos(pz*1.4+T*.8)*0.14);}p.needsUpdate=true;g.computeVertexNormals();}});
+    }
+    halo.rotation.y-=.002;halo.rotation.x+=.001;dust.rotation.y+=.0006;C.position.x=tx*.6;C.position.y=1.2-ty*.4;C.lookAt(0,0,0);R.render(S,C);requestAnimationFrame(tick);}tick();
+  // scroll-driven zoom-out as you leave hero
+  addEventListener('scroll',function(){var r=cv.getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/innerHeight));C.position.z=4+p*3;},{passive:true});
+})();
+</script>
+</section>
 <main>
 <section class="sec" id="how"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>How it works</div><h2 class="clip-line">Three steps to live.</h2></div><div class="grid g3"><article class="glass" data-reveal data-reveal-d="1"><div class="eyebrow">Step 1</div><h3>3D Walkthroughs</h3><p class="muted">Photoreal scenes that load in-browser.</p></article><article class="glass" data-reveal data-reveal-d="2"><div class="eyebrow">Step 2</div><h3>Floorplan Config</h3><p class="muted">Reconfigure rooms and finishes live.</p></article><article class="glass" data-reveal data-reveal-d="3"><div class="eyebrow">Step 3</div><h3>Virtual Staging</h3><p class="muted">Stage empty homes in real time.</p></article></div></div></section>
+<section class="th-sec" id="thero">
+<canvas class="th-canvas" id="th-c"></canvas>
+<div class="th-overlay">
+  <div class="th-eb">Immersive Property</div>
+  <h1 class="th-h">Tour homes in three dimensions.</h1>
+  <p class="th-p">Interactive 3D walkthroughs and configurable floorplans — buyers explore before they ever visit.</p>
+  <div class="th-scrub" aria-hidden="true"><div class="th-scrub-bar"></div></div>
+</div>
+<style>
+.th-sec{position:relative;height:140vh;background:var(--bg);color:var(--fg);overflow:hidden}
+.th-canvas{position:sticky;top:0;width:100%;height:100vh;display:block}
+.th-overlay{position:absolute;inset:auto 0 4rem 0;padding:clamp(2rem,5vw,5rem);z-index:1;pointer-events:none;max-width:1280px;margin:0 auto}
+.th-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.th-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.th-p{margin:0 0 1.4rem;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.th-scrub{height:2px;width:240px;background:color-mix(in srgb,var(--fg) 14%, transparent);border-radius:2px;overflow:hidden}
+.th-scrub-bar{height:100%;width:0;background:var(--accent);transition:width .12s linear}
+@media (prefers-reduced-motion: reduce){.th-canvas{display:none}.th-sec{height:auto;min-height:80vh;background:linear-gradient(180deg,var(--bg),color-mix(in srgb,var(--accent) 8%,var(--bg)))}}
+</style>
+<script type="module">
+import * as THREE from 'three';
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var sec=document.getElementById('thero');
+  var c=document.getElementById('th-c'); if(!c||!sec)return;
+  var bar=sec.querySelector('.th-scrub-bar');
+  var ren=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:false});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  function size(){ren.setSize(c.clientWidth,c.clientHeight,false)}
+  var sc=new THREE.Scene();
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  var col=new THREE.Color(accent);
+  sc.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#050505');
+  var cam=new THREE.PerspectiveCamera(50,1,.1,100); cam.position.z=4;
+  sc.add(new THREE.AmbientLight(0xffffff,.5));
+  var d=new THREE.DirectionalLight(0xffffff,1.2); d.position.set(3,4,5); sc.add(d);
+  var mat=new THREE.MeshStandardMaterial({color:col,metalness:.55,roughness:.25});
+  var geo=new THREE.IcosahedronGeometry(1.1,2);
+  var mesh=new THREE.Mesh(geo,mat); sc.add(mesh);
+  // timeline keyframes (t = 0..1 along section scroll)
+  var KF=[
+    {t:0,    rx:0,    ry:0,    z:5.5, lx:0},
+    {t:.33,  rx:.6,   ry:.9,   z:3.8, lx:-.6},
+    {t:.66,  rx:-.4,  ry:2.2,  z:3.0, lx:.5},
+    {t:1,    rx:.2,   ry:Math.PI*1.4, z:4.8, lx:0}
+  ];
+  function lerp(a,b,t){return a+(b-a)*t}
+  function sample(p){
+    for(var i=0;i<KF.length-1;i++){if(p<=KF[i+1].t){var a=KF[i],b=KF[i+1];var u=(p-a.t)/(b.t-a.t);u=u*u*(3-2*u);return{rx:lerp(a.rx,b.rx,u),ry:lerp(a.ry,b.ry,u),z:lerp(a.z,b.z,u),lx:lerp(a.lx,b.lx,u)}}}
+    return KF[KF.length-1];
+  }
+  function tick(){
+    var r=sec.getBoundingClientRect();
+    var p=Math.min(1,Math.max(0,-r.top/(r.height-window.innerHeight)));
+    var k=sample(p);
+    mesh.rotation.x=k.rx; mesh.rotation.y=k.ry; cam.position.z=k.z; cam.position.x=k.lx; cam.lookAt(0,0,0);
+    if(bar)bar.style.width=(p*100)+'%';
+    var w=c.clientWidth,h=c.clientHeight;
+    if(ren.domElement.width!==w*ren.getPixelRatio()||ren.domElement.height!==h*ren.getPixelRatio()){size(); cam.aspect=w/h; cam.updateProjectionMatrix();}
+    ren.render(sc,cam); requestAnimationFrame(tick);
+  }
+  size(); cam.aspect=c.clientWidth/c.clientHeight; cam.updateProjectionMatrix();
+  window.addEventListener('resize',function(){size(); cam.aspect=c.clientWidth/c.clientHeight; cam.updateProjectionMatrix();});
+  requestAnimationFrame(tick);
+})();
+</script>
+</section>
+<section class="bh-sec" id="bhero">
+<canvas class="bh-canvas" id="bh-c"></canvas>
+<div class="bh-overlay">
+  <div class="bh-eb">Immersive Property</div>
+  <h1 class="bh-h">Tour homes in three dimensions.</h1>
+  <p class="bh-p">Interactive 3D walkthroughs and configurable floorplans — buyers explore before they ever visit.</p>
+</div>
+<style>
+.bh-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.bh-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:none}
+.bh-overlay{position:absolute;inset:auto 0 0 0;padding:clamp(2rem,5vw,5rem);z-index:1;pointer-events:none;max-width:1280px;margin:0 auto}
+.bh-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.bh-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.bh-p{margin:0;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+@media (prefers-reduced-motion: reduce){.bh-canvas{display:none}.bh-sec{background:radial-gradient(60% 50% at 50% 40%, color-mix(in srgb, var(--accent) 18%, transparent), transparent), var(--bg)}}
+</style>
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var c=document.getElementById('bh-c'); if(!c||!window.BABYLON)return;
+  var eng=new BABYLON.Engine(c,true,{preserveDrawingBuffer:false,stencil:false,antialias:true});
+  var s=new BABYLON.Scene(eng); s.clearColor=new BABYLON.Color4(0,0,0,1);
+  var cam=new BABYLON.ArcRotateCamera('c',Math.PI/2,Math.PI/2.2,5,BABYLON.Vector3.Zero(),s);
+  cam.attachControl(c,true); cam.lowerRadiusLimit=4; cam.upperRadiusLimit=8; cam.wheelDeltaPercentage=0;
+  var hemi=new BABYLON.HemisphericLight('h',new BABYLON.Vector3(0,1,0),s); hemi.intensity=.4;
+  var dir=new BABYLON.DirectionalLight('d',new BABYLON.Vector3(-1,-2,-1),s); dir.intensity=.8;
+  var m=new BABYLON.PBRMaterial('m',s);
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  m.albedoColor=BABYLON.Color3.FromHexString(accent);
+  m.metallic=.7; m.roughness=.25; m.emissiveColor=BABYLON.Color3.FromHexString(accent).scale(.05);
+  var sph=BABYLON.MeshBuilder.CreateSphere('s',{diameter:2.2,segments:64},s); sph.material=m;
+  var t=0;
+  eng.runRenderLoop(function(){ t+=.005; sph.rotation.y=t; sph.position.y=Math.sin(t*2)*.08; s.render(); });
+  window.addEventListener('resize',function(){eng.resize()});
+})();
+</script>
+</section>
+<section class="rp-sec" id="rhero">
+<canvas class="rp-canvas" id="rp-c"></canvas>
+<div class="rp-overlay">
+  <div class="rp-eb">Immersive Property</div>
+  <h1 class="rp-h">Tour homes in three dimensions.</h1>
+  <p class="rp-p">Interactive 3D walkthroughs and configurable floorplans — buyers explore before they ever visit.</p>
+  <button class="rp-drop" type="button" id="rp-drop">Drop one</button>
+</div>
+<style>
+.rp-sec{position:relative;height:100vh;min-height:640px;background:var(--bg);color:var(--fg);overflow:hidden}
+.rp-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.rp-overlay{position:absolute;inset:auto 0 0 0;padding:clamp(2rem,5vw,5rem);z-index:1;max-width:1280px;margin:0 auto}
+.rp-eb{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;opacity:.9}
+.rp-h{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em;margin:0 0 1rem;max-width:18ch}
+.rp-p{margin:0 0 1.4rem;max-width:48ch;font-size:1.05rem;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.rp-drop{background:transparent;color:var(--fg);border:1px solid var(--accent);padding:.7rem 1.4rem;font-family:var(--font-body),monospace;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;border-radius:var(--btn-radius,2px);transition:background .25s ease}
+.rp-drop:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.rp-drop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.rp-canvas{display:none}.rp-sec{background:radial-gradient(50% 60% at 50% 60%, color-mix(in srgb, var(--accent) 14%, transparent), transparent), var(--bg)}.rp-drop{display:none}}
+</style>
+<script type="module">
+import * as THREE from 'three';
+import RAPIER from '@dimforge/rapier3d-compat';
+(async function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  await RAPIER.init();
+  var c=document.getElementById('rp-c'); if(!c)return;
+  var ren=new THREE.WebGLRenderer({canvas:c,antialias:true});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  function size(){ren.setSize(c.clientWidth,c.clientHeight,false)}
+  size();
+  var sc=new THREE.Scene();
+  sc.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#050505');
+  var cam=new THREE.PerspectiveCamera(50,c.clientWidth/c.clientHeight,.1,100); cam.position.set(0,4,12); cam.lookAt(0,0,0);
+  sc.add(new THREE.AmbientLight(0xffffff,.55));
+  var d=new THREE.DirectionalLight(0xffffff,1.1); d.position.set(4,8,5); sc.add(d);
+  var accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#c9a96e';
+  var w=new RAPIER.World({x:0,y:-9.81,z:0});
+  // floor
+  w.createCollider(RAPIER.ColliderDesc.cuboid(20,.2,20).setRestitution(.3),w.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0,-2,0)));
+  var floor=new THREE.Mesh(new THREE.BoxGeometry(40,.4,40),new THREE.MeshStandardMaterial({color:0x111111,roughness:.9}));
+  floor.position.y=-2; sc.add(floor);
+  var bodies=[];
+  function drop(){
+    var size=.5+Math.random()*.4;
+    var rb=w.createRigidBody(RAPIER.RigidBodyDesc.dynamic().setTranslation((Math.random()-.5)*4,6,(Math.random()-.5)*2));
+    w.createCollider(RAPIER.ColliderDesc.cuboid(size/2,size/2,size/2).setRestitution(.35),rb);
+    var m=new THREE.Mesh(new THREE.BoxGeometry(size,size,size),new THREE.MeshStandardMaterial({color:accent,metalness:.5,roughness:.3}));
+    sc.add(m); bodies.push({rb:rb,m:m});
+    if(bodies.length>40){var old=bodies.shift(); w.removeRigidBody(old.rb); sc.remove(old.m); old.m.geometry.dispose(); old.m.material.dispose();}
+  }
+  for(var i=0;i<8;i++)drop();
+  var btn=document.getElementById('rp-drop'); btn&&btn.addEventListener('click',drop);
+  function tick(){
+    w.step();
+    bodies.forEach(function(b){var t=b.rb.translation(),r=b.rb.rotation();b.m.position.set(t.x,t.y,t.z);b.m.quaternion.set(r.x,r.y,r.z,r.w);});
+    ren.render(sc,cam); requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',function(){size();cam.aspect=c.clientWidth/c.clientHeight;cam.updateProjectionMatrix();});
+  requestAnimationFrame(tick);
+})();
+</script>
+</section>
+<section class="sd-sec" aria-label="Depth">
+  <div class="sd-stage">
+    <svg class="sd-layer sd-l3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#7CF7FF" stop-opacity=".22"/><stop offset="1" stop-color="#7CF7FF" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1600" height="900" fill="url(#sdSky)"/>
+      <circle cx="1200" cy="240" r="100" fill="#7CF7FF" fill-opacity=".5" filter="blur(40)"/>
+    </svg>
+    <svg class="sd-layer sd-l2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="#7CF7FF" fill-opacity=".22"/>
+    </svg>
+    <svg class="sd-layer sd-l1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="#7CF7FF" fill-opacity=".48"/>
+    </svg>
+    <div class="sd-frame">
+      <div class="sd-eyebrow">Immersive Property</div>
+      <h2 class="sd-h2">Tour homes in three dimensions.</h2>
+      <p class="sd-sub">Interactive 3D walkthroughs and configurable floorplans — buyers explore before they ever visit.</p>
+    </div>
+  </div>
+  <style>
+  .sd-sec{position:relative;height:220vh;background:linear-gradient(180deg,var(--bg,#0a0a0a),var(--surface,#11102a));color:var(--fg,#f5f1e8)}
+  .sd-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .sd-layer{position:absolute;inset:0;width:100%;height:100%;will-change:transform;filter:drop-shadow(0 12px 32px rgba(0,0,0,.45))}
+  .sd-l3{transform:translateY(0);z-index:1}
+  .sd-l2{transform:translateY(0);z-index:2}
+  .sd-l1{transform:translateY(0);z-index:3}
+  .sd-frame{position:relative;z-index:4;text-align:center;padding:0 1.6rem;max-width:min(80vw,720px)}
+  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#7CF7FF;margin-bottom:1.2rem}
+  .sd-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;letter-spacing:-.02em;margin:0 0 1.2rem;text-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .sd-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.75);margin:0 auto;max-width:48ch}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.sd-sec');if(!sec)return;
+    var l1=sec.querySelector('.sd-l1'),l2=sec.querySelector('.sd-l2'),l3=sec.querySelector('.sd-l3'),f=sec.querySelector('.sd-frame');
+    function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+    function on(){var r=sec.getBoundingClientRect(),t=Math.max(0,-r.top),m=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,t/m),e=ease(p);
+      if(l1)l1.style.transform='translate3d(0,'+(-e*120)+'px,0) scale('+(1+e*.08)+')';
+      if(l2)l2.style.transform='translate3d(0,'+(-e*70)+'px,0) scale('+(1+e*.04)+')';
+      if(l3)l3.style.transform='translate3d(0,'+(-e*30)+'px,0)';
+      if(f)f.style.transform='translate3d(0,'+(-e*40)+'px,0)';if(f)f.style.opacity=String(1-Math.max(0,(p-.7)/.3));
+    }addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
 <section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>What you build</div><h2 class="clip-line">From idea to live.</h2></div>
   <div class="frow" data-reveal><div class="frow-txt"><div class="eyebrow">01</div><h3>3D Walkthroughs</h3><p class="muted">Photoreal scenes that load in-browser.</p></div><div class="frow-vis" aria-hidden="true"></div></div><div class="frow frow--rev" data-reveal><div class="frow-txt"><div class="eyebrow">02</div><h3>Floorplan Config</h3><p class="muted">Reconfigure rooms and finishes live.</p></div><div class="frow-vis" aria-hidden="true"></div></div><div class="frow" data-reveal><div class="frow-txt"><div class="eyebrow">03</div><h3>Virtual Staging</h3><p class="muted">Stage empty homes in real time.</p></div><div class="frow-vis" aria-hidden="true"></div></div></div></section>
 <div class="logo-mq" aria-hidden="true"><div class="logo-mq-track"><span>DIMENSION</span><span class="dot">·</span><span>Immersive Property</span><span class="dot">·</span><span>3D Walkthroughs</span><span class="dot">·</span><span>Floorplan Config</span><span class="dot">·</span><span>Virtual Staging</span><span class="dot">·</span><span>DIMENSION</span><span class="dot">·</span><span>Immersive Property</span><span class="dot">·</span><span>3D Walkthroughs</span><span class="dot">·</span><span>Floorplan Config</span><span class="dot">·</span><span>Virtual Staging</span><span class="dot">·</span><span>DIMENSION</span><span class="dot">·</span><span>Immersive Property</span><span class="dot">·</span><span>3D Walkthroughs</span><span class="dot">·</span><span>Floorplan Config</span><span class="dot">·</span><span>Virtual Staging</span><span class="dot">·</span></div></div>

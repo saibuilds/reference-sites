@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>:root{--bg:#05050B;--surface:#0C0C16;--fg:#F4F6FB;--accent:#E6B873;--card:rgba(255,255,255,.05);--card-bd:rgba(255,255,255,.10);--font-display:'Bebas Neue';--font-body:'DM Sans'}</style>
+<style>:root{--bg:#05050B;--surface:#0C0C16;--fg:#F4F6FB;--accent:#FF7A1A;--card:rgba(255,255,255,.05);--card-bd:rgba(255,255,255,.10);--font-display:'Bebas Neue';--font-body:'DM Sans'}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -17,29 +17,192 @@
 <img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Library switcher">
   <a href="../reels/17-villa-maravilha.html" aria-label="Previous">&larr;</a>
-  <a href="../index.html">Index</a><span class="pos">64 / 70</span>
+  <a href="../index.html">Index</a><span class="pos">66 / 72</span>
   <a href="../reels/18-jesko-jets.html" aria-label="Next">&rarr;</a></nav>
 <nav class="nav"><div class="brand">MERIDIAN</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Book a consultation</a></nav>
-<header class="hero hero--video">
-  <img class="media" src="../assets/02-cinematic-video.svg" alt="" aria-hidden="true" loading="eager" decoding="async">
-  <div class="scrim"></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Real Estate Group</div>
-    <h1>Your next move, on schedule.</h1>
-    <p class="lead" data-reveal data-reveal-d="2">Buying, selling and relocation — engineered to close on time, every time.</p>
-    <div class="hero-cta" data-reveal data-reveal-d="3"><a href="#contact" class="btn btn-primary magnetic">Book a consultation</a></div>
-  </div>
-  <div class="hero-badge" data-reveal data-reveal-d="4">1,400 Closings &middot; 99 % list-to-sale</div>
-  <span class="scrollcue" aria-hidden="true">Scroll &darr;</span>
-</header>
+<section class="vg-hero">
+<video class="vg-video" autoplay muted loop playsinline poster="../assets/02-cinematic-video-hero.jpg"></video>
+<div class="vg-scrim" aria-hidden="true"></div>
+<div class="vg-frame">
+  <div class="vg-kicker">Real Estate Group</div>
+  <h1 class="vg-h1">Your next move, on schedule.</h1>
+  <p class="vg-sub">Buying, selling and relocation — engineered to close on time, every time.</p>
+  <a class="vg-cta" href="#shop">Book a consultation &rarr;</a>
+</div>
+<div class="vg-stats">
+  <div class="vg-stat"><div class="vg-n">1,400</div><div class="vg-l">Closings</div></div><div class="vg-stat"><div class="vg-n">18</div><div class="vg-l">Days avg.</div></div><div class="vg-stat"><div class="vg-n">99</div><div class="vg-l">% list-to-sale</div></div>
+</div>
+<style>
+.vg-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0d0f12;color:#f2f2f2}
+.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%)}
+.vg-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,18,.65) 0%,rgba(13,15,18,.35) 40%,rgba(13,15,18,.85) 100%)}
+.vg-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(70vw,820px)}
+.vg-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#e8a948);margin-bottom:1.4rem}
+.vg-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,7vw,6.4rem);line-height:1;margin:0 0 1.4rem;letter-spacing:-.02em}
+.vg-sub{font-size:1.05rem;line-height:1.55;color:rgba(242,242,242,.72);margin:0 0 2rem;max-width:54ch}
+.vg-cta{display:inline-block;padding:.95rem 1.8rem;background:var(--accent,#e8a948);color:#0d0f12;border-radius:4px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:600;width:fit-content}
+.vg-cta:hover{filter:brightness(1.08)}
+.vg-stats{position:absolute;bottom:clamp(1.4rem,3vw,2.4rem);left:clamp(1.4rem,5vw,4rem);right:clamp(1.4rem,5vw,4rem);z-index:2;display:flex;gap:clamp(2rem,5vw,4rem);border-top:1px solid rgba(242,242,242,.18);padding-top:1.4rem}
+.vg-stat{display:flex;flex-direction:column;gap:.3rem}
+.vg-n{font-family:var(--font-display),serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--accent,#e8a948)}
+.vg-l{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,242,242,.55)}
+</style>
+</section>
 <main>
 <section class="sec statsband" id="stats"><div class="wrap"><div class="stats"><div class="stat" data-reveal><div class="num" data-count="1400" data-prefix="" data-suffix="">0</div><div class="lbl">Closings</div></div><div class="stat" data-reveal><div class="num" data-count="18" data-prefix="" data-suffix="">0</div><div class="lbl">Days avg.</div></div><div class="stat" data-reveal><div class="num" data-count="99" data-prefix="" data-suffix="">0</div><div class="lbl">% list-to-sale</div></div></div></div></section>
+<section class="sd-sec" aria-label="Depth">
+  <div class="sd-stage">
+    <svg class="sd-layer sd-l3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="sdSky" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FF7A1A" stop-opacity=".22"/><stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1600" height="900" fill="url(#sdSky)"/>
+      <circle cx="1200" cy="240" r="100" fill="#FF7A1A" fill-opacity=".5" filter="blur(40)"/>
+    </svg>
+    <svg class="sd-layer sd-l2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,640 L220,500 L420,560 L640,460 L860,540 L1080,440 L1300,520 L1600,460 L1600,900 L0,900 Z" fill="#FF7A1A" fill-opacity=".22"/>
+    </svg>
+    <svg class="sd-layer sd-l1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,780 L160,680 L320,740 L520,660 L720,720 L920,640 L1140,710 L1360,650 L1600,700 L1600,900 L0,900 Z" fill="#FF7A1A" fill-opacity=".48"/>
+    </svg>
+    <div class="sd-frame">
+      <div class="sd-eyebrow">Real Estate Group</div>
+      <h2 class="sd-h2">Your next move, on schedule.</h2>
+      <p class="sd-sub">Buying, selling and relocation — engineered to close on time, every time.</p>
+    </div>
+  </div>
+  <style>
+  .sd-sec{position:relative;height:220vh;background:linear-gradient(180deg,var(--bg,#0a0a0a),var(--surface,#11102a));color:var(--fg,#f5f1e8)}
+  .sd-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .sd-layer{position:absolute;inset:0;width:100%;height:100%;will-change:transform;filter:drop-shadow(0 12px 32px rgba(0,0,0,.45))}
+  .sd-l3{transform:translateY(0);z-index:1}
+  .sd-l2{transform:translateY(0);z-index:2}
+  .sd-l1{transform:translateY(0);z-index:3}
+  .sd-frame{position:relative;z-index:4;text-align:center;padding:0 1.6rem;max-width:min(80vw,720px)}
+  .sd-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#FF7A1A;margin-bottom:1.2rem}
+  .sd-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;letter-spacing:-.02em;margin:0 0 1.2rem;text-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .sd-sub{font-size:1rem;line-height:1.55;color:rgba(245,241,232,.75);margin:0 auto;max-width:48ch}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.sd-sec');if(!sec)return;
+    var l1=sec.querySelector('.sd-l1'),l2=sec.querySelector('.sd-l2'),l3=sec.querySelector('.sd-l3'),f=sec.querySelector('.sd-frame');
+    function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+    function on(){var r=sec.getBoundingClientRect(),t=Math.max(0,-r.top),m=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,t/m),e=ease(p);
+      if(l1)l1.style.transform='translate3d(0,'+(-e*120)+'px,0) scale('+(1+e*.08)+')';
+      if(l2)l2.style.transform='translate3d(0,'+(-e*70)+'px,0) scale('+(1+e*.04)+')';
+      if(l3)l3.style.transform='translate3d(0,'+(-e*30)+'px,0)';
+      if(f)f.style.transform='translate3d(0,'+(-e*40)+'px,0)';if(f)f.style.opacity=String(1-Math.max(0,(p-.7)/.3));
+    }addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
 <section class="sec" id="work"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Capabilities</div><h2 class="clip-line">Buy Side, List &amp; Sell &amp; Relocation.</h2></div>
   <div class="grid g3"><article class="glass" data-reveal data-reveal-d="1"><h3>Buy Side</h3><p class="muted">Off-market access and disciplined negotiation.</p><span class="arrow">&rarr;</span></article><article class="glass" data-reveal data-reveal-d="2"><h3>List &amp; Sell</h3><p class="muted">Cinematic listing media that moves fast.</p><span class="arrow">&rarr;</span></article><article class="glass" data-reveal data-reveal-d="3"><h3>Relocation</h3><p class="muted">End-to-end coordination across cities.</p><span class="arrow">&rarr;</span></article></div></div></section>
 <section class="sec" id="process"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>How it works</div><h2 class="clip-line">One window. No surprises.</h2></div>
   <ol class="steps"><li class="step" data-reveal data-reveal-d="1"><span class="step-n">1</span><h3>Brief</h3><p class="muted">We map the route, the risk and the window.</p></li><li class="step" data-reveal data-reveal-d="2"><span class="step-n">2</span><h3>Engineer</h3><p class="muted">Lanes, modes and contingencies, costed to the hour.</p></li><li class="step" data-reveal data-reveal-d="3"><span class="step-n">3</span><h3>Execute</h3><p class="muted">Live tracking, one point of contact, no surprises.</p></li><li class="step" data-reveal data-reveal-d="4"><span class="step-n">4</span><h3>Close</h3><p class="muted">Delivered on the promised window — measured, every time.</p></li></ol></div></section>
+<section class="cx-sec" id="carousel" aria-roledescription="carousel" aria-label="Selected.">
+<div class="cx-wrap">
+  <div class="cx-head">
+    <div class="cx-eb">Real Estate Group</div>
+    <h2 class="cx-h2">Selected.</h2>
+  </div>
+  <div class="cx-stage">
+    <button class="cx-nav cx-prev" type="button" aria-label="Previous slide">&larr;</button>
+    <div class="cx-track-wrap"><div class="cx-track">
+      <article class="cx-slide" data-i="0" role="group" aria-roledescription="slide" aria-label="1 of 3">
+          <div class="cx-num">01 / 03</div>
+          <h3 class="cx-st">Buy Side</h3>
+          <p class="cx-sp">Off-market access and disciplined negotiation.</p>
+          
+        </article><article class="cx-slide" data-i="1" role="group" aria-roledescription="slide" aria-label="2 of 3">
+          <div class="cx-num">02 / 03</div>
+          <h3 class="cx-st">List &amp; Sell</h3>
+          <p class="cx-sp">Cinematic listing media that moves fast.</p>
+          
+        </article><article class="cx-slide" data-i="2" role="group" aria-roledescription="slide" aria-label="3 of 3">
+          <div class="cx-num">03 / 03</div>
+          <h3 class="cx-st">Relocation</h3>
+          <p class="cx-sp">End-to-end coordination across cities.</p>
+          
+        </article>
+    </div></div>
+    <button class="cx-nav cx-next" type="button" aria-label="Next slide">&rarr;</button>
+  </div>
+  <div class="cx-dots" role="tablist">
+    <button class="cx-dot cx-dot--on" type="button" role="tab" aria-label="Go to slide 1" data-i="0"></button><button class="cx-dot" type="button" role="tab" aria-label="Go to slide 2" data-i="1"></button><button class="cx-dot" type="button" role="tab" aria-label="Go to slide 3" data-i="2"></button>
+  </div>
+  <div class="cx-progress" aria-hidden="true"><div class="cx-progress-bar"></div></div>
+</div>
+<style>
+.cx-sec{position:relative;padding:clamp(3rem,6vw,6rem) 0;background:var(--bg);color:var(--fg);overflow:hidden}
+.cx-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.4rem,4vw,3rem)}
+.cx-head{margin-bottom:2.4rem}
+.cx-eb{font-family:var(--font-body),sans-serif;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;opacity:.9}
+.cx-h2{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2rem,4vw,3.4rem);line-height:1;margin:0;letter-spacing:-.02em}
+.cx-stage{position:relative;display:flex;align-items:stretch;gap:1rem}
+.cx-track-wrap{flex:1;overflow:hidden;border-radius:8px;background:var(--surface,rgba(255,255,255,.02));border:1px solid var(--card-bd,rgba(255,255,255,.08))}
+.cx-track{display:flex;transition:transform .8s cubic-bezier(.65,0,.35,1);will-change:transform}
+.cx-slide{flex:0 0 100%;padding:clamp(2rem,5vw,4rem) clamp(1.6rem,4vw,3.2rem);min-height:340px;display:flex;flex-direction:column;gap:1rem;justify-content:center}
+.cx-num{font-family:var(--font-body),monospace;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:color-mix(in srgb,var(--accent) 80%, var(--fg));opacity:.85;margin-bottom:.6rem}
+.cx-st{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.1;margin:0;letter-spacing:-.01em}
+.cx-sp{margin:0;max-width:60ch;font-size:1rem;line-height:1.6;color:color-mix(in srgb,var(--fg) 75%, transparent)}
+.cx-sm{margin-top:auto;padding-top:1.4rem;font-family:var(--font-body),monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:color-mix(in srgb,var(--accent) 70%, var(--fg));opacity:.8}
+.cx-nav{flex:0 0 auto;align-self:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--card-bd,rgba(255,255,255,.18));background:transparent;color:var(--fg);font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .25s ease,transform .25s ease}
+.cx-nav:hover{background:color-mix(in srgb,var(--accent) 14%, transparent);transform:scale(1.05)}
+.cx-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cx-dots{display:flex;justify-content:center;gap:.6rem;margin-top:1.6rem}
+.cx-dot{width:8px;height:8px;border-radius:999px;border:none;background:color-mix(in srgb,var(--fg) 30%, transparent);cursor:pointer;padding:0;transition:width .35s ease,background .35s ease}
+.cx-dot--on{width:32px;background:var(--accent)}
+.cx-dot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cx-progress{margin-top:1.4rem;height:2px;background:color-mix(in srgb,var(--fg) 12%, transparent);border-radius:2px;overflow:hidden}
+.cx-progress-bar{height:100%;width:0;background:var(--accent);transition:width .15s linear}
+@media (max-width:640px){.cx-nav{display:none}.cx-slide{padding:1.6rem 1.2rem;min-height:280px}}
+@media (prefers-reduced-motion: reduce){.cx-track{transition:none}.cx-progress-bar{transition:none}}
+</style>
+<script>
+(function(){
+  var sec=document.currentScript.closest('.cx-sec'); if(!sec)return;
+  var track=sec.querySelector('.cx-track');
+  var slides=sec.querySelectorAll('.cx-slide');
+  var dots=sec.querySelectorAll('.cx-dot');
+  var prev=sec.querySelector('.cx-prev');
+  var next=sec.querySelector('.cx-next');
+  var bar=sec.querySelector('.cx-progress-bar');
+  var n=slides.length, i=0, timer=null, t0=0, dur=5000, paused=false;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(k){
+    i=((k%n)+n)%n;
+    track.style.transform='translateX('+(-i*100)+'%)';
+    dots.forEach(function(d,j){d.classList.toggle('cx-dot--on',j===i)});
+    t0=Date.now();
+  }
+  function tick(){
+    if(reduce||paused){requestAnimationFrame(tick);return}
+    var p=Math.min(1,(Date.now()-t0)/dur);
+    bar.style.width=(p*100)+'%';
+    if(p>=1){go(i+1)}
+    requestAnimationFrame(tick);
+  }
+  prev&&prev.addEventListener('click',function(){go(i-1)});
+  next&&next.addEventListener('click',function(){go(i+1)});
+  dots.forEach(function(d,j){d.addEventListener('click',function(){go(j)})});
+  sec.addEventListener('mouseenter',function(){paused=true});
+  sec.addEventListener('mouseleave',function(){paused=false;t0=Date.now()});
+  sec.addEventListener('focusin',function(){paused=true});
+  sec.addEventListener('focusout',function(){paused=false;t0=Date.now()});
+  // touch swipe
+  var sx=0,sy=0,sw=0;
+  track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;sw=0;paused=true},{passive:true});
+  track.addEventListener('touchmove',function(e){sw=e.touches[0].clientX-sx},{passive:true});
+  track.addEventListener('touchend',function(){if(Math.abs(sw)>40)go(i+(sw<0?1:-1));paused=false;t0=Date.now()});
+  // keyboard
+  sec.tabIndex=0;
+  sec.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')go(i-1);else if(e.key==='ArrowRight')go(i+1)});
+  go(0); t0=Date.now(); requestAnimationFrame(tick);
+})();
+</script>
+</section>
 <section class="sec" id="proof"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>In their words</div><h2 class="clip-line">Trusted where it matters.</h2></div>
   <div class="grid g3"><figure class="qcard" data-reveal data-reveal-d="1"><blockquote>Off-market access and disciplined negotiation.</blockquote><figcaption class="muted">— MERIDIAN</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="2"><blockquote>Cinematic listing media that moves fast.</blockquote><figcaption class="muted">— Real Estate Group</figcaption></figure><figure class="qcard" data-reveal data-reveal-d="3"><blockquote>End-to-end coordination across cities.</blockquote><figcaption class="muted">— MERIDIAN</figcaption></figure></div></div></section>
 <section class="sec cta-big" id="contact"><div class="wrap" style="text-align:center">

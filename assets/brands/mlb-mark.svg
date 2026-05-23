@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>MyLegalBasement Mark</title>
+  <desc>Copper house silhouette enclosing a modernized hard hat with a basement stripe and a small gold key.</desc>
+
+  <!-- House inner shadow (depth) -->
+  <path d="M37 81.5 L100 33.5 L163 81.5 L163 168.5 L37 168.5 Z"
+        stroke="#0F0805" stroke-opacity="0.25" stroke-width="5"/>
+
+  <!-- House outline -->
+  <path d="M35 80 L100 32 L165 80 L165 167 L35 167 Z"
+        stroke="#C97844" stroke-width="5"/>
+
+  <!-- Basement foundation stripe (bottom third interior) -->
+  <rect x="45" y="135" width="110" height="22" rx="2"
+        fill="#E89B6A" fill-opacity="0.6"/>
+  <line x1="45" y1="135" x2="155" y2="135"
+        stroke="#E89B6A" stroke-opacity="0.6" stroke-width="2"/>
+
+  <!-- Hard hat dome (modern geometric) -->
+  <path d="M70 118 Q70 82 100 82 Q130 82 130 118 Z"
+        fill="#C97844" fill-opacity="0.85"
+        stroke="#F2E8D8" stroke-width="5"/>
+
+  <!-- Hat brim -->
+  <path d="M58 118 L142 118 Q142 126 132 128 L68 128 Q58 126 58 118 Z"
+        fill="#C97844" fill-opacity="0.85"
+        stroke="#F2E8D8" stroke-width="5"/>
+
+  <!-- Center ridge -->
+  <line x1="100" y1="84" x2="100" y2="118"
+        stroke="#F2E8D8" stroke-width="4"/>
+
+  <!-- Side ridge facets -->
+  <path d="M82 118 Q86 96 100 88" stroke="#F2E8D8" stroke-width="2.5" stroke-opacity="0.65"/>
+  <path d="M118 118 Q114 96 100 88" stroke="#F2E8D8" stroke-width="2.5" stroke-opacity="0.65"/>
+
+  <!-- Tiny gold key on lower-right of brim -->
+  <circle cx="138" cy="132" r="5"
+          stroke="#D4AF37" stroke-width="3" fill="none"/>
+  <line x1="142" y1="133" x2="155" y2="133"
+        stroke="#D4AF37" stroke-width="3"/>
+  <line x1="152" y1="133" x2="152" y2="138"
+        stroke="#D4AF37" stroke-width="3"/>
+</svg>

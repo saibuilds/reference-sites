@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1.0">
+<title>Sathi & Sai — 9:16 Reel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0F2C;
+  --indigo:#1F2A6E;
+  --saffron:#F5A623;
+  --gold:#E8B547;
+  --paper:#F4EFE3;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{
+  width:1080px;height:1920px;
+  background:var(--bg);
+  color:var(--paper);
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.stage{
+  position:relative;
+  width:1080px;height:1920px;
+  background:var(--bg);
+  overflow:hidden;
+}
+/* Rotating radial mesh */
+.mesh{
+  position:absolute;inset:-25%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(245,166,35,0.08), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(232,181,71,0.07), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(31,42,110,0.35), transparent 60%);
+  animation:meshSpin 40s linear infinite;
+  z-index:0;
+}
+@keyframes meshSpin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+/* Background fade */
+.fade{
+  position:absolute;inset:0;
+  background:#000;
+  z-index:5;
+  animation:bgFade 8s ease-out infinite;
+}
+@keyframes bgFade{
+  0%{opacity:1;}
+  8%,100%{opacity:0;}
+}
+/* Particle bloom */
+.particle{
+  position:absolute;
+  left:50%;top:35%;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--saffron), transparent 70%);
+  transform:translate(-50%,-50%) scale(0);
+  z-index:2;
+  animation:bloom 8s ease-out infinite;
+}
+.particle.p2{animation-delay:0.1s;left:48%;top:34%;}
+.particle.p3{animation-delay:0.2s;left:52%;top:36%;}
+.particle.p4{animation-delay:0.15s;left:50%;top:37%;}
+@keyframes bloom{
+  0%{transform:translate(-50%,-50%) scale(0);opacity:0;}
+  4%{opacity:1;}
+  10%{transform:translate(-50%,-50%) scale(40);opacity:0.7;}
+  20%{transform:translate(-50%,-50%) scale(80);opacity:0;}
+  100%{transform:translate(-50%,-50%) scale(80);opacity:0;}
+}
+/* Drift particles */
+.drift{
+  position:absolute;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--gold);
+  opacity:0;
+  z-index:3;
+  animation:drift 8s ease-in-out infinite;
+}
+.drift:nth-child(1){left:15%;top:60%;animation-delay:0s;}
+.drift:nth-child(2){left:85%;top:40%;animation-delay:0.5s;}
+.drift:nth-child(3){left:25%;top:80%;animation-delay:1s;}
+.drift:nth-child(4){left:75%;top:20%;animation-delay:1.5s;}
+.drift:nth-child(5){left:50%;top:90%;animation-delay:2s;}
+.drift:nth-child(6){left:10%;top:25%;animation-delay:2.5s;}
+@keyframes drift{
+  0%,55%{opacity:0;transform:translateY(0);}
+  70%{opacity:0.7;}
+  100%{opacity:0;transform:translateY(-120px);}
+}
+
+/* Content layout */
+.content{
+  position:relative;z-index:10;
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:140px 80px;
+}
+/* Logo */
+.logo-wrap{
+  margin-top:80px;
+  width:280px;height:280px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+  transform:scale(0.4);
+  filter:blur(20px);
+  animation:logoIn 8s ease-out infinite;
+}
+.logo-wrap img{
+  width:100%;height:100%;
+  object-fit:contain;
+  animation:halo 8s ease-in-out infinite;
+}
+@keyframes logoIn{
+  0%,7%{opacity:0;transform:scale(0.4);filter:blur(20px);}
+  22%{opacity:1;transform:scale(1);filter:blur(0);}
+  100%{opacity:1;transform:scale(1);filter:blur(0);}
+}
+@keyframes halo{
+  0%,7%{filter:drop-shadow(0 0 0 var(--gold));}
+  22%{filter:drop-shadow(0 0 40px var(--gold));}
+  40%{filter:drop-shadow(0 0 60px var(--saffron));}
+  60%{filter:drop-shadow(0 0 40px var(--gold));}
+  100%{filter:drop-shadow(0 0 40px var(--gold));}
+}
+/* Tagline */
+.tagline{
+  margin-top:120px;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:120px;
+  line-height:1.05;
+  color:var(--paper);
+  text-align:center;
+  letter-spacing:-0.01em;
+}
+.tagline .word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(40px);
+  animation:wordIn 8s ease-out infinite;
+}
+.tagline .word:nth-child(1){animation-delay:0s;}
+.tagline .word:nth-child(2){animation-delay:0.2s;}
+.tagline .word:nth-child(3){animation-delay:0.4s;}
+.tagline .word:nth-child(4){animation-delay:0.6s;}
+.tagline .word:nth-child(5){animation-delay:0.8s;}
+@keyframes wordIn{
+  0%,22%{opacity:0;transform:translateY(40px);}
+  32%{opacity:1;transform:translateY(0);}
+  100%{opacity:1;transform:translateY(0);}
+}
+.tagline .accent{color:var(--gold);}
+/* Stat ticker */
+.stats{
+  margin-top:auto;
+  width:100%;
+  font-family:'JetBrains Mono',monospace;
+  font-size:26px;
+  letter-spacing:0.4em;
+  text-transform:uppercase;
+  color:var(--paper);
+  text-align:center;
+}
+.stat-row{
+  opacity:0;
+  transform:translateY(20px);
+  margin:14px 0;
+  animation:statIn 8s ease-out infinite;
+}
+.stat-row:nth-child(1){animation-delay:0s;}
+.stat-row:nth-child(2){animation-delay:0.2s;}
+.stat-row:nth-child(3){animation-delay:0.4s;}
+@keyframes statIn{
+  0%,38%{opacity:0;transform:translateY(20px);}
+  50%{opacity:1;transform:translateY(0);}
+  100%{opacity:1;transform:translateY(0);}
+}
+.stat-row .num{color:var(--gold);font-weight:500;}
+/* Sub text */
+.sub{
+  margin-top:32px;
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  font-size:24px;
+  letter-spacing:0.15em;
+  color:rgba(244,239,227,0.7);
+  text-align:center;
+  text-transform:uppercase;
+  opacity:0;
+  animation:subIn 8s ease-out infinite;
+}
+@keyframes subIn{
+  0%,56%{opacity:0;}
+  70%{opacity:1;}
+  100%{opacity:1;}
+}
+/* CTA */
+.cta{
+  margin-top:50px;margin-bottom:40px;
+  display:inline-block;
+  padding:30px 60px;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:30px;
+  color:var(--bg);
+  background:linear-gradient(110deg, var(--gold) 0%, var(--saffron) 40%, #fff3c8 50%, var(--saffron) 60%, var(--gold) 100%);
+  background-size:300% 100%;
+  background-position:100% 50%;
+  border-radius:60px;
+  letter-spacing:0.04em;
+  opacity:0;
+  transform:translateY(30px);
+  animation:ctaIn 8s ease-out infinite, shimmer 3s linear infinite;
+  box-shadow:0 10px 60px rgba(245,166,35,0.4);
+}
+@keyframes ctaIn{
+  0%,56%{opacity:0;transform:translateY(30px);}
+  70%{opacity:1;transform:translateY(0);}
+  100%{opacity:1;transform:translateY(0);}
+}
+@keyframes shimmer{
+  0%{background-position:100% 50%;}
+  100%{background-position:-100% 50%;}
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation:none !important;
+    transition:none !important;
+  }
+  .fade{display:none;}
+  .particle{display:none;}
+  .drift{display:none;}
+  .logo-wrap{opacity:1;transform:scale(1);filter:none;}
+  .logo-wrap img{filter:drop-shadow(0 0 40px var(--gold));}
+  .tagline .word{opacity:1;transform:none;}
+  .stat-row{opacity:1;transform:none;}
+  .sub{opacity:1;}
+  .cta{opacity:1;transform:none;background:var(--gold);}
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="mesh"></div>
+  <div class="drift"></div><div class="drift"></div><div class="drift"></div>
+  <div class="drift"></div><div class="drift"></div><div class="drift"></div>
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="fade"></div>
+  <div class="content">
+    <div class="logo-wrap">
+      <img src="../../assets/brands/sathideals-logo.png" alt="Sathi & Sai">
+    </div>
+    <div class="tagline">
+      <span class="word"><span class="accent">412</span></span>
+      <span class="word">Closings.</span><br>
+      <span class="word">One</span>
+      <span class="word">Standard.</span>
+    </div>
+    <div class="stats">
+      <div class="stat-row"><span class="num">412</span> &nbsp;Closings</div>
+      <div class="stat-row"><span class="num">$1.4B</span> &nbsp;Sold</div>
+      <div class="stat-row"><span class="num">4.9&#9733;</span> &nbsp;Rated</div>
+      <div class="sub">Toronto &amp; GTA Real Estate · TRREB · RECO</div>
+      <div class="cta">Book your private consult &rarr; sathideals.ca</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

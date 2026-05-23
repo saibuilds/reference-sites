@@ -1,0 +1,23 @@
+{
+  "name": "refsites-remotion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brand-reel MP4 renderer for the reference-sites archetypes. Reads STYLES from ../../build.js and renders one 5-second cinematic intro per archetype into assets/<id>-hero.mp4.",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "node render.js",
+    "render-one": "node render.js"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/renderer": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "^5.4.0"
+  }
+}

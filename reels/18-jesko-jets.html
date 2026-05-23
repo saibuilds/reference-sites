@@ -4,9 +4,9 @@
 <meta name="description" content="Private Aviation. A global private fleet with a single standard of service. Wheels-up in as little as four hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../shared/lib.css">
-<style>:root{--bg:#0C0C0C;--surface:#161514;--fg:#F5F2ED;--accent:#C9A96E;--card:rgba(245,242,237,.04);--card-bd:rgba(201,169,110,.20);--btn-radius:999px;--font-display:'Space Grotesk';--font-body:'Inter'}</style>
+<style>:root{--bg:#0C0C0C;--surface:#161514;--fg:#F5F2ED;--accent:#C9A96E;--card:rgba(245,242,237,.04);--card-bd:rgba(201,169,110,.20);--btn-radius:999px;--font-display:'Cormorant Garamond';--font-body:'Inter'}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -17,13 +17,13 @@
 <img id="preview-img" alt="" aria-hidden="true">
 <nav class="sitenav" aria-label="Library switcher">
   <a href="../reels-realestate/17-villa-maravilha.html" aria-label="Previous">&larr;</a>
-  <a href="../index.html">Index</a><span class="pos">65 / 70</span>
+  <a href="../index.html">Index</a><span class="pos">67 / 72</span>
   <a href="../reels-realestate/18-jesko-jets.html" aria-label="Next">&rarr;</a></nav>
 <nav class="nav"><div class="brand">JESKO JETS</div>
   <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a href="#contact" class="btn btn-ghost magnetic nav-cta">Request a flight</a></nav>
 <header class="hero hero--split">
-  <div class="split-media" style="background-image:linear-gradient(90deg,var(--bg),transparent 60%),url('../assets/09-aviation-luxury.svg')" aria-hidden="true"></div>
+  <div class="split-media" style="background-image:linear-gradient(90deg,var(--bg),transparent 60%),url('../assets/09-aviation-luxury-hero.jpg')" aria-hidden="true"></div>
   <div class="wrap">
     <div class="eyebrow" data-reveal>Private Aviation</div>
     <h1>Anywhere. On your hour.</h1>
@@ -38,7 +38,60 @@
 <main>
 <section class="sec" id="services"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>The service</div><h2 class="clip-line">Charter · Jet Card · Management</h2></div>
   <div class="routes"><div class="route" data-reveal data-reveal-d="1"><h3>Charter</h3><p class="muted">On-demand charter, any city pair.</p></div><div class="route" data-reveal data-reveal-d="2"><h3>Jet Card</h3><p class="muted">Fixed-rate hours, zero surprises.</p></div><div class="route" data-reveal data-reveal-d="3"><h3>Management</h3><p class="muted">Full ownership management.</p></div></div></div></section>
-<section class="sec--flush fleet" aria-hidden="true"><div class="fleet-img" style="background-image:url('../assets/09-aviation-luxury.svg')"></div></section>
+<section class="rl-sec" aria-label="Reel">
+  <div class="rl-stage">
+    <canvas class="rl-bg" id="rlBg" aria-hidden="true"></canvas>
+    <div class="rl-frame" data-rl-idx="0">
+      <div class="rl-num">01</div>
+      <div class="rl-title">Charter</div>
+      <div class="rl-sub">On-demand charter, any city pair.</div>
+    </div><div class="rl-frame" data-rl-idx="1">
+      <div class="rl-num">02</div>
+      <div class="rl-title">Jet Card</div>
+      <div class="rl-sub">Fixed-rate hours, zero surprises.</div>
+    </div><div class="rl-frame" data-rl-idx="2">
+      <div class="rl-num">03</div>
+      <div class="rl-title">Management</div>
+      <div class="rl-sub">Full ownership management.</div>
+    </div><div class="rl-frame" data-rl-idx="3">
+      <div class="rl-num">04</div>
+      <div class="rl-title">Anywhere. On your hour.</div>
+      <div class="rl-sub">A global private fleet with a single standard of service. Wheels-up in as little as four hours.</div>
+    </div>
+    <div class="rl-progress" aria-hidden="true"><i class="rl-fill"></i></div>
+  </div>
+  <div class="rl-spacer" aria-hidden="true"></div>
+  <style>
+  .rl-sec{position:relative;height:300vh;background:var(--bg,#0a0a0a);color:var(--fg,#f5f1e8)}
+  .rl-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .rl-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+  .rl-frame{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.6rem;opacity:0;transform:scale(.98);transition:opacity .6s ease,transform .9s ease;z-index:2}
+  .rl-frame[data-rl-idx="0"]{opacity:1;transform:none}
+  .rl-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.32em;color:var(--accent,#c9a961);margin-bottom:1.6rem}
+  .rl-title{font-family:var(--font-display),serif;font-weight:300;font-size:clamp(2.6rem,7vw,6.8rem);line-height:.98;letter-spacing:-.02em;max-width:18ch;margin-bottom:1.4rem}
+  .rl-sub{font-size:1.05rem;line-height:1.55;color:rgba(245,241,232,.7);max-width:50ch}
+  .rl-progress{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:3;width:min(30vw,260px);height:1px;background:rgba(245,241,232,.18)}
+  .rl-fill{display:block;height:100%;width:0;background:var(--accent,#c9a961);transition:width .12s linear}
+  </style>
+  <script>
+  (function(){
+    var sec=document.currentScript.closest('.rl-sec');if(!sec)return;
+    var frames=sec.querySelectorAll('.rl-frame'),fill=sec.querySelector('.rl-fill');
+    var bg=sec.querySelector('.rl-bg');
+    if(bg){var b=bg.getContext('2d'),BW=0,BH=0,t=0;
+      function sz(){BW=bg.width=bg.clientWidth;BH=bg.height=bg.clientHeight;}sz();addEventListener('resize',sz);
+      (function tk(){t++;b.clearRect(0,0,BW,BH);for(var i=0;i<5;i++){var x=BW*(.18+.16*i)+Math.sin(t*.004+i)*40,y=BH*(.5+.18*Math.cos(t*.003+i*1.2));var g=b.createRadialGradient(x,y,0,x,y,180);g.addColorStop(0,'rgba(201,169,110,.18)');g.addColorStop(1,'transparent');b.fillStyle=g;b.beginPath();b.arc(x,y,180,0,6.28);b.fill();}requestAnimationFrame(tk);})();}
+    function on(){
+      var r=sec.getBoundingClientRect(),top=Math.max(0,-r.top),max=Math.max(1,sec.offsetHeight-innerHeight),p=Math.min(1,top/max);
+      var seg=1/frames.length,active=Math.min(frames.length-1,Math.floor(p/seg));
+      for(var i=0;i<frames.length;i++){var l=(p-i*seg)/seg,o=0,sc=.98;if(i===active){o=l<.18?l/.18:(l>.82?1-(l-.82)/.18:1);sc=.98+.02*o;}frames[i].style.opacity=Math.max(0,Math.min(1,o));frames[i].style.transform='scale('+sc+')';}
+      if(fill)fill.style.width=(p*100).toFixed(1)+'%';
+    }
+    addEventListener('scroll',on,{passive:true});on();
+  })();
+  </script>
+</section>
+<section class="sec--flush fleet" aria-hidden="true"><div class="fleet-img" style="background-image:url('../assets/09-aviation-luxury-hero.jpg')"></div></section>
 <section class="sec" id="membership"><div class="wrap"><div class="sec-head"><div class="eyebrow" data-reveal>Membership</div><h2 class="clip-line">By standard, not by volume.</h2></div>
   <div class="grid g3"><article class="tier" data-reveal data-reveal-d="1"><div class="tier-name">Charter</div><div class="tier-tag muted">On-demand</div><p class="muted">Any city pair, wheels-up in 4h</p></article><article class="tier tier--hot" data-reveal data-reveal-d="2"><div class="tier-name">Jet Card</div><div class="tier-tag muted">Fixed hours</div><p class="muted">Locked rate, zero surprises</p></article><article class="tier" data-reveal data-reveal-d="3"><div class="tier-name">Management</div><div class="tier-tag muted">Full ownership</div><p class="muted">Crew, maintenance, charter revenue</p></article></div>
   <div style="text-align:center;margin-top:3rem"><a href="#apply" class="btn btn-primary magnetic">Request a flight &rarr;</a></div></div></section>

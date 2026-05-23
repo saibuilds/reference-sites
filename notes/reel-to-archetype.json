@@ -1,0 +1,78 @@
+{
+  "generated": "2026-05-20",
+  "source_corpus": {
+    "named_reference_reels": "build.js REELS[] (20 entries, lines ~504-525)",
+    "saved_reels_export": "C:/Users/Admin/Downloads/insta 2/your_instagram_activity/saved/saved_posts.html",
+    "saved_reels_count": 7751,
+    "saved_reels_format": "instagram.com/reel/{shortcode}/ — shortcodes only, no titles or thumbnails in IG archive export"
+  },
+  "note": "The IG archive does not expose reel titles or thumbnails as data — only shortcodes. So per-shortcode mapping to one of 16 archetypes requires fetching each URL (rate-limited + needs auth). Instead we map the 20 NAMED reference sites that the user pre-tagged in REELS[], plus provide a heuristic rubric the user (or future Claude session with browser MCP) can apply when surfacing new reels.",
+
+  "named_reels_to_archetype": [
+    { "n": 1,  "site": "Cartier Watch",            "archetype": "01-luxury-dark",            "confidence": "high" },
+    { "n": 2,  "site": "Terminal Logistics",       "archetype": "02-cinematic-video",        "confidence": "high" },
+    { "n": 3,  "site": "Guilty Mind",              "archetype": "03-dark-brutalist",         "confidence": "high" },
+    { "n": 4,  "site": "GSAP Animation Engine",    "archetype": "12-experimental-dev",       "confidence": "high" },
+    { "n": 5,  "site": "Sidewave Music",           "archetype": "05-vaporwave",              "confidence": "high" },
+    { "n": 6,  "site": "OF Sakazuki",              "archetype": "11-japanese-web3",          "confidence": "high" },
+    { "n": 7,  "site": "Obsidian Dew",             "archetype": "10-food-beauty-dtc",        "confidence": "high" },
+    { "n": 8,  "site": "Hashgraph Ventures",       "archetype": "02-cinematic-video",        "confidence": "high" },
+    { "n": 9,  "site": "Spline Ice Cube",          "archetype": "04-3d-spline-webgl",        "confidence": "high" },
+    { "n": 10, "site": "Fall Line House",          "archetype": "08-architecture-editorial", "confidence": "high" },
+    { "n": 11, "site": "Relats / Periflex",        "archetype": "03-dark-brutalist",         "confidence": "high" },
+    { "n": 12, "site": "Maison de Synergy",        "archetype": "06-soft-editorial",         "confidence": "high" },
+    { "n": 13, "site": "Design Agency",            "archetype": "12-experimental-dev",       "confidence": "medium" },
+    { "n": 14, "site": "Cartier Watches & Wonders","archetype": "06-soft-editorial",         "confidence": "medium" },
+    { "n": 15, "site": "E.C.H.O. / Active Theory", "archetype": "12-experimental-dev",       "confidence": "high" },
+    { "n": 16, "site": "Casper's Caviar",          "archetype": "10-food-beauty-dtc",        "confidence": "high" },
+    { "n": 17, "site": "Villa Maravilha",          "archetype": "02-cinematic-video",        "confidence": "medium" },
+    { "n": 18, "site": "Jesko Jets",               "archetype": "09-aviation-luxury",        "confidence": "high" },
+    { "n": 19, "site": "Alpine Chalets",           "archetype": "08-architecture-editorial", "confidence": "high" },
+    { "n": 20, "site": "JoyJam",                   "archetype": "07-saas-glass",             "confidence": "high" }
+  ],
+
+  "archetype_coverage": {
+    "01-luxury-dark":            { "named_reels": 1,  "extra_candidates": "Sakazuki, OF jewellery brands, Boucheron, Vacheron — search 'haute horlogerie' / 'haute joaillerie' in saved" },
+    "02-cinematic-video":        { "named_reels": 3,  "extra_candidates": "Terminal Industries, Stripe, Linear, Hashgraph, Villa edits — search 'logistics', 'enterprise', 'cinematic hero' tags" },
+    "03-dark-brutalist":         { "named_reels": 2,  "extra_candidates": "Sazabi, SHAPESHIFT, Guilty Mind, Periflex/Relats — search 'brutalist', 'anti-design', 'ALL CAPS hero'" },
+    "04-3d-spline-webgl":        { "named_reels": 1,  "extra_candidates": "Spline tutorials, E.C.H.O., JoyJam — search 'spline', 'three.js', 'webgl'" },
+    "05-vaporwave":              { "named_reels": 1,  "extra_candidates": "Sidewave, audio-reactive sites — search 'audio reactive', 'synthwave', 'neon retro'" },
+    "06-soft-editorial":         { "named_reels": 2,  "extra_candidates": "Bisous, Trendship, Maison Synergy — search 'atelier', 'slow fashion', 'editorial cream'" },
+    "07-saas-glass":             { "named_reels": 1,  "extra_candidates": "GSAP Engine, Hashgraph, glassmorphism SaaS landing pages" },
+    "08-architecture-editorial": { "named_reels": 2,  "extra_candidates": "Fall Line, Fifth & Dune, Alpine Chalets — search 'architecture studio', 'cabin design'" },
+    "09-aviation-luxury":        { "named_reels": 1,  "extra_candidates": "VistaJet, NetJets, Jesko Jets — search 'private aviation'" },
+    "10-food-beauty-dtc":        { "named_reels": 2,  "extra_candidates": "Casper's Caviar, Obsidian Dew, single-origin DTC — search 'cold-pressed', 'single origin'" },
+    "11-japanese-web3":          { "named_reels": 1,  "extra_candidates": "Sakazuki, kanji marquee sites, members-only web3 — search '盃', 'allowlist', 'kanji'" },
+    "12-experimental-dev":       { "named_reels": 3,  "extra_candidates": "Robert Borghesi, IDOM, indie devs — search 'creative dev', 'shader'" },
+    "13-wellness-botanical":     { "named_reels": 0,  "extra_candidates": "Coco Veda (PRIMARY ref), Ayurvedic brands — search 'cold-pressed', '6-chapter film'" },
+    "14-cosmic-platform":        { "named_reels": 0,  "extra_candidates": "Starry Labs, astronomy SaaS — search 'ephemeris', 'cosmic UI'" },
+    "15-resort-residences":      { "named_reels": 0,  "extra_candidates": "Aman, Six Senses, branded residences — search 'private bay', 'barefoot luxury'" },
+    "16-terminal-industrial":    { "named_reels": 0,  "extra_candidates": "Terminal Industries, Stripe Atlas, Linear — search 'industrial AI', 'autonomous yard'" }
+  },
+
+  "categorization_rubric": {
+    "purpose": "When a NEW saved reel surfaces and needs an archetype assignment, apply this rubric in order. Stop at first match.",
+    "decision_tree": [
+      { "if": "ALL CAPS hero + sans-serif + red/white/black + manifesto tone",            "archetype": "03-dark-brutalist" },
+      { "if": "kanji or Japanese characters + amber/orange palette + members-only copy", "archetype": "11-japanese-web3" },
+      { "if": "kanji-style scrolling marquee + dark cinematic + serif",                  "archetype": "01-luxury-dark" },
+      { "if": "Spline iframe-like 3D hero + interactive product",                        "archetype": "04-3d-spline-webgl" },
+      { "if": "audio-reactive WAV viz + neon purple/pink + glow",                        "archetype": "05-vaporwave" },
+      { "if": "wireframe globe + space gradient + 'engine' / 'API' copy",                "archetype": "14-cosmic-platform" },
+      { "if": "cinematic full-bleed video hero + Bebas Neue / DM Sans",                  "archetype": "02-cinematic-video" },
+      { "if": "PBR sphere / blob + glassmorphic cards + 'SaaS' / 'platform'",            "archetype": "07-saas-glass" },
+      { "if": "private jet / runway shots + serif + 'on-demand' copy",                   "archetype": "09-aviation-luxury" },
+      { "if": "single product macro shot + ingredient mosaic + dark beige",              "archetype": "10-food-beauty-dtc" },
+      { "if": "6-chapter scroll film + botanical / coconut / ayurvedic",                 "archetype": "13-wellness-botanical" },
+      { "if": "stone architecture + landscape-led + DM Serif / Cormorant",               "archetype": "08-architecture-editorial" },
+      { "if": "resort villa + cream/sand palette + 'barefoot' / 'reserved'",             "archetype": "15-resort-residences" },
+      { "if": "atelier / mode / slow-fashion + cream + serif italic",                    "archetype": "06-soft-editorial" },
+      { "if": "logistics yard / autonomy / Linear-style UI + orange/green accent",       "archetype": "16-terminal-industrial" },
+      { "if": "shader experiment / creative-dev portfolio + mono font + red accent",     "archetype": "12-experimental-dev" }
+    ]
+  },
+
+  "deferred_work": [
+    "Per-shortcode harvest: requires Chrome MCP + Instagram auth (NOT done — user must drive Instagram session per safety skill). Pipeline if user proceeds: (a) load each saved_posts URL via Claude_in_Chrome MCP, (b) extract caption + first-frame thumbnail, (c) run rubric in OCR, (d) write per-shortcode archetype label to data/saved-reels-classified.json. Cost: ~7,751 URLs × ~2s each = ~4h browser time. Reasonable to chunk into 500/run."
+  ]
+}
