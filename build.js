@@ -859,7 +859,7 @@ function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
   const {c,s} = x;
   const vsrc=resolveVideo(s);
   return `<section class="vg-hero">
-<video class="vg-video" autoplay muted loop playsinline poster="${resolveAsset(s)}"${vsrc?` src="${vsrc}"`:''}></video>
+<video class="vg-video${vsrc?'':' vg-still'}" autoplay muted loop playsinline poster="${resolveAsset(s)}"${vsrc?` src="${vsrc}"`:''}></video>
 <div class="vg-scrim" aria-hidden="true"></div>
 <div class="vg-frame">
   <div class="vg-kicker">${esc(c.kicker)}</div>
@@ -872,7 +872,10 @@ function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
 </div>
 <style>
 .vg-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0d0f12;color:#f2f2f2}
-.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%)}
+.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%);background-size:220% 220%}
+.vg-still{animation:vgKen 24s ease-in-out infinite alternate}
+@keyframes vgKen{0%{transform:scale(1.05) translate(0,0);background-position:0% 50%}100%{transform:scale(1.14) translate(-1.6%,-1.2%);background-position:100% 50%}}
+@media(prefers-reduced-motion:reduce){.vg-still{animation:none}}
 .vg-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,18,.65) 0%,rgba(13,15,18,.35) 40%,rgba(13,15,18,.85) 100%)}
 .vg-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(70vw,820px)}
 .vg-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#e8a948);margin-bottom:1.4rem}
