@@ -25,6 +25,58 @@ failure; the credentials are never even exercised.
 Because every generation MCP server runs **inside this same container**,
 it inherits this policy — fixing credentials alone cannot get past it.
 
+## Update — full findings & complete allowlist (verified 2026-05-23)
+
+Exhaustive re-test from `refsites-code` (the cloud session). Expanded
+results:
+
+| Host | For | Result |
+|------|-----|--------|
+| `platform.higgsfield.ai` | Higgsfield (image + Seedance video) | ❌ 403 not in allowlist |
+| `mcp.fal.ai` · `fal.run` · `queue.fal.run` · `api.fal.ai` | fal (Flux, Seedance, nano-banana) | ❌ 403 |
+| `api.replicate.com` · `replicate.delivery` | Replicate (incl. Hunyuan3D) | ❌ 403 |
+| `image.pollinations.ai` · `pollinations.ai` | free image gen | ❌ 403 here (✅ works in the *media* session that made the 15 heroes) |
+| `hunyuan.tencentcloudapi.com` | Hunyuan | ❌ 403 |
+| `remotion.media` / `www.remotion.dev` | Remotion headless-chromium download | ❌ 403 — so **offline MP4 render also fails here** (npm installs fine; the browser binary can't download; no system chromium) |
+| `nanana.app` · OpenAI · Stability · BFL · Runway · Luma · Kling | misc gen | ❌ 403 |
+| `generativelanguage.googleapis.com` | Google Gemini | ✅ **reachable** — text works (`tools/gemini.js`). Image models (`imagen-4.0*`, `gemini-2.5-flash-image`, `gemini-3.1-flash-image`) and `veo-*` exist but the key is **free-plan**: Imagen → `400 paid only`, flash-image → `429 quota`. So image/video gen needs **billing enabled** on the key, not a network change. |
+| `www.googleapis.com` · `registry.npmjs.org` · `github.com` | Drive API / npm / git | ✅ allowed |
+
+**Net:** the only generation API reachable from this session is Gemini,
+and only its *text* tier is usable on the current key. Every image/video
+host is blocked. So: imagery + video must be produced in a networked
+session (or the env allowlist opened), and the scroll-scrub hero
+(`heroScrollScrub` in `build.js`, `snippets/ScrollHero.tsx` for React)
+auto-consumes `assets/<id>-hero.mp4` the moment one exists.
+
+### Complete allowlist to add (by capability)
+
+- **Image/video gen:** `platform.higgsfield.ai`, `*.fal.ai`, `fal.run`,
+  `queue.fal.run`, `*.fal.media`, `api.replicate.com`,
+  `*.replicate.delivery`, `image.pollinations.ai`, `pollinations.ai`
+- **Offline video render (Remotion):** `remotion.media`,
+  `www.remotion.dev`, `storage.googleapis.com` (Chrome-for-Testing binary)
+- **3D:** `api.meshy.ai`, `api.tripo3d.ai`
+- **Live-site research / DESIGN.md:** `*.vercel.app`, `drive.google.com`,
+  `*.instagram.com`
+- **Dev tooling (Context7 MCP):** `context7.com`, `api.context7.com`,
+  `mcp.context7.com`
+
+### Gemini billing (the one non-network unlock)
+
+`generativelanguage.googleapis.com` is already reachable. Enable billing
+on the `GEMINI_API_KEY` project at <https://ai.dev> and Imagen 4 /
+nano-banana / Veo become usable *from this session directly* — no host
+allowlisting needed for Google. (Text already works without billing.)
+
+### RESO listings run in the Cloudflare BUILD, not this container
+
+`tools/fetch-listings.js` executes during the Cloudflare Workers Build
+(which has its own network), so the RESO host does **not** need this
+container's allowlist. Set `RESO_BASE` + `RESO_TOKEN` (or the OAuth2
+trio) as **Cloudflare build variables/secrets** and prepend the fetch to
+the build command. Full detail in `LISTINGS.md`.
+
 ## Config already corrected (in `.mcp.json`)
 
 Verified by reading each installed package's source:
