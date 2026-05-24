@@ -209,7 +209,10 @@ This is the practical answer to the recurring "I can't fetch
 - **Claude for Chrome** (extension, your machine) — still the right tool
   when you need *behaviour* not just styles (scroll-linked animations,
   interactive states, video). Pair it with the DESIGN.md Generator for
-  full coverage.
+  full coverage. **Full project playbook (setup + copy-paste task
+  prompts + reliability/security tips) is in [BROWSER.md](BROWSER.md)** —
+  it's how to make the extension do the gaps this cloud session can't
+  (analyze reference sites, generate imagery, set Cloudflare vars, QA).
 - **Firecrawl / Fetch MCPs** — would let *this* session scrape live
   sites, but they're useless until the env's network policy is opened.
   If you ever open `refsites-research`'s policy, install these there.
