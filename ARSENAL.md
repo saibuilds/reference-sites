@@ -809,6 +809,9 @@ Use it sparingly and know the trade-offs:
 
 Tie-in: `heroVideoGSAP` already accepts an MP4 via `resolveVideo()`; the
 scroll-scrub version is a richer variant to add once a real video exists.
+A ready, hardened implementation is saved at **`snippets/ScrollHero.tsx`**
+(React/Next.js) with a mobile-jank fallback + reduced-motion guard — see
+`snippets/README.md` for the end-to-end recipe.
 
 ### Free-LLM backups (from the free-llm-api-resources list)
 
