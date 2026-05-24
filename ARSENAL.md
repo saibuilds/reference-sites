@@ -746,3 +746,74 @@ first real client React build (e.g. apps/sathideals/)
 That's the whole pipeline — every "extra" tool (Skiper, React Bits,
 Aceternity, ElevenLabs, Figma MCP, Supabase, Stripe, Resend) lives
 outside this loop and stays optional until a real project demands it.
+
+---
+
+## 9. Premium design — attention control (the refine checklist)
+
+The throughline of every "make it feel high-end" reference: premium sites
+**control where the eye goes; they don't decorate.** This is the missing
+half of `PROMPTS.md` — the prompts get a fast first pass; this is how you
+refine it into something intentional. Run this before building and again
+while trimming any archetype.
+
+**Draw the attention map first:**
+- **Land** — the one focal element the hero resolves to.
+- **Travel** — where weight / contrast / motion pulls the eye next.
+- **Rest** — the CTA or the single strongest proof point.
+- **Exit** — final CTA → footer.
+
+**One job per section** (no section does two things):
+- Hero → emotion + promise · Trust → logos / awards / years ·
+  Proof → the work · Process → how it works ·
+  Social proof → testimonials · Close → one CTA, no competing buttons.
+
+**Rules of thumb:**
+- One focal point per screen — kill competing elements.
+- Whitespace is the luxury signal — default to ~2× what feels necessary.
+- Motion must *guide the eye*, never just decorate. (This is exactly why
+  the minimal-scroll trim + Ken-Burns hero motion we shipped on `02` fit:
+  the motion has a job — it draws the eye to the headline.)
+- Scroll pacing: slow at story moments, fast through lists.
+- Hierarchy via contrast: combine **size + weight + colour — pick two,
+  not three.**
+
+**The workflow these principles sit inside:** reference (a site that
+already feels premium) → deconstruct its layout / motion / spacing /
+scroll → generate a fast first pass (Lovable/Bolt + `PROMPTS.md`) →
+refine against the checklist above until nothing feels accidental. Taste
+in the refine step is the whole difference between "looks good" and
+award-level. Map onto our repo: steps 1–3 = `PROMPTS.md`; step 4 = this
+checklist.
+
+### Signature hero pattern: scroll-scrubbed video
+
+A high-end hero worth keeping in the toolkit: a tall (~300vh) sticky
+container holds a full-viewport `<video>`; scroll progress maps to
+`video.currentTime`, **lerped** (~0.22 smoothing) so the playhead glides
+instead of snapping — the footage feels driven by the scroll.
+
+Use it sparingly and know the trade-offs:
+- iOS Safari throttles `currentTime` scrubbing → janky on phones. Real
+  fix: extract the clip to an image sequence + draw to `<canvas>`, or use
+  `requestVideoFrameCallback`.
+- 300vh = three screens before the next section — that runs *against* the
+  minimal-scroll goal, so reserve it for one signature moment, not every
+  page.
+- Needs a real MP4 — which can't be produced from this session (Remotion
+  chromium + every gen host are allowlist-blocked); render it in a
+  networked session.
+- Via Higgsfield it costs real credits (Seedance 1080p/8s isn't
+  free-tier) — always preview the rewritten cinematic prompt before
+  generating; never run "generate, no questions."
+
+Tie-in: `heroVideoGSAP` already accepts an MP4 via `resolveVideo()`; the
+scroll-scrub version is a richer variant to add once a real video exists.
+
+### Free-LLM backups (from the free-llm-api-resources list)
+
+For high-volume / automation / sub-agent work without spending: **Groq**
+(fast Llama/Mixtral), **Google Gemini free tier**, **OpenRouter** free
+models. Caveat for this project: only `generativelanguage.googleapis.com`
+(Gemini) is reachable from `refsites-code` — Groq/OpenRouter are
+allowlist-blocked here, so they're options for a networked session only.
