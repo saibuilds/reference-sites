@@ -161,7 +161,7 @@ const STYLES = [
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
     vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#FF7A1A','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
-    layout:['heroVideoGSAP','statsBand','glassServices','ctaBig','footerCols'],
+    layout:['heroScrollScrub','statsBand','glassServices','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
       ['Engineer','Lanes, modes and contingencies, costed to the hour.'],
       ['Execute','Live tracking, one point of contact, no surprises.'],
@@ -1911,7 +1911,32 @@ function listingsGrid(x){ const {c}=x;
     ${(l.city||l.region)?`<div class="prop-loc muted">${esc([l.city,l.region].filter(Boolean).join(', '))}</div>`:''}
     ${l.url?`<a class="prop-link" href="${esc(l.url)}" target="_blank" rel="noopener">View listing &rarr;</a>`:''}</div></article>`).join('')}</div></div>${LISTINGS_CSS}</section>`;
 }
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,listingsGrid,
+const SS_CSS = `<style>
+.ss-wrap{position:relative;height:300vh}
+.ss-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg)}
+.ss-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ss-hero{position:relative;height:100vh;min-height:620px;overflow:hidden;background:var(--bg)}
+.ss-media{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.ss-hero--still .ss-media{animation:ssKen 24s ease-in-out infinite alternate}
+@keyframes ssKen{0%{transform:scale(1.06)}100%{transform:scale(1.15) translate(-1.4%,-1%)}}
+@media(prefers-reduced-motion:reduce){.ss-hero--still .ss-media{animation:none}}
+.ss-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.22) 40%,rgba(0,0,0,.8))}
+.ss-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100vh;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(74vw,860px);color:#f4f1ea}
+.ss-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem}
+.ss-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,7vw,6.2rem);line-height:1.02;margin:0 0 1.3rem;letter-spacing:-.02em}
+.ss-sub{font-size:1.05rem;line-height:1.55;color:rgba(244,241,234,.74);margin:0 0 2rem;max-width:54ch}
+.ss-cta{display:inline-block;padding:.9rem 1.7rem;background:var(--accent);color:#0b0b0b;border-radius:4px;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:600;width:fit-content}
+</style>`;
+const SS_JS = `(function(){var w=document.querySelector('[data-scrollscrub]');if(!w)return;var v=w.querySelector('.ss-video');if(!v)return;var mm=window.matchMedia;if(mm&&mm('(prefers-reduced-motion: reduce)').matches)return;if(mm&&mm('(pointer: coarse)').matches){v.loop=true;v.muted=true;v.play().catch(function(){});return;}var target=0,current=0;function onScroll(){var r=w.getBoundingClientRect();var s=r.height-window.innerHeight;var p=s>0?Math.min(1,Math.max(0,-r.top/s)):0;var d=v.duration||0;if(d)target=p*d;}function tick(){current+=(target-current)*0.22;if(isFinite(current)&&v.readyState>=2){try{v.currentTime=current;}catch(e){}}requestAnimationFrame(tick);}window.addEventListener('scroll',onScroll,{passive:true});onScroll();requestAnimationFrame(tick);})();`;
+function heroScrollScrub(x){ const {c,s}=x; const vsrc=resolveVideo(s); const poster=resolveAsset(s);
+  const frame = `<div class="ss-scrim"></div><div class="ss-frame"><div class="ss-kicker">${esc(c.kicker)}</div><h1 class="ss-h1">${esc(c.h1)}</h1><p class="ss-sub">${esc(c.sub)}</p><a class="ss-cta" href="#contact">${esc(c.cta)} &rarr;</a></div>`;
+  if(!vsrc){ // no video yet → single-screen Ken-Burns hero (no dead scroll)
+    return `<section class="ss-hero ss-hero--still"><div class="ss-media" style="background-image:url('${poster}')"></div>${frame}${SS_CSS}</section>`;
+  }
+  // video present → 300vh scroll-scrubbed cinematic hero
+  return `<section class="ss-wrap" data-scrollscrub><div class="ss-sticky"><video class="ss-video" muted playsinline preload="auto" poster="${poster}" src="${vsrc}"></video>${frame}</div>${SS_CSS}<script>${SS_JS}</script></section>`;
+}
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,listingsGrid,heroScrollScrub,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,
