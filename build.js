@@ -127,6 +127,11 @@ function resolveAsset(s){
 function resolveVideo(s){
   return fs.existsSync(path.join(ROOT,'assets',`${s.id}-hero.mp4`)) ? `../assets/${s.id}-hero.mp4` : '';
 }
+function loadListings(){
+  try{ const a=JSON.parse(fs.readFileSync(path.join(ROOT,'data','listings.json'),'utf8')); return Array.isArray(a)?a:[]; }
+  catch{ return []; }
+}
+const LISTINGS = loadListings();
 
 /* ---------- 15 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
@@ -268,7 +273,7 @@ const STYLES = [
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
     vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#A89376','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
-    layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','carouselClassic','scrollDepth','aboutTwoPara','contactEmail'],
+    layout:['heroBuildSequence','listingsGrid','projectIndex','galleryHorizontalScroll','caseStudies','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
       ['Water Cabin','West Coast, NZ','2022'],['Stone Court','Engadin, CH','2021']] },
     g:{ brand:'FALL LINE', kicker:'Architecture Studio', h1:'Houses that listen to the land.',
@@ -1878,7 +1883,35 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,
+const LISTINGS_CSS = `<style>
+.prop{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--card-bd);border-radius:12px;background:var(--card);transition:transform .25s,border-color .25s}
+.prop:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.prop-img{aspect-ratio:4/3;background:linear-gradient(160deg,var(--surface),color-mix(in srgb,var(--accent) 18%,var(--bg)));background-size:cover;background-position:center}
+.prop-b{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem}
+.prop-price{font-family:var(--font-display),serif;font-size:1.4rem;color:var(--accent)}
+.prop-addr{margin:.1rem 0;font-size:1.02rem;font-weight:500;line-height:1.25}
+.prop-meta{font-size:.82rem;letter-spacing:.04em}
+.prop-loc{font-size:.8rem}
+.prop-link{margin-top:.5rem;font-size:.82rem;color:var(--accent);text-decoration:none;width:fit-content}
+.prop-link:hover{text-decoration:underline}
+.prop--ph .prop-img{opacity:.5}
+.listings-note{text-align:center;margin-top:1.6rem;font-size:.85rem}
+</style>`;
+function listingsGrid(x){ const {c}=x;
+  if(!LISTINGS.length){
+    return `<section class="sec" id="listings"><div class="wrap">${sectionHead('Listings','Live inventory, the moment it lists.')}
+  <div class="grid g3">${(c.svc||[]).slice(0,3).map((s,i)=>`<article class="prop prop--ph" data-reveal data-reveal-d="${i+1}"><div class="prop-img"></div><div class="prop-b"><h3>${esc(s)}</h3><p class="muted">${esc((c.svcd||[])[i]||'')}</p></div></article>`).join('')}</div>
+  <p class="muted listings-note">Connect a RESO Web API feed to populate live listings — see LISTINGS.md.</p></div>${LISTINGS_CSS}</section>`;
+  }
+  return `<section class="sec" id="listings"><div class="wrap">${sectionHead('Listings','Currently on the market.')}
+  <div class="grid g3">${LISTINGS.map((l,i)=>`<article class="prop" data-reveal data-reveal-d="${(i%3)+1}">
+    <div class="prop-img"${l.image?` style="background-image:url('${esc(l.image)}')"`:''}></div>
+    <div class="prop-b">${l.price?`<div class="prop-price">${esc(l.price)}</div>`:''}<h3 class="prop-addr">${esc(l.address||'')}</h3>
+    <div class="prop-meta muted">${[l.beds&&l.beds+' bd',l.baths&&l.baths+' ba',l.sqft&&l.sqft+' sqft'].filter(Boolean).join(' · ')}</div>
+    ${(l.city||l.region)?`<div class="prop-loc muted">${esc([l.city,l.region].filter(Boolean).join(', '))}</div>`:''}
+    ${l.url?`<a class="prop-link" href="${esc(l.url)}" target="_blank" rel="noopener">View listing &rarr;</a>`:''}</div></article>`).join('')}</div></div>${LISTINGS_CSS}</section>`;
+}
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,listingsGrid,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,
