@@ -233,3 +233,29 @@ Remotion is separate (renders MP4 from React). shadcn/ui = foundation/dashboards
 Aceternity + Magic MCP = marketing-page animation layer on top of shadcn. MCPs to add:
 context7 (live docs), playwright (browser), 21st.dev magic (UI gen). Stitch = design-to-code
 mockups only, never ship its exported code (Google fonts + telemetry).
+
+## 2026-05-23 — Runable + the implementation verdict (the cheap-media unlock)
+
+**Runable (`runable.com`, iOS/Android/browser, ~$1 trial)** — AI agent app: object photo →
+3D-style product image at **1600×1000 on white (= our exact hero size)** → animate into a hero
+video → can also generate full sites on `*.runable.site`.
+
+**Verdict — best implementation for the goal (free/cheap, own the code, no headaches, quality):**
+- Use Runable as the **media asset factory only**. It runs on the user's phone/network, so it
+  works where the cloud build session is network-blocked for every gen host. Generate hero
+  images (1600×1000) + hero videos, commit to `assets/<id>-hero.{jpg,mp4}`;
+  `resolveAsset()` / `resolveVideo()` auto-consume them. Closes the "can't generate media
+  in-session" gap for ~$1.
+- **Keep the sites as owned custom code — do NOT host on `*.runable.site`** (platform-locked,
+  no GHL/RESO/own-domain control). Business sites stay: Claude Code build → Cloudflare deploy →
+  GHL forms + RESO listings.
+- **Net recurring cost to ship high-end, code-owned sites: ~$0.** Runable ~$1 trial covers
+  media; everything else is free + Claude Code. No Higgsfield / Framer / Lovable / Runway
+  subscription needed (Runway free = one-time 125 credits, 720p, watermark → skip).
+
+**Pipeline:** Runable (phone) → download → repo `assets/` → `node build.js` → Cloudflare + GHL.
+
+Note: couldn't analyze the Google Drive sample videos directly (`drive.google.com` is blocked by
+the session egress allowlist) — worked from the pasted Runable guide; the Drive links were just
+its example output clips. Full tool write-up is in `ARSENAL.md` → "Runable — cheap all-in-one
+asset factory".
