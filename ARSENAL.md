@@ -44,6 +44,31 @@ results.
 | **Spline** | **Not** a generation API — a 3D scene editor. You export a Spline scene URL and embed it in the hero (we already wire this on `04-3d-spline-webgl`). | n/a | Your 3D hero objects (orb, device). Exports a scene URL the page loads. |
 | **Vertex AI Imagen** (Google) | Google's hosted Imagen 3 via `aiplatform.googleapis.com`. | Host **reachable** but needs Vertex-scoped OAuth (Gemini API key won't work). | Fallback if everything else is throttled and you have GCP. |
 
+### Runable — cheap all-in-one asset factory (use for MEDIA, not hosting)
+
+Runable (`runable.com`; iOS/Android + browser) is an AI agent app that does
+image gen, video gen, and full-site gen from a phone or browser, with a
+~$1 trial. The standout fit for us: photograph an object → it returns a
+clean **3D-style product image on white at 1600×1000** (that's exactly our
+hero size) → animate it into a short **hero video** — all from your phone,
+on your network (so it works where this cloud session can't).
+
+**The smart split — use Runable for the assets, keep our code for the site:**
+- ✅ **Asset factory:** generate hero images (1600×1000) + short hero
+  videos in Runable, download, and commit them to
+  `assets/<id>-hero.jpg` / `assets/<id>-hero.mp4`. The build auto-consumes
+  them via `resolveAsset()` / `resolveVideo()` — zero code change. This
+  fills the exact media gap this session is blocked on.
+- ❌ **Don't host the business sites on it.** Runable's generated sites
+  live on `*.runable.site` — platform-locked, no code ownership, no custom
+  GHL/RESO wiring, no your-domain control. For DJ / SathiDeals / Mortgages
+  we keep the owned custom code (Cloudflare + GHL + RESO) and just *feed it
+  Runable's media*.
+
+**Workflow:** Runable on your phone (object → 3D image → video) → download →
+drop into repo `assets/` → our build → Cloudflare deploy + GHL. Best of
+both: Runable's cheap media + your owned, headache-free code.
+
 ### Site builders (the "$50k website" video)
 
 | Tool | Reality check | Best for |
