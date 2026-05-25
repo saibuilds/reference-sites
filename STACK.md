@@ -165,3 +165,58 @@ first real client React build  (e.g. apps/sathideals/)
 
 That's the whole stack. Anything not in this file is either
 out-of-scope, niche-only, or deferred until a real client demands it.
+
+---
+
+## Subscriptions — what to actually pay for
+
+You already have: **Claude Code Max** (dev), **ChatGPT Plus $20** (Codex +
+Sora 2 video), **GoHighLevel** (CRM), **Canva**. That already covers dev,
+one top-tier video model, and CRM. Two phases:
+
+### Build phase (all sites, one-time) — **$0 new**
+Everything needed is free or already owned:
+- Dev: Claude Code Max + Codex
+- Components/motion: shadcn, Magic UI, 21st.dev, React Bits, GSAP, Lenis,
+  Motion — all free
+- 3D: **Spline free** + **Hunyuan 3D free** (20/day) → `.glb`, embedded
+  via Three.js (Claude writes the code)
+- Hero video: 1–2 per site via **Sora 2** (you have it) or Google's free/
+  Plus tier
+- Deploy: Cloudflare (this repo) / Vercel — free
+Don't subscribe to anything during the build.
+
+### Ongoing media phase — add at most two
+When you're regularly producing content (not before):
+1. **Google AI Pro $19.99/mo** — Veo 3.1 (video) + **Nano Banana Pro**
+   (best image model) + Gemini. One tool for images *and* video;
+   complements the Sora 2 you already have.
+2. **CapCut Pro ~$13/mo** — editing your *real* footage (walkthroughs,
+   listings, reels). AI gen can't edit footage — this is the one genuine
+   gap in your stack.
+3D stays free (Hunyuan + Spline free until you produce 3D weekly).
+
+### Skip (redundant with the above or what you own)
+- **Higgsfield** subscription — Sora 2 + Veo already cover video; and it
+  can't run from the cloud build session anyway (network-blocked).
+- **Artlist** — overkill unless reels become a weekly habit.
+- **Spline Pro / Meshy Pro** — free tiers cover web 3D for now.
+- **Framer paid** — Claude Code outputs code you own.
+
+### Real estate only, at launch
+- RESO Web API / IDX data feed for Sathi & Sai listings — already wired
+  (see `LISTINGS.md`); the cost lands when listings go live.
+
+### Net
+- **Today: $0 new** — build everything with what you have.
+- **When producing media: ~$33/mo** (Google AI Pro + CapCut Pro).
+- **At RE launch:** + the IDX/RESO data feed.
+
+### On the "Higgsfield + ScrollHero" prompt going around
+It's safe to run, but two things: (1) you don't need Higgsfield — make the
+hero MP4 with Sora 2 / Veo instead; (2) the valuable part (the
+scroll-scrubbed `ScrollHero` component) is **already built and committed**
+here — React version at `snippets/ScrollHero.tsx`, vanilla version live in
+the static library as `heroScrollScrub` (archetype 02). Both already
+include the mobile fallback the original prompt was missing. So you just
+drop a `hero.mp4` in and it works.
