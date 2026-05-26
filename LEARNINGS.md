@@ -6,17 +6,56 @@ from the GitHub URL alone. Read this **before** editing `build.js`,
 
 Repo: <https://github.com/saibuilds/reference-sites>
 Branch: `main`
-Latest verified commit at write-time: `36e560a` (18-issue Claude-browser fix pass).
+Key commits at write-time:
+- `36e560a` — 18-issue Claude-browser fix pass (this doc's primary subject)
+- `ab918f5` — Upstream merge adding archetypes 13–16 (wellness / cosmic / resort / terminal)
+- `f2e9f47` — This LEARNINGS.md
+
+**Repo also has companion docs** worth reading after this one:
+`README.md`, `HANDOFF.md`, `STACK.md`, `ARSENAL.md`, `NETWORK.md`,
+`MCP-SETUP.md`, `PROMPTS.md`. They describe the wider AI-website-builder
+context this generator plugs into. LEARNINGS.md (this file) is
+specifically the handoff for the 18-issue fix pass and the generator
+template.
 
 ---
 
 ## 0. What this repo is
 
-A generator that emits **64 self-contained reference websites** — 12
+A generator that emits **72 self-contained reference websites** — 16
 style archetypes + 20 reel-specific builds, each in a generic and a
-real-estate variant. Zero frameworks. GSAP 3.12.5 + Lenis 1.0.42 +
-Three.js r128 via CDN. Used as the design reference set the AI website
-builder targets when building animated sites for any business.
+real-estate variant (16×2 + 20×2 = 72). Zero frameworks. GSAP 3.12.5
++ Lenis 1.0.42 + Three.js r128 via CDN. Used as the design reference
+set the AI website builder targets when building animated sites for
+any business.
+
+> **Historical note + post-merge reality check:** The 18-issue
+> Claude-browser fix pass (commit `36e560a`) was authored against a
+> 12-archetype / 64-page snapshot of the OLD generator. The upstream
+> merge (`ab918f5`) replaced that generator with a v2 "bespoke
+> per-archetype layouts, no demo chrome" build (16 archetypes, 72
+> pages, `page()` now at ~line 1893 of build.js). What survived the
+> merge into the v2 output:
+>
+> | Fix-pass feature | v2 coverage | Status |
+> |---|---|---|
+> | Custom cursor `#cur` / `#cur2` | 16/16 | ✓ universal |
+> | Preloader `#loader` | 16/16 | ✓ universal |
+> | Cinematic `<video>` | style 02 | ✓ |
+> | Architecture `proj-list` | style 08 | ✓ |
+> | Aviation `#clock` / ticker | style 09 | ✓ |
+> | Brutalist `body.brutal` | style 03 | ✓ |
+> | Soft-editorial `body.light` (also style 15) | styles 06, 15 | ✓ |
+> | Cinematic-style hero on style 16 (terminal) | 16 | ✓ `<video>` |
+> | WhatsApp `.wa-fab` markup | 0/16 | ✗ dropped by v2 |
+> | Vaporwave `.ripple-wrap` concentric rings | 0/16 | ✗ v2 vaporwave is bespoke |
+> | Film grain `body::after` | global via lib.css | ✓ (CSS lives, applies to all) |
+>
+> **Action for next session:** if WhatsApp FAB and vaporwave rings
+> are still wanted, add them inside the v2 `page()` function at the
+> top of build.js (line ~1893) — the body injection point moved.
+> Section 7 of this doc indexes the OLD generator; for the v2 layout
+> read `HANDOFF.md` and search `build.js` for `function page`.
 
 Source of truth for design intent: `../02-REEL-FINDINGS.md` (a 700-line
 distillation of the larger
@@ -29,7 +68,8 @@ which is mostly video-editing workflow). Reel-video URLs live in
 ## 1. Architecture — read in this order
 
 1. **`build.js`** — single generator. Holds two tables:
-   - `STYLES` — 12 archetypes. Each has `id, name, refs, vars` (CSS
+   - `STYLES` — 16 archetypes (01 luxury-dark → 16 terminal-industrial).
+     Each has `id, name, refs, vars` (CSS
      custom properties), `disp, body` (font pair), and **boolean
      flags** that drive the page template: `threeD, vanta, light,
      brutal, editorial, ripple, clock, video, heroImg, heroVideo,
