@@ -3,42 +3,390 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DJ Custom Reno — coming soon</title>
+<title>DJ Custom Reno — Renovation · Cabinetry · Millwork</title>
+<meta name="description" content="[PLACEHOLDER — one-line value proposition for DJ Custom Reno, e.g. 'Custom cabinetry, millwork, and full renovations for the Greater Toronto Area.']">
+<!-- Keep noindex until REAL content replaces every [PLACEHOLDER], then delete this line. -->
 <meta name="robots" content="noindex">
-<link rel="icon" href="/dj/dj-mark.svg">
+<link rel="icon" href="dj-logo.png">
+
+<!-- ============================================================
+     DJ CUSTOM RENO — premium shell. Reuses the shared reference
+     library (../shared/lib.css + lib.js). Built from the same
+     template as sathideals/index.html, but tuned for renovation:
+       - warm walnut + ivory + bronze palette
+       - before/after slider (signature reno section)
+       - "Selected work" project list with hover image preview
+       - process: consult -> design -> build -> install
+
+     >>> WHAT TO REPLACE before launch (search "[PLACEHOLDER" / "[" ):
+       - Hero copy, value proposition, all body copy
+       - Stats numbers (do NOT ship the [##] placeholders)
+       - Project names + locations + dates (proj-list)
+       - Before/after photos: ../assets/dj-before.jpg + dj-after.jpg
+       - Hero: ../assets/dj-hero.jpg (1600x1000) + optional dj-hero.mp4
+       - Owner/team name + bio + headshot
+       - Testimonials (real client quotes only)
+       - Contact: phone, email, WhatsApp link, shop address
+       - GHL form endpoint (form action) — see GHL-PRODUCTION.md
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../shared/lib.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
 <style>
   :root{
-    --bg:#0b0b0b; --ink:#f1eee6; --mute:#a39d92; --line:rgba(241,238,230,.12);
+    --bg:#0e0c0a; --fg:#efe8dc; --accent:#b08a4a;
+    --surface:#181410; --card:rgba(255,255,255,.04); --card-bd:rgba(239,232,220,.12);
+    --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Inter',system-ui,sans-serif;
+    --btn-radius:0; --card-radius:6px;
   }
-  *,*::before,*::after{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:"Times New Roman",Georgia,serif;min-height:100vh}
-  body{display:flex;flex-direction:column;justify-content:space-between;padding:48px clamp(24px,5vw,72px);position:relative;overflow-x:hidden}
-  header,footer{display:flex;justify-content:space-between;align-items:center;font:500 10px/1 -apple-system,Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
-  header img{height:32px;width:auto;opacity:.92}
-  main{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1100px;margin:auto;padding:80px 0;text-align:left}
-  .eyebrow{font:500 11px/1 -apple-system,Inter,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--mute);margin:0 0 28px}
-  h1{font-family:"Times New Roman",Georgia,serif;font-weight:400;font-size:clamp(48px,9vw,124px);line-height:.95;letter-spacing:-.02em;margin:0 0 32px}
-  h1 em{font-style:italic;color:var(--mute)}
-  p{font:300 17px/1.55 -apple-system,Inter,sans-serif;color:var(--mute);max-width:54ch;margin:0 0 12px}
-  .rule{height:1px;background:var(--line);margin:48px 0 0}
-  footer{padding-top:32px;border-top:1px solid var(--line)}
+  /* hero fallback gradient so the section reads premium even with no media */
+  .hero-bg{position:absolute;inset:0;z-index:0;background:
+    radial-gradient(70% 90% at 70% 30%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 60%),
+    radial-gradient(80% 90% at 20% 90%,color-mix(in srgb,#2b2117 70%,transparent),transparent 70%),
+    linear-gradient(180deg,#14110d,var(--bg));}
+  .hero .media{z-index:0}
+  /* Featured projects (uses the .prop pattern, renamed for reno context) */
+  .work{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--card-bd);border-radius:6px;background:var(--card);transition:transform .25s,border-color .25s}
+  .work:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+  .work-img{aspect-ratio:4/3;background:linear-gradient(160deg,var(--surface),color-mix(in srgb,var(--accent) 18%,var(--bg)));background-size:cover;background-position:center}
+  .work-b{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem}
+  .work-kind{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);opacity:.85}
+  .work-title{margin:.15rem 0;font-family:var(--font-display);font-size:1.45rem;line-height:1.2}
+  .work-meta{font-size:.82rem;letter-spacing:.04em;opacity:.62}
+  /* ===== before/after slider ===== */
+  .ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:1px solid var(--card-bd);touch-action:none;user-select:none;--ba-pos:50%;background:#000}
+  .ba img,.ba .ba-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .ba .ba-before-bg{background:linear-gradient(160deg,#2a221a,#15110c)}
+  .ba .ba-after-bg{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 22%,#1f1812),#15110c)}
+  .ba .ba-after,.ba .ba-after-bg{clip-path:inset(0 calc(100% - var(--ba-pos)) 0 0)}
+  .ba-label{position:absolute;top:1.1rem;font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;padding:.45rem .8rem;border:1px solid var(--card-bd);background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(8px);z-index:3}
+  .ba-label--before{left:1.1rem}
+  .ba-label--after{right:1.1rem;color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+  .ba-handle{position:absolute;top:0;bottom:0;left:var(--ba-pos);transform:translateX(-50%);width:2px;background:var(--fg);z-index:4;pointer-events:none}
+  .ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--fg);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1rem;letter-spacing:0;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.45);pointer-events:none}
+  .ba-grab{position:absolute;inset:0;z-index:5;cursor:ew-resize}
+  /* contact form (GHL-ready) */
+  .lead-form{display:grid;gap:1rem;max-width:520px;margin-top:2.2rem}
+  .lead-form .fields{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+  .lead-form input,.lead-form textarea,.lead-form select{width:100%;padding:1rem 1.1rem;background:transparent;border:1px solid var(--card-bd);color:inherit;font:inherit;border-radius:0}
+  .lead-form textarea{grid-column:1/-1;min-height:120px;resize:vertical}
+  .lead-form select{grid-column:1/-1}
+  .lead-form input:focus,.lead-form textarea:focus,.lead-form select:focus{outline:none;border-color:var(--accent)}
+  .lead-form .hp{position:absolute;left:-9999px}
+  @media(max-width:560px){.lead-form .fields{grid-template-columns:1fr}}
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,5rem);align-items:start}
+  @media(max-width:820px){.contact-grid{grid-template-columns:1fr}}
+  .contact-list{list-style:none;display:grid;gap:1.1rem;margin-top:2rem}
+  .contact-list a{border-bottom:1px solid var(--card-bd);padding-bottom:.4rem;transition:border-color .3s}
+  .contact-list a:hover{border-color:var(--accent)}
 </style>
 </head>
 <body>
-  <header>
-    <img src="/dj/dj-logo-light.png" alt="DJ Custom Reno">
-    <span>Toronto · GTA</span>
-  </header>
-  <main>
-    <p class="eyebrow">Coming soon</p>
-    <h1>DJ Custom Reno <em>— the site is<br>being built.</em></h1>
-    <p>Custom renovations and millwork.</p>
-    <p>This brand's site hasn't been written yet. Project library, process, and contact details will appear once the brief is finalized.</p>
-    <div class="rule"></div>
-  </main>
-  <footer>
-    <span>DJ Custom Reno · Toronto</span>
-    <span>Site rebuild · 2026</span>
-  </footer>
+
+<!-- preloader -->
+<div id="loader"><div class="lLogo">DJ Custom Reno</div><div class="lTrack"><div class="lBar"></div></div></div>
+
+<!-- custom cursor -->
+<div id="cur"></div><div id="cur2"></div>
+<!-- project image preview (architecture-style hover) -->
+<img id="preview-img" alt="" src="">
+
+<!-- nav -->
+<header class="nav">
+  <a class="brand" href="#top">DJ Custom Reno</a>
+  <nav class="links">
+    <a href="#work">Work</a>
+    <a href="#beforeafter">Before / After</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="btn btn-primary nav-cta magnetic" href="#contact">Request a quote</a>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero hero--photo" id="top">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <!-- Drop ../assets/dj-hero.jpg (+ optional .mp4) and this lights up. -->
+    <video class="media" autoplay muted loop playsinline
+           poster="../assets/dj-hero.jpg"
+           src="../assets/dj-hero.mp4"
+           onerror="this.remove()" aria-hidden="true"></video>
+    <div class="scrim"></div>
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Renovation · Cabinetry · Millwork</p>
+      <h1 data-reveal data-reveal-d="1"><em>Custom work,</em><br>built to last.</h1>
+      <p class="lead" data-reveal data-reveal-d="2"><!-- PLACEHOLDER -->[One or two lines on what DJ Custom Reno does and who you do it for — full-home renovations, custom kitchens, built-ins, and millwork across the GTA.]</p>
+      <div class="hero-cta" data-reveal data-reveal-d="3">
+        <a class="btn btn-primary magnetic" href="#work">See selected work</a>
+        <a class="link-cta" href="#contact">Request a quote</a>
+      </div>
+    </div>
+    <span class="scrollcue">Scroll</span>
+  </section>
+
+  <!-- ===== SERVICE-AREA MARQUEE ===== -->
+  <!-- PLACEHOLDER: replace with the real areas you serve -->
+  <div class="logo-mq" aria-label="Areas served">
+    <div class="logo-mq-track">
+      <span>Toronto</span><span class="dot">/</span><span>Mississauga</span><span class="dot">/</span><span>Vaughan</span><span class="dot">/</span><span>Oakville</span><span class="dot">/</span><span>Markham</span><span class="dot">/</span><span>Etobicoke</span><span class="dot">/</span>
+      <span>Toronto</span><span class="dot">/</span><span>Mississauga</span><span class="dot">/</span><span>Vaughan</span><span class="dot">/</span><span>Oakville</span><span class="dot">/</span><span>Markham</span><span class="dot">/</span><span>Etobicoke</span><span class="dot">/</span>
+      <span>Toronto</span><span class="dot">/</span><span>Mississauga</span><span class="dot">/</span><span>Vaughan</span><span class="dot">/</span><span>Oakville</span><span class="dot">/</span><span>Markham</span><span class="dot">/</span><span>Etobicoke</span><span class="dot">/</span>
+    </div>
+  </div>
+
+  <!-- ===== STATEMENT ===== -->
+  <section class="sec">
+    <div class="wrap narrow">
+      <p class="eyebrow" data-reveal>The approach</p>
+      <p class="manifesto-p" data-reveal data-reveal-d="1"><!-- PLACEHOLDER -->[Your positioning statement — what makes DJ Custom Reno different from a generic GTA contractor. 2–3 sentences on craft, materials, and how you treat a client's home.]</p>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <!-- PLACEHOLDER: replace [##] with REAL figures only — never ship invented numbers. -->
+  <section class="sec statsband">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat" data-reveal><div class="num">[##]+</div><div class="lbl">Renovations completed</div></div>
+        <div class="stat" data-reveal data-reveal-d="1"><div class="num">[##]</div><div class="lbl">Years building in the GTA</div></div>
+        <div class="stat" data-reveal data-reveal-d="2"><div class="num">[##]</div><div class="lbl">Trade partners</div></div>
+        <div class="stat" data-reveal data-reveal-d="3"><div class="num">[##]</div><div class="lbl">Five-star reviews</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BEFORE / AFTER ===== -->
+  <section class="sec" id="beforeafter">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Before · After</p>
+        <h2>The space, transformed.</h2>
+      </div>
+      <!-- Drag the handle. Drop ../assets/dj-before.jpg + ../assets/dj-after.jpg to replace the gradient placeholders. -->
+      <div class="ba" data-ba data-reveal data-reveal-d="1" aria-label="Before and after comparison">
+        <div class="ba-bg ba-before-bg" aria-hidden="true"></div>
+        <div class="ba-bg ba-after-bg" aria-hidden="true"></div>
+        <img class="ba-before" alt="Before" src="../assets/dj-before.jpg" onerror="this.remove()">
+        <img class="ba-after"  alt="After"  src="../assets/dj-after.jpg"  onerror="this.remove()">
+        <span class="ba-label ba-label--before">Before</span>
+        <span class="ba-label ba-label--after">After</span>
+        <div class="ba-handle"><div class="ba-knob">⟷</div></div>
+        <div class="ba-grab" aria-hidden="true"></div>
+      </div>
+      <p class="muted" style="margin-top:1.4rem;font-size:.85rem;text-align:center">
+        [PLACEHOLDER caption — e.g. "Kitchen renovation in Mississauga, completed Q[#] 2026."]
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED WORK ===== -->
+  <section class="sec" id="work">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Selected work</p>
+        <h2>Projects we've recently delivered.</h2>
+      </div>
+      <div class="grid g3">
+        <article class="work" data-reveal data-reveal-d="1">
+          <div class="work-img"></div>
+          <div class="work-b">
+            <span class="work-kind">Kitchen</span>
+            <h3 class="work-title">[Project name]</h3>
+            <p class="work-meta">[Neighbourhood, GTA · 2026]</p>
+          </div>
+        </article>
+        <article class="work" data-reveal data-reveal-d="2">
+          <div class="work-img"></div>
+          <div class="work-b">
+            <span class="work-kind">Built-ins</span>
+            <h3 class="work-title">[Project name]</h3>
+            <p class="work-meta">[Neighbourhood, GTA · 2025]</p>
+          </div>
+        </article>
+        <article class="work" data-reveal data-reveal-d="3">
+          <div class="work-img"></div>
+          <div class="work-b">
+            <span class="work-kind">Millwork</span>
+            <h3 class="work-title">[Project name]</h3>
+            <p class="work-meta">[Neighbourhood, GTA · 2025]</p>
+          </div>
+        </article>
+      </div>
+      <p class="muted listings-note" style="text-align:center;margin-top:1.6rem;font-size:.85rem">Add more project cards as your portfolio grows — same markup, swap copy + drop a hero photo into <code>.work-img</code> as a background-image.</p>
+    </div>
+  </section>
+
+  <!-- ===== PROJECT INDEX (hover image preview via #preview-img) ===== -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Project index</p>
+        <h2>A few recent builds, at a glance.</h2>
+      </div>
+      <!-- PLACEHOLDER: replace names + point data-img to a real photo per project -->
+      <ul class="proj-list">
+        <li class="proj-row" data-reveal data-img="../assets/dj-hero.jpg"><span class="proj-i">01</span><span class="proj-t">[Project One]</span><span class="proj-loc muted">[Neighbourhood, GTA]</span><span class="proj-y muted">2026</span></li>
+        <li class="proj-row" data-reveal data-reveal-d="1" data-img="../assets/dj-hero.jpg"><span class="proj-i">02</span><span class="proj-t">[Project Two]</span><span class="proj-loc muted">[Neighbourhood, GTA]</span><span class="proj-y muted">2025</span></li>
+        <li class="proj-row" data-reveal data-reveal-d="2" data-img="../assets/dj-hero.jpg"><span class="proj-i">03</span><span class="proj-t">[Project Three]</span><span class="proj-loc muted">[Neighbourhood, GTA]</span><span class="proj-y muted">2025</span></li>
+        <li class="proj-row" data-reveal data-reveal-d="3" data-img="../assets/dj-hero.jpg"><span class="proj-i">04</span><span class="proj-t">[Project Four]</span><span class="proj-loc muted">[Neighbourhood, GTA]</span><span class="proj-y muted">2024</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="sec" id="process">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">How it works</p>
+        <h2>From first sketch to final install.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step" data-reveal><span class="step-n">01</span><h3>Consult</h3><p class="muted">[A short line on the first conversation — site visit, scope, budget framing.]</p></li>
+        <li class="step" data-reveal data-reveal-d="1"><span class="step-n">02</span><h3>Design</h3><p class="muted">[Drawings, material selection, sign-off on the plan and timeline.]</p></li>
+        <li class="step" data-reveal data-reveal-d="2"><span class="step-n">03</span><h3>Build</h3><p class="muted">[Shop work + on-site demo and rough-in. Daily site clean-up.]</p></li>
+        <li class="step" data-reveal data-reveal-d="3"><span class="step-n">04</span><h3>Install</h3><p class="muted">[Final install and walk-through. Workmanship warranty in writing.]</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT / OWNER ===== -->
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="frow">
+        <div class="frow-txt" data-reveal>
+          <p class="eyebrow">About</p>
+          <h2>[Owner / team name]</h2>
+          <p class="lead">[Two or three sentences: years in the trade, training, licensing/insurance, and what clients can expect on a build site. No invented stats.]</p>
+          <a class="link-cta" href="#contact" style="margin-top:1.6rem;display:inline-block">Work with us</a>
+        </div>
+        <!-- Replace .frow-vis with a real photo: <img src="../assets/dj-owner.jpg" alt="..."> -->
+        <div class="frow-vis" data-reveal data-reveal-d="1" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Clients</p>
+        <h2>In their words.</h2>
+      </div>
+      <!-- PLACEHOLDER: REAL client quotes only. -->
+      <div class="grid g3">
+        <figure class="qcard" data-reveal><blockquote>"[Real client testimonial goes here.]"</blockquote><figcaption class="muted">[Client name] · [neighbourhood]</figcaption></figure>
+        <figure class="qcard" data-reveal data-reveal-d="1"><blockquote>"[Real client testimonial goes here.]"</blockquote><figcaption class="muted">[Client name] · [neighbourhood]</figcaption></figure>
+        <figure class="qcard" data-reveal data-reveal-d="2"><blockquote>"[Real client testimonial goes here.]"</blockquote><figcaption class="muted">[Client name] · [neighbourhood]</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA + CONTACT (GHL-ready) ===== -->
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div data-reveal>
+          <p class="eyebrow">Get a quote</p>
+          <h2>Tell us about the project.</h2>
+          <p class="lead">[Invite them to share scope, timeline, and budget range. Set expectations on response time.]</p>
+          <!-- PLACEHOLDER contact details -->
+          <ul class="contact-list">
+            <li><a href="tel:[PHONE]">[ (000) 000-0000 ]</a></li>
+            <li><a href="mailto:[EMAIL]">[ hello@djcustomreno.com ]</a></li>
+            <li><a href="[GOOGLE_MAPS_OR_ADDRESS]">[ Shop / mailing address, GTA ]</a></li>
+          </ul>
+        </div>
+
+        <!-- GHL wiring: set action to your GHL inbound webhook / form endpoint.
+             See GHL-PRODUCTION.md "Lead capture → GHL". -->
+        <form class="lead-form" data-reveal data-reveal-d="1"
+              action="[GHL_FORM_OR_WEBHOOK_ENDPOINT]" method="post">
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="fields">
+            <input type="text" name="first_name" placeholder="First name" required>
+            <input type="text" name="last_name" placeholder="Last name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="Phone">
+          </div>
+          <select name="project_type" required>
+            <option value="">Project type…</option>
+            <option>Kitchen renovation</option>
+            <option>Bathroom renovation</option>
+            <option>Custom cabinetry / built-ins</option>
+            <option>Millwork</option>
+            <option>Full-home renovation</option>
+            <option>Other</option>
+          </select>
+          <textarea name="message" placeholder="Scope, rough timeline, budget range — anything that helps us reply with a real estimate."></textarea>
+          <button class="btn btn-primary magnetic" type="submit">Request a quote</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <div class="brand-mark">DJ Custom Reno</div>
+        <div class="foot-meta">Renovation · Cabinetry · Millwork · GTA</div>
+      </div>
+      <nav class="foot-nav">
+        <a href="#work">Work</a>
+        <a href="#beforeafter">Before / After</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="foot-meta">[Business legal name &amp; licensing] · © 2026</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp quick contact — replace with your wa.me link -->
+<a class="wa-fab" href="[https://wa.me/1XXXXXXXXXX]" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+
+<!-- before/after slider behavior -->
+<script>
+(function(){
+  document.querySelectorAll('[data-ba]').forEach(function(slider){
+    var grab = slider.querySelector('.ba-grab');
+    var dragging = false;
+    function setPos(clientX){
+      var r = slider.getBoundingClientRect();
+      var pct = Math.max(2, Math.min(98, ((clientX - r.left) / r.width) * 100));
+      slider.style.setProperty('--ba-pos', pct + '%');
+    }
+    function down(e){ dragging = true; setPos((e.touches?e.touches[0]:e).clientX); e.preventDefault && e.preventDefault(); }
+    function move(e){ if(!dragging) return; setPos((e.touches?e.touches[0]:e).clientX); }
+    function up(){ dragging = false; }
+    (grab || slider).addEventListener('pointerdown', down);
+    window.addEventListener('pointermove', move, {passive:true});
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+    // keyboard a11y: tab to slider, arrow keys move handle
+    slider.setAttribute('tabindex','0');
+    slider.addEventListener('keydown', function(e){
+      var cur = parseFloat(getComputedStyle(slider).getPropertyValue('--ba-pos')) || 50;
+      if(e.key === 'ArrowLeft'){ slider.style.setProperty('--ba-pos', Math.max(0, cur-4) + '%'); e.preventDefault(); }
+      if(e.key === 'ArrowRight'){ slider.style.setProperty('--ba-pos', Math.min(100, cur+4) + '%'); e.preventDefault(); }
+    });
+  });
+})();
+</script>
+
+<script src="../shared/lib.js" defer></script>
 </body>
 </html>
