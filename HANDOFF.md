@@ -4,6 +4,53 @@ Paste the prompt at the bottom into a fresh Claude session (Cowork / Code /
 browser) that has **network access + generation credentials**. This file is
 the full context so the new session can continue without this chat.
 
+## ⮕ LATEST SYNC — 2026-05-25 (read this FIRST in a new session)
+
+**Branch:** `claude/setup-mcp-api-keys-t4GTr` · **PR:** [#6 (draft)](https://github.com/saibuilds/reference-sites/pull/6) · **Last commit:** `b7fa5fe`
+**Live preview (Cloudflare Workers, deploy green):**
+- Library root: <https://claude-setup-mcp-api-keys-t4gtr-reference-sites.rajsharma2234567.workers.dev>
+- SathiDeals: append `/sathideals/`
+
+### What changed since the archetype phase
+The project moved from "finish the 16-archetype reference library" (still
+the state of the older sections below) to **shipping the real business
+sites that consume that library**.
+
+| Commit | What landed |
+|---|---|
+| `f3a5861` | `NETWORK.md` — full egress allowlist + latest 403 findings |
+| `0b1f24e` | `BROWSER.md` — Claude-for-Chrome playbook for tasks this session can't do (browse / generate / authed sources) |
+| `a8e8a91` | `.mcp.json` — added `cloudflare-bindings`, `cloudflare-browser` (Browser Rendering), `aws-api` (awslabs). Need a networked session: Cloudflare OAuth on connect; `AWS_*` creds via env. |
+| `4df2f1d` | `STACK.md` — subscriptions verdict: **build phase $0** (Claude Code + free libs); media phase **at most Google AI Pro $19.99 + CapCut ~$13**; skip Higgsfield/Artlist/Framer/Runway subs. |
+| `ba230cc` | `GHL-PRODUCTION.md` — playbook for the 3 GHL business sites (custom code + GHL for CRM, lead-capture wiring, per-business plans, production checklist). |
+| `bf7ef55` + `2d09008` | `ARSENAL.md` + `notes/session-learnings.md` — **Runable** as a cheap *media asset factory* (1600×1000 hero images + videos on the user's own phone/network, ~$1). **Use it for media only; do NOT host on `*.runable.site`** — sites stay as owned custom code so GHL/RESO/own-domain wiring works. |
+| `b7fa5fe` | **`sathideals/index.html`** — replaced the coming-soon stub with the **first premium business landing**. |
+
+### State of the three business sites
+| Folder | State |
+|---|---|
+| `sathideals/` | ✅ **Premium shell built** — reuses `shared/lib.css` + `lib.js`. Sections: hero (scroll/video-ready, gradient fallback) · service-area marquee · positioning statement · stats · **RESO-ready listings grid** · neighbourhoods (hover image preview) · process · about · testimonials · **GHL-ready contact form** · footer · WhatsApp FAB. Every business fact is a marked `[PLACEHOLDER]`; nothing invented; `noindex` until real content lands. |
+| `dj/` | ⏳ Still a coming-soon stub. Next obvious build using the same template, plus a **before/after slider** (key for reno). |
+| `mylegalbasement/` | ⏳ Still a coming-soon stub. |
+
+### The implementation verdict (what to actually do for high-end + free/cheap + own the code)
+1. **Build the page in this repo** (custom code, owned). Reuse `shared/lib.css` + `lib.js`. Cloudflare Workers deploys on every push.
+2. **Generate the hero on Runable** (or Veo / Pollinations) on the user's *phone/network* — 1600×1000 image + optional video. Commit to `assets/<slug>-hero.{jpg,mp4}`. Existing pages auto-consume; the SathiDeals page references `../assets/sathideals-hero.{jpg,mp4}` with `onerror="this.remove()"` so it stays graceful until added.
+3. **Wire GHL** — set the contact form `action` to the GHL inbound webhook or embed code. See `GHL-PRODUCTION.md`.
+4. **Wire RESO** — set `RESO_*` env vars in Cloudflare → listings build in. See `LISTINGS.md`.
+
+### Honest tooling state (verified this session)
+- Higgsfield MCP: ✅ key works *in the user's other (media) session* (credits consumed); ❌ from *this* cloud build session it returns `403 Host not in allowlist` and the credential reads the literal `${HIGGSF...}` placeholder. **Do generation in the media/phone session, build here.**
+- Cloudflare + AWS MCPs are wired in `.mcp.json` but need a networked session to authenticate.
+- `drive.google.com`, Instagram, every gen host — all blocked from this session's egress.
+
+### First moves in the new session
+1. Read this section + `STACK.md` + `GHL-PRODUCTION.md` + `ARSENAL.md` § "Runable".
+2. Open the live SathiDeals preview URL above and eyeball it.
+3. Either: **(a)** build `dj/index.html` the same way (start from `sathideals/index.html` as the template; add a before/after slider; same `[PLACEHOLDER]` discipline — no invented business facts); or **(b)** drop a Runable hero into `assets/sathideals-hero.jpg` + replace `[PLACEHOLDER]`s with real content + wire the GHL form.
+
+---
+
 ## ⮕ CURRENT FINISH LINE (read this first)
 
 State as of this update: **16 archetypes, 72 pages, deployed and green on
