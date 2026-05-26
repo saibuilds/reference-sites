@@ -1,0 +1,168 @@
+================================================================================
+LEARNINGS.txt — running log of what we've figured out on reference-sites
+================================================================================
+Last updated:  2026-05-26
+Live branch:   claude/setup-mcp-api-keys-t4GTr
+Live PR:       https://github.com/saibuilds/reference-sites/pull/6 (draft)
+Library URL:   https://claude-setup-mcp-api-keys-t4gtr-reference-sites.rajsharma2234567.workers.dev
+SathiDeals:    same URL + /sathideals/
+
+This is the plain-text consolidation of everything we've learned during the
+business-pages phase. The CANONICAL docs (markdown, with details) are in the
+repo at the paths below — this file is the index + summary so you can grep
+or read it on any device.
+
+Canonical docs (read these in order when starting cold):
+  1. HANDOFF.md                       — top-of-file LATEST SYNC section
+  2. STACK.md                         — what to buy / what's free
+  3. GHL-PRODUCTION.md                — the 3-business build playbook
+  4. ARSENAL.md                       — full tool roster + new MCP table
+  5. notes/tools-research.md          — MCP-availability research (per tool)
+  6. PROMPTS-MANUAL.md                — paste-ready prompts for manual tools
+  7. BOOTSTRAP.md                     — paste-ready prompt to start fresh sessions
+  8. NETWORK.md / BROWSER.md          — what this session can/can't do
+  9. LISTINGS.md / MCP-SETUP.md       — RESO listings + MCP env-var setup
+ 10. notes/session-learnings.md       — older session-by-session log
+
+
+--------------------------------------------------------------------------------
+1.  THE IMPLEMENTATION VERDICT (free/cheap, own the code, no headaches)
+--------------------------------------------------------------------------------
+
+Build phase  — $0 new spend.
+  Claude Code Max (already owned) builds custom Next.js/static pages.
+  Free libs: shadcn, Magic UI, GSAP, Lenis, Motion, Spline free,
+  Hunyuan 3D free (20/day), Cloudflare free deploy.
+
+Media phase  — at most ~$33/mo total.
+  Google AI Pro ($19.99) for Veo video + Nano Banana Pro images
+  CapCut Pro (~$13) for editing real footage.
+  Skip Higgsfield/Artlist/Framer/Lovable/Runway subscriptions.
+
+The Runable unlock — the cheap-media closer.
+  Runable (runable.com, phone/browser app, ~$1 trial) produces
+  1600x1000 3D-style product images on white + animates them to short
+  hero videos. That's EXACTLY our hero spec. The workflow:
+       Runable on phone -> download -> commit to assets/<id>-hero.{jpg,mp4}
+       -> build auto-consumes via resolveAsset()/resolveVideo()
+       -> Cloudflare deploys, GHL wires the lead form.
+  Do NOT host the sites on *.runable.site — that's platform-locked and
+  loses code ownership, GHL/RESO wiring, custom-domain control.
+
+
+--------------------------------------------------------------------------------
+2.  STATE OF THE 3 BUSINESS SITES (the GHL builds)
+--------------------------------------------------------------------------------
+
+sathideals/         PREMIUM SHELL BUILT.  Hero (scroll/video-ready, graceful
+                    gradient fallback) -> service-area marquee -> positioning
+                    statement -> stats -> RESO-ready listings grid ->
+                    neighbourhoods (hover image preview) -> process -> about
+                    -> testimonials -> GHL-ready contact form -> footer ->
+                    WhatsApp FAB.  Every business fact is a marked
+                    [PLACEHOLDER]; nothing invented.  noindex stays until
+                    real content lands.
+
+dj/                 Still a coming-soon stub.  Next obvious build using
+                    sathideals/index.html as the template + a
+                    before/after slider (key for reno).
+
+mylegalbasement/    Still a coming-soon stub.  Mortgages or legal-basement
+                    angle TBD — needs real positioning before content.
+
+
+--------------------------------------------------------------------------------
+3.  MCP STATE (2026-05-26)
+--------------------------------------------------------------------------------
+
+.mcp.json is committed; 8 servers travel with the repo:
+   fal-ai, replicate, nano-banana, higgsfield, stitch,
+   cloudflare-bindings, cloudflare-browser, aws-api
+
+Only the secrets need per-machine setup — `.mcp.env` is gitignored on
+purpose.  Variable names live in `.mcp.env.example`:
+   NANANA_API_TOKEN
+   GEMINI_API_KEY
+   STITCH_API_KEY
+   FAL_KEY
+   REPLICATE_API_TOKEN
+   HIGGSFIELD_API_KEY
+   HIGGSFIELD_API_SECRET
+   AWS_ACCESS_KEY_ID
+   AWS_SECRET_ACCESS_KEY
+   AWS_REGION
+Cloudflare bindings + browser MCPs use OAuth on first connect (no env var).
+
+MCPs worth ADDING (verified in tools-research.md):
+   Semrush          official HTTP MCP        SEO research
+   Sketchfab        active community MCP     free embeddable 3D assets
+   Webflow          official (Feb 2026)      only if a client lives on it
+   Icons8           official                 stock icons
+   Blender          Anthropic-blessed (Apr)  only if Blender is local
+
+NO working MCP — manual / prompt-only (use PROMPTS-MANUAL.md):
+   Spline, Womp, Nomad Sculpt, Adobe Substance 3D,
+   EndlessTools.io, ContentCore.xyz, Omma.build, Free3D, 3DModels.org
+
+Honest network reality from this cloud build session:
+   - Generation hosts (Higgsfield platform, fal.ai, replicate, nanana,
+     pollinations) all return 403 from this session — the egress allowlist
+     blocks them.
+   - The user's OTHER session (phone/browser/media machine) IS where
+     Higgsfield credits actually flow.  Generation happens there;
+     building happens here.
+
+
+--------------------------------------------------------------------------------
+4.  AUTO-SYNC BETWEEN COMPUTERS
+--------------------------------------------------------------------------------
+
+.claude/settings.json (now git-tracked) runs a SessionStart hook on every
+Claude Code session start:
+   git fetch origin && git pull --rebase --autostash origin <current-branch>
+Prints one of:
+   "auto-sync: up to date on <branch>"
+   "auto-sync: pulled latest on <branch>"
+   "auto-sync FAILED on <branch> - resolve manually"
+
+Autostash protects any in-progress edits.  If a rebase conflicts, you
+resolve it manually — never silent data loss.
+
+To bootstrap a brand-new machine:
+   git clone https://github.com/saibuilds/reference-sites.git
+   cd reference-sites
+   git checkout claude/setup-mcp-api-keys-t4GTr
+   # set env vars per .mcp.env.example  (or paste them into
+   # Claude Code on the web -> Environment -> Variables)
+   claude          # then say: read BOOTSTRAP.md
+The SessionStart hook then keeps both machines current automatically.
+
+
+--------------------------------------------------------------------------------
+5.  THE ORIGINAL DESIGN PRINCIPLES THAT MATTER MOST
+--------------------------------------------------------------------------------
+
+(From notes/session-learnings.md + ARSENAL.md, captured for quick recall.)
+
+Taste > AI.  AI just makes execution fast.  The differentiator is
+attention control: one focal point per screen, one job per section,
+whitespace = luxury (default to 2x what feels right), motion guides
+the eye instead of decorating.
+
+Build flow (under ~1 hour per page):
+   Reference (10m) -> Direction (5m) -> Attention map (5m) ->
+   Generate (15m) -> Refine (30m) -> Polish (15m).
+
+Premium-site sections that earn their keep:
+   Hero (one focal point) -> Trust (logos/awards/years) -> Proof
+   (work/portfolio) -> Process -> Social proof -> CTA.
+   Before/after slider: huge for reno + real estate.
+
+Never ship invented business facts.  Use clearly-marked [PLACEHOLDER]s
+until real content arrives.  This is what triggered the earlier
+rollback — don't repeat it.
+
+
+--------------------------------------------------------------------------------
+END.  Anything missing here?  Add it.  This file is the running log.
+--------------------------------------------------------------------------------
