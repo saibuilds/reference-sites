@@ -30,8 +30,8 @@ sites that consume that library**.
 | Folder | State |
 |---|---|
 | `sathideals/` | ✅ **Premium shell built** — reuses `shared/lib.css` + `lib.js`. Sections: hero (scroll/video-ready, gradient fallback) · service-area marquee · positioning statement · stats · **RESO-ready listings grid** · neighbourhoods (hover image preview) · process · about · testimonials · **GHL-ready contact form** · footer · WhatsApp FAB. Every business fact is a marked `[PLACEHOLDER]`; nothing invented; `noindex` until real content lands. |
-| `dj/` | ⏳ Still a coming-soon stub. Next obvious build using the same template, plus a **before/after slider** (key for reno). |
-| `mylegalbasement/` | ⏳ Still a coming-soon stub. |
+| `dj/` | ✅ **Premium shell built** — same template, walnut+ivory+bronze palette, Cormorant Garamond + Inter. Adds the **before/after slider** (vanilla JS draggable, keyboard-accessible, gradient fallback) and a project-type dropdown on the GHL form. Same `[PLACEHOLDER]` discipline. |
+| `mylegalbasement/` | ⏳ Still a coming-soon stub. Needs positioning (legal-basement / garden-suite consulting? mortgages?) before content. |
 
 ### The implementation verdict (what to actually do for high-end + free/cheap + own the code)
 1. **Build the page in this repo** (custom code, owned). Reuse `shared/lib.css` + `lib.js`. Cloudflare Workers deploys on every push.
@@ -45,9 +45,12 @@ sites that consume that library**.
 - `drive.google.com`, Instagram, every gen host — all blocked from this session's egress.
 
 ### First moves in the new session
-1. Read this section + `STACK.md` + `GHL-PRODUCTION.md` + `ARSENAL.md` § "Runable".
-2. Open the live SathiDeals preview URL above and eyeball it.
-3. Either: **(a)** build `dj/index.html` the same way (start from `sathideals/index.html` as the template; add a before/after slider; same `[PLACEHOLDER]` discipline — no invented business facts); or **(b)** drop a Runable hero into `assets/sathideals-hero.jpg` + replace `[PLACEHOLDER]`s with real content + wire the GHL form.
+1. Read this section + `BOOTSTRAP.md` + `STACK.md` + `GHL-PRODUCTION.md` + `ARSENAL.md` § "Runable".
+2. Open the live previews above (root + `/sathideals/` + `/dj/`) and eyeball them.
+3. Pick one:
+   - **(a)** Drop Runable heroes into `assets/sathideals-hero.{jpg,mp4}` and `assets/dj-hero.{jpg,mp4}` + `assets/dj-before.jpg` + `assets/dj-after.jpg` (see `PROMPTS-MANUAL.md` § 11 / § 12a).
+   - **(b)** Replace `[PLACEHOLDER]`s with real copy + GHL form `action` + RESO env vars.
+   - **(c)** Build `mylegalbasement/index.html` from the same template — after deciding the positioning (legal-basement consulting vs garden-suite contracting vs mortgages — pick one, don't blend).
 
 ---
 
