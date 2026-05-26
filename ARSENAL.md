@@ -69,6 +69,35 @@ on your network (so it works where this cloud session can't).
 drop into repo `assets/` → our build → Cloudflare deploy + GHL. Best of
 both: Runable's cheap media + your owned, headache-free code.
 
+### Tools / MCP research — what's real, what's a prompt (2026-05-26)
+
+Full breakdown in `notes/tools-research.md` (373 lines, sourced). Headline:
+
+**Wire these MCPs (verified, on a networked session) — highest leverage first:**
+| Tool | MCP | Why |
+|---|---|---|
+| **Semrush** | official HTTP MCP | SEO keywords + competitor research for SathiDeals / DJ / Mortgages |
+| **Sketchfab** | active community MCP | Free, embeddable, license-clean 3D assets feeding `assets/` |
+| **Webflow** | official (Feb 2026) | Only if a client lives on Webflow — otherwise skip |
+| **Icons8** | official | Stock-icon search; nice-to-have, not critical |
+| **Blender** | Anthropic-blessed (Apr 2026) | Only if you do Blender locally; skip otherwise |
+
+**No working MCP — manual / prompt-only:**
+- **Spline** — the one community attempt is archived; Spline has no public REST API. Treat as a **manual export tool**: design scene in spline.design → either embed via the `<spline-viewer>` web component or export `.glb` and commit to `assets/`. Three paste-ready Spline prompts are in `tools-research.md` § 3.
+- **Womp**, **Nomad Sculpt**, **Adobe Substance 3D**, **EndlessTools.io**, **ContentCore.xyz**, **Omma.build** — no MCPs; manual export → commit.
+- **Free3D**, **3DModels.org**, **1MIBA** — model marketplaces; **per-model licensing**, no safe blanket integration. Pick individually.
+- **UIColors.app**, **Realtime Colors**, **Trello** — utility/web tools; use directly, no MCP needed for landing-page work.
+- **GSAP / Barba.js / Anime.js / Lenis / Three.js** — JS libraries, **no MCP applies**. Already integrated via `shared/lib.css` + `shared/lib.js` and CDN script tags on the archetype pages.
+
+**Disambiguations to resolve when you're back:**
+- "**Spawn**" — five live 2026 products share that name (spawn.co, spawning.ai, Sonic Labs Spawn, spawntools.ai, Lemonaide Spawn). Best-guess `spawntools.ai`. Confirm which.
+- "**side spline editor**" — no product under that exact name. Best guess: Spline's own side-panel scene-graph editor.
+- "**codecraters-io**" = typo for **`codecrafters-io`** (the "build your own X" coding-challenges org). Useful as a systems-programming reference; not directly relevant to landing-page work.
+
+**How to add a custom MCP yourself** — full guide in `tools-research.md` § 2 (the `claude mcp add --transport http|stdio …` command, the matching `.mcp.json` schema, env-var substitution via `${VAR}` against `.mcp.env`, and where to find community server lists).
+
+**Net recommendation for the free-tier, own-the-code goal:** add **Semrush + Sketchfab** MCPs when you're on a networked session. Keep Spline + Runable as manual asset factories. Skip the rest until a specific job demands them.
+
 ### Site builders (the "$50k website" video)
 
 | Tool | Reality check | Best for |
