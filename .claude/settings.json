@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "BR=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if [ -z \"$BR\" ]; then echo '{}'; exit 0; fi; OUT=$(git fetch origin \"$BR\" 2>&1 && git pull --rebase --autostash origin \"$BR\" 2>&1); EC=$?; if [ $EC -ne 0 ]; then MSG=\"auto-sync FAILED on $BR - resolve manually\"; elif echo \"$OUT\" | grep -qE 'up.to.date|Already up to date'; then MSG=\"auto-sync: up to date on $BR\"; else MSG=\"auto-sync: pulled latest on $BR\"; fi; printf '{\"systemMessage\":\"%s\"}\\n' \"$MSG\"",
+            "timeout": 30,
+            "statusMessage": "Pulling latest from origin…"
+          }
+        ]
+      }
+    ]
+  }
+}
