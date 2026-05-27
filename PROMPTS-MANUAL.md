@@ -123,16 +123,157 @@ text overlays. Cinematic colour grade. Output JPG.
 
 ---
 
-## 7. Omma.build
-Site/component builder. Use only for inspiration scraping — paste any
-exported component into Claude Code and ask:
+## 7. Omma.build — the "section/idea generator" (50 free code generations/month)
+
+**Verified May 2026** (omma.build/pricing): the **Free** plan is permanent,
+**50 credits/month**, **no credit card** required, and covers **full code
+generation** (HTML / CSS / JS). What's locked behind paid: image gen, 3D
+model gen, and custom domain. **No MCP exists** — manual usage only.
+
+> Heads-up: if you'd heard "20 free" — that's outdated. It's 50/month
+> right now. More headroom than expected.
+
+### How to use Omma WITH our architecture (the smart way)
+- ✅ Use Omma's free credits as a **section / idea generator** — generate
+  code-only section variants, then port them back into our pages using
+  `shared/lib.css` primitives.
+- ❌ Don't use Omma to host the actual sites (custom domain is paid; we
+  own the code in this repo anyway).
+- ❌ Don't burn free credits on image / 3D generation — those need the
+  paid plan and we have Runable + Spline for those.
+
+### Signup (60 seconds)
+1. Open `https://omma.build` → "Sign up" (Google OAuth or email).
+2. The Free plan auto-applies. 50 credits reset monthly on signup date.
+3. Each generation consumes a variable number of credits — text-light
+   code generations cost least. Stick to code-only requests on free.
+
+### Credit budget plan — finish all three sites with ~40 of 50 free credits
+Eight prompts, ~3-6 credits each, leaves ~10 credits for retries/refines.
+After each generation: click Omma's "Code" / "Export" → copy the result
+→ paste into Claude Code with **the port-back prompt** at the end of
+this section. Claude Code rewrites it onto our `shared/lib.css`
+primitives, our palette variables, and our `[PLACEHOLDER]` discipline.
+
+#### A. SathiDeals — listing-card showcase (alt to current placeholders)
 ```
-Here's a component exported from Omma. Re-implement it in vanilla
-HTML/CSS/JS using this repo's shared/lib.css primitives (sec / wrap /
-grid / card / data-reveal). Strip any external font, telemetry, or
-3rd-party CDN that isn't already in shared/lib.js. Keep the visual
-intent identical but the code must match the repo's conventions.
+Build a single page section: a responsive 3-column grid of premium
+real-estate listing cards. Each card: 4:3 image area at top, gold price
+in a serif font, two-line address, one line of "beds · baths · sqft"
+metadata, neighbourhood line, subtle "View listing →" link. Dark
+background near-black, warm gold accent. Cards lift on hover. Pure
+HTML + CSS, no images, no JS frameworks. Use CSS custom properties
+for colors. Mobile = 1 column.
 ```
+
+#### B. SathiDeals — split-hero alternative
+```
+Hero section, full viewport. Left half: vertical type stack — small
+all-caps eyebrow, oversized serif headline (italic accent on one
+word), single-line subhead in sans, two CTAs (primary filled + ghost
+link). Right half: a single tall image slot, subtle inner shadow,
+optional thin gold corner accent. Dark theme, near-black bg, warm
+ivory text, gold accent. Pure HTML + CSS. Use CSS variables for
+palette. No JS.
+```
+
+#### C. DJ Custom Reno — horizontal scroll project gallery
+```
+Section: a horizontally-scrolling gallery of project cards
+(scroll-snap mandatory). Each card: 3:4 vertical image area, project
+type tag in uppercase tracking-wide above title, large serif project
+title, one-line meta (neighbourhood · year). Walnut+ivory+bronze
+palette via CSS variables. Mobile: same horizontal scroll, native
+inertia. Pure HTML + CSS, no JS, no images.
+```
+
+#### D. DJ Custom Reno — vertical timeline process
+```
+"How it works" section: 4 steps as a vertical timeline. Each step:
+left column = step number in serif (01-04) with a bronze accent line
+running vertically connecting them, right column = step title (sans
+600) + 1-2 line description. Walnut + ivory + bronze palette. Mobile
+collapses to single column, accent line straightens. Pure HTML + CSS,
+no JS, no images.
+```
+
+#### E. My Legal Basement & Garden Suite — full landing page
+```
+Single-page landing for a Toronto-area consulting/contracting service
+that turns basements and garden suites into legal rental units.
+Sections in order: nav, hero with one focal headline + two CTAs,
+trust strip (areas served marquee), "what we do" (3 services: legal
+basement, garden suite, permit handling), "how it works" (4 steps),
+estimated-cost band with simple input fields (sq ft, finish level
+dropdown), recent projects grid (3 cards), FAQ (5 items),
+contact form, footer. Mid-century-modern + warm palette: deep
+charcoal, cream, brick-red accent. Pure HTML + CSS only — minimal
+inline JS for the FAQ accordion. No images, use CSS gradients for
+visual interest. CSS variables for palette.
+```
+
+#### F. My Legal Basement — interactive cost calculator
+```
+Standalone interactive section: a basement-build cost estimator.
+Inputs: square footage (number), finish level (basic / standard /
+premium — radio buttons), include permit help (checkbox). Live total
+updates as you type/select. Output: a big serif estimated range
+("$XX,XXX – $YY,YYY"), small disclaimer, "Get a real quote" CTA.
+Vanilla JS, no frameworks. Numbers should be configurable via
+data-* attributes on the section so we can tune them later. Use CSS
+variables for palette. Mobile responsive.
+```
+
+#### G. Universal before/after slider — alt implementation
+```
+Before/after image comparison section with a centered draggable
+divider. Pointer + touch + keyboard (arrow keys) support. Two image
+slots that fall back to colored placeholders (CSS gradient) if the
+src is missing. "Before" label top-left, "After" label top-right
+with accent color. Pure HTML + CSS + vanilla JS, no frameworks.
+~80 lines max.
+```
+
+#### H. Universal animated footer
+```
+Dark 4-column footer with: column 1 = serif brand mark + one-line
+description, column 2 = nav links (5), column 3 = contact (phone,
+email, address), column 4 = small newsletter / quick-contact field
++ social row. Above the columns: a thin marquee strip of service-area
+names that scrolls slowly. Below the columns: fine print + © year.
+Subtle hover underline on links, accent-colored on hover. Pure HTML
++ CSS only, no JS. CSS variables for palette.
+```
+
+### Port-back prompt (paste into Claude Code after each Omma export)
+```
+Here's an Omma export. Port it into <<TARGET FILE>> using this repo's
+`shared/lib.css` primitives (`sec` / `wrap` / `sec-head` / `grid` /
+`g3` / `card` / `eyebrow` / `lead` / `data-reveal` /
+`data-reveal-d` / `magnetic` / `tilt`). Strip any external font, CDN,
+or telemetry that isn't already in `shared/lib.js`. Replace any
+hard-coded color with our existing CSS variables (`--bg --fg
+--accent --surface --card --card-bd`). Keep the visual intent and
+any new interaction logic. All business-specific copy stays as
+[PLACEHOLDER] — do not invent client names, addresses, prices, or
+stats. Show me a diff before writing.
+
+----- Omma export below -----
+<<paste the Omma HTML/CSS/JS here>>
+```
+
+### Net plan to "finish all sites with the free credits"
+| Site | Use credits for | Expected outcome |
+|---|---|---|
+| `sathideals/` | A + B | Replace listing placeholders with richer cards; optional split-hero variant ready if you want a different mood |
+| `dj/` | C + D | Horizontal project gallery + a refined timeline alternative to the current grid steps |
+| `mylegalbasement/` | E + F | Full premium landing (currently still a stub) + an interactive cost calculator — the biggest single jump in completeness |
+| All three | G + H | Slider + footer pattern alternates available for either site if the current versions need refreshing |
+
+Once ported back, every gain stays in this repo (`shared/lib.*` +
+business folder) — Omma was just the idea sketcher. The free 50
+credits/month is renewable, so you can keep using it as we build out
+later pages.
 
 ---
 
