@@ -124,6 +124,14 @@ function resolveAsset(s){
   }
   return `../assets/${s.id}.svg`;
 }
+function resolveVideo(s){
+  return fs.existsSync(path.join(ROOT,'assets',`${s.id}-hero.mp4`)) ? `../assets/${s.id}-hero.mp4` : '';
+}
+function loadListings(){
+  try{ const a=JSON.parse(fs.readFileSync(path.join(ROOT,'data','listings.json'),'utf8')); return Array.isArray(a)?a:[]; }
+  catch{ return []; }
+}
+const LISTINGS = loadListings();
 
 /* ---------- 15 STYLE ARCHETYPES ----------
    Each style declares: palette vars, fonts, flags, a bespoke `layout`
@@ -153,7 +161,7 @@ const STYLES = [
   { id:'02-cinematic-video', name:'Cinematic Video', refs:'Terminal Logistics · Villa · Alpine · Hashgraph',
     vars:{'--bg':'#05050B','--surface':'#0C0C16','--fg':'#F4F6FB','--accent':'#FF7A1A','--card':'rgba(255,255,255,.05)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'Bebas Neue', body:'DM Sans', threeD:false, video:true,
-    layout:['heroVideoGSAP','statsBand','scrollDepth','glassServices','processSteps','carouselClassic','quoteCards','ctaBig','footerCols'],
+    layout:['heroScrollScrub','statsBand','glassServices','ctaBig','footerCols'],
     extra:{ steps:[['Brief','We map the route, the risk and the window.'],
       ['Engineer','Lanes, modes and contingencies, costed to the hour.'],
       ['Execute','Live tracking, one point of contact, no surprises.'],
@@ -265,7 +273,7 @@ const STYLES = [
   { id:'08-architecture-editorial', name:'Architecture Editorial', refs:'Fall Line House · Fifth & Dune · Alpine',
     vars:{'--bg':'#0B0B0A','--surface':'#141413','--fg':'#F0EEEB','--accent':'#A89376','--card':'rgba(255,255,255,.03)','--card-bd':'rgba(255,255,255,.10)'},
     disp:'DM Serif Display', body:'Inter', threeD:false, editorial:true,
-    layout:['heroBuildSequence','projectIndex','galleryHorizontalScroll','scrollReel','caseStudies','carouselClassic','scrollDepth','aboutTwoPara','contactEmail'],
+    layout:['heroBuildSequence','listingsGrid','projectIndex','galleryHorizontalScroll','caseStudies','aboutTwoPara','contactEmail'],
     extra:{ projects:[['Cliff House','Sognefjord, NO','2024'],['Forest Pavilion','Nagano, JP','2023'],
       ['Water Cabin','West Coast, NZ','2022'],['Stone Court','Engadin, CH','2021']] },
     g:{ brand:'FALL LINE', kicker:'Architecture Studio', h1:'Houses that listen to the land.',
@@ -562,8 +570,12 @@ function heroProduct(x){ // luxury / food / japanese — glowing centred product
 }
 function heroVideo(x){
   const {c,s} = x;
+  const vsrc=resolveVideo(s);
+  const media = vsrc
+    ? `<video class="media" autoplay muted loop playsinline poster="${resolveAsset(s)}" src="${vsrc}" aria-hidden="true"></video>`
+    : `<img class="media" src="${resolveAsset(s)}" alt="" aria-hidden="true" loading="eager" decoding="async">`;
   return `<header class="hero hero--video">
-  <img class="media" src="${resolveAsset(s)}" alt="" aria-hidden="true" loading="eager" decoding="async">
+  ${media}
   <div class="scrim"></div>
   ${wrapOpen}
     <div class="eyebrow" data-reveal>${esc(c.kicker)}</div>
@@ -850,8 +862,9 @@ function heroVanta(x){ // Vanta WAVES vaporwave hero
 }
 function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
   const {c,s} = x;
+  const vsrc=resolveVideo(s);
   return `<section class="vg-hero">
-<video class="vg-video" autoplay muted loop playsinline poster="${resolveAsset(s)}"></video>
+<video class="vg-video${vsrc?'':' vg-still'}" autoplay muted loop playsinline poster="${resolveAsset(s)}"${vsrc?` src="${vsrc}"`:''}></video>
 <div class="vg-scrim" aria-hidden="true"></div>
 <div class="vg-frame">
   <div class="vg-kicker">${esc(c.kicker)}</div>
@@ -864,7 +877,10 @@ function heroVideoGSAP(x){ // cinematic video hero + GSAP fade
 </div>
 <style>
 .vg-hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0d0f12;color:#f2f2f2}
-.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%)}
+.vg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:linear-gradient(135deg,#1a1f28 0%,#0d0f12 50%,#2a1a0e 100%);background-size:220% 220%}
+.vg-still{animation:vgKen 24s ease-in-out infinite alternate}
+@keyframes vgKen{0%{transform:scale(1.05) translate(0,0);background-position:0% 50%}100%{transform:scale(1.14) translate(-1.6%,-1.2%);background-position:100% 50%}}
+@media(prefers-reduced-motion:reduce){.vg-still{animation:none}}
 .vg-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,18,.65) 0%,rgba(13,15,18,.35) 40%,rgba(13,15,18,.85) 100%)}
 .vg-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(70vw,820px)}
 .vg-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent,#e8a948);margin-bottom:1.4rem}
@@ -1867,7 +1883,60 @@ function footerBare(x){ const {c}=x; const slug=(c.brand||'studio').toLowerCase(
   <a class="big-mail" href="mailto:hello@${slug}.com">hello@${slug}.com</a>
   <div class="paren-links"><a href="#">Instagram</a></div></div></footer>`; }
 
-const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,
+const LISTINGS_CSS = `<style>
+.prop{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--card-bd);border-radius:12px;background:var(--card);transition:transform .25s,border-color .25s}
+.prop:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.prop-img{aspect-ratio:4/3;background:linear-gradient(160deg,var(--surface),color-mix(in srgb,var(--accent) 18%,var(--bg)));background-size:cover;background-position:center}
+.prop-b{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem}
+.prop-price{font-family:var(--font-display),serif;font-size:1.4rem;color:var(--accent)}
+.prop-addr{margin:.1rem 0;font-size:1.02rem;font-weight:500;line-height:1.25}
+.prop-meta{font-size:.82rem;letter-spacing:.04em}
+.prop-loc{font-size:.8rem}
+.prop-link{margin-top:.5rem;font-size:.82rem;color:var(--accent);text-decoration:none;width:fit-content}
+.prop-link:hover{text-decoration:underline}
+.prop--ph .prop-img{opacity:.5}
+.listings-note{text-align:center;margin-top:1.6rem;font-size:.85rem}
+</style>`;
+function listingsGrid(x){ const {c}=x;
+  if(!LISTINGS.length){
+    return `<section class="sec" id="listings"><div class="wrap">${sectionHead('Listings','Live inventory, the moment it lists.')}
+  <div class="grid g3">${(c.svc||[]).slice(0,3).map((s,i)=>`<article class="prop prop--ph" data-reveal data-reveal-d="${i+1}"><div class="prop-img"></div><div class="prop-b"><h3>${esc(s)}</h3><p class="muted">${esc((c.svcd||[])[i]||'')}</p></div></article>`).join('')}</div>
+  <p class="muted listings-note">Connect a RESO Web API feed to populate live listings — see LISTINGS.md.</p></div>${LISTINGS_CSS}</section>`;
+  }
+  return `<section class="sec" id="listings"><div class="wrap">${sectionHead('Listings','Currently on the market.')}
+  <div class="grid g3">${LISTINGS.map((l,i)=>`<article class="prop" data-reveal data-reveal-d="${(i%3)+1}">
+    <div class="prop-img"${l.image?` style="background-image:url('${esc(l.image)}')"`:''}></div>
+    <div class="prop-b">${l.price?`<div class="prop-price">${esc(l.price)}</div>`:''}<h3 class="prop-addr">${esc(l.address||'')}</h3>
+    <div class="prop-meta muted">${[l.beds&&l.beds+' bd',l.baths&&l.baths+' ba',l.sqft&&l.sqft+' sqft'].filter(Boolean).join(' · ')}</div>
+    ${(l.city||l.region)?`<div class="prop-loc muted">${esc([l.city,l.region].filter(Boolean).join(', '))}</div>`:''}
+    ${l.url?`<a class="prop-link" href="${esc(l.url)}" target="_blank" rel="noopener">View listing &rarr;</a>`:''}</div></article>`).join('')}</div></div>${LISTINGS_CSS}</section>`;
+}
+const SS_CSS = `<style>
+.ss-wrap{position:relative;height:300vh}
+.ss-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg)}
+.ss-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ss-hero{position:relative;height:100vh;min-height:620px;overflow:hidden;background:var(--bg)}
+.ss-media{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.ss-hero--still .ss-media{animation:ssKen 24s ease-in-out infinite alternate}
+@keyframes ssKen{0%{transform:scale(1.06)}100%{transform:scale(1.15) translate(-1.4%,-1%)}}
+@media(prefers-reduced-motion:reduce){.ss-hero--still .ss-media{animation:none}}
+.ss-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.22) 40%,rgba(0,0,0,.8))}
+.ss-frame{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100vh;padding:0 clamp(1.4rem,5vw,4rem);max-width:min(74vw,860px);color:#f4f1ea}
+.ss-kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem}
+.ss-h1{font-family:var(--font-display),serif;font-weight:400;font-size:clamp(2.6rem,7vw,6.2rem);line-height:1.02;margin:0 0 1.3rem;letter-spacing:-.02em}
+.ss-sub{font-size:1.05rem;line-height:1.55;color:rgba(244,241,234,.74);margin:0 0 2rem;max-width:54ch}
+.ss-cta{display:inline-block;padding:.9rem 1.7rem;background:var(--accent);color:#0b0b0b;border-radius:4px;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:600;width:fit-content}
+</style>`;
+const SS_JS = `(function(){var w=document.querySelector('[data-scrollscrub]');if(!w)return;var v=w.querySelector('.ss-video');if(!v)return;var mm=window.matchMedia;if(mm&&mm('(prefers-reduced-motion: reduce)').matches)return;if(mm&&mm('(pointer: coarse)').matches){v.loop=true;v.muted=true;v.play().catch(function(){});return;}var target=0,current=0;function onScroll(){var r=w.getBoundingClientRect();var s=r.height-window.innerHeight;var p=s>0?Math.min(1,Math.max(0,-r.top/s)):0;var d=v.duration||0;if(d)target=p*d;}function tick(){current+=(target-current)*0.22;if(isFinite(current)&&v.readyState>=2){try{v.currentTime=current;}catch(e){}}requestAnimationFrame(tick);}window.addEventListener('scroll',onScroll,{passive:true});onScroll();requestAnimationFrame(tick);})();`;
+function heroScrollScrub(x){ const {c,s}=x; const vsrc=resolveVideo(s); const poster=resolveAsset(s);
+  const frame = `<div class="ss-scrim"></div><div class="ss-frame"><div class="ss-kicker">${esc(c.kicker)}</div><h1 class="ss-h1">${esc(c.h1)}</h1><p class="ss-sub">${esc(c.sub)}</p><a class="ss-cta" href="#contact">${esc(c.cta)} &rarr;</a></div>`;
+  if(!vsrc){ // no video yet → single-screen Ken-Burns hero (no dead scroll)
+    return `<section class="ss-hero ss-hero--still"><div class="ss-media" style="background-image:url('${poster}')"></div>${frame}${SS_CSS}</section>`;
+  }
+  // video present → 300vh scroll-scrubbed cinematic hero
+  return `<section class="ss-wrap" data-scrollscrub><div class="ss-sticky"><video class="ss-video" muted playsinline preload="auto" poster="${poster}" src="${vsrc}"></video>${frame}</div>${SS_CSS}<script>${SS_JS}</script></section>`;
+}
+const SECTIONS = { heroProduct,heroVideo,heroType,heroCanvas,heroRipple,heroSoft,heroCinematicFilm,heroSpline,heroThreeGlobe,heroVanta,heroVideoGSAP,heroBuildSequence,scrollReel,r3fScene,scrollDepth,galleryHorizontalScroll,kanjiMarquee,relatsKinetic,carouselClassic,babylonHero,p5Sketch,theatreScene,rapierPhysicsHero,heroSplit,heroPhoto,heroSaas,listingsGrid,heroScrollScrub,
   storyQuote,productGrid,materialScroll,statsBand,glassServices,processSteps,quoteCards,ctaBig,ctaGradient,
   manifesto,rawProof,numberedGet,emailInvert,featureRows,logoMarquee,pricing,faq,personaCols,stackCards,
   editorialStatement,asymGrid,philosophy,journalCards,newsletter,projectIndex,caseStudies,capabilitySlides,

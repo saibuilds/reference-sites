@@ -1,8 +1,10 @@
 node_modules/
 .DS_Store
 *.log
-.claude/
+.claude/*
+!.claude/settings.json
 .mcp.env
 .env
 .env.*
 !.mcp.env.example
+data/listings.json

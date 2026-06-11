@@ -35,6 +35,23 @@
       "env": {
         "STITCH_API_KEY": "${STITCH_API_KEY}"
       }
+    },
+    "cloudflare-bindings": {
+      "type": "http",
+      "url": "https://bindings.mcp.cloudflare.com/mcp"
+    },
+    "cloudflare-browser": {
+      "type": "http",
+      "url": "https://browser.mcp.cloudflare.com/mcp"
+    },
+    "aws-api": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_REGION": "${AWS_REGION}"
+      }
     }
   }
 }
